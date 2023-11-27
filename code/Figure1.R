@@ -1,163 +1,133 @@
-#let's source some packages, listed in one file
+# Code to generate Figure 1 of the Jokura et al 2024 Ctenophore apical organ connectome paper
+
+# source packages and functions -----------------
 source("code/packages_and_functions.R")
 
+# load neurons ----------------------
 
-# Load and process the data -----------------------------------------------
+Q1 <- nlapply(read.neurons.catmaid("Q1", pid = 35, conn = conn_http1),
+              function(x) smooth_neuron(x, sigma = 1000)
+              )
+Q2 <- nlapply(read.neurons.catmaid("Q2", pid = 35, conn = conn_http1),
+              function(x) smooth_neuron(x, sigma = 1000)
+              )
+Q3 <- nlapply(read.neurons.catmaid("Q3", pid = 35, conn = conn_http1),
+              function(x) smooth_neuron(x, sigma = 1000)
+              )
+Q4 <- nlapply(read.neurons.catmaid("Q4", pid = 35, conn = conn_http1),
+              function(x) smooth_neuron(x, sigma = 1000)
+              )
+balancer <- nlapply(read.neurons.catmaid("balancer_cell", pid = 35, conn = conn_http1),
+                     function(x) smooth_neuron(x, sigma = 1000)
+                    )
+LB <- nlapply(read.neurons.catmaid("lamellate body", pid = 35, conn = conn_http1),
+                    function(x) smooth_neuron(x, sigma = 1000)
+                    )
+syn_neuron <- nlapply(read.neurons.catmaid("pre-synaptic", pid = 35, conn = conn_http1),
+                    function(x) smooth_neuron(x, sigma = 1000)
+                    )
+balancer <- nlapply(read.neurons.catmaid("balancer_cell", pid = 35, conn = conn_http1),
+                    function(x) smooth_neuron(x, sigma = 1000)
+                    )
+monocilia <- nlapply(read.neurons.catmaid("monocilia", pid = 35, conn = conn_http1),
+                    function(x) smooth_neuron(x, sigma = 1000)
+                    )
 
-#read some pre-processed data text/csv file from the /data directory
-syn <- read_csv2("data/head_celltypes_syn_matrix.csv")
+balancer <- nlapply(read.neurons.catmaid("balancer_cell", pid = 35, conn = conn_http1),
+                    function(x) smooth_neuron(x, sigma = 1000)
+)
 
-syn
-
-#convert the matrix into a tibble in tidy format
-syn_tb <- syn_tb %>%
-  rename ("presyn_cell" = ...1) %>%
-  pivot_longer(-presyn_cell, names_to = "postsyn_cell", values_to = "synapses") %>%
-  mutate(synapse_fraction = synapses / sum(synapses, na.rm = TRUE))
-
-syn_tb
-
-# visualise the data and save plot ----------------------------------------
-
-#plot with ggplot
-ggplot(syn_tb) +
-  geom_point(aes(x = postsyn_cell, y = presyn_cell, size = sqrt(synapses), color = synapse_fraction), 
-             stroke = 0,)+ 
-  theme(
-    axis.text.x = element_text (angle = 90,hjust = 1, vjust = 0.5, size=3), 
-    axis.text.y = element_text (angle = 0,hjust = 1, vjust = 0.5, size=3),
-    axis.title.x = element_text (size=14),
-    axis.title.y = element_text (size=14)
-  ) + 
-  labs(x="postsynaptic cell types",y="presynaptic cell types",title=" ") +
-  scale_size_area(max_size=1) +
-  guides(color = 'legend') +
-  scale_colour_gradient2(
-    low = "#0072B2",
-    mid = "#D55E00",
-    high ="#D55E00",
-    midpoint = 0.5,
-    space = "Lab",
-    na.value = "grey50",
-    guide = "colourbar",
-    aesthetics = "colour") +
-  theme(panel.background = element_rect(fill = "grey98", color = "white"))
-
-
-# Save the plot as pdf and png
-ggsave("pictures/head_celltypes_syn_matrix.pdf", 
-       width = 2000, 
-       height = 1600, limitsize = TRUE, 
-       units = c("px"))
-ggsave("pictures/head_celltypes_syn_matrix.png", 
-       width = 1700, 
-       height = 1400, limitsize = TRUE, 
-       units = c("px"))
-
-
-# save the table as supplementary file ------------------------------------
-#write table
-readr::write_csv(syn_tb, file="supplements/Supplementary_table1.csv", na="", quote="none")
+balancer_Q1 <- nlapply(
+  read.neurons.catmaid(skids_by_2annotations("balancer_cell", "Q1"),
+                       pid = 35, conn = conn_http1), 
+  function(x) smooth_neuron(x, sigma = 1000)
+  )
+balancer_Q2 <- nlapply(
+  read.neurons.catmaid(skids_by_2annotations("balancer_cell", "Q2"),
+                       pid = 35, conn = conn_http1), 
+  function(x) smooth_neuron(x, sigma = 1000)
+  )
+balancer_Q3 <- nlapply(
+  read.neurons.catmaid(skids_by_2annotations("balancer_cell", "Q3"),
+                       pid = 35, conn = conn_http1), 
+  function(x) smooth_neuron(x, sigma = 1000)
+  )
+balancer_Q4 <- nlapply(
+  read.neurons.catmaid(skids_by_2annotations("balancer_cell", "Q4"),
+                       pid = 35, conn = conn_http1), 
+  function(x) smooth_neuron(x, sigma = 1000)
+  )
 
 
-
-# assemble figure ---------------------------------------------------------
-
-#read the pictures from the /pictures folder
-img1 <- readPNG("pictures/Platynereis_SEM_inverted_nolabel.png")
-img2 <- readPNG("pictures/head_celltypes_syn_matrix.png")
-img3 <- readPNG("pictures/FVRIa_rhoPhall_31h_200um.png")
-
-#convert to image panel and add text labels with cowplot::draw_image 
-panelA <- cowplot::ggdraw() + cowplot::draw_image(img1, scale = 1) + 
-  draw_label("Platynereis larva", x = 0.35, y = 0.99, fontfamily = "sans", fontface = "plain",
-             color = "black", size = 11, angle = 0, lineheight = 0.9, alpha = 1) +
-  draw_label(expression(paste("50 ", mu, "m")), x = 0.27, y = 0.05, fontfamily = "sans", fontface = "plain",
-             color = "black", size = 10, angle = 0, lineheight = 0.9, alpha = 1) + 
-  draw_label("head", x = 0.5, y = 0.85, fontfamily = "sans", fontface = "plain",
-             color = "black", size = 9, angle = 0, lineheight = 0.9, alpha = 1) + 
-  draw_label("sg0", x = 0.52, y = 0.67, fontfamily = "sans", fontface = "plain",
-             color = "black", size = 9, angle = 0, lineheight = 0.9, alpha = 1) + 
-  draw_label("sg1", x = 0.51, y = 0.55, fontfamily = "sans", fontface = "plain",
-             color = "black", size = 9, angle = 0, lineheight = 0.9, alpha = 1) + 
-  draw_label("sg2", x = 0.52, y = 0.4, fontfamily = "sans", fontface = "plain",
-             color = "black", size = 9, angle = 0, lineheight = 0.9, alpha = 1) + 
-  draw_label("sg3", x = 0.54, y = 0.2, fontfamily = "sans", fontface = "plain",
-             color = "black", size = 9, angle = 0, lineheight = 0.9, alpha = 1) + 
-  draw_label("pygidium", x = 0.55, y = 0.03, fontfamily = "sans", fontface = "plain",
-             color = "black", size = 9, angle = 0, lineheight = 0.9, alpha = 1)
-panelB <- ggdraw() + draw_image(img2, scale = 1) + 
-  draw_label("Synaptic connectivity", x = 0.4, y = 0.99, fontfamily = "sans", fontface = "plain",
-             color = "black", size = 11, angle = 0, lineheight = 0.9, alpha = 1)
-
-panelC <- ggdraw() + draw_image(img3, scale = 1) + 
-  draw_label("anti-FVRIamide", x = 0.3, y = 0.99, fontfamily = "sans", fontface = "plain",
-             color = "#0072B2", size = 11, angle = 0, lineheight = 0.9, alpha = 1) + 
-  draw_label("rhoPhalloidin", x = 0.8, y = 0.99, fontfamily = "sans", fontface = "plain",
-             color = "#D55E00", size = 11, angle = 0, lineheight = 0.9, alpha = 1) +
-  draw_line(x = c(0.1, 0.3), y = c(0.07, 0.07), color = "black", size = 1) +
-  draw_label(expression(paste("40 ", mu, "m")), x = 0.2, y = 0.1, fontfamily = "sans", fontface = "plain",
-             color = "black", size = 10, angle = 0, lineheight = 0.9, alpha = 1)
+# plot neurons -----------------------------------------------
 
 
-#clear the images from memory
-#rm(img1, img2, img3)
+plot_background()
+plot3d(Q1, soma = T, lwd = c(2,6), add = T, alpha = c(0.5:1), col = Okabe_Ito[1])
+plot3d(Q2, soma = T, lwd = c(2,6), add = T, alpha = c(0.5:1), col = Okabe_Ito[2])
+plot3d(Q3, soma = T, lwd = c(2,6), add = T, alpha = c(0.5:1), col = Okabe_Ito[3])
+plot3d(Q4, soma = T, lwd = c(2,6), add = T, alpha = c(0.5:1), col = Okabe_Ito[4])
+rgl.snapshot("pictures/Quadrants.png")
+close3d()
 
 
-# assemble final  figure with patchwork -----------------------------------
+plot_background()
+plot3d(Q1, soma = T, lwd = c(2,6), add = T, alpha = 0.2, col = Okabe_Ito[1])
+plot3d(Q2, soma = T, lwd = c(2,6), add = T, alpha = 0.2, col = Okabe_Ito[1])
+plot3d(Q3, soma = T, lwd = c(2,6), add = T, alpha = 0.2, col = Okabe_Ito[1])
+plot3d(Q4, soma = T, lwd = c(2,6), add = T, alpha = 0.2, col = Okabe_Ito[1])
+plot3d(balancer_Q1, soma = T, lwd = c(2,6), add = T, alpha = 1, col = Okabe_Ito[2])
+plot3d(balancer_Q2, soma = T, lwd = c(2,6), add = T, alpha = 1, col = Okabe_Ito[3])
+plot3d(balancer_Q3, soma = T, lwd = c(2,6), add = T, alpha = 1, col = Okabe_Ito[5])
+plot3d(balancer_Q4, soma = T, lwd = c(2,6), add = T, alpha = 1, col = Okabe_Ito[7])
 
-#we use the very efficient and elegant patchwork package to assemble the 
-#multi-panel figure
+rgl.snapshot("pictures/balancer.png")
 
-#first, we define the layout with textual representation
-# the # symbol will introduce an empty field - can be used to add spacers,
-#their width will be defined later with the widths/heights options
+nview3d("ventral", extramat=rotationMatrix(0.9, 0.3, -0.1, 1))
+rgl.snapshot("pictures/balancer_ventral.png")
 
+close3d()
+
+
+
+# assemble figure -------------------------------------------------------------
+
+#read pics
+img_Q1_4 <- readPNG("pictures/Quadrants.png")
+img_balancer <- readPNG("pictures/balancer.png")
+img_balancer_v <- readPNG("pictures/balancer_ventral.png")
+
+#make panels
+panel_Q1_4 <- ggdraw() + draw_image(img_Q1_4) +
+  draw_label("Apical organ", x = 0.3, y = 0.98, size = 10, fontface = "italic") +
+  draw_label("anterior", x = 0.6, y = 0.98, size = 10, fontface = "plain")
+
+panel_balancer <- ggdraw() + draw_image(img_balancer) +
+  draw_label("balancer", x = 0.3, y = 0.98, size = 10, fontface = "italic") +
+  draw_label("anterior", x = 0.53, y = 0.98, size = 10, fontface = "plain")
+
+panel_balancer_v <- ggdraw() + draw_image(img_balancer_v) +
+  draw_label("balancer", x = 0.3, y = 0.98, size = 10, fontface = "italic") +
+  draw_label("lateral", x = 0.53, y = 0.98, size = 10, fontface = "plain")
+
+# define layout with textual representation for pathchwork assembly of figure
 layout <- "
 ABCD
-####
-EFKK
-##KK
-IJKK
+EFGH
 "
 
-#same as
-layout2 <- "
-AABBCCDD
-AABBCCDD
-########
-########
-EEFFKKKK
-EEFFKKKK
-####KKKK
-####KKKK
-IIJJKKKK
-IIJJKKKK
-"
-#you get the picture - you can define any layout and ratios with this representation
+Figure1 <- panel_Q1_4 + panel_balancer + panel_balancer_v + panel_Q1_4 + 
+  panel_Q1_4 + panel_Q1_4 + panel_Q1_4 + panel_Q1_4 +
+  plot_layout(design = layout, heights = c(1, 1)) +
+  plot_annotation(tag_levels = "A") &
+  theme(plot.tag = element_text(size = 12, face = "plain"))
 
-#we now define which panel go into the figure and in which order, the layout
-#will be based on our textual definition above
-#we can also define the relative sizes of rows and columns and the tags to use
-#it is not necessary to enter all the tags e.g., c("A", "B", "C", "D"), patchwork
-#takes care of that if we define the tag_levels only
-Figure1 <- panelA + panelB + panelA + panelB + 
-  panelC + panelB + panelB +  
-  panelA + panelB +  
-  patchwork::plot_layout(design = layout2, heights = c(1, 1, 0.05, 0.05, 1, 1, 0.05, 0.05, 1, 1)) + #we can change the heights of the rows in our layout (widths also can be defined)
-  patchwork::plot_annotation(tag_levels = "A") &  #we can change this to 'a' for small caps or 'i' or '1'
-  ggplot2::theme(plot.tag = element_text(size = 12, face='plain')) #or 'bold', 'italic'
+ggsave("figures/Figure1.png", limitsize = FALSE, 
+       units = c("px"), Figure1, width = 3300, height = 1600, bg = "white")
 
-
-# save figure -------------------------------------------------------------
-
-#when you save the figure as pdf and png it is important to set the width and
-#height of the figure properly, so that your panels fit nicely - you may have to try a few times
 
 ggsave("figures/Figure1.pdf", limitsize = FALSE, 
-       units = c("px"), Figure1, width = 3300, height = 2800)
-ggsave("figures/Figure1.png", limitsize = FALSE, 
-       units = c("px"), Figure1, width = 3300, height = 2800, bg = "white")
+       units = c("px"), Figure1, width = 3300, height = 1600)
 
 
 
