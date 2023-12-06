@@ -44,33 +44,31 @@ for (nconnector in seq_along(all_syn_connectors$connectors)) {
 # server needs time to process this
 Sys.sleep(200)
 
-# download cropped stacks from server
-# the exact file names are needed for download 
+# download stacks ---------------------------------------------------------
+# the exact file names are needed for download,
+# to get them we need to check messages from the server
+# originally I was checking which messages are new, and downloading those
+# but this could lead to false positives
+# so I decided that's it's probably safe to download the last n messages
+# where n is the number of jobs
 
-# get only recent messages
-max_timediff=2
-# TODO: do timezones properly (this is wrong, but it works for me at the moment, so I'm leaving it for now)
-qtime <- .POSIXct(Sys.time(), "GMT")
+# It would be cool if I can put the synapse ID as file name,
+# but it's not guaranteed that jobs will return in the same order
+
+setwd("synapse_tiff_stacks")
 
 cat_messages <- catmaid_fetch(
   path = "messages/list"
 )
 
-setwd("synapse_tiff_stacks")
-for (i in seq_along(cat_messages)) {
-  metime <- cat_messages[[i]]$time
-  metime_formatted <- as.POSIXct(format(metime,tz="GMT"))
-  timediff <- difftime(qtime, metime)
-  print(timediff)
-  if (timediff < max_timediff) {
-    cat_message <- cat_messages[[i]]$text
-    link <- regmatches(cat_message, 
-                       regexpr("/crop/download/crop_.{6}.tiff", cat_message))
-    filename <- regmatches(link, 
-                           regexpr("crop_.{6}.tiff", link))
-    full_link <- paste("https:/catmaid.ex.ac.uk", link, sep = "")
-    download.file(full_link, destfile = filename)
-  }
+for (i in seq_along(all_syn_connectors$connectors)) {
+  cat_message <- cat_messages[[i]]$text
+  link <- regmatches(cat_message, 
+                     regexpr("/crop/download/crop_.{6}.tiff", cat_message))
+  filename <- regmatches(link, 
+                         regexpr("crop_.{6}.tiff", link))
+  full_link <- paste("https:/catmaid.ex.ac.uk", link, sep = "")
+  download.file(full_link, destfile = filename)
 }
 
 # filter duplicate synapses
