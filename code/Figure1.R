@@ -26,16 +26,9 @@ LB <- nlapply(read.neurons.catmaid("lamellate body", pid = 35, conn = conn_http1
 syn_neuron <- nlapply(read.neurons.catmaid("pre-synaptic", pid = 35, conn = conn_http1),
                     function(x) smooth_neuron(x, sigma = 1000)
                     )
-balancer <- nlapply(read.neurons.catmaid("balancer_cell", pid = 35, conn = conn_http1),
-                    function(x) smooth_neuron(x, sigma = 1000)
-                    )
 monocilia <- nlapply(read.neurons.catmaid("monocilia", pid = 35, conn = conn_http1),
                     function(x) smooth_neuron(x, sigma = 1000)
                     )
-
-balancer <- nlapply(read.neurons.catmaid("balancer_cell", pid = 35, conn = conn_http1),
-                    function(x) smooth_neuron(x, sigma = 1000)
-)
 
 balancer_Q1 <- nlapply(
   read.neurons.catmaid(skids_by_2annotations("balancer_cell", "Q1"),
