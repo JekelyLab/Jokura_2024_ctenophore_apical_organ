@@ -26,10 +26,15 @@ cilium_length <- function(ctip_id) {
   treenode_id <- ctip_id
   distance <- 0
   while (!(treenode_id %in% basalb_ids)) {
-    #print(treenode_id)
     index <- match(treenode_id, neuron$d$PointNo)
     parent_id <- neuron$d$Parent[[index]]
+    if (parent_id == -1) {
+      print("root reached before basal body tag, from ciium tip")
+      print(ctip_id)
+      stop()
+    }
     index_parent <- match(parent_id, neuron$d$PointNo)
+ 
     distance_2nodes <- dist(rbind(c(neuron$d$X[[index]],
                                 neuron$d$Y[[index]],
                                 neuron$d$Z[[index]]),
