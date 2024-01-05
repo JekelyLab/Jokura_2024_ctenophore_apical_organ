@@ -52,7 +52,9 @@ cilium_length <- function(ctip_id) {
 cilium_lenghts <- list()
 for (ctip_id in ctips) {
   c_length <- cilium_length(ctip_id)
-  cilium_lenghts <- c(cilium_lenghts, ctip_id = c_length)
+  cilium_length_new <- c_length
+  names(cilium_length_new) <- ctip_id
+  cilium_lenghts <- c(cilium_lenghts, cilium_length_new)
 }
 
 hist(as.numeric(cilium_lenghts))
