@@ -46,15 +46,24 @@ cilium_length <- function(ctip_id) {
     #print(distance)
     treenode_id <- parent_id
   }
-  return(distance)
+  return(c(distance, length(basalb_ids)))
 }
 
-cilium_lenghts <- list()
+cilium_lenghts_monociliated <- list()
+cilium_lenghts_biciliated <- list()
 for (ctip_id in ctips) {
-  c_length <- cilium_length(ctip_id)
-  cilium_length_new <- c_length
+  c_length_type <- c(cilium_length(ctip_id))
+  cilium_length_new <- c_length_type[[1]]
+  nbb <- c_length_type[[2]]
   names(cilium_length_new) <- ctip_id
-  cilium_lenghts <- c(cilium_lenghts, cilium_length_new)
+  if (nbb == 1) {
+    cilium_lenghts_monociliated <- c(cilium_lenghts_monociliated, cilium_length_new)
+  }
+  if (nbb == 2) {
+    cilium_lenghts_biciliated <- c(cilium_lenghts_monociliated, cilium_length_new)
+  }
 }
 
-hist(as.numeric(cilium_lenghts))
+hist(as.numeric(cilium_lenghts_monociliated))
+hist(as.numeric(cilium_lenghts_biciliated))
+t.test(as.numeric(cilium_lenghts_monociliated), as.numeric(cilium_lenghts_biciliated))
