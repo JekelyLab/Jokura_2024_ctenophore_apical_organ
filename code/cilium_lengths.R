@@ -21,6 +21,8 @@ cilium_length <- function(ctip_id) {
   ctip_treenode <- catmaid_fetch(path = path)
   skid <- ctip_treenode[[8]]
   neuron_info <- read.neuron.catmaid(skid, pid = 35)
+  neuron_name <- catmaid_fetch(path = "/35/skeleton/neuronnames",
+                               body = list(skids=skid))[[1]]
   # check which treenodes have basal body annotation, because this is the stop point
   basalb_ids <- neuron_info$tags$`basal body`
   treenode_id <- ctip_id
@@ -46,15 +48,18 @@ cilium_length <- function(ctip_id) {
     #print(distance)
     treenode_id <- parent_id
   }
-  return(c(distance, length(basalb_ids)))
+  return(c(distance, length(basalb_ids), neuron_name))
 }
 
 cilium_lengths_monociliated <- list()
 cilium_lengths_biciliated <- list()
+cilium_lengths_intramulti <- list()
+cilium_lengths_lamellate <- list()
 for (ctip_id in ctips) {
   c_length_type <- c(cilium_length(ctip_id))
   cilium_length_new <- c_length_type[[1]]
   nbb <- c_length_type[[2]]
+  nname <- c_length_type[[3]]
   names(cilium_length_new) <- ctip_id
   if (nbb == 1) {
     cilium_lengths_monociliated <- c(cilium_lengths_monociliated, cilium_length_new)
@@ -62,8 +67,36 @@ for (ctip_id in ctips) {
   if (nbb == 2) {
     cilium_lengths_biciliated <- c(cilium_lengths_biciliated, cilium_length_new)
   }
+  if (nbb > 2) {
+    print(nname)
+    print(ctip_id)
+    if (grepl("intracellular multiciliated cell", nname)) {
+      cilium_lengths_intramulti <- c(cilium_lengths_intramulti, cilium_length_new)
+    }
+    if (grepl("lamellate", nname)) {
+      cilium_lengths_lamellate <- c(cilium_lengths_lamellate, cilium_length_new)
+    }
+  }
 }
 
 hist(as.numeric(cilium_lengths_monociliated))
 hist(as.numeric(cilium_lengths_biciliated))
+hist(as.numeric(cilium_lengths_intramulti))
+hist(as.numeric(cilium_lengths_lamellate))
 t.test(as.numeric(cilium_lengths_monociliated), as.numeric(cilium_lengths_biciliated))
+ 
+
+
+# --------------------------------------------------------------
+neurons_info <- read.neurons.catmaid("intracellular multiciliated cell", pid = 35)
+neurons_info <- read.neurons.catmaid("lamellate body", pid = 35)
+n_extra <- list()
+for (neuroninf in neurons_info) {
+  n_extra <- c(n_extra, length(neuroninf$tags$`cilium tip extracellular`))
+}
+summary(as.numeric(n_extra))
+n_intra <- list()
+for (neuroninf in neurons_info) {
+  n_intra <- c(n_intra, length(neuroninf$tags$`cilium tip intracellular`))
+}
+summary(as.numeric(n_intra))
