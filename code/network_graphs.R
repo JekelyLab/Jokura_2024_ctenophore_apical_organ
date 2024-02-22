@@ -119,6 +119,36 @@ degree=degree(
   )
 degree
 
+# plot cells
+
+plot_background()
+
+plot3d(
+  balancer, soma = TRUE, color = Okabe_Ito[1], 
+  alpha = 0.6, lwd = 3
+  )
+
+plot3d(
+  LB, soma = TRUE, color = Okabe_Ito[2], 
+  alpha = 0.6, lwd = 2
+)
+
+plot3d(
+  syn_neuron, soma = TRUE, color = Okabe_Ito[3], 
+  alpha = 0.6, lwd = 4
+)
+
+plot3d(
+  bridge, soma = TRUE, color = Okabe_Ito[4], 
+  alpha = 0.6, lwd = 3
+)
+
+plot3d(
+  monociliated, soma = TRUE, color = Okabe_Ito[5], 
+  alpha = 0.6, lwd = 3
+)
+
+
 # use visNetwork to plot the network --------------------------------------
 
 ## convert to VisNetwork-list
@@ -130,13 +160,13 @@ AO_graph.visn$edges$value <- AO_graph.visn$edges$weight
 AO_graph.visn$nodes$value <- degree
 
 #define node color
-AO_graph.visn$nodes$color <- "#ABC123"
+AO_graph.visn$nodes$color <- Okabe_Ito[1:5]
 
 #AO_graph.visn$nodes$group <- cell_group_attr$type
 AO_graph.visn
 
-#hierarchical layout
-AO_graph.visn$nodes
+#hierarchical layout - define level of nodes
+AO_graph.visn$nodes <- c(2, 2, 1, 3, 3)
 AO_graph.visn$edges
 
 #level	: Number. Default to undefined. When using the hierarchical layout, the level determines where the node is going to be positioned.
@@ -146,6 +176,13 @@ visNetwork(AO_graph.visn$nodes, AO_graph.visn$edges) %>%
   visIgraphLayout(
     layout = "layout_nicely", physics = TRUE, 
     randomSeed = 42, type="square"
+    ) %>%
+  visHierarchicalLayout(
+    levelSeparation=250, 
+    nodeSpacing=10,
+    direction='LR',
+    sortMethod='hubsize',
+    shakeTowards='roots'
     ) %>%
   visEdges(
     smooth = list(type = 'curvedCW', roundness=0.2),
@@ -161,7 +198,8 @@ visNetwork(AO_graph.visn$nodes, AO_graph.visn$edges) %>%
     opacity=0.9,
     shape='dot', 
     font=list(color='black', size=44),
-    scaling = list(label=list(enabled=TRUE, min=48, max=56))
+    scaling = list(label=list(enabled=TRUE, min=48, max=56)),
+    level= AO_graph.visn$nodes$level
     )
 
 # create graph with cell types as nodes
