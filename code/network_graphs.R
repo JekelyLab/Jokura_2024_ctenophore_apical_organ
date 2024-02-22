@@ -48,6 +48,13 @@ syn_neuron <- nlapply(
   function(x) smooth_neuron(x, sigma = 1000)
 )
 
+monociliated <- nlapply(
+  read.neurons.catmaid(
+    "monociliated_cell", pid = 35
+  ),
+  function(x) smooth_neuron(x, sigma = 1000)
+)
+
 bridge <- nlapply(
   read.neurons.catmaid(
     "celltype:bridge", pid = 35
@@ -56,9 +63,11 @@ bridge <- nlapply(
 )
 
 # cell types
-AO_celltypes <- list(balancer, LB, syn_neuron, bridge)
+AO_celltypes <- list(
+  balancer, LB, syn_neuron, bridge, monociliated
+  )
 AO_celltype_names <- list(
-  "balancer", "LB", "syn_neuron", "bridge"
+  "balancer", "LB", "syn_neuron", "bridge", "monociliated"
   )
 
 # iterate through cell group neuron lists and get connectivity
@@ -82,6 +91,17 @@ for (i in 1:length(AO_celltypes)) {
   }
 }
 synapse_list
+# convert synapse list into a matrix of appropriate dimensions
+synapse_matrix <- matrix(
+  unlist(synapse_list), byrow = TRUE, 
+  nrow = length(AO_celltypes)
+  )
+synapse_matrix
+
+rownames(synapse_matrix) <- as.character(AO_celltype_names)
+colnames(synapse_matrix) <- as.character(AO_celltype_names)
+synapse_matrix
+
 
 # create graph with cell types as nodes
 node_IDs <- data.frame(name = cell_types)
