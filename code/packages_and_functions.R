@@ -12,6 +12,8 @@ library(visNetwork)
 library(webshot2)
 library(patchwork)
 library(RColorBrewer)
+library(igraph)
+library(tidygraph)
 
 # catmaid connection, needs username, password AND token - weird!
 {
