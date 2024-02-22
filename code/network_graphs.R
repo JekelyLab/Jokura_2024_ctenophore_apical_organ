@@ -129,60 +129,41 @@ AO_graph.visn
 AO_graph.visn$edges$value <- AO_graph.visn$edges$weight
 AO_graph.visn$nodes$value <- degree
 
+#define node color
+AO_graph.visn$nodes$color <- "#ABC123"
+
 #AO_graph.visn$nodes$group <- cell_group_attr$type
 AO_graph.visn
 
 #hierarchical layout
+AO_graph.visn$nodes
+AO_graph.visn$edges
 
 #level	: Number. Default to undefined. When using the hierarchical layout, the level determines where the node is going to be positioned.
 #Conn_graph.visn$nodes$level <- cell_group_attr$level
 #hierarchical layout
-visNet <- visNetwork(Conn_graph.visn$nodes,Conn_graph.visn$edges) %>% 
-    visIgraphLayout(layout = "layout_nicely", physics = TRUE, 
-                    randomSeed = 42, type="square") %>%
-    visHierarchicalLayout(levelSeparation=250, 
-                          nodeSpacing=10,
-                          direction='LR',
-                          sortMethod='hubsize',
-                          shakeTowards='roots') %>%
-    visEdges(smooth = list(type = 'curvedCW', roundness=0.1),
-             scaling=list(min=2, max=12),
-             color = list(inherit=TRUE, opacity=0.7),
-             arrows = list(to = list(enabled = TRUE, 
-                                     scaleFactor = 1.2, type = 'arrow'))) %>%
-    visNodes(borderWidth=0.3, 
-             color = list(background=Conn_graph.visn$nodes$color, border='black'),
-             opacity=0.9,
-             shape='dot', 
-             font=list(color='black', size=44),
-             scaling = list(label=list(enabled=TRUE, min=48, max=56)),
-             level= Conn_graph.visn$nodes$level) %>%
-    visOptions(highlightNearest = list(enabled=TRUE, degree=1, algorithm='hierarchical',labelOnly=FALSE)) %>%
-    visInteraction(dragNodes = TRUE, dragView = TRUE,
-                   zoomView = TRUE, hover=TRUE,
-                   multiselect=TRUE) %>%
-    visGroups(groupname = "MBSN", shape = "square", 
-              opacity=1, color="#E69F00") %>%
-    visGroups(groupname = "MBintrIN", shape = "square", 
-              opacity=1, color="#CC79A7") %>%
-    visGroups(groupname = "MBON", shape = "square", 
-              opacity=1, color="#56B4E9") %>%
-    visGroups(groupname = "IN", shape = "dot", 
-              opacity=1, color="#0072B2") %>%
-    visGroups(groupname = "SN", shape = "dot", 
-              opacity=1, color="#D55E00") %>%
-    visGroups(groupname = "MN", shape = "dot", 
-              opacity=1, color="#cccccc")  %>%
-    addFontAwesome() %>%
-    visLegend(addNodes = list(
-      list(label = "66 syn", shape = "icon", 
-           icon = list(code = "f2d1", size = 30, color = "#D55E00"))), 
-      useGroups = TRUE,  width=0.1,ncol = 1,
-      position='right', stepY=70)
-  
-  
-  visNet
-}
+visNetwork(AO_graph.visn$nodes, AO_graph.visn$edges) %>%
+  visIgraphLayout(
+    layout = "layout_nicely", physics = TRUE, 
+    randomSeed = 42, type="square"
+    ) %>%
+  visEdges(
+    smooth = list(type = 'curvedCW', roundness=0.2),
+    scaling=list(min=2, max=12),
+    color = list(inherit=TRUE, opacity=0.7),
+    arrows = list(
+      to = list(enabled = TRUE, 
+      scaleFactor = 1, type = 'arrow'))
+    ) %>%
+  visNodes(
+    borderWidth=0.3, 
+    color = list(background=AO_graph.visn$nodes$color, border='black'),
+    opacity=0.9,
+    shape='dot', 
+    font=list(color='black', size=44),
+    scaling = list(label=list(enabled=TRUE, min=48, max=56))
+    )
+
 # create graph with cell types as nodes
 node_IDs <- data.frame(name = cell_types)
 graph.funct <- tbl_graph(nodes = node_IDs)
