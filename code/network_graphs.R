@@ -29,24 +29,25 @@ plot(g_tb)
 
 balancer <- nlapply(
   read.neurons.catmaid(
-    "balancer_cell", pid = 35
+    "celltype:balancer", pid = 35
     ),
   function(x) smooth_neuron(x, sigma = 1000)
 )
 
 LB <- nlapply(
   read.neurons.catmaid(
-    "lamellate body", pid = 35
+    "celltype:lamellate", pid = 35
     ),
   function(x) smooth_neuron(x, sigma = 1000)
 )
 
 syn_neuron <- nlapply(
   read.neurons.catmaid(
-    "pre-synaptic", pid = 35
+    "celltype:neuron", pid = 35
     ),
   function(x) smooth_neuron(x, sigma = 1000)
 )
+
 
 # create graph with cell types as nodes
 node_IDs <- data.frame(name = cell_types)
