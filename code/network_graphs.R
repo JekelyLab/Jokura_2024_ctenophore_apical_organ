@@ -1,4 +1,4 @@
-
+#network analysis and plotting
 
 source("code/packages_and_functions.R")
 
@@ -23,8 +23,30 @@ g_tb |>
   activate(nodes) |>
   mutate(color = "blue")
 
-
 plot(g_tb)
+
+# load cell types from catmaid
+
+balancer <- nlapply(
+  read.neurons.catmaid(
+    "balancer_cell", pid = 35
+    ),
+  function(x) smooth_neuron(x, sigma = 1000)
+)
+
+LB <- nlapply(
+  read.neurons.catmaid(
+    "lamellate body", pid = 35
+    ),
+  function(x) smooth_neuron(x, sigma = 1000)
+)
+
+syn_neuron <- nlapply(
+  read.neurons.catmaid(
+    "pre-synaptic", pid = 35
+    ),
+  function(x) smooth_neuron(x, sigma = 1000)
+)
 
 # create graph with cell types as nodes
 node_IDs <- data.frame(name = cell_types)
