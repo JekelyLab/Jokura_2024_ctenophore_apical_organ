@@ -43,36 +43,43 @@ for(i in 1:length(contacts$connectors)){
 node_id_of_contact_partner2
 
 
-
-connector_tb <- tibble(
-  connectors = (connector_ids),
-  skid1 = (partner1_skid),
-  skid2 = (partner2_skid)
-  )
-connector_tb
-
-#
-partner1_pre <- c()
+#check for tags enter_cil and enter_nocil
+partner1_pre_cil <- c()
+partner1_pre_nocil <- c()
 for(i in 1:length(contacts$connectors)){
   neuron <- read.neuron.catmaid(partner1_skid[i], pid = 35)
-  partner1_pre[i] <- node_id_of_contact_partner1[i] %in% neuron$tags$enter_cil
+  partner1_pre_cil[i] <- node_id_of_contact_partner1[i] %in% neuron$tags$enter_cil
+  partner1_pre_nocil[i] <- node_id_of_contact_partner1[i] %in% neuron$tags$enter_nocil
 }
-partner1_pre
-node_id_of_contact_partner1[10]
+partner1_pre_cil
+partner1_pre_nocil
 
-partner2_pre <- c()
+partner2_pre_cil <- c()
+partner2_pre_nocil <- c()
 for(i in 1:length(contacts$connectors)){
   neuron <- read.neuron.catmaid(partner2_skid[i], pid = 35)
-  partner2_pre[i] <- node_id_of_contact_partner2[i] %in% neuron$tags$enter_nocil
+  partner2_pre_cil[i] <- node_id_of_contact_partner2[i] %in% neuron$tags$enter_cil
+  partner2_pre_nocil[i] <- node_id_of_contact_partner2[i] %in% neuron$tags$enter_nocil
 }
-partner2_pre
+partner2_pre_cil
+partner2_pre_nocil
 
-neuron <- read.neuron.catmaid(partner1_skid[1], pid = 35)
-neuron$tags$enter_cil
-node_id_of_contact_partner1[1] %in% neuron$tags$enter_cil
+# define connectivity tibble
 
-neuron$`2476258`
+connector_tb <- tibble(
+  connectors = connector_ids,
+  skid1 = partner1_skid,
+  skid2 = partner2_skid,
+  partner1_pre_cil = partner1_pre_cil,
+  partner1_pre_nocil = partner1_pre_nocil,
+  partner2_pre_cil = partner2_pre_cil,
+  partner2_pre_nocil = partner2_pre_nocil
+)
+connector_tb
 
-catmaid_t
-skid2 <- contacts$partners[[1]][[2]][[3]]
+connector_tb |>
+  select(skid1, skid2) |>
+  pull()
+
+contactome_tbl_graph 
 
