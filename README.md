@@ -37,17 +37,20 @@ The project directory contains:
   of the figures from the /figures folder. There is also a rendered html
   version, `Manuscript.html`, suitable for reading.
 
-- [:file_folder: data](/data): Data used in the analysis.
+- [:file_folder: data](analysis/data): Data used in the analysis.
 
-- [:file_folder: figures](/figures): Plots and other illustrations
+- [:file_folder: data](analysis/scripts): scripts used in the analysis.
 
-- [:file_folder: supplements](/supplements): Supplementary materials
-  including notes and other documents prepared and collected during the
-  analysis.
+- [:file_folder: figures](manuscript/figures): Plots and other
+  illustrations
 
-- [:file_folder: source_data](/source_data): Source data files
-  associated with each figure containing all data points that have been
-  plotted in the figure.
+- [:file_folder: supplements](manuscript/supplements): Supplementary
+  materials including notes and other documents prepared and collected
+  during the analysis.
+
+- [:file_folder: source_data](/manuscript/source_data): Source data
+  files associated with each figure containing all data points that have
+  been plotted in the figure.
 
 ## How to run in your browser or download and run locally
 
