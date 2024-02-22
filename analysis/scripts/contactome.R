@@ -9,8 +9,66 @@ contacts <- catmaid_fetch(
     with_partners = "true"
   )
 )
-length(contacts$connectors)
 
+# method1 -------------------------------
+start.time <- Sys.time()
+
+authtoken <- conn$value$token
+
+has_enter_cil_nocil_tag <- function(treenode_id) {
+  # catmaid fetch doesn't work here for some reason?
+  tags_of_node <- GET(paste(
+    "https://catmaid.ex.ac.uk/35/labels/treenode/", treenode_id, sep = ""
+    ), 
+    add_headers(Authorization = paste("Token", authtoken))) |>
+    content()
+  enter_cil <- "enter_cil" %in% tags_of_node
+  enter_nocil <- "enter_nocil" %in% tags_of_node
+  return(c(enter_cil, enter_nocil))
+}
+
+enter_cell_info <- function(connector_id) {
+  connector_info <- GET(paste(
+     "https://catmaid.ex.ac.uk/35/connectors/", connector_id, sep = ""
+  ), 
+  add_headers(Authorization = paste("Token", authtoken))) |>
+    content()
+  partner1_treenode <- connector_info$partners[[1]][[2]]
+  partner2_treenode <- connector_info$partners[[2]][[2]]
+  partner1_skid <- connector_info$partners[[1]][[4]]
+  partner2_skid <- connector_info$partners[[2]][[4]]
+  newlist <- c(
+    connector_id,
+    partner1_skid,
+    partner2_skid,
+    has_enter_cil_nocil_tag(partner1_treenode),
+    has_enter_cil_nocil_tag(partner2_treenode)
+  )
+  names(newlist) <- c("connector_id",
+                      "partner1_skid",
+                      "partner2_skid",
+                      "partner1_enter_cil",
+                      "partner1_enter_nocil",
+                      "partner2_enter_cil",
+                      "partner2_enter_nocil"
+                      )
+  return(newlist)
+}
+          
+# get connector ids
+connector_ids <- lapply(contacts$connectors, "[[", 1) |> unlist()
+
+connector_prepost_info <- lapply(connector_ids, enter_cell_info)
+
+connector_prepost_info_table <- bind_rows(connector_prepost_info, .id = "fitname")
+
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+
+start.time <- Sys.time()
+
+# method 2 -------------------------------------
 # get connector ids
 connector_ids <- c()
 for(i in 1:length(contacts$connectors)){
@@ -75,6 +133,11 @@ connector_tb <- tibble(
   partner2_pre_cil = partner2_pre_cil,
   partner2_pre_nocil = partner2_pre_nocil
 )
+
+end.time <- Sys.time()
+time.taken <- end.time - start.time
+time.taken
+
 connector_tb
 
 connector_tb |>
