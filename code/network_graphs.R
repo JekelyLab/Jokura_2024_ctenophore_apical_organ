@@ -123,20 +123,21 @@ degree
 
 ## convert to VisNetwork-list
 AO_graph.visn <- toVisNetworkData(AO_graph)
+AO_graph.visn
 
 ## copy column "weight" to new column "value" in list "edges"
-Conn_graph.visn$edges$value <- Conn_graph.visn$edges$weight
-Conn_graph.visn$nodes$value = degree
-Conn_graph.visn$nodes$group <- cell_group_attr$type
+AO_graph.visn$edges$value <- AO_graph.visn$edges$weight
+AO_graph.visn$nodes$value <- degree
 
+#AO_graph.visn$nodes$group <- cell_group_attr$type
+AO_graph.visn
 
 #hierarchical layout
 
 #level	: Number. Default to undefined. When using the hierarchical layout, the level determines where the node is going to be positioned.
-Conn_graph.visn$nodes$level <- cell_group_attr$level
+#Conn_graph.visn$nodes$level <- cell_group_attr$level
 #hierarchical layout
-{
-  visNet <- visNetwork(Conn_graph.visn$nodes,Conn_graph.visn$edges) %>% 
+visNet <- visNetwork(Conn_graph.visn$nodes,Conn_graph.visn$edges) %>% 
     visIgraphLayout(layout = "layout_nicely", physics = TRUE, 
                     randomSeed = 42, type="square") %>%
     visHierarchicalLayout(levelSeparation=250, 
