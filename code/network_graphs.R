@@ -153,7 +153,6 @@ plot3d(
 
 ## convert to VisNetwork-list
 AO_graph.visn <- toVisNetworkData(AO_graph)
-AO_graph.visn
 
 ## copy column "weight" to new column "value" in list "edges"
 AO_graph.visn$edges$value <- AO_graph.visn$edges$weight
@@ -162,15 +161,9 @@ AO_graph.visn$nodes$value <- degree
 #define node color
 AO_graph.visn$nodes$color <- Okabe_Ito[1:5]
 
-#AO_graph.visn$nodes$group <- cell_group_attr$type
-AO_graph.visn
-
 #hierarchical layout - define level of nodes
-AO_graph.visn$nodes <- c(2, 2, 1, 3, 3)
-AO_graph.visn$edges
+AO_graph.visn$nodes$level <- c(2, 2, 1, 3, 3)
 
-#level	: Number. Default to undefined. When using the hierarchical layout, the level determines where the node is going to be positioned.
-#Conn_graph.visn$nodes$level <- cell_group_attr$level
 #hierarchical layout
 visNetwork(AO_graph.visn$nodes, AO_graph.visn$edges) %>%
   visIgraphLayout(
@@ -202,23 +195,3 @@ visNetwork(AO_graph.visn$nodes, AO_graph.visn$edges) %>%
     level= AO_graph.visn$nodes$level
     )
 
-# create graph with cell types as nodes
-node_IDs <- data.frame(name = cell_types)
-graph.funct <- tbl_graph(nodes = node_IDs)
-
-# define sources and targets
-sources <- 
-targets <- 
-
-# edges 
-graph_edges <- data.frame(
-    from = rep(sources, each = length(targets)),
-    to = rep(targets, length(sources)),
-    value = ,
-    color = ,
-    type = 
-  )
-  
-# add edges to graph
-graph.funct.edges <- graph.funct %>%
-    bind_edges(graph_edges)
