@@ -14,6 +14,7 @@ library(patchwork)
 library(RColorBrewer)
 library(igraph)
 library(tidygraph)
+library(av)
 
 # catmaid connection, needs username, password AND token - weird!
 {
