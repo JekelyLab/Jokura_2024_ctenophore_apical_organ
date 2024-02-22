@@ -48,6 +48,7 @@
   \usepackage[soul]{lua-ul}
 \else
   \usepackage{soul}
+  
 \fi
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \setcounter{secnumdepth}{5}
@@ -79,7 +80,7 @@
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
 \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
@@ -89,7 +90,7 @@
 \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
 \newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
 \newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
 \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
@@ -126,35 +127,41 @@
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
 \newlength{\csllabelwidth}
 \setlength{\csllabelwidth}{3em}
-\newlength{\cslentryspacingunit} % times entry-spacing
-\setlength{\cslentryspacingunit}{\parskip}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
   % turn on hanging indent if param 1 is 1
   \ifodd #1
-  \let\oldpar\par
-  \def\par{\hangindent=\cslhangindent\oldpar}
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
   \fi
   % set entry spacing
-  \setlength{\parskip}{#2\cslentryspacingunit}
- }%
- {}
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
 \usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 \usepackage{lineno}
-\makeatletter
-\makeatother
-\makeatletter
-\makeatother
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
@@ -191,15 +198,16 @@
 \newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
 \makeatother
 \makeatletter
-\@ifpackageloaded{caption}{}{\usepackage{caption}}
-\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
 \makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
+
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
@@ -217,6 +225,7 @@
 
 \begin{document}
 \maketitle
+
 \linenumbers
 
 \renewcommand*\contentsname{Table of contents}
@@ -237,8 +246,7 @@ Author 1\textsuperscript{1,2,*} , Author 2\textsuperscript{2}, Author
 Exeter, EX4 4QD, United Kingdom\\
 \textsuperscript{*}Correspondence: corr\_author@email.com
 
-\hypertarget{abstract}{%
-\section{Abstract}\label{abstract}}
+\section{Abstract}\label{abstract}
 
 This is an R Markdown document. Markdown is a simple formatting syntax
 for authoring HTML, PDF, and MS Word documents. For more details on
@@ -246,12 +254,12 @@ using R Markdown see \url{http://rmarkdown.rstudio.com}.
 
 \textbf{text in bold} \emph{italic} \ul{underline}
 
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
+\section{Introduction}\label{introduction}
 
 You can add references either by referring to their id in the .bib file
 e.g., (Marinković et al., 2019), or by switching to the visual editor
-(Cogwheel in the .Rmd menu -\textgreater{} Use Visual Editor).
+(Cogwheel in the .Rmd menu -\textgreater{} Use Visual Editor). The
+awesome paper by (Jokura et al., 2019).
 
 In the visual editor mode, go to `Insert' -\textgreater{} @ Citation
 
@@ -283,8 +291,7 @@ respective .csl file (e.g., from the Zotero style repository
 \url{https://www.zotero.org/styles}), save it in the /manuscript folder
 of the project and change the Yaml to csl: your\_favourite\_journal.csl.
 
-\hypertarget{results}{%
-\section{Results}\label{results}}
+\section{Results}\label{results}
 
 Inserting Figures
 
@@ -294,7 +301,7 @@ can insert them from there. We use knitr::include\_graphics for this.
 The title and legend can also be edited, as will as the width of the
 output figure.
 
-\begin{figure}
+\begin{figure}[H]
 
 {\centering \includegraphics[width=1\textwidth,height=\textheight]{figures/Figure1.png}
 
@@ -302,10 +309,9 @@ output figure.
 
 \caption{\textbf{Figure 1. Title fig 1} (A) legend (B) legend.}
 
-\end{figure}
+\end{figure}%
 
-\hypertarget{equations}{%
-\section{Equations}\label{equations}}
+\section{Equations}\label{equations}
 
 Equations can also be inserted, Insert -\textgreater{} Display Math:
 
@@ -313,42 +319,44 @@ Equations can also be inserted, Insert -\textgreater{} Display Math:
 \bar{X} = \frac{\sum_{i=1}^{n} x_{i}}{n}
 \]
 
-\hypertarget{sourcing-code-and-working-with-variable}{%
 \section{Sourcing code and working with
-variable}\label{sourcing-code-and-working-with-variable}}
+variable}\label{sourcing-code-and-working-with-variable}
 
 The `analysis/scripts/statistics\_for\_paper.R' script is sourced and it
 runs but the output is not included in the knitted output. But we can
 access the variables defined in the sourced script simply by adding ` r
-var\_name ` between ` backticks, in this case max\_PRC value is 21 (now
+var\_name ` between ` backticks, in this case max\_PRC value is (now
 this number comes from our sourced script).
 
 If we update the data, the script can recalculate the variable we want
 to refer to in the text and update the number.
 
-\hypertarget{materials-and-methods}{%
-\section{Materials and Methods}\label{materials-and-methods}}
+\section{Materials and Methods}\label{materials-and-methods}
 
-\hypertarget{acknowledgements}{%
-\section{Acknowledgements}\label{acknowledgements}}
+\section{Acknowledgements}\label{acknowledgements}
 
 We would like to thank the Jekely lab for the R project template
 (\url{https://github.com/JekelyLab/new_paper_template}) we used to write
 this paper. This work was funded by \ldots{}
 
-\hypertarget{references}{%
-\section*{References}\label{references}}
+\section*{References}\label{references}
 \addcontentsline{toc}{section}{References}
 
-\hypertarget{refs}{}
+\phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
-\leavevmode\vadjust pre{\hypertarget{ref-Marinkovi2020}{}}%
+\bibitem[\citeproctext]{ref-Jokura_2019}
+Jokura K, Shibata D, Yamaguchi K, Shiba K, Makino Y, Shigenobu S, Inaba
+K. 2019. CTENO64 is required for coordinated paddling of ciliary comb
+plate in ctenophores. \emph{Current Biology} \textbf{29}:3510--3516.e4.
+doi:\href{https://doi.org/10.1016/j.cub.2019.08.059}{10.1016/j.cub.2019.08.059}
+
+\bibitem[\citeproctext]{ref-Marinkovi2020}
 Marinković M, Berger J, Jékely G. 2019. Neuronal coordination of motile
 cilia in locomotion and feeding. \emph{Philosophical Transactions of the
 Royal Society B: Biological Sciences} \textbf{375}:20190165.
 doi:\href{https://doi.org/10.1098/rstb.2019.0165}{10.1098/rstb.2019.0165}
 
-\leavevmode\vadjust pre{\hypertarget{ref-ozpolat2021}{}}%
+\bibitem[\citeproctext]{ref-ozpolat2021}
 Ozpolat BD, Randel N, Williams EA, Bezares-Calderón LA, Andreatta G,
 Balavoine G, Bertucci PY, Ferrier DEK, Gambi MC, Gazave E,
 Handberg-Thorsager M, Hardege J, Hird C, Hsieh Y-W, Hui J, Mutemi KN,

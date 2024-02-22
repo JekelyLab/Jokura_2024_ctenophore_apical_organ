@@ -43,7 +43,7 @@ There is also a rendered html version,
     `Manuscript.html`, suitable for reading.
     
   - [:file\_folder: data](analysis/data): Data used in the analysis.
-  - [:file\_folder: data](analysis/scripts): scripts used in the analysis.
+  - [:file\_folder: scripts](analysis/scripts): scripts used in the analysis.
   - [:file\_folder: figures](manuscript/figures): Plots and other
     illustrations
   - [:file\_folder:

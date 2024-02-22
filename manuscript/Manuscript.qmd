@@ -28,6 +28,7 @@ format:
 bibliography: references.bib #add bibliography in this file
 csl: elife.csl #change according to journal
 ---
+
 \
 
 Author 1^1,2,\*^ , Author 2^2^, Author 3^1,2^\
@@ -44,7 +45,7 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 ## Introduction
 
-You can add references either by referring to their id in the .bib file e.g., [@Marinkovi2020], or by switching to the visual editor (Cogwheel in the .Rmd menu -\> Use Visual Editor).
+You can add references either by referring to their id in the .bib file e.g., [@Marinkovi2020], or by switching to the visual editor (Cogwheel in the .Rmd menu -\> Use Visual Editor). The awesome paper by [@Jokura_2019].
 
 In the visual editor mode, go to 'Insert' -\> \@ Citation
 
@@ -61,7 +62,7 @@ curl -LH "Accept: application/x-bibtex" https://doi.org/10.7554/eLife.91258.1 >>
 
 *Platynereis dumerilii* is a marine annelid... [@ozpolat2021]
 
-The references are stored in manuscript/references.bib (need to be defined in the Yaml header). This file will automatically updated when you insert a new reference through the Visual editor \> Insert > Citations.
+The references are stored in manuscript/references.bib (need to be defined in the Yaml header). This file will automatically updated when you insert a new reference through the Visual editor \> Insert \> Citations.
 
 In this documents, references will be formatted in the style of eLife. This is defined in the Yaml header under: csl: elife.csl. The elife.csl file is saved in the /manuscript folder.
 
@@ -92,10 +93,10 @@ $$
 ```{r}
 #| include: false
 #| eval: true
-source(here::here("analysis/scripts/statistics_for_paper.R"))
+#source(here::here("analysis/scripts/statistics_for_paper.R"))
 ```
 
-The 'analysis/scripts/statistics_for_paper.R' script is sourced and it runs but the output is not included in the knitted output. But we can access the variables defined in the sourced script simply by adding \` r var_name \` between \` backticks, in this case max_PRC value is `r max_PRC` (now this number comes from our sourced script).
+The 'analysis/scripts/statistics_for_paper.R' script is sourced and it runs but the output is not included in the knitted output. But we can access the variables defined in the sourced script simply by adding \` r var_name \` between \` backticks, in this case max_PRC value is (now this number comes from our sourced script).
 
 If we update the data, the script can recalculate the variable we want to refer to in the text and update the number.
 

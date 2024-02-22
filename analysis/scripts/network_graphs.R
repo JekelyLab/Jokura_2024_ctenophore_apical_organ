@@ -1,6 +1,6 @@
 #network analysis and plotting
 
-source("code/packages_and_functions.R")
+source("analysis/scripts/packages_and_functions.R")
 
 # Create a random graph with 10 nodes
 g <- erdos.renyi.game(10, p = 0.3)

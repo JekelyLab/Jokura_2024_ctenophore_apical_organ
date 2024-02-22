@@ -7,9 +7,9 @@ BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0
 LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
 
 locale:
- [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
- [3] LC_TIME=en_GB.UTF-8        LC_COLLATE=en_US.UTF-8    
- [5] LC_MONETARY=en_GB.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [1] LC_CTYPE=en_GB.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_GB.UTF-8        LC_COLLATE=en_GB.UTF-8    
+ [5] LC_MONETARY=en_GB.UTF-8    LC_MESSAGES=en_GB.UTF-8   
  [7] LC_PAPER=en_GB.UTF-8       LC_NAME=C                 
  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 [11] LC_MEASUREMENT=en_GB.UTF-8 LC_IDENTIFICATION=C       
@@ -22,14 +22,14 @@ attached base packages:
 [7] base     
 
 other attached packages:
- [1] tidygraph_1.2.3    RColorBrewer_1.1-3 patchwork_1.2.0   
- [4] webshot2_0.1.1     visNetwork_2.1.2   networkD3_0.4     
- [7] igraph_1.5.1       png_0.1-8          cowplot_1.1.3     
-[10] lubridate_1.9.3    forcats_1.0.0      stringr_1.5.1     
-[13] dplyr_1.1.4        purrr_1.0.2        readr_2.1.5       
-[16] tidyr_1.3.1        tibble_3.2.1       ggplot2_3.4.4     
-[19] tidyverse_2.0.0    catmaid_0.10.1     nat_1.10.4        
-[22] rgl_1.2.8          httr_1.4.7        
+ [1] av_0.9.0           tidygraph_1.2.3    RColorBrewer_1.1-3
+ [4] patchwork_1.2.0    webshot2_0.1.1     visNetwork_2.1.2  
+ [7] networkD3_0.4      igraph_1.5.1       png_0.1-8         
+[10] cowplot_1.1.3      lubridate_1.9.3    forcats_1.0.0     
+[13] stringr_1.5.1      dplyr_1.1.4        purrr_1.0.2       
+[16] readr_2.1.5        tidyr_1.3.1        tibble_3.2.1      
+[19] ggplot2_3.4.4      tidyverse_2.0.0    catmaid_0.10.1    
+[22] nat_1.10.4         rgl_1.2.8          httr_1.4.7        
 
 loaded via a namespace (and not attached):
  [1] gtable_0.3.4      xfun_0.42         htmlwidgets_1.6.4
@@ -37,16 +37,18 @@ loaded via a namespace (and not attached):
  [7] vctrs_0.6.5       tools_4.3.2       ps_1.7.6         
 [10] generics_0.1.3    curl_5.2.0        fansi_1.0.6      
 [13] pkgconfig_2.0.3   checkmate_2.3.1   filehash_2.4-5   
-[16] lifecycle_1.0.4   compiler_4.3.2    munsell_0.5.0    
-[19] chromote_0.2.0    codetools_0.2-19  htmltools_0.5.7  
-[22] nat.utils_0.6.1   yaml_2.3.8        Rttf2pt1_1.3.12  
-[25] pillar_1.9.0      later_1.3.2       extrafontdb_1.0  
-[28] nabor_0.5.0       tidyselect_1.2.0  digest_0.6.34    
-[31] stringi_1.8.3     extrafont_0.19    fastmap_1.1.1    
-[34] grid_4.3.2        colorspace_2.1-0  cli_3.6.2        
-[37] magrittr_2.0.3    base64enc_0.1-3   utf8_1.2.4       
-[40] withr_3.0.0       scales_1.3.0      promises_1.2.1   
-[43] backports_1.4.1   timechange_0.3.0  hms_1.1.3        
-[46] knitr_1.45        rlang_1.1.3       Rcpp_1.0.12      
-[49] glue_1.7.0        xml2_1.3.6        rstudioapi_0.15.0
-[52] jsonlite_1.8.8    R6_2.5.1          plyr_1.8.9       
+[16] lifecycle_1.0.4   compiler_4.3.2    progress_1.2.3   
+[19] munsell_0.5.0     chromote_0.2.0    codetools_0.2-19 
+[22] htmltools_0.5.7   nat.utils_0.6.1   yaml_2.3.8       
+[25] Rttf2pt1_1.3.12   crayon_1.5.2      pillar_1.9.0     
+[28] later_1.3.2       extrafontdb_1.0   nabor_0.5.0      
+[31] tidyselect_1.2.0  digest_0.6.34     stringi_1.8.3    
+[34] extrafont_0.19    fastmap_1.1.1     grid_4.3.2       
+[37] colorspace_2.1-0  cli_3.6.2         magrittr_2.0.3   
+[40] base64enc_0.1-3   utf8_1.2.4        withr_3.0.0      
+[43] prettyunits_1.2.0 scales_1.3.0      promises_1.2.1   
+[46] backports_1.4.1   timechange_0.3.0  rmarkdown_2.25   
+[49] hms_1.1.3         evaluate_0.23     knitr_1.45       
+[52] rlang_1.1.3       Rcpp_1.0.12       glue_1.7.0       
+[55] xml2_1.3.6        rstudioapi_0.15.0 jsonlite_1.8.8   
+[58] R6_2.5.1          plyr_1.8.9       

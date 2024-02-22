@@ -35,8 +35,8 @@ bluepurple <- brewer.pal(9, 'BuPu')
 oranges <- brewer.pal(9, 'YlOrRd')
 
 #save session info and Rstudio version info for reproducibility
-writeLines(capture.output(sessionInfo()), "code/sessionInfo.txt")
-writeLines(capture.output(rstudioapi::versionInfo()), "code/versionInfo.txt")
+writeLines(capture.output(sessionInfo()), "analysis/scripts/sessionInfo.txt")
+writeLines(capture.output(rstudioapi::versionInfo()), "analysis/scripts/versionInfo.txt")
 
 # functions ----------------------
 
