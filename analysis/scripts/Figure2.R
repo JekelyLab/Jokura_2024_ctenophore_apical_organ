@@ -3,93 +3,40 @@
 # source packages and functions ------------------------------------------------
 source("analysis/scripts/packages_and_functions.R")
 
-
-
-
-
 # load cell types from catmaid -------------------------------------------------
 
-balancer <-
-  nlapply(read.neurons.catmaid("celltype:balancer", pid = 35),
+read_smooth_neuron <- function(annotation){
+  nlapply(read.neurons.catmaid(annotation, pid = 35),
           function(x)
             smooth_neuron(x, sigma = 1000))
+}
 
-bridge <-
-  nlapply(read.neurons.catmaid("celltype:bridge", pid = 35),
-          function(x)
-            smooth_neuron(x, sigma = 1000))
-
-bristle <-
-  nlapply(read.neurons.catmaid("celltype:bristle", pid = 35),
-          function(x)
-            smooth_neuron(x, sigma = 1000))
-
-dome <-
-  nlapply(read.neurons.catmaid("celltype:dome", pid = 35),
-          function(x)
-            smooth_neuron(x, sigma = 1000))
-
-groove <-
-  nlapply(read.neurons.catmaid("celltype:groove", pid = 35),
-          function(x)
-            smooth_neuron(x, sigma = 1000))
-
-intramulticilia <-
-  nlapply(read.neurons.catmaid("celltype:intra-multi-ciliated", pid = 35),
-          function(x)
-            smooth_neuron(x, sigma = 1000))
-
-lamellate <-
-  nlapply(read.neurons.catmaid("celltype:lamellate", pid = 35),
-          function(x)
-            smooth_neuron(x, sigma = 1000))
-
-lithocyte <-
-  nlapply(read.neurons.catmaid("celltype:lithocyte", pid = 35),
-          function(x)
-            smooth_neuron(x, sigma = 1000))
-
-neuron <-
-  nlapply(read.neurons.catmaid("celltype:neuron", pid = 35),
-          function(x)
-            smooth_neuron(x, sigma = 1000))
-
-plumose <-
-  nlapply(read.neurons.catmaid("celltype:plumose", pid = 35),
-          function(x)
-            smooth_neuron(x, sigma = 1000))
-
-dense_vesicle <-
-  nlapply(read.neurons.catmaid("celltype:dense_vesicle", pid = 35),
-          function(x)
-            smooth_neuron(x, sigma = 1000))
-
-monocilia <-
-  nlapply(read.neurons.catmaid("celltype:monociliated", pid = 35),
-          function(x)
-            smooth_neuron(x, sigma = 1000))
-
-bicilia <-
-  nlapply(read.neurons.catmaid("celltype:biciliated", pid = 35),
-          function(x)
-            smooth_neuron(x, sigma = 1000))
-
-non_cilia <-
-  nlapply(read.neurons.catmaid("celltype:nonciliated", pid = 35),
-          function(x)
-            smooth_neuron(x, sigma = 1000))
+balancer <- read_smooth_neuron("celltype:balancer")
+bridge <- read_smooth_neuron("celltype:bridge")
+bristle <- read_smooth_neuron("celltype:bristle")
+dome <- read_smooth_neuron("celltype:dome")
+groove <- read_smooth_neuron("celltype:groove")
+intramulticilia <- read_smooth_neuron("celltype:intra-multi-ciliated")
+lamellate <- read_smooth_neuron("celltype:lamellate")
+lithocyte <- read_smooth_neuron("celltype:lithocyte")
+neuron <- read_smooth_neuron("celltype:neuron")
+plumose <- read_smooth_neuron("celltype:plumose")
+dense_vesicle <- read_smooth_neuron("celltype:dense_vesicle")
+monocilia <- read_smooth_neuron("celltype:monociliated")
+bicilia <- read_smooth_neuron("celltype:biciliated")
+non_cilia <- read_smooth_neuron("celltype:nonciliated")
 
 
 
 # cell types -------------------------------------------------------------------
 
-celltypes <- list(balancer, bridge, bristle, dome, groove, intramulticilia, 
-                     lamellate, lithocyte, neuron, plumose, dense_vesicle, 
+celltypes <- list(balancer, bridge, groove, intramulticilia, 
+                     neuron, dense_vesicle, 
                      monocilia, bicilia, non_cilia)
 
-celltype_names <- list("balancer", "bridge", "bristle", "dome", "groove", 
-                          "intramulticilia", "lamellate", "lithocyte", "neuron", 
-                          "plumose", "dense_vesicle", "monocilia", "bicilia", "non_cilia")
+celltype_names <- list("balancer", "bridge", "groove", 
+                          "intramulticilia", "neuron", "dense_vesicle", 
+                          "monocilia", "bicilia", "non_cilia")
 
 
 # iterate through cell group neuron lists and get connectivity
@@ -155,10 +102,10 @@ graph.visn$edges$value <- graph.visn$edges$weight
 graph.visn$nodes$value <- degree
 
 #define node color
-graph.visn$nodes$color <- Okabe_Ito[1:14]
+graph.visn$nodes$color <- Okabe_Ito[1:9]
 
 #hierarchical layout - define level of nodes
-graph.visn$nodes$level <- c(1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2)
+graph.visn$nodes$level <- c(1, 2, 3, 4, 1, 2, 3, 4, 1)
 
 #hierarchical layout
 visNetwork(graph.visn$nodes, graph.visn$edges) %>%
@@ -190,3 +137,42 @@ visNetwork(graph.visn$nodes, graph.visn$edges) %>%
     scaling = list(label=list(enabled=TRUE, min=48, max=56)),
     level= graph.visn$nodes$level
   )
+
+
+
+
+
+
+visNetwork(graph.visn$nodes, graph.visn$edges) %>%
+  visIgraphLayout(
+    layout = "layout_nicely", physics = TRUE, 
+    randomSeed = 42, type="square"
+  ) %>%
+#  visHierarchicalLayout(
+#    levelSeparation=250, 
+#    nodeSpacing=10,
+#    direction='LR',
+#    sortMethod='hubsize',
+#    shakeTowards='roots'
+#  ) %>%
+  visEdges(
+    smooth = list(type = 'curvedCW', roundness=0.2),
+    scaling=list(min=2, max=12),
+    color = list(inherit=TRUE, opacity=0.7),
+    arrows = list(
+      to = list(enabled = TRUE, 
+                scaleFactor = 1, type = 'arrow'))
+  ) %>%
+  visNodes(
+    borderWidth=0.3, 
+    color = list(background=graph.visn$nodes$color, border='black'),
+    opacity=0.9,
+    shape='dot', 
+    font=list(color='black', size=1),
+    scaling = list(label=list(enabled=TRUE, min=10, max=12)),
+    level= graph.visn$nodes$level
+  )
+
+
+
+
