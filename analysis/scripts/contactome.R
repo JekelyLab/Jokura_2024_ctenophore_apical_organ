@@ -290,8 +290,8 @@ nocil_graph.visn <- toVisNetworkData(nocil_graph)
 nocil_graph.visn
 
 #define node color
-nocil_graph.visn$nodes$color <- sample(Okabe_Ito[1:8], 95, replace = TRUE)
-nocil_graph.visn$nodes$vakue <- 1
+nocil_graph.visn$nodes$color <- sample(Okabe_Ito[1:8], 102, replace = TRUE)
+nocil_graph.visn$nodes$value <- 1
 
 #hierarchical layout
 visNetwork(nocil_graph.visn$nodes, nocil_graph.visn$edges) %>%
