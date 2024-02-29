@@ -5,14 +5,14 @@ source("analysis/scripts/packages_and_functions.R")
 
 # load cell types from catmaid -------------------------------------------------
 
-#read_smooth_cell <- function(annotation){
-#  nlapply(read.cells.catmaid(annotation, pid = 35),
-#          function(x)
-#            smooth_cell(x, sigma = 1000))
-#}
+read_smooth_cell <- function(annotation){
+  nlapply(read.neurons.catmaid(annotation, pid = 35),
+          function(x)
+            smooth_neuron(x, sigma = 1000))
+}
 
 #balancer <- read_smooth_cell("celltype:balancer")
-#bridge <- read_smooth_cell("celltype:bridge")
+bridge <- read_smooth_cell("celltype:bridge")
 #bristle <- read_smooth_cell("celltype:bristle")
 #dome <- read_smooth_cell("celltype:dome")
 #groove <- read_smooth_cell("celltype:groove")
