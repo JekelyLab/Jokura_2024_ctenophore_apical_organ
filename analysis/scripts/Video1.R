@@ -79,7 +79,7 @@ plot3d(
   alpha = 0.6, lwd = 2
 )
 texts3d(
-  30000, 32000, 1000, text = "lamellar body", col='black', cex = 2
+  25000, 32000, 1000, text = "lamellate body", col='black', cex = 2
 )
 for(i in 121:140){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
@@ -91,21 +91,43 @@ plot3d(
   syn_neuron, soma = TRUE, color = Okabe_Ito[3], 
   alpha = 0.6, lwd = 4
 )
+texts3d(
+  25000, 32000, 1000, text = "nerve net", col='black', cex = 2
+)
+for(i in 141:160){
+  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
+}
+rgl.pop()
 
 plot3d(
   bridge, soma = TRUE, color = Okabe_Ito[4], 
   alpha = 0.6, lwd = 3
 )
+texts3d(
+  25000, 32000, 1000, text = "bridge", col='black', cex = 2
+)
+for(i in 161:180){
+  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
+}
+rgl.pop()
 
 plot3d(
   monociliated, soma = TRUE, color = Okabe_Ito[5], 
   alpha = 0.6, lwd = 3
 )
+texts3d(
+  25000, 32000, 1000, text = "monociliated", col='black', cex = 2
+)
+for(i in 181:200){
+  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
+}
+rgl.pop()
+
 
 #go to next scene
 next3d()
 par3d(zoom=0.75)
-nview3d("frontal", extramat=rotationMatrix(1.2, 0, 0, 1))
+nview3d("left", extramat = rotationMatrix(300, 4200, 1800, 800))
 
 plot3d(
   balancer, soma = TRUE, color = Okabe_Ito[1], 
@@ -136,18 +158,21 @@ plot3d(
 
 # get rotation matrix
 next3d(clear=F)
+nview3d("frontal", extramat=rotationMatrix(1.2, 0, 0, 1))
+
 um1 <- par3d()$userMatrix
 next3d(clear=F)
+nview3d("left", extramat = rotationMatrix(300, 4200, 1800, 800))
 um2 <- par3d()$userMatrix
 next3d(clear=F)
 
 rotation=200
 
-for (l in 1:40){
+for (l in 1:180){
   #rotate in a loop (with l e.g. 1:90 for a 180 turn)
   nview3d(userMatrix = um1 %*%rotationMatrix(pi*l/90, 0, 0, 1)
-          %*%rotationMatrix(pi*l/180, 0, 1, 0)
-          %*%rotationMatrix(pi*l/360, 1, 0, 0)
+          %*%rotationMatrix(0, 0, 1, 0)
+          %*%rotationMatrix(0, 1, 0, 0)
           )
   next3d(clear=F)
   nview3d(userMatrix = um2 %*%rotationMatrix(pi*l/90, 0, 0, 1)
