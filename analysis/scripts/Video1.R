@@ -1,6 +1,6 @@
 #Video1 of the Jokura et al ctenophore AO paper
 
-source("code/packages_and_functions.R")
+source("analysis/scripts/packages_and_functions.R")
 
 #create temp dir to store video frames
 mainDir = getwd()
@@ -174,7 +174,7 @@ av::av_encode_video(
   paste('videoframes/', list.files("videoframes/", '*.png'), 
         sep = ""),
   framerate = 10,
-  output = 'Videos/Video1.mp4'
+  output = 'manuscript/videos/Video1.mp4'
   )
 
 unlink("videoframes", recursive = T)
