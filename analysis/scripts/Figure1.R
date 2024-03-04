@@ -70,7 +70,7 @@ close3d()
 nopen3d() 
 mfrow3d(1, 3)  #defines the two scenes
 #define the size of the rgl window, the view and zoom
-par3d(windowRect = c(0, 0, 1200, 350))
+par3d(windowRect = c(0, 0, 2400, 800))
 
 
 #plot aboral view
