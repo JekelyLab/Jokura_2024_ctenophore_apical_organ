@@ -16,6 +16,11 @@ balancer <- nlapply(
   function(x) smooth_neuron(x, sigma = 1000)
 )
 
+intramulticilia_Q1 <- read_smooth_cell(
+  skids_by_2annotations(
+    "celltype:intra-multi-ciliated", "Q1")
+  )
+
 LB <- nlapply(
   read.neurons.catmaid(
     "celltype:lamellate", pid = 35
@@ -70,69 +75,13 @@ plot3d(
   alpha = 0.6, lwd = 3
   )
 plot3d(bounding_dots, alpha = 0, lwd = 0)
-
+par3d(zoom=0.6)
 texts3d(
   14000, 32000, 1000, text = "balancer", col='black', cex = 2
   )
-for(i in 101:120){
-  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
-  }
-rgl.pop()
-
-
-plot3d(
-  LB, soma = TRUE, color = Okabe_Ito[2], 
-  alpha = 0.6, lwd = 2
-)
-texts3d(
-  15000, 32000, 1000, text = "lamellate body", col='black', cex = 2
-)
-for(i in 121:140){
-  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
-}
-rgl.pop()
-
-
-plot3d(
-  syn_neuron, soma = TRUE, color = Okabe_Ito[3], 
-  alpha = 0.6, lwd = 4
-)
-texts3d(
-  15000, 32000, 1000, text = "nerve net", col='black', cex = 2
-)
-for(i in 141:160){
-  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
-}
-rgl.pop()
-
-plot3d(
-  bridge, soma = TRUE, color = Okabe_Ito[4], 
-  alpha = 0.6, lwd = 3
-)
-texts3d(
-  15000, 32000, 1000, text = "bridge", col='black', cex = 2
-)
-for(i in 161:180){
-  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
-}
-rgl.pop()
-
-plot3d(
-  monociliated, soma = TRUE, color = Okabe_Ito[5], 
-  alpha = 0.3, lwd = 3
-)
-texts3d(
-  15000, 32000, 1000, text = "monociliated", col='black', cex = 2
-)
-for(i in 181:200){
-  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
-}
-rgl.pop()
-
 
 #go to next scene
 next3d(clear=FALSE)
-par3d(zoom=0.75)
 nview3d("anterior", 
         extramat = rotationMatrix(2.54, 0.1, 0, 1)
         )
@@ -141,51 +90,133 @@ plot3d(
   alpha = 0.6, lwd = 3
 )
 plot3d(bounding_dots, alpha = 0, lwd = 0)
+par3d(zoom=0.6)
+
+for(i in 101:120){
+  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
+  }
+
+next3d(clear=FALSE)
+#remove text
+rgl.pop(id = as_tibble(ids3d()) |> filter(type =="text") |> pull(id))
 
 plot3d(
-  LB, soma = TRUE, color = Okabe_Ito[2], 
+  intramulticilia, soma = TRUE, color = Okabe_Ito[2], 
+  alpha = 0.6, lwd = 2
+)
+texts3d(
+  15000, 32000, 1000, text = "intra-multiciliated", col='black', cex = 2
+)
+next3d(clear=FALSE)
+plot3d(
+  intramulticilia, soma = TRUE, color = Okabe_Ito[2], 
   alpha = 0.6, lwd = 2
 )
 
+for(i in 121:140){
+  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
+}
+
+next3d(clear=FALSE)
+#remove text
+rgl.pop(id = as_tibble(ids3d()) |> filter(type =="text") |> pull(id))
+
 plot3d(
-  syn_neuron, soma = TRUE, color = Okabe_Ito[3], 
+  LB, soma = TRUE, color = Okabe_Ito[3], 
+  alpha = 0.6, lwd = 2
+)
+texts3d(
+  15000, 32000, 1000, text = "lamellate body", col='black', cex = 2
+)
+
+next3d(clear=FALSE)
+plot3d(
+  LB, soma = TRUE, color = Okabe_Ito[3], 
+  alpha = 0.6, lwd = 2
+)
+
+for(i in 141:160){
+  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
+}
+
+next3d(clear=FALSE)
+rgl.pop(id = as_tibble(ids3d()) |> filter(type =="text") |> pull(id))
+
+plot3d(
+  syn_neuron, soma = TRUE, color = Okabe_Ito[4], 
+  alpha = 0.6, lwd = 4
+)
+texts3d(
+  15000, 32000, 1000, text = "nerve net", col='black', cex = 2
+)
+
+next3d(clear=FALSE)
+plot3d(
+  syn_neuron, soma = TRUE, color = Okabe_Ito[4], 
   alpha = 0.6, lwd = 4
 )
 
+
+for(i in 161:180){
+  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
+}
+
+next3d(clear=FALSE)
+rgl.pop(id = as_tibble(ids3d()) |> filter(type =="text") |> pull(id))
+
+
 plot3d(
-  bridge, soma = TRUE, color = Okabe_Ito[4], 
+  bridge, soma = TRUE, color = Okabe_Ito[8], 
+  alpha = 0.6, lwd = 3
+)
+texts3d(
+  15000, 32000, 1000, text = "bridge", col='black', cex = 2
+)
+
+next3d(clear=FALSE)
+plot3d(
+  bridge, soma = TRUE, color = Okabe_Ito[8], 
   alpha = 0.6, lwd = 3
 )
 
+for(i in 181:200){
+  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
+}
+next3d(clear=FALSE)
+rgl.pop(id = as_tibble(ids3d()) |> filter(type =="text") |> pull(id))
+
 plot3d(
-  monociliated, soma = TRUE, color = Okabe_Ito[5], 
-  alpha = 0.3, lwd = 3
+  monociliated, soma = TRUE, color = "grey50", 
+  alpha = 0.1, lwd = 1
 )
 
+next3d(clear=FALSE)
+plot3d(
+  monociliated, soma = TRUE, color = "grey50", 
+  alpha = 0.1, lwd = 1
+)
+
+for(i in 201:220){
+  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
+}
 
 
 # get rotation matrix
 next3d(clear=F)
 
-#nview3d("ventral", extramat=rotationMatrix(1.2, 0, 0, 1))
-nview3d("left", extramat = rotationMatrix(-1.7, 190, -120, -140))
-
 um1 <- par3d()$userMatrix
 next3d(clear=F)
 #nview3d("left", extramat = rotationMatrix(300, 4200, 1800, 800))
-nview3d("anterior", 
-        extramat = rotationMatrix(2.54, 0.1, 0, 1)
-        )
 um2 <- par3d()$userMatrix
 next3d(clear=F)
 
-rotation=200
+rotation=300
 
-for (l in 1:180){
+for (l in 1:90){
   #rotate in a loop (with l e.g. 1:90 for a 180 turn)
   nview3d(userMatrix = um1 %*%rotationMatrix(pi*l/90, 0, 0, 1)
           %*%rotationMatrix(0, 0, 1, 0)
-          %*%rotationMatrix(0, 1, 0, 0)
+          %*%rotationMatrix(0.2, 1, 0, 0)
           )
   next3d(clear=F)
   nview3d(userMatrix = um2 %*%rotationMatrix(pi*l/90, 0, 0, 1)
