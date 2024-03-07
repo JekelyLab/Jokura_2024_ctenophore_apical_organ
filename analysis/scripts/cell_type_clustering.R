@@ -60,6 +60,8 @@ for (skid in skids) {
   }
 }
 
+write.csv(tag_stats_per_skid, "analysis/data/organelle_stats.csv")
+
 tag_stats_noskid <- tag_stats_per_skid[,3:ncol(tag_stats_per_skid)]
 
 km <- kmeans(tag_stats_noskid, centers = 20, nstart = 25)
@@ -98,3 +100,31 @@ for (i in seq(1:length(tag_stats_per_skid$skid))) {
 
 sorted <- celltypes[order(celltypes[[3]]),]
 
+
+# mitochondria stats ---------------------------------------------------------
+
+mito_done_cells <- read.neurons.catmaid("mitochondria done", pid=35, fetch.annotations = TRUE)
+annotations <- attr(mito_done_cells, 'anndf') |> as.tibble()
+
+mito_counts_tb <- tibble(skid=integer(),
+                         neuron_name=character(),
+                         celltype=character(),
+                         n_mito=integer())
+for (mito_done_cell in mito_done_cells) {
+  # var named sskid because othrwise filter doesn't work
+  sskid <- mito_done_cell$skid
+  n_mito <- length(mito_done_cell$tags$mitochondrion)
+  celltype <- annotations |> 
+    filter(skid==sskid) |> 
+    filter(grepl("celltype:", annotation)) |> 
+    select(annotation) |> 
+    pull()
+  celltype <- gsub(".*:","", celltype)
+  if (length(celltype)==0) {
+    celltype <- "NA"
+  }
+  neuron_name <- catmaid_get_neuronnames(sskid, pid = 35)
+  print(paste(sskid, neuron_name, celltype, n_mito))
+  mito_counts_tb <- mito_counts_tb |> add_row(skid=sskid, neuron_name=neuron_name, celltype=celltype, n_mito=n_mito)
+}
+write.csv(mito_counts_tb, "analysis/data/mito_per_celltype.csv")

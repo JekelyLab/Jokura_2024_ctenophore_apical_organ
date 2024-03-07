@@ -1,0 +1,65 @@
+"","skid","neuron_name","celltype","n_mito"
+"1",2436142,"monoC_middle 2436143","monociliated",6
+"2",2436172,"SSN_Q1-2","neuron",136
+"3",2436505,"non-C_2436506","nonciliated",7
+"4",2436516,"bridge cell Q3Q4 2436517","bridge",22
+"5",2436531,"SSN_Q3-4","neuron",83
+"6",2436550,"IcMC_Q2 2436551","intra-multi-ciliated",18
+"7",2436590,"plumose_Q1 2436591","plumose",8
+"8",2436675,"LB_Q1 2436676","lamellate",28
+"9",2436684,"bristle_Q4 2436685","bristle",6
+"10",2436698,"biC_middle 2436699","biciliated",7
+"11",2436802,"balancer_Q2 2436803","balancer",8
+"12",2437047,"bridge cell Q1Q2 2437048","bridge",38
+"13",2437072,"bridge cell Q3Q4 2437073","bridge",20
+"14",2437077,"bridge cell Q3Q4 2437078","bridge",9
+"15",2437083,"bridge cell Q1Q2 2437084","bridge",11
+"16",2437089,"bridge cell Q3Q4 2437090","bridge",14
+"17",2437100,"bridge cell Q3Q4 2437101","bridge",8
+"18",2437106,"balancer_Q4 2437107","balancer",7
+"19",2437297,"balancer_Q3 2437298","balancer",3
+"20",2437663,"balancer_Q1 2437664","balancer",5
+"21",2438567,"monoC_middle 2438568","bridge",5
+"22",2438653,"IcMC_Q1 2438654","intra-multi-ciliated",17
+"23",2438810,"IcMC_Q3 2438811","intra-multi-ciliated",14
+"24",2438853,"bristle_Q1 2438854","bristle",4
+"25",2438926,"multiciliated (3 cilia) cell Q1 2438927","NA",4
+"26",2457192,"biC_middle 2457193","biciliated",9
+"27",2457796,"non-C_vesicle_2457797","nonciliated",13
+"28",2457895,"biC_Q2Q3 2457896","biciliated",7
+"29",2457945,"dense vesicle cell 2457946","dense_vesicle",4
+"30",2458237,"bridge cell Q3Q4 2458238","NA",5
+"31",2458342,"dense vesicle cell 2458343","dense_vesicle",4
+"32",2458350,"dense vesicle cell 2458351","dense_vesicle",5
+"33",2458401,"EF_Q3Q4 2458402","nonciliated",3
+"34",2462187,"biC_Q1Q4 2462188","biciliated",6
+"35",2472607,"dense vesicle cell 2472608","NA",6
+"36",2473250,"non-C_vesicle_2473251","nonciliated",9
+"37",2473363,"monociliated vesicle cell middle 2473364","monociliated",11
+"38",2473440,"dome_2473441","dome",5
+"39",2473471,"dome_2473472","dome",5
+"40",2473599,"EF_Q1Q2 2473600","nonciliated",5
+"41",2473954,"EF_Q3 2473955","NA",4
+"42",2474482,"ssCG_Q3 2474483","Cgroove-sag",6
+"43",2474824,"multiciliated (6 cilia) cell Q2 2474825","NA",7
+"44",2475261,"EF_Q2 2475262","NA",9
+"45",2475269,"monoC_Q2Q3 2475270","monociliated",6
+"46",2475366,"biciliated long projection cell_Q2Q3 2475367","biciliated",8
+"47",2476064,"CG?balancer?(bicilia)_2476065","biciliated",4
+"48",2477131,"biC_Q3 2477132","biciliated",4
+"49",2477784,"EF_Q4 2477785","NA",8
+"50",2477884,"biC_Q1Q4 2477885","biciliated",5
+"51",2478544,"multiciliated (5 cilia) cell Q4 2478545","NA",7
+"52",2478701,"biC_Q1 2478702","biciliated",3
+"53",2478824,"EF_Q1 2478825","NA",3
+"54",2479027,"multiciliated (4 cilia) cell Q1 2479028","NA",7
+"55",2480142,"lithocyte 2480143","lithocyte",43
+"56",2480205,"bridge? cell Q1Q2 2480206","NA",8
+"57",2480221,"bridge? cell Q1Q2 2480222","NA",7
+"58",2480302,"non-C_2480303","NA",5
+"59",2480313,"non-C_2480314","NA",4
+"60",2480943,"biC_Q1Q4 2480944","biciliated",3
+"61",2481678,"SSN_2481679","neuron",1
+"62",2487643,"balancer_Q4 2487644","monociliated",4
+"63",2496955,"SSN_Q1-4","neuron",211
+"64",2497202,"outside cell 2497203","NA",4
