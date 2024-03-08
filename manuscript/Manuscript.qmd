@@ -1,5 +1,5 @@
 ---
-title: "New paper template - title here"
+title: "Cell-type diversity and connectome of the ctenophore apical organ"
 mainfont: Arial
 monofont: DejaVu Sans Mono #Times New Roman
 fontsize: 11pt
@@ -7,17 +7,16 @@ linestretch: 1.2
 linkcolor: blue
 documentclass: article
 max-width: 100%
-number-sections: false
 format:
   html: default
   pdf:
     pdf-engine: xelatex
-    number-sections: true
+    number-sections: false
     margin-left: 0.8in
     margin-right: 0.8in
     margin-top: 0.8in
     margin-bottom: 0.8in
-    toc: true
+    toc: false
     keep-tex: true
     include-in-header:
       text: |
@@ -31,10 +30,12 @@ csl: elife.csl #change according to journal
 
 \
 
-Author 1^1,2,\*^ , Author 2^2^, Author 3^1,2^\
+Kei Jokura^1,3,\*^, Sanja Jasek^1,2^, Lara Kewalow^2^, Pawel Burkhardt^4^, Gáspár Jékely^1,2,\*^\
 
-^1^Heidelberg University, Centre for Organismal Studies (COS), 69120 Heidelberg, Germany\
-^2^Living Systems Institute, University of Exeter, Exeter, EX4 4QD, United Kingdom\
+^1^Living Systems Institute, University of Exeter, Exeter, EX4 4QD, United Kingdom\
+^2^Heidelberg University, Centre for Organismal Studies (COS), 69120 Heidelberg, Germany\
+^3^National Institute for Basic Biology, Okazaki, ..., Japan
+^4^Sars Centre ... Berge, Norway
 ^\*^Correspondence: corr_author\@email.com
 
 ## Abstract
@@ -45,11 +46,17 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 ## Introduction
 
-You can add references either by referring to their id in the .bib file e.g., [@Marinkovi2020], or by switching to the visual editor (Cogwheel in the .Rmd menu -\> Use Visual Editor). The awesome paper by [@Jokura_2019].
+First descriptions of AO: [@aronova1974electron]
 
-In the visual editor mode, go to 'Insert' -\> \@ Citation
+The lobate ctenophore *Mnemiopsis*
 
-You can select a Zotero library, PubMed, CrossRef etc. and insert the citations.
+The lithocytes have a large calcium carbonate concretion and... [@Tamm_2014]
+Living lithocytes are transported along the balancer cilia to the tip of the statocyst [@Noda_2014]
+The projections of a group of bridge cells located on two sides of the apical organ forms an arch and connects the balancers along the tentacular plane [@Tamm_2002].
+
+
+
+
 
 The easiest way is to use the command line:
 
@@ -57,18 +64,66 @@ The easiest way is to use the command line:
 #| echo: true
 #| eval: false
 
-curl -LH "Accept: application/x-bibtex" https://doi.org/10.7554/eLife.91258.1 >> references.bib
+#curl -LH "Accept: application/x-bibtex" https://doi.org/10.7554/eLife.91258.1 >> references.bib
 ```
 
-*Platynereis dumerilii* is a marine annelid... [@ozpolat2021]
-
-The references are stored in manuscript/references.bib (need to be defined in the Yaml header). This file will automatically updated when you insert a new reference through the Visual editor \> Insert \> Citations.
-
-In this documents, references will be formatted in the style of eLife. This is defined in the Yaml header under: csl: elife.csl. The elife.csl file is saved in the /manuscript folder.
-
-If you would like to use a different citation format, download the respective .csl file (e.g., from the Zotero style repository <https://www.zotero.org/styles>), save it in the /manuscript folder of the project and change the Yaml to csl: your_favourite_journal.csl.
 
 ## Results
+
+### Volume EM reconstruction of the *Mnemiopsis* apical organ
+
+- specimen 
+- volume, resolution, fixation, quality
+- number of sections
+- skeletonisation in Catmaid
+- number of cells
+- general anatomy, regions, quadrants
+
+Figure1: (pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions)
+
+### Classification of cell types
+
+- ultrastructural criteria (cilia, vesicles etc)
+- number of types, cells per type - table
+
+Figure2 - Balancer complex: balancer, lithocyte, groove 2 types, bridge - EM pics
+
+"the larval bridge has not yet developed forks at its ends, as seen in adult Mnemiopsis bridges"[@Tamm_2002]
+
+Figure3 - dome, bicil, monocil, no-cil, plumose, dense vesicle cells (rename), gland? cells, oligo/multiciliated cells
+
+Plumose cells [@Hernandez_Nicaise_1984] may be pressure sensors [@Tamm_2014b]
+
+Figure4 - lamellate body complex, LB, intra-multi-ciliated, relationship to balancer
+
+Figure5 - nerve net, different fragments/cells/syntytia, EM, relation to entire organ
+
+Figure 6 -  cilia? renderings of basal bodies, centrioles, length, axoneme structure (table), table about cell types, number of cilia etc.
+
+## Synapses 
+
+"synaptic regions with the characteristic presynaptic triad mor-
+phology of ctenophore nerves (i.e., a single layer of
+vesicles, smooth ER sac, and closely apposed mito-
+chondria; Horridge and Mackay, 1964; Hernandez-
+Nicaise, 1973)"
+
+Figure 7 - synapses, reconstruction, annotation, numbers, distribution of partners, example EM (figure supplement - lots of EM), mitochondria
+(Fig suppl - mitochondrion stats - Sanja)
+
+Gap juntions? Innexins are expressed in the apical organ in specific patches of cells in each quadrant [@Ortiz_2023]
+
+
+Ctenophore synapses [@Hernandez_Nicaise_1973]
+
+We found no synapses between bridge and balancer, in agreement with Tamm [@Tamm_2002].
+
+Figure 8 - connectome
+cell-type based, quadrant based, nerve net syntycia, bridge, quadrants
+(Fig suppl - cell-based network)
+
+Tamm&Tamm observed synapses from neurites to bridge cells (2002).
+and in Mnemiopsis larvae observed synapses from bridge cells onto other cells
 
 Inserting Figures
 
@@ -105,5 +160,8 @@ If we update the data, the script can recalculate the variable we want to refer 
 ## Acknowledgements
 
 We would like to thank the Jekely lab for the R project template (<https://github.com/JekelyLab/new_paper_template>) we used to write this paper. This work was funded by ...
+JSPS...
+ERC..
+Others ...
 
 ## References
