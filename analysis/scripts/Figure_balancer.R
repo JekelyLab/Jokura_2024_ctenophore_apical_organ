@@ -121,9 +121,15 @@ close3d()
 
 # crop EM pictures ---------------
 
-crop_catmaid("nice LB", 5000, 5000, 1, 0, "manuscript/pictures/")
+#crop_catmaid("nice LB", 5000, 5000, 1, 0, "manuscript/pictures/")
 
 #list all files starting with crop
 system("ls ./manuscript/pictures/crop_*")
 
-LB_EM1 <- ggdraw() + draw_image(magick::image_read("manuscript/pictures/crop_6l53xv.tiff"))
+# assemble figure --------------------
+
+LB_EM1 <- ggdraw() + draw_image(magick::image_read("manuscript/pictures/crop_3yr8pe_8.4um.tif"))
+
+
+
+
