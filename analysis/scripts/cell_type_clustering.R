@@ -11,6 +11,8 @@ skids <- unlist(
 characters <- list("soma",
                    "centriole",
                    "basal body",
+                   "9+0",
+                   "9+2",
                    "rootlets",
                    "golgi",
                    "lysosome?",
@@ -128,3 +130,52 @@ for (mito_done_cell in mito_done_cells) {
   mito_counts_tb <- mito_counts_tb |> add_row(skid=sskid, neuron_name=neuron_name, celltype=celltype, n_mito=n_mito)
 }
 write.csv(mito_counts_tb, "analysis/data/mito_per_celltype.csv")
+
+
+
+# bridge cells --------------------------------------------------------
+bridge_cells <- read.neurons.catmaid("celltype:bridge", pid=35, fetch.annotations = TRUE)
+annotations <- attr(bridge_cells, 'anndf') |> as.tibble()
+
+bridge_stats_tb <- tibble(skid=integer(),
+                   neuron_name=character(),
+                   n_centrioles=integer(),
+                   centrioles_done=logical(),
+                   n_mito=integer(),
+                   mito_done=logical(),
+                   syn_in=integer(),
+                   syn_out=integer())
+for (bridge_cell in bridge_cells) {
+  # var named sskid because othrwise filter doesn't work
+  sskid <- bridge_cell$skid
+  neuron_name <- catmaid_get_neuronnames(sskid, pid = 35)
+  n_centrioles <- length(bridge_cell$tags$centriole)
+  n_mito <- length(bridge_cell$tags$mitochondrion)
+  centrioles_done <- annotations |> 
+    filter(skid==sskid) |> 
+    filter(annotation=="centrioles done") |> 
+    select(annotation) |> 
+    pull() |>
+    length() |>
+    as.logical()
+  mito_done <- annotations |> 
+    filter(skid==sskid) |> 
+    filter(annotation=="mitochondria done") |> 
+    select(annotation) |> 
+    pull() |>
+    length() |>
+    as.logical()
+  # pre is 0 and post is 1
+  prepost <- bridge_cell$connectors$prepost
+  n_pre <- sum(prepost == 0)
+  n_post <- sum(prepost == 1)
+  bridge_stats_tb <- bridge_stats_tb |> add_row(skid=sskid, 
+                                  neuron_name=neuron_name, 
+                                  n_centrioles=n_centrioles,
+                                  centrioles_done=centrioles_done,
+                                  n_mito=n_mito,
+                                  mito_done=mito_done,
+                                  syn_in=n_pre,
+                                  syn_out=n_post)
+}
+write.csv(bridge_stats_tb, "analysis/data/bridge_stats.csv")

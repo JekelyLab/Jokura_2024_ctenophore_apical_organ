@@ -1,0 +1,13 @@
+"","skid","neuron_name","n_centrioles","centrioles_done","n_mito","mito_done","syn_in","syn_out"
+"1",2436516,"bridge cell Q3Q4 2436517",0,TRUE,22,TRUE,6,9
+"2",2437047,"bridge cell Q1Q2 2437048",0,TRUE,38,TRUE,4,16
+"3",2437072,"bridge cell Q3Q4 2437073",0,TRUE,20,TRUE,5,7
+"4",2437077,"bridge cell Q3Q4 2437078",0,TRUE,11,TRUE,2,2
+"5",2437083,"bridge cell Q1Q2 2437084",0,TRUE,11,TRUE,3,2
+"6",2437089,"bridge cell Q3Q4 2437090",0,TRUE,14,TRUE,5,3
+"7",2437100,"bridge cell Q3Q4 2437101",2,TRUE,8,TRUE,1,2
+"8",2438600,"bridge cell Q1Q2 2438601",2,TRUE,7,TRUE,0,4
+"9",2473306,"bridge cell Q1Q2 2473307",0,TRUE,20,TRUE,8,12
+"10",2480239,"bridge cell Q1Q2 2480240",1,TRUE,6,TRUE,0,2
+"11",2480248,"bridge cell Q1Q2 2480249",0,TRUE,10,TRUE,0,1
+"12",2480254,"bridge cell Q1Q2 2480255",2,TRUE,4,TRUE,0,1
