@@ -40,7 +40,7 @@ Kei Jokura^1,3,\*^, Sanja Jasek^1,2^, Lara Kewalow^2^, Pawel Burkhardt^4^, Gásp
 
 ## Abstract
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
 
 **text in bold** *italic* [underline]{.underline}
 
@@ -58,7 +58,7 @@ The projections of a group of bridge cells located on two sides of the apical or
 
 
 
-The easiest way is to use the command line:
+The easiest way is to use the command line to add new refs to the .bib file:
 
 ```{bash}
 #| echo: true
@@ -105,7 +105,7 @@ Figure 6 -  cilia? renderings of basal bodies, centrioles, length, axoneme struc
 "synaptic regions with the characteristic presynaptic triad mor-
 phology of ctenophore nerves (i.e., a single layer of
 vesicles, smooth ER sac, and closely apposed mito-
-chondria; Horridge and Mackay, 1964; Hernandez-
+chondria [@Horridge_1964; @Hernandez_Nicaise_1973] Hernandez-
 Nicaise, 1973)"
 
 Figure 7 - synapses, reconstruction, annotation, numbers, distribution of partners, example EM (figure supplement - lots of EM), mitochondria
