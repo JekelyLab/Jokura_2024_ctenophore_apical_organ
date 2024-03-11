@@ -1,44 +1,32 @@
-R version 4.3.2 (2023-10-31)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 22.04.4 LTS
+R version 4.2.1 (2022-06-23 ucrt)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 22631)
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
 
 locale:
- [1] LC_CTYPE=en_GB.UTF-8       LC_NUMERIC=C               LC_TIME=en_GB.UTF-8       
- [4] LC_COLLATE=en_GB.UTF-8     LC_MONETARY=en_GB.UTF-8    LC_MESSAGES=en_GB.UTF-8   
- [7] LC_PAPER=en_GB.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
-[10] LC_TELEPHONE=C             LC_MEASUREMENT=en_GB.UTF-8 LC_IDENTIFICATION=C       
-
-time zone: Europe/Berlin
-tzcode source: system (glibc)
+[1] LC_COLLATE=Japanese_Japan.utf8  LC_CTYPE=Japanese_Japan.utf8    LC_MONETARY=Japanese_Japan.utf8
+[4] LC_NUMERIC=C                    LC_TIME=Japanese_Japan.utf8    
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] av_0.9.0           tidygraph_1.2.3    RColorBrewer_1.1-3 patchwork_1.2.0   
- [5] webshot2_0.1.1     visNetwork_2.1.2   networkD3_0.4      igraph_1.5.1      
- [9] png_0.1-8          cowplot_1.1.3      lubridate_1.9.3    forcats_1.0.0     
-[13] stringr_1.5.1      dplyr_1.1.4        purrr_1.0.2        readr_2.1.5       
-[17] tidyr_1.3.1        tibble_3.2.1       ggplot2_3.5.0      tidyverse_2.0.0   
-[21] catmaid_0.10.1     nat_1.10.4         rgl_1.2.8          httr_1.4.7        
+ [1] av_0.9.0           tidygraph_1.2.3    RColorBrewer_1.1-3 patchwork_1.1.2    webshot2_0.1.0    
+ [6] visNetwork_2.1.2   networkD3_0.4      igraph_1.4.2       png_0.1-8          cowplot_1.1.1     
+[11] lubridate_1.9.2    forcats_1.0.0      stringr_1.5.0      dplyr_1.1.2        purrr_1.0.1       
+[16] readr_2.1.4        tidyr_1.3.0        tibble_3.2.1       ggplot2_3.4.2      tidyverse_2.0.0   
+[21] catmaid_0.10.1     nat_1.10.4         rgl_1.1.3          httr_1.4.6        
 
 loaded via a namespace (and not attached):
- [1] gtable_0.3.4      xfun_0.42         htmlwidgets_1.6.4 websocket_1.4.1  
- [5] processx_3.8.3    tzdb_0.4.0        ps_1.7.6          vctrs_0.6.5      
- [9] tools_4.3.2       generics_0.1.3    curl_5.2.0        fansi_1.0.6      
-[13] pkgconfig_2.0.3   checkmate_2.3.1   filehash_2.4-5    lifecycle_1.0.4  
-[17] compiler_4.3.2    progress_1.2.3    munsell_0.5.0     chromote_0.2.0   
-[21] codetools_0.2-19  htmltools_0.5.7   nat.utils_0.6.1   yaml_2.3.8       
-[25] Rttf2pt1_1.3.12   crayon_1.5.2      pillar_1.9.0      later_1.3.2      
-[29] extrafontdb_1.0   magick_2.8.3      nabor_0.5.0       tidyselect_1.2.0 
-[33] digest_0.6.34     stringi_1.8.3     extrafont_0.19    fastmap_1.1.1    
-[37] grid_4.3.2        colorspace_2.1-0  cli_3.6.2         magrittr_2.0.3   
-[41] base64enc_0.1-3   utf8_1.2.4        withr_3.0.0       prettyunits_1.2.0
-[45] scales_1.3.0      promises_1.2.1    backports_1.4.1   timechange_0.3.0 
-[49] hms_1.1.3         knitr_1.45        rlang_1.1.3       Rcpp_1.0.12      
-[53] glue_1.7.0        xml2_1.3.6        rstudioapi_0.15.0 jsonlite_1.8.8   
-[57] R6_2.5.1          plyr_1.8.9       
+ [1] Rcpp_1.0.10       ps_1.7.5          digest_0.6.31     utf8_1.2.3        R6_2.5.1         
+ [6] plyr_1.8.8        backports_1.4.1   pillar_1.9.0      rlang_1.1.1       curl_5.0.0       
+[11] rstudioapi_0.14   magick_2.7.4      checkmate_2.2.0   htmlwidgets_1.6.2 munsell_0.5.0    
+[16] compiler_4.2.1    xfun_0.39         pkgconfig_2.0.3   base64enc_0.1-3   htmltools_0.5.5  
+[21] websocket_1.4.1   tidyselect_1.2.0  codetools_0.2-18  fansi_1.0.4       tzdb_0.3.0       
+[26] withr_2.5.0       later_1.3.1       nat.utils_0.5.1   grid_4.2.1        jsonlite_1.8.4   
+[31] gtable_0.3.3      lifecycle_1.0.3   magrittr_2.0.3    scales_1.2.1      cli_3.6.1        
+[36] stringi_1.7.12    nabor_0.5.0       promises_1.2.0.1  xml2_1.3.4        generics_0.1.3   
+[41] vctrs_0.6.2       tools_4.2.1       glue_1.6.2        hms_1.1.3         processx_3.8.1   
+[46] fastmap_1.1.1     yaml_2.3.7        timechange_0.2.0  chromote_0.1.1    colorspace_2.1-0 
+[51] filehash_2.4-5    knitr_1.42       
