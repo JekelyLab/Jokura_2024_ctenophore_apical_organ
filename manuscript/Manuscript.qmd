@@ -79,14 +79,26 @@ The easiest way is to use the command line to add new refs to the .bib file:
 - number of cells
 - general anatomy, regions, quadrants
 
-Figure1: (pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions)
+
+```{r, out.width = "100%", fig.cap="**Figure 1. Title fig 1** pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend. " }
+#| echo: false 
+
+knitr::include_graphics("figures/Figure1.png")
+```
+
 
 ### Classification of cell types
 
 - ultrastructural criteria (cilia, vesicles etc)
 - number of types, cells per type - table
 
-Figure2 - Balancer complex: balancer, lithocyte, groove 2 types, bridge - EM pics
+
+```{r, out.width = "100%", fig.cap="**Figure 2. Title fig 2** Balancer complex: balancer, lithocyte, groove 2 types, bridge - EM pics, (A) legend (B) legend. " }
+#| echo: false 
+
+knitr::include_graphics("figures/Figure2.png")
+```
+
 
 "the larval bridge has not yet developed forks at its ends, as seen in adult Mnemiopsis bridges"[@Tamm_2002]
 
@@ -128,12 +140,6 @@ and in Mnemiopsis larvae observed synapses from bridge cells onto other cells
 Inserting Figures
 
 You can add your figures into the rendered document. We saved the figures into /manuscript/figures or /manuscript/figure_supplements and can insert them from there. We use knitr::include_graphics for this. The title and legend can also be edited, as will as the width of the output figure.
-
-```{r, out.width = "100%", fig.cap="**Figure 1. Title fig 1** (A) legend (B) legend. " }
-#| echo: false 
-
-knitr::include_graphics("figures/Figure1.png")
-```
 
 ## Equations
 
