@@ -43,14 +43,28 @@ LB <- nlapply(
 
 syn_neuron <- nlapply(
   read.neurons.catmaid(
-    "celltype:neuron", pid = 35
+    "celltype:SSN", pid = 35
     ),
   function(x) smooth_neuron(x, sigma = 1000)
 )
 
 monociliated <- nlapply(
   read.neurons.catmaid(
-    "monociliated_cell", pid = 35
+    "celltype:monociliated", pid = 35
+  ),
+  function(x) smooth_neuron(x, sigma = 1000)
+)
+
+biciliated <- nlapply(
+  read.neurons.catmaid(
+    "celltype:biciliated", pid = 35
+  ),
+  function(x) smooth_neuron(x, sigma = 1000)
+)
+
+nonciliated <- nlapply(
+  read.neurons.catmaid(
+    "celltype:nonciliated", pid = 35
   ),
   function(x) smooth_neuron(x, sigma = 1000)
 )
@@ -62,12 +76,37 @@ bridge <- nlapply(
   function(x) smooth_neuron(x, sigma = 1000)
 )
 
+dense_vesicle <- nlapply(
+  read.neurons.catmaid(
+    "celltype:dense_vesicle", pid = 35
+  ),
+  function(x) smooth_neuron(x, sigma = 1000)
+)
+
+intra_multiciliated <- nlapply(
+  read.neurons.catmaid(
+    "celltype:intra-multi-ciliated", pid = 35
+  ),
+  function(x) smooth_neuron(x, sigma = 1000)
+)
+
+plumose <- nlapply(
+  read.neurons.catmaid(
+    "celltype:plumose", pid = 35
+  ),
+  function(x) smooth_neuron(x, sigma = 1000)
+)
+
+
+
 # cell types
 AO_celltypes <- list(
-  balancer, LB, syn_neuron, bridge, monociliated
+  balancer, LB, syn_neuron, bridge, monociliated, biciliated, 
+  nonciliated, dense_vesicle, intra_multiciliated, plumose
   )
 AO_celltype_names <- list(
-  "balancer", "LB", "syn_neuron", "bridge", "monociliated"
+  "balancer", "lamellar body", "nerve net", "bridge", "monociliated", "biciliated", "nonciliated", "dense-vesicle", 
+  "intra-multiciliated", "plumose"
   )
 
 # iterate through cell group neuron lists and get connectivity
@@ -96,11 +135,9 @@ synapse_matrix <- matrix(
   unlist(synapse_list), byrow = TRUE, 
   nrow = length(AO_celltypes)
   )
-synapse_matrix
 
 rownames(synapse_matrix) <- as.character(AO_celltype_names)
 colnames(synapse_matrix) <- as.character(AO_celltype_names)
-synapse_matrix
 
 # with the make_graph function of igraph we turn it into a graph (input is the list of edge pairs)
 AO_graph <- graph_from_adjacency_matrix(
@@ -111,68 +148,99 @@ AO_graph <- graph_from_adjacency_matrix(
 
 AO_graph |> as_tbl_graph() 
 
-
 # calculate node weighted degree -------------
 degree=degree(
   AO_graph, v = V(AO_graph), mode = c("all"), 
   loops = TRUE, normalized = FALSE
   )
-degree
 
 # plot cells
-
 plot_background()
+
+# "#E69F00" "#56B4E9" "#009E73" "#F0E442" "#0072B2" "#D55E00" "#CC79A7" "#000000"
 
 plot3d(
   balancer, soma = TRUE, color = Okabe_Ito[1], 
-  alpha = 0.6, lwd = 3
+  alpha = 0.1, lwd = 3
   )
 
 plot3d(
   LB, soma = TRUE, color = Okabe_Ito[2], 
-  alpha = 0.6, lwd = 2
+  alpha = 0.4, lwd = 2
 )
 
 plot3d(
-  syn_neuron, soma = TRUE, color = Okabe_Ito[3], 
-  alpha = 0.6, lwd = 4
+  syn_neuron, soma = TRUE, color = Okabe_Ito[c(1,5,8)], 
+  alpha = 1, lwd = c(4,3,3)
 )
 
 plot3d(
   bridge, soma = TRUE, color = Okabe_Ito[4], 
-  alpha = 0.6, lwd = 3
+  alpha = 0.4, lwd = 3
 )
 
 plot3d(
   monociliated, soma = TRUE, color = Okabe_Ito[5], 
-  alpha = 0.6, lwd = 3
+  alpha = 0.1, lwd = 3
 )
 
+plot3d(
+  biciliated, soma = TRUE, color = Okabe_Ito[6], 
+  alpha = 0.2, lwd = 3
+)
+
+plot3d(
+  nonciliated, soma = TRUE, color = Okabe_Ito[7], 
+  alpha = 0.1, lwd = 3
+)
+
+plot3d(
+  intra_multiciliated, soma = TRUE, color = Okabe_Ito[8], 
+  alpha = 0.2, lwd = 3
+)
+
+plot3d(
+  plumose, soma = TRUE, color = bluepurple[7], 
+  alpha = 0.1, lwd = 3
+)
+
+nview3d("ventral", extramat=rotationMatrix(0.9, 0.3, -0.1, 1))
+rgl.snapshot("manuscript/pictures/celltypes_in_network_lateral.png")
+
+nview3d("frontal", extramat=rotationMatrix(2.1, 0, 0, 1)
+        %*%rotationMatrix(3.14, 1, 0, 0))
+rgl.snapshot("manuscript/pictures/celltypes_in_network_oral.png")
+close3d()
 
 # use visNetwork to plot the network --------------------------------------
 
 ## convert to VisNetwork-list
 AO_graph.visn <- toVisNetworkData(AO_graph)
 
+#filter low-weight edges
+AO_graph.visn$edges$weight
+AO_graph.visn$edges$weight[AO_graph.visn$edges$weight < 3]  <- 0
+AO_graph.visn$edges$weight
+
 ## copy column "weight" to new column "value" in list "edges"
 AO_graph.visn$edges$value <- AO_graph.visn$edges$weight
 AO_graph.visn$nodes$value <- degree
 
 #define node color
-AO_graph.visn$nodes$color <- Okabe_Ito[1:5]
+AO_graph.visn$nodes$color <- Okabe_Ito[1:10]
 
 #hierarchical layout - define level of nodes
-AO_graph.visn$nodes$level <- c(2, 2, 1, 3, 3)
+AO_graph.visn$nodes$level <- c(2, 4, 1, 1, 3, 3, 3, 3, 3, 4)
+#balancer, LB, syn_neuron, bridge, monociliated, biciliated, nonciliated, dense_vesicle
 
 #hierarchical layout
-visNetwork(AO_graph.visn$nodes, AO_graph.visn$edges) %>%
+visNet <- visNetwork(AO_graph.visn$nodes, AO_graph.visn$edges) %>%
   visIgraphLayout(
-    layout = "layout_nicely", physics = TRUE, 
-    randomSeed = 42, type="square"
+    layout = "layout_nicely", physics = FALSE
     ) %>%
   visHierarchicalLayout(
     levelSeparation=250, 
-    nodeSpacing=10,
+    nodeSpacing=200,
     direction='LR',
     sortMethod='hubsize',
     shakeTowards='roots'
@@ -191,7 +259,19 @@ visNetwork(AO_graph.visn$nodes, AO_graph.visn$edges) %>%
     opacity=0.9,
     shape='dot', 
     font=list(color='black', size=44),
-    scaling = list(label=list(enabled=TRUE, min=48, max=56)),
+    scaling = list(label=list(enabled=TRUE, min=22, max=80)),
     level= AO_graph.visn$nodes$level
     )
+#%>%
+  visOptions(highlightNearest = TRUE, width = 1800, height = 800) %>%
+  visInteraction(navigationButtons = FALSE,
+           dragNodes = TRUE, dragView = FALSE,
+           zoomView = TRUE)
+visNet
 
+
+saveNetwork(visNet, "manuscript/pictures/visNetwork_celltype_connectome.html")
+webshot2::webshot(url = "manuscript/pictures/visNetwork_celltype_connectome.html",
+                  file = "manuscript/pictures/visNetwork_celltype_connectome.png",
+                  vwidth = 800, vheight = 800, #define the size of the browser window
+                  cliprect = c(0, 0, 800, 800), zoom = 5, delay = 1)
