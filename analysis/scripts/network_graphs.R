@@ -157,51 +157,60 @@ degree=degree(
 # plot cells
 plot_background()
 
+# "#E69F00" "#56B4E9" "#009E73" "#F0E442" "#0072B2" "#D55E00" "#CC79A7" "#000000"
+
 plot3d(
   balancer, soma = TRUE, color = Okabe_Ito[1], 
-  alpha = 0.6, lwd = 3
+  alpha = 0.1, lwd = 3
   )
 
 plot3d(
   LB, soma = TRUE, color = Okabe_Ito[2], 
-  alpha = 0.6, lwd = 2
+  alpha = 0.4, lwd = 2
 )
 
 plot3d(
-  syn_neuron, soma = TRUE, color = Okabe_Ito[3], 
-  alpha = 0.6, lwd = 4
+  syn_neuron, soma = TRUE, color = Okabe_Ito[c(1,5,8)], 
+  alpha = 1, lwd = c(4,3,3)
 )
 
 plot3d(
   bridge, soma = TRUE, color = Okabe_Ito[4], 
-  alpha = 0.6, lwd = 3
+  alpha = 0.4, lwd = 3
 )
 
 plot3d(
   monociliated, soma = TRUE, color = Okabe_Ito[5], 
-  alpha = 0.6, lwd = 3
+  alpha = 0.1, lwd = 3
 )
 
 plot3d(
   biciliated, soma = TRUE, color = Okabe_Ito[6], 
-  alpha = 0.6, lwd = 3
+  alpha = 0.2, lwd = 3
 )
 
 plot3d(
   nonciliated, soma = TRUE, color = Okabe_Ito[7], 
-  alpha = 0.6, lwd = 3
+  alpha = 0.1, lwd = 3
 )
 
 plot3d(
   intra_multiciliated, soma = TRUE, color = Okabe_Ito[8], 
-  alpha = 0.6, lwd = 3
+  alpha = 0.2, lwd = 3
 )
 
 plot3d(
   plumose, soma = TRUE, color = bluepurple[7], 
-  alpha = 1, lwd = 3
+  alpha = 0.1, lwd = 3
 )
 
+nview3d("ventral", extramat=rotationMatrix(0.9, 0.3, -0.1, 1))
+rgl.snapshot("manuscript/pictures/celltypes_in_network_lateral.png")
+
+nview3d("frontal", extramat=rotationMatrix(2.1, 0, 0, 1)
+        %*%rotationMatrix(3.14, 1, 0, 0))
+rgl.snapshot("manuscript/pictures/celltypes_in_network_oral.png")
+close3d()
 
 # use visNetwork to plot the network --------------------------------------
 
