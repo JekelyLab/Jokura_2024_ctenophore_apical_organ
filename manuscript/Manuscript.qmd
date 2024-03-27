@@ -96,7 +96,7 @@ knitr::include_graphics("figures/Figure1.png")
 ```{r, out.width = "100%", fig.cap="**Figure 2. Title fig 2** Balancer complex: balancer, lithocyte, groove 2 types, bridge - EM pics, (A) legend (B) legend. " }
 #| echo: false 
 
-knitr::include_graphics("figures/Figure2.png")
+knitr::include_graphics("figures/Figure_network.png")
 ```
 
 
@@ -171,3 +171,9 @@ ERC..
 Others ...
 
 ## References
+
+<!--
+## See https://github.com/hypothesis/client
+## Add commenting functionality with this script
+-->
+<script src="https://hypothes.is/embed.js" async></script>

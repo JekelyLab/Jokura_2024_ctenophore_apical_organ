@@ -148,44 +148,83 @@ window.Quarto = {
 
 <p><br>
 </p>
-<p>Kei Jokura<sup>1,3,*</sup> , Author 2<sup>2</sup>, Author 3<sup>1,2</sup><br>
+<p>Kei Jokura<sup>1,3,*</sup>, Sanja Jasek<sup>1,2</sup>, Lara Kewalow<sup>2</sup>, Pawel Burkhardt<sup>4</sup>, Gáspár Jékely<sup>1,2,*</sup><br>
 </p>
 <p><sup>1</sup>Living Systems Institute, University of Exeter, Exeter, EX4 4QD, United Kingdom<br>
 <sup>2</sup>Heidelberg University, Centre for Organismal Studies (COS), 69120 Heidelberg, Germany<br>
-<sup>3</sup>National Institute for Basic Biology, Okazaki, …, Japan <sup>*</sup>Correspondence: corr_author@email.com</p>
+<sup>3</sup>National Institute for Basic Biology, Okazaki, …, Japan <sup>4</sup>Sars Centre … Berge, Norway <sup>*</sup>Correspondence: corr_author@email.com</p>
 <section id="abstract" class="level2">
 <h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
 <p><strong>text in bold</strong> <em>italic</em> <u>underline</u></p>
 </section>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>You can add references either by referring to their id in the .bib file e.g., <span class="citation" data-cites="Marinkovi2020">(<a href="#ref-Marinkovi2020" role="doc-biblioref">Marinković et al., 2019</a>)</span>, or by switching to the visual editor (Cogwheel in the .Rmd menu -&gt; Use Visual Editor). The awesome paper by <span class="citation" data-cites="Jokura_2019">(<a href="#ref-Jokura_2019" role="doc-biblioref">Jokura et al., 2019</a>)</span>.</p>
-<p>In the visual editor mode, go to ‘Insert’ -&gt; @ Citation</p>
-<p>You can select a Zotero library, PubMed, CrossRef etc. and insert the citations.</p>
-<p>The easiest way is to use the command line:</p>
+<p>First descriptions of AO: <span class="citation" data-cites="aronova1974electron">(<a href="#ref-aronova1974electron" role="doc-biblioref">Aronova, 1974</a>)</span></p>
+<p>The lobate ctenophore <em>Mnemiopsis</em></p>
+<p>The lithocytes have a large calcium carbonate concretion and… <span class="citation" data-cites="Tamm_2014">(<a href="#ref-Tamm_2014" role="doc-biblioref">Tamm, 2014a</a>)</span> Living lithocytes are transported along the balancer cilia to the tip of the statocyst <span class="citation" data-cites="Noda_2014">(<a href="#ref-Noda_2014" role="doc-biblioref">Noda and Tamm, 2014</a>)</span> The projections of a group of bridge cells located on two sides of the apical organ forms an arch and connects the balancers along the tentacular plane <span class="citation" data-cites="Tamm_2002">(<a href="#ref-Tamm_2002" role="doc-biblioref">Tamm and Tamm, 2002</a>)</span>.</p>
+<p>The easiest way is to use the command line to add new refs to the .bib file:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#curl -LH "Accept: application/x-bibtex" https://doi.org/10.7554/eLife.91258.1 &gt;&gt; references.bib</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><em>Platynereis dumerilii</em> is a marine annelid… <span class="citation" data-cites="ozpolat2021">(<a href="#ref-ozpolat2021" role="doc-biblioref">Ozpolat et al., 2021</a>)</span></p>
-<p>The references are stored in manuscript/references.bib (need to be defined in the Yaml header). This file will automatically updated when you insert a new reference through the Visual editor &gt; Insert &gt; Citations.</p>
-<p>In this documents, references will be formatted in the style of eLife. This is defined in the Yaml header under: csl: elife.csl. The elife.csl file is saved in the /manuscript folder.</p>
-<p>If you would like to use a different citation format, download the respective .csl file (e.g., from the Zotero style repository <a href="https://www.zotero.org/styles" class="uri">https://www.zotero.org/styles</a>), save it in the /manuscript folder of the project and change the Yaml to csl: your_favourite_journal.csl.</p>
 </section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
-<p>Inserting Figures</p>
-<p>You can add your figures into the rendered document. We saved the figures into /manuscript/figures or /manuscript/figure_supplements and can insert them from there. We use knitr::include_graphics for this. The title and legend can also be edited, as will as the width of the output figure.</p>
+<section id="volume-em-reconstruction-of-the-mnemiopsis-apical-organ" class="level3">
+<h3 class="anchored" data-anchor-id="volume-em-reconstruction-of-the-mnemiopsis-apical-organ">Volume EM reconstruction of the <em>Mnemiopsis</em> apical organ</h3>
+<ul>
+<li>specimen</li>
+<li>volume, resolution, fixation, quality</li>
+<li>number of sections</li>
+<li>skeletonisation in Catmaid</li>
+<li>number of cells</li>
+<li>general anatomy, regions, quadrants</li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="figures/Figure1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption><strong>Figure 1. Title fig 1</strong> (A) legend (B) legend.</figcaption>
+<figcaption><strong>Figure 1. Title fig 1</strong> pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend.</figcaption>
 </figure>
 </div>
 </div>
 </div>
+</section>
+<section id="classification-of-cell-types" class="level3">
+<h3 class="anchored" data-anchor-id="classification-of-cell-types">Classification of cell types</h3>
+<ul>
+<li>ultrastructural criteria (cilia, vesicles etc)</li>
+<li>number of types, cells per type - table</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/Figure_network.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption><strong>Figure 2. Title fig 2</strong> Balancer complex: balancer, lithocyte, groove 2 types, bridge - EM pics, (A) legend (B) legend.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>“the larval bridge has not yet developed forks at its ends, as seen in adult Mnemiopsis bridges”<span class="citation" data-cites="Tamm_2002">(<a href="#ref-Tamm_2002" role="doc-biblioref">Tamm and Tamm, 2002</a>)</span></p>
+<p>Figure3 - dome, bicil, monocil, no-cil, plumose, dense vesicle cells (rename), gland? cells, oligo/multiciliated cells</p>
+<p>Plumose cells <span class="citation" data-cites="Hernandez_Nicaise_1984">(<a href="#ref-Hernandez_Nicaise_1984" role="doc-biblioref">Hernandez-Nicaise, 1984</a>)</span> may be pressure sensors <span class="citation" data-cites="Tamm_2014b">(<a href="#ref-Tamm_2014b" role="doc-biblioref">Tamm, 2014b</a>)</span></p>
+<p>Figure4 - lamellate body complex, LB, intra-multi-ciliated, relationship to balancer</p>
+<p>Figure5 - nerve net, different fragments/cells/syntytia, EM, relation to entire organ</p>
+<p>Figure 6 - cilia? renderings of basal bodies, centrioles, length, axoneme structure (table), table about cell types, number of cilia etc.</p>
+</section>
+</section>
+<section id="synapses" class="level2">
+<h2 class="anchored" data-anchor-id="synapses">Synapses</h2>
+<p>“synaptic regions with the characteristic presynaptic triad mor- phology of ctenophore nerves (i.e., a single layer of vesicles, smooth ER sac, and closely apposed mito- chondria <span class="citation" data-cites="Horridge_1964 Hernandez_Nicaise_1973">(<a href="#ref-Hernandez_Nicaise_1973" role="doc-biblioref">Hernandez-Nicaise, 1973</a>; <a href="#ref-Horridge_1964" role="doc-biblioref">Horridge and Mackay, 1964</a>)</span> Hernandez- Nicaise, 1973)”</p>
+<p>Figure 7 - synapses, reconstruction, annotation, numbers, distribution of partners, example EM (figure supplement - lots of EM), mitochondria (Fig suppl - mitochondrion stats - Sanja)</p>
+<p>Gap juntions? Innexins are expressed in the apical organ in specific patches of cells in each quadrant <span class="citation" data-cites="Ortiz_2023">(<a href="#ref-Ortiz_2023" role="doc-biblioref">Ortiz et al., 2023</a>)</span></p>
+<p>Ctenophore synapses <span class="citation" data-cites="Hernandez_Nicaise_1973">(<a href="#ref-Hernandez_Nicaise_1973" role="doc-biblioref">Hernandez-Nicaise, 1973</a>)</span></p>
+<p>We found no synapses between bridge and balancer, in agreement with Tamm <span class="citation" data-cites="Tamm_2002">(<a href="#ref-Tamm_2002" role="doc-biblioref">Tamm and Tamm, 2002</a>)</span>.</p>
+<p>Figure 8 - connectome cell-type based, quadrant based, nerve net syntycia, bridge, quadrants (Fig suppl - cell-based network)</p>
+<p>Tamm&amp;Tamm observed synapses from neurites to bridge cells (2002). and in Mnemiopsis larvae observed synapses from bridge cells onto other cells</p>
+<p>Inserting Figures</p>
+<p>You can add your figures into the rendered document. We saved the figures into /manuscript/figures or /manuscript/figure_supplements and can insert them from there. We use knitr::include_graphics for this. The title and legend can also be edited, as will as the width of the output figure.</p>
 </section>
 <section id="equations" class="level2">
 <h2 class="anchored" data-anchor-id="equations">Equations</h2>
@@ -206,20 +245,43 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
 <p>We would like to thank the Jekely lab for the R project template (<a href="https://github.com/JekelyLab/new_paper_template" class="uri">https://github.com/JekelyLab/new_paper_template</a>) we used to write this paper. This work was funded by … JSPS… ERC.. Others …</p>
 </section>
-<section id="references" class="level2 unnumbered">
-
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<!--
+## See https://github.com/hypothesis/client
+## Add commenting functionality with this script
+-->
+<script src="https://hypothes.is/embed.js" async=""></script>
 
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-Jokura_2019" class="csl-entry" role="listitem">
-Jokura K, Shibata D, Yamaguchi K, Shiba K, Makino Y, Shigenobu S, Inaba K. 2019. CTENO64 is required for coordinated paddling of ciliary comb plate in ctenophores. <em>Current Biology</em> <strong>29</strong>:3510–3516.e4. doi:<a href="https://doi.org/10.1016/j.cub.2019.08.059">10.1016/j.cub.2019.08.059</a>
+<div id="ref-aronova1974electron" class="csl-entry" role="listitem">
+Aronova M. 1974. Electron microscopic observation of the aboral organ of ctenophora. I. The gravity receptor. <em>Zeitschrift fur mikroskopisch-anatomische Forschung</em> <strong>88</strong>:401–412.
 </div>
-<div id="ref-Marinkovi2020" class="csl-entry" role="listitem">
-Marinković M, Berger J, Jékely G. 2019. Neuronal coordination of motile cilia in locomotion and feeding. <em>Philosophical Transactions of the Royal Society B: Biological Sciences</em> <strong>375</strong>:20190165. doi:<a href="https://doi.org/10.1098/rstb.2019.0165">10.1098/rstb.2019.0165</a>
+<div id="ref-Hernandez_Nicaise_1984" class="csl-entry" role="listitem">
+Hernandez-Nicaise M-L. 1984. CtenophoraBiology of the Integument. Springer Berlin Heidelberg. pp. 96–111. doi:<a href="https://doi.org/10.1007/978-3-642-51593-4_9">10.1007/978-3-642-51593-4_9</a>
 </div>
-<div id="ref-ozpolat2021" class="csl-entry" role="listitem">
-Ozpolat BD, Randel N, Williams EA, Bezares-Calderón LA, Andreatta G, Balavoine G, Bertucci PY, Ferrier DEK, Gambi MC, Gazave E, Handberg-Thorsager M, Hardege J, Hird C, Hsieh Y-W, Hui J, Mutemi KN, Schneider SQ, Simakov O, Vergara HM, Vervoort M, Jékely G, Tessmar-Raible K, Raible F, Arendt D. 2021. The Nereid on the rise: Platynereis as a model system. <em>Zenodo</em>. doi:<a href="https://doi.org/10.5281/ZENODO.4907400">10.5281/ZENODO.4907400</a>
+<div id="ref-Hernandez_Nicaise_1973" class="csl-entry" role="listitem">
+Hernandez-Nicaise M-L. 1973. The nervous system of ctenophores III. Ultrastructure of synapses. <em>Journal of Neurocytology</em> <strong>2</strong>:249–263. doi:<a href="https://doi.org/10.1007/bf01104029">10.1007/bf01104029</a>
+</div>
+<div id="ref-Horridge_1964" class="csl-entry" role="listitem">
+Horridge GA, Mackay B. 1964. Neurociliary synapses in pleurobrachia (ctenophora). <em>Journal of Cell Science</em> <strong>S3-105</strong>:163–174. doi:<a href="https://doi.org/10.1242/jcs.s3-105.70.163">10.1242/jcs.s3-105.70.163</a>
+</div>
+<div id="ref-Noda_2014" class="csl-entry" role="listitem">
+Noda N, Tamm SL. 2014. Lithocytes are transported along the ciliary surface to build the statolith of ctenophores. <em>Current Biology</em> <strong>24</strong>:R951–R952. doi:<a href="https://doi.org/10.1016/j.cub.2014.08.045">10.1016/j.cub.2014.08.045</a>
+</div>
+<div id="ref-Ortiz_2023" class="csl-entry" role="listitem">
+Ortiz J, Bobkov YV, DeBiasse MB, Mitchell DG, Edgar A, Martindale MQ, Moss AG, Babonis LS, Ryan JF. 2023. Independent innexin radiation shaped signaling in ctenophores. <em>Molecular Biology and Evolution</em> <strong>40</strong>. doi:<a href="https://doi.org/10.1093/molbev/msad025">10.1093/molbev/msad025</a>
+</div>
+<div id="ref-Tamm_2014" class="csl-entry" role="listitem">
+Tamm SL. 2014a. Formation of the statolith in the ctenophore mnemiopsis leidyi. <em>The Biological Bulletin</em> <strong>227</strong>:7–18. doi:<a href="https://doi.org/10.1086/bblv227n1p7">10.1086/bblv227n1p7</a>
+</div>
+<div id="ref-Tamm_2014b" class="csl-entry" role="listitem">
+Tamm SL. 2014b. Cilia and the life of ctenophores. <em>Invertebrate Biology</em> <strong>133</strong>:1–46. doi:<a href="https://doi.org/10.1111/ivb.12042">10.1111/ivb.12042</a>
+</div>
+<div id="ref-Tamm_2002" class="csl-entry" role="listitem">
+Tamm SL, Tamm S. 2002. Novel bridge of axon‐like processes of epithelial cells in the aboral sense organ of ctenophores. <em>Journal of Morphology</em> <strong>254</strong>:99–120. doi:<a href="https://doi.org/10.1002/jmor.10019">10.1002/jmor.10019</a>
 </div>
 </div></section></div></main>
 <!-- /main column -->
