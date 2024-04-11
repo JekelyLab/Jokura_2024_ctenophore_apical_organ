@@ -464,46 +464,46 @@ webshot2::webshot(url = "manuscript/pictures/visNetwork_celltype_connectome.html
 # assemble figure ---------------------------------------------------------
 
 panel_mono_oral <- ggdraw() + draw_image(readPNG("manuscript/pictures/mono_syn_ant.png")) +
-  draw_label("oral view", x = 0.25, y = 0.95, size = 10) +
-  draw_label("monociliated", x = 0.7, y = 0.95, size = 10)
+  draw_label("oral view", x = 0.75, y = 0.95, size = 10) +
+  draw_label("monociliated", x = 0.1, y = 0.95, size = 10, hjust = 0)
 panel_mono_side <- ggdraw() + draw_image(readPNG("manuscript/pictures/mono_syn_left.png")) +
-  draw_label("side view", x = 0.25, y = 0.95, size = 10)
+  draw_label("side view", x = 0.75, y = 0.95, size = 10)
 
 panel_bridge_oral <- ggdraw() + draw_image(readPNG("manuscript/pictures/bridge_syn_ant.png")) +
-  draw_label("oral view", x = 0.25, y = 0.95, size = 10) +
-  draw_label("bridge", x = 0.7, y = 0.95, size = 10)
+  draw_label("oral view", x = 0.75, y = 0.95, size = 10) +
+  draw_label("bridge", x = 0.1, y = 0.95, size = 10, hjust = 0)
 panel_bridge_side <- ggdraw() + draw_image(readPNG("manuscript/pictures/bridge_syn_left.png")) +
-  draw_label("side view", x = 0.25, y = 0.95, size = 10)
+  draw_label("side view", x = 0.75, y = 0.95, size = 10)
 
 panel_bal_oral <- ggdraw() + draw_image(readPNG("manuscript/pictures/bal_syn_ant.png")) +
-  draw_label("oral view", x = 0.25, y = 0.95, size = 10) +
-  draw_label("balancer", x = 0.7, y = 0.95, size = 10)
+  draw_label("oral view", x = 0.75, y = 0.95, size = 10) +
+  draw_label("balancer", x = 0.1, y = 0.95, size = 10, hjust = 0)
 panel_bal_side <- ggdraw() + draw_image(readPNG("manuscript/pictures/bal_syn_left.png")) +
-  draw_label("side view", x = 0.25, y = 0.95, size = 10)
+  draw_label("side view", x = 0.75, y = 0.95, size = 10)
 
 panel_noncil_oral <- ggdraw() + draw_image(readPNG("manuscript/pictures/noncil_syn_ant.png")) +
-  draw_label("oral view", x = 0.25, y = 0.95, size = 10) +
-  draw_label("nonciliated", x = 0.7, y = 0.95, size = 10)
+  draw_label("oral view", x = 0.75, y = 0.95, size = 10) +
+  draw_label("nonciliated", x = 0.1, y = 0.95, size = 10, hjust = 0)
 panel_noncil_side <- ggdraw() + draw_image(readPNG("manuscript/pictures/noncil_syn_left.png")) +
-  draw_label("side view", x = 0.25, y = 0.95, size = 10)
+  draw_label("side view", x = 0.75, y = 0.95, size = 10)
 
 panel_dense_oral <- ggdraw() + draw_image(readPNG("manuscript/pictures/dense_syn_ant.png")) +
-  draw_label("oral view", x = 0.25, y = 0.95, size = 10) +
-  draw_label("dense vesicle", x = 0.7, y = 0.95, size = 10)
+  draw_label("oral view", x = 0.75, y = 0.95, size = 10) +
+  draw_label("dense vesicle", x = 0.1, y = 0.95, size = 10, hjust = 0)
 panel_dense_side <- ggdraw() + draw_image(readPNG("manuscript/pictures/dense_syn_left.png")) +
-  draw_label("side view", x = 0.25, y = 0.95, size = 10)
+  draw_label("side view", x = 0.75, y = 0.95, size = 10)
 
 panel_bicil_oral <- ggdraw() + draw_image(readPNG("manuscript/pictures/bicil_syn_ant.png")) +
-  draw_label("oral view", x = 0.25, y = 0.95, size = 10) +
-  draw_label("biciliated", x = 0.7, y = 0.95, size = 10)
+  draw_label("oral view", x = 0.75, y = 0.95, size = 10) +
+  draw_label("biciliated", x = 0.1, y = 0.95, size = 10, hjust = 0)
 panel_bicil_side <- ggdraw() + draw_image(readPNG("manuscript/pictures/bicil_syn_left.png")) +
-  draw_label("side view", x = 0.25, y = 0.95, size = 10)
+  draw_label("side view", x = 0.75, y = 0.95, size = 10)
 
 panel_all_oral <- ggdraw() + draw_image(readPNG("manuscript/pictures/celltypes_in_network_ant.png")) +
-  draw_label("oral view", x = 0.25, y = 0.95, size = 10) +
-  draw_label("all cells", x = 0.7, y = 0.95, size = 10)
+  draw_label("oral view", x = 0.75, y = 0.95, size = 10) +
+  draw_label("all cells", x = 0.1, y = 0.95, size = 10, hjust = 0)
 panel_all_side<- ggdraw() + draw_image(readPNG("manuscript/pictures/celltypes_in_network_left.png")) +
-  draw_label("side view", x = 0.25, y = 0.95, size = 10)
+  draw_label("side view", x = 0.75, y = 0.95, size = 10)
 
 panel_conn <- ggdraw() + draw_image(readPNG("manuscript/pictures/visNetwork_celltype_connectome.png"))
 
@@ -529,4 +529,8 @@ Figure_network <-
 
 ggsave("manuscript/figures/Figure_network.png", limitsize = FALSE, 
        units = c("px"), Figure_network, width = 3800, height = 2000, bg = "white")
+
+ggsave("manuscript/figures/Figure_network.pdf", limitsize = FALSE, 
+       units = c("px"), Figure_network, width = 3800, height = 2000)
+
 
