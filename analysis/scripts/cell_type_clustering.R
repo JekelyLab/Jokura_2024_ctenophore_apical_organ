@@ -62,7 +62,7 @@ for (skid in skids) {
   }
 }
 
-write.csv(tag_stats_per_skid, "analysis/data/organelle_stats.csv")
+#write.csv(tag_stats_per_skid, "analysis/data/organelle_stats.csv")
 
 tag_stats_noskid <- tag_stats_per_skid[,3:ncol(tag_stats_per_skid)]
 
@@ -103,7 +103,52 @@ for (i in seq(1:length(tag_stats_per_skid$skid))) {
 sorted <- celltypes[order(celltypes[[3]]),]
 
 
-# mitochondria stats ---------------------------------------------------------
+# visualize different cells ----------------------------------------------------
+
+# all columns are characters, which means that many math functions don't work
+# convert comlumns with numers to int
+tag_stats_per_skid <-  tag_stats_per_skid |> mutate_at(c(3:21), as.integer)
+
+centriolerich_skids <- tag_stats_per_skid |> filter(centriole > 9) |> 
+  select(skid) |> pull()
+
+centriolerich <- nlapply(read.neurons.catmaid(centriolerich_skids, pid = 35),
+          function(x) smooth_neuron(x, sigma = 1000))
+
+balancer <- read_smooth_neuron("celltype:balancer")
+bridge <- read_smooth_neuron("celltype:bridge")
+
+plot_background()
+plot3d(
+  centriolerich, soma = TRUE, color = "blue", 
+  alpha = 0.3, lwd = c(4,3,3)
+)
+plot3d(
+  balancer, soma = TRUE, color = Okabe_Ito[8], 
+  alpha = 0.1, lwd = 3
+)
+
+# get cells where all centrioles are annotated and color them by number of centrioles
+
+centriole_skels <- read.neurons.catmaid("centrioles done", pid = 35)
+Reds <- brewer.pal(9, 'Reds')
+for (centriole_skel in centriole_skels) {
+  skel <- smooth_neuron(centriole_skel, sigma=6000)
+  ccount <- length(centriole_skel$tags$centriole)
+  # pick discrete colors based on normalised degree
+  shade <- round(ccount/max(tag_stats_per_skid$centriole)*10)
+  # if there are no centrioles, skip it
+  if (shade == 0) {
+    next
+  }
+  plot3d(skel, soma = TRUE, lwd = 1, add=T, 
+         alpha = 0.7, 
+         col=Reds[shade])
+}
+
+
+
+# mitochondria stats -----------------------------------------------------------
 
 mito_done_cells <- read.neurons.catmaid("mitochondria done", pid=35, fetch.annotations = TRUE)
 annotations <- attr(mito_done_cells, 'anndf') |> as.tibble()
@@ -146,7 +191,7 @@ bridge_stats_tb <- tibble(skid=integer(),
                    syn_in=integer(),
                    syn_out=integer())
 for (bridge_cell in bridge_cells) {
-  # var named sskid because othrwise filter doesn't work
+  # var named sskid because otherwise filter doesn't work
   sskid <- bridge_cell$skid
   neuron_name <- catmaid_get_neuronnames(sskid, pid = 35)
   n_centrioles <- length(bridge_cell$tags$centriole)
