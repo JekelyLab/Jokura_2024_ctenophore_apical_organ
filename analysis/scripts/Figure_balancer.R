@@ -123,6 +123,13 @@ close3d()
 
 #crop_catmaid("nice LB", 5000, 5000, 1, 0, "manuscript/pictures/")
 
+??crop_catmaid
+
+crop_catmaid <- function(tagname,
+                         half_bb_size_x, half_bb_size_y, half_bb_size_z,
+                         zoomlevel,
+                         dest_dir)
+
 #list all files starting with crop
 system("ls ./manuscript/pictures/crop_*")
 
