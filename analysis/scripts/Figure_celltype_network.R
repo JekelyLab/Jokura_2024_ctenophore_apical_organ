@@ -523,7 +523,8 @@ Figure_network <-
   patchwork::plot_layout(design = layout, 
                          heights = c(1,1,1,1,1), 
                          widths = c(1,1,1)) +
-  patchwork::plot_annotation(tag_levels = "A") &
+  patchwork::plot_annotation(tag_levels = list(c(
+    "A", "B", "C", "", "D", "", "E", "F", "", "G", "", "H", "", "I"))) &
   ggplot2::theme(plot.tag = element_text(size = 12, face='plain', color='black'))
 
 
