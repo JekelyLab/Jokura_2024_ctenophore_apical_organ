@@ -166,3 +166,11 @@ crop_catmaid <- function(tagname,
     download.file(full_link, destfile = destpath)
   }
 }
+
+
+get_celltypes <- function(pid) {
+  annotations <- catmaid_get_annotationlist(pid = 35)
+  celltypes <- annotations$annotations |> filter(grepl("^celltype:", name)) |>
+    select(name) |> pull() |> sub(pattern="^celltype:", replacement="")
+  return(celltypes)
+}
