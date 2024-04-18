@@ -25,6 +25,10 @@ library(av)
   conn_http1 = catmaid_login(conn=conn, config=httr::config(ssl_verifypeer=0, http_version=1))
 }
 
+system("git clone https://github.com/SanjaJasek/rcatmaid_functions_library.git")
+system("git -C rcatmaid_functions_library pull https://github.com/SanjaJasek/rcatmaid_functions_library.git")
+source("rcatmaid_functions_library/functions.R")
+
 #define some colors
 #From Color Universal Design (CUD): https://jfly.uni-koeln.de/color/
 Okabe_Ito <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", 

@@ -37,3 +37,11 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# vim swap and temporary files
+*~
+*.swp
+*.swo
+
+# sourced repo
+rcatmaid_functions_library
