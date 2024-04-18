@@ -22,8 +22,20 @@ other attached packages:
 [23] rgl_1.2.8          httr_1.4.7         credentials_2.0.1 
 
 loaded via a namespace (and not attached):
+<<<<<<< HEAD
+ [1] Rcpp_1.0.10       ps_1.7.5          digest_0.6.31     utf8_1.2.3        R6_2.5.1          plyr_1.8.8       
+ [7] backports_1.4.1   pillar_1.9.0      rlang_1.1.1       curl_5.0.0        rstudioapi_0.14   magick_2.7.4     
+[13] checkmate_2.2.0   htmlwidgets_1.6.2 munsell_0.5.0     compiler_4.2.1    xfun_0.39         pkgconfig_2.0.3  
+[19] base64enc_0.1-3   htmltools_0.5.5   websocket_1.4.1   tidyselect_1.2.0  codetools_0.2-18  fansi_1.0.4      
+[25] tzdb_0.3.0        withr_2.5.0       later_1.3.1       nat.utils_0.5.1   grid_4.2.1        jsonlite_1.8.4   
+[31] gtable_0.3.3      lifecycle_1.0.3   magrittr_2.0.3    scales_1.2.1      cli_3.6.1         stringi_1.7.12   
+[37] nabor_0.5.0       promises_1.2.0.1  xml2_1.3.4        generics_0.1.3    vctrs_0.6.2       tools_4.2.1      
+[43] glue_1.6.2        hms_1.1.3         processx_3.8.1    fastmap_1.1.1     yaml_2.3.7        timechange_0.2.0 
+[49] chromote_0.1.1    colorspace_2.1-0  filehash_2.4-5    knitr_1.42       
+=======
  [1] gtable_0.3.4      xfun_0.42         htmlwidgets_1.6.4 websocket_1.4.1   processx_3.8.3    tzdb_0.4.0        vctrs_0.6.5       tools_4.3.2       ps_1.7.6          generics_0.1.3    curl_5.2.0        fansi_1.0.6      
 [13] pkgconfig_2.0.3   checkmate_2.3.1   filehash_2.4-5    lifecycle_1.0.4   compiler_4.3.2    munsell_0.5.0     chromote_0.2.0    codetools_0.2-19  htmltools_0.5.7   sys_3.4.2         nat.utils_0.6.1   yaml_2.3.8       
 [25] Rttf2pt1_1.3.12   later_1.3.2       pillar_1.9.0      extrafontdb_1.0   openssl_2.1.1     nabor_0.5.0       tidyselect_1.2.0  digest_0.6.34     stringi_1.8.3     extrafont_0.19    fastmap_1.1.1     grid_4.3.2       
 [37] colorspace_2.1-0  cli_3.6.2         magrittr_2.0.3    base64enc_0.1-3   utf8_1.2.4        withr_3.0.0       scales_1.3.0      promises_1.2.1    backports_1.4.1   timechange_0.3.0  askpass_1.2.0     hms_1.1.3        
 [49] knitr_1.45        rlang_1.1.3       Rcpp_1.0.12       glue_1.7.0        xml2_1.3.6        rstudioapi_0.15.0 jsonlite_1.8.8    R6_2.5.1          plyr_1.8.9       
+>>>>>>> e3ccaf99d3912041407c73034034d655f46ceca6

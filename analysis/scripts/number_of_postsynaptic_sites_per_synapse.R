@@ -32,16 +32,30 @@ summary(as.numeric(n_post))
 
 # calculate percentage of mitochondria which have vesicles or synapses associated with them -----
 
-synaptic_neurons <- read.neurons.catmaid("synaptic neuron", pid=35)
 
-mito_in_syn <- data.frame()
-for (i in seq_along(synaptic_neurons)) {
+# below approach is not good because the result is not a neuronslit, which messes up some functions
+#celltypes <- c("celltype:SSN", "celltype:bridge")
+#neurons <- mapply(read.neurons.catmaid, celltypes, 35) |> flatten()
+SSNs <- read.neurons.catmaid("celltype:SSN", pid = 35)
+bridge_cells <- read.neurons.catmaid("celltype:bridge", pid = 35)
+neurons <- c(SSNs, bridge_cells)
+
+mito_in_syn <- tibble(celltype=character(),
+                      skid=character(),
+                      vesicles_syn=integer(),
+                      vesicles_no_syn=integer(),
+                      vesicles_unclear=integer(),
+                      vesicles_no=integer(),
+                      total=integer()
+)
+
+
+get_mito_stats <- function(neur) {
   n_mito_vesicles_syn <- 0
   n_mito_vesicles_no_syn <- 0
-  mito_vesicles <- synaptic_neurons[[i]]$tags$`mitochondrion vesicles`
-  # this doesn't check which type of connector is associated with the node,
-  # but in 99.5% cases it will be presynaptic, so it's probably not necessary to do extra checks
-  syn <- synaptic_neurons[[i]]$connectors$treenode_id
+  mito_vesicles <- neur$tags$`mitochondrion vesicles`
+  # treenodes with outgoing synapses
+  syn <- neur$connectors |> filter(prepost == 0) |> select(treenode_id) |> pull()
   mito_syn <- list()
   for (mito_vesicle in mito_vesicles) {
     if (mito_vesicle %in% syn) {
@@ -51,43 +65,56 @@ for (i in seq_along(synaptic_neurons)) {
       n_mito_vesicles_no_syn <- n_mito_vesicles_no_syn + 1
     }
   }
-  mito_unclear_vesicles <- synaptic_neurons[[i]]$tags$`mitochondrion unclear vesicles`
+  sskid=neur$NeuronName
+  celltype <- catmaid_get_annotations_for_skeletons(sskid, pid=35) |> 
+    select(annotation) |> 
+    filter(grepl("celltype:", annotation)) |> 
+    pull()
+  celltype <- gsub(".*:","", celltype)
+  if (length(celltype)==0) {
+    celltype <- "NA"
+  }
+  mito_unclear_vesicles <- neur$tags$`mitochondrion unclear vesicles`
   n_mito_unclear_vesicles <- length(mito_unclear_vesicles)
-  mito_no_vesicles <- synaptic_neurons[[i]]$tags$`mitochondrion no vesicles`
+  mito_no_vesicles <- neur$tags$`mitochondrion no vesicles`
   n_mito_no_vesicles <- length(mito_no_vesicles)
   n_mito_total <- n_mito_vesicles_syn + n_mito_vesicles_no_syn + n_mito_unclear_vesicles + n_mito_no_vesicles
-  mito_count_neuron <- data.frame(skid=synaptic_neurons[[i]]$NeuronName,
-                                  vesicles_syn=n_mito_vesicles_syn,
-                                  vesicles_no_syn=n_mito_vesicles_no_syn,
-                                  vesicles_unclear=n_mito_unclear_vesicles,
-                                  vesicles_no=n_mito_no_vesicles,
-                                  total=n_mito_total)
-  mito_in_syn <- rbind(mito_in_syn, mito_count_neuron)
+  list(celltype=celltype,
+       skid=sskid,
+       vesicles_syn=n_mito_vesicles_syn,
+       vesicles_no_syn=n_mito_vesicles_no_syn,
+       vesicles_unclear=n_mito_unclear_vesicles,
+       vesicles_no=n_mito_no_vesicles,
+       total=n_mito_total)
 }
 
-mito_in_syn_arranged <- arrange(mito_in_syn, desc(total))
+mito_stats <- lapply(neurons, get_mito_stats) |> bind_rows()
 
-mito_in_syn_tidy <-  mito_in_syn_arranged %>%
+
+#---------------------------------
+
+mito_in_syn_tidy <-  mito_stats %>% select(1:6) %>%
   #select(total) %>%
   pivot_longer(
     cols = c("vesicles_syn", "vesicles_no_syn", "vesicles_unclear", "vesicles_no"), 
     names_to = "characteristic", 
     values_to = "count")
 
+
 mito_in_syn_graph <- mito_in_syn_tidy %>%
-  ggplot(aes(as.character(skid),
+  ggplot(aes(as.character(celltype),
              count,
              fill=factor(characteristic,
                          levels=c("vesicles_syn", "vesicles_no_syn", "vesicles_unclear", "vesicles_no")))) +
   geom_bar(position="fill",
            stat = "identity") +
-  scale_x_discrete(limits = as.character(mito_in_syn$skid)) +
+  scale_x_discrete(limits = as.character(mito_stats$celltype)) +
   scale_y_reverse() +
-  geom_text(aes(label = count),
-            position = "fill",
-            hjust = 1,
-            size = 2,
-            family="sans") +
+  #geom_text(aes(label = count),
+  #          position = "fill",
+  #          hjust = 1,
+  #          size = 2,
+  #          family="sans") +
   coord_flip() + 
   scale_fill_manual(values = c("#4477AA","#AA3377","#EE6677","lightgrey")) + # Tol
   theme_bw() +
@@ -103,5 +130,116 @@ mito_in_syn_graph <- mito_in_syn_tidy %>%
         text=element_text(family="sans", size = 12))
 
 #ggsave("pictures/mito_vesicles_graph.png", limitsize = FALSE, 
-#       units = c("px"), desmo_tono_graph, width = 2400, height = 1600, bg = 'white')
+#       units = c("px"), mito_in_syn_graph, width = 2400, height = 1600, bg = 'white')
 
+
+
+
+
+
+
+
+
+
+
+
+# get positions of mitochondria ------------------------------------------------
+
+get_pos_of_tags_in_neuron <- function(neur, tagname) {
+  # argument is neuron (data type), not skid
+  tag_positions <- tibble(treenodeid=character(),
+                          x=double(),
+                          y=double(),
+                          z=double())
+  tags <- neur$tags[[tagname]]
+  for (tag in tags) {
+    pos <- neur$d |> filter(PointNo == tag) |> select(X,Y,Z)
+    tag <- as.character(tag)
+    tag_positions <- tag_positions |> bind_rows(list(treenodeid=tag,
+                                                     x=pos$X, y=pos$Y, z=pos$Z))
+  }
+  return(tag_positions)
+}
+
+mito_positions <- tibble(celltype=character(),
+                         skid=character(),
+                         mito_type=character(),
+                         treenodeid=character(),
+                         x=double(),
+                         y=double(),
+                         z=double()
+)
+
+for (neur in neurons) {
+  sskid=neur$NeuronName
+  celltype <- catmaid_get_annotations_for_skeletons(sskid, pid=35) |> 
+    select(annotation) |> 
+    filter(grepl("celltype:", annotation)) |> 
+    pull()
+  celltype <- gsub(".*:","", celltype)
+  if (length(celltype)==0) {
+    celltype <- "NA"
+  }
+  
+  ves_no <- get_pos_of_tags_in_neuron(neur, "mitochondrion no vesicles")
+  ves_no <- bind_cols(mito_type="ves_no", ves_no)
+  
+  ves_unc <- get_pos_of_tags_in_neuron(neur, "mitochondrion unclear vesicles")
+  ves_unc <- bind_cols(mito_type="ves_unc", ves_unc)
+  
+  ves_yes <- get_pos_of_tags_in_neuron(neur, "mitochondrion vesicles")
+  ves_yes <- bind_cols(mito_type="ves", ves_yes)
+  # treenodes with outgoing synapses
+  syn_out_treenodes <- neur$connectors |> 
+    filter(prepost == 0) |> select(treenode_id) |> pull()
+  # check if the mitochondrion is associated with a synapse
+  for (treenode in ves_yes$treenodeid) {
+    if (treenode %in% syn_out_treenodes) {
+      mitotype <- "ves_syn"
+    }
+    else {
+      mitotype <- "ves_no_syn"
+    }
+    ves_yes <- ves_yes |>
+      mutate(mito_type = replace(mito_type, treenodeid == treenode, mitotype))
+  }
+  mito_pos <- bind_rows(ves_no, ves_unc, ves_yes)
+  mito_pos <- bind_cols(celltype=celltype,
+                        skid=sskid,
+                        mito_pos)
+  mito_positions <- bind_rows(mito_positions, mito_pos)
+}
+
+
+# plot mitochondria positions --------------------------------------------------
+
+plot_background()
+plot3d(neurons, color = "lightgrey", lwd = 2, soma = TRUE, alpha = 0.2)
+
+pos_ves_syn <- mito_positions |> filter(mito_type=="ves_syn") |> select(x,y,z)
+plot3d(pos_ves_syn,
+       add = TRUE, 
+       col="#4477AA", 
+       size=5,
+       alpha=1)
+
+pos_ves_no_syn <- mito_positions |> filter(mito_type=="ves_no_syn") |> select(x,y,z)
+plot3d(pos_ves_no_syn,
+       add = TRUE, 
+       col="#AA3377", 
+         size=5,
+       alpha=1)
+
+pos_ves_unc <- mito_positions |> filter(mito_type=="ves_unc") |> select(x,y,z)
+plot3d(pos_ves_unc,
+       add = TRUE, 
+       col="#EE6677", 
+       size=5,
+       alpha=1)
+
+pos_ves_no <- mito_positions |> filter(mito_type=="ves_no") |> select(x,y,z)
+plot3d(pos_ves_no,
+       add = TRUE, 
+       col="black", 
+       size=5,
+       alpha=1)
