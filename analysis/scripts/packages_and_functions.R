@@ -61,6 +61,36 @@ plot_background_ventral <- function(x){
   par3d(windowRect = c(0, 0, 800, 800)) #resize for frontal view
 }
 
+read_smooth_neuron <- function(annotation){
+  nlapply(
+  read.neurons.catmaid(
+    annotation, pid = 35
+  ),
+  function(x) smooth_neuron(x, sigma = 1000)
+  )
+}
+
+outline <- catmaid_get_volume(
+  53, rval = c("mesh3d", "catmaidmesh", "raw"),
+  invertFaces = T, conn = NULL, pid = 35
+  )
+dome_cavity <- catmaid_get_volume(
+  54, rval = c("mesh3d", "catmaidmesh", "raw"),
+  invertFaces = T, conn = NULL, pid = 35
+  )
+
+# define views --------------
+
+anterior <- function(){
+  nview3d("anterior", 
+        extramat = rotationMatrix(2.54, 0.1, 0, 1)
+        )
+}
+
+left <- function(){
+  nview3d("left", extramat = rotationMatrix(-1.7, 190, -120, -140))
+}
+
 
 
 # crop from catmaid -----------------------------------------
