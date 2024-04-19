@@ -13,14 +13,14 @@ tags <- catmaid_get_label_stats(pid = 35)
 # measuring from tips because it's easy to get parent node, but harder to get child
 ctips <- tags[tags$labelName == "cilium tip", "treenodeID"]
 
-cilium_length <- function(ctip_id) {
+cilium_length <- function(ctip_id, smooth_sigma = 1) {
   # this will only work if root node is proximal to basal body tag
   # treenode compact detail response:
   # [ID, parent ID, x, y, z, confidence, radius, skeleton_id, edition_time, user_id]
   path <- paste("/35/treenodes/", ctip_id, "/compact-detail", sep = "")
   ctip_treenode <- catmaid_fetch(path = path)
   skid <- ctip_treenode[[8]]
-  neuron_info <- read.neuron.catmaid(skid, pid = 35)
+  neuron_info <- smooth_neuron(read.neuron.catmaid(skid, pid = 35), sigma=smooth_sigma)
   neuron_name <- catmaid_fetch(path = "/35/skeleton/neuronnames",
                                body = list(skids=skid))[[1]]
   # check which treenodes have basal body annotation, because this is the stop point
@@ -51,12 +51,13 @@ cilium_length <- function(ctip_id) {
   return(c(distance, length(basalb_ids), neuron_name))
 }
 
+
 cilium_lengths_monociliated <- list()
 cilium_lengths_biciliated <- list()
 cilium_lengths_intramulti <- list()
 cilium_lengths_lamellate <- list()
 for (ctip_id in ctips) {
-  c_length_type <- c(cilium_length(ctip_id))
+  c_length_type <- c(cilium_length(ctip_id, 250))
   cilium_length_new <- c_length_type[[1]]
   nbb <- c_length_type[[2]]
   nname <- c_length_type[[3]]
@@ -68,8 +69,8 @@ for (ctip_id in ctips) {
     cilium_lengths_biciliated <- c(cilium_lengths_biciliated, cilium_length_new)
   }
   if (nbb > 2) {
-    print(nname)
-    print(ctip_id)
+    #print(nname)
+    #print(ctip_id)
     if (grepl("intracellular multiciliated cell", nname)) {
       cilium_lengths_intramulti <- c(cilium_lengths_intramulti, cilium_length_new)
     }
@@ -100,3 +101,4 @@ for (neuroninf in neurons_info) {
   n_intra <- c(n_intra, length(neuroninf$tags$`cilium tip intracellular`))
 }
 summary(as.numeric(n_intra))
+
