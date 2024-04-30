@@ -35,7 +35,9 @@ Kei Jokura^1,3,\*^, Sanja Jasek^1,2^, Lara Kewalow^2^, Pawel Burkhardt^4^, Gásp
 
 ^1^Living Systems Institute, University of Exeter, Exeter, EX4 4QD, United Kingdom\
 ^2^Heidelberg University, Centre for Organismal Studies (COS), 69120 Heidelberg, Germany\
-^3^National Institute for Basic Biology, Okazaki, ..., Japan ^4^Sars Centre ... Berge, Norway ^\*^Correspondence: corr_author\@email.com
+^3^Exploratory Research Center on Life and Living Systems (ExCELLS), National Institutes of Natural Sciences, Okazaki, Japan\
+^4^Michael Sars Centre, University of Bergen, Norway\
+^\*^Correspondence: jokura\@nibb.ac.jp, gaspar.jekely\@cos.uni-heidelberg.de
 
 ## Abstract
 
@@ -156,7 +158,3 @@ We would like to thank the Jekely lab for the R project template (<https://githu
 ```{=html}
 <script src="https://hypothes.is/embed.js" async></script>
 ```
-=======
-
-<script src="hypothes.is/embed.js" async></script>
->>>>>>> e3ccaf99d3912041407c73034034d655f46ceca6
