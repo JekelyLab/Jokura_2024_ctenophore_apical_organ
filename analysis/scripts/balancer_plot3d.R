@@ -20,7 +20,7 @@ Cgroove_sag <- read_smooth_neuron("celltype:Cgroove-sag")
 intramulticilia <- read_smooth_neuron("celltype:intra-multi-ciliated")
 lamellate <- read_smooth_neuron("celltype:lamellate")
 lithocyte <- read_smooth_neuron("celltype:lithocyte")
-neuron <- read_smooth_neuron("celltype:neuron")
+neuron <- read_smooth_neuron("celltype:SSN")
 plumose <- read_smooth_neuron("celltype:plumose")
 dense_vesicle <- read_smooth_neuron("celltype:dense_vesicle")
 monocilia <- read_smooth_neuron("celltype:monociliated")
@@ -78,7 +78,9 @@ plot3d(bristle,
        soma = T, lwd = 1, add = T, alpha = 0.05, col = Okabe_Ito[8])
 plot3d(dome, 
        soma = T, lwd = 1, add = T, alpha = 0.05, col = Okabe_Ito[8])
-plot3d(groove, 
+plot3d(Cgroove_tag, 
+       soma = T, lwd = 1, add = T, alpha = 0.05, col = Okabe_Ito[8])
+plot3d(Cgroove_sag, 
        soma = T, lwd = 1, add = T, alpha = 0.05, col = Okabe_Ito[8])
 plot3d(intramulticilia, 
        soma = T, lwd = 1, add = T, alpha = 0.05, col = Okabe_Ito[8])
@@ -146,7 +148,9 @@ plot3d(bristle,
        soma = T, lwd = 1, add = T, alpha = 0.05, col = Okabe_Ito[8])
 plot3d(dome, 
        soma = T, lwd = 1, add = T, alpha = 0.05, col = Okabe_Ito[8])
-plot3d(groove, 
+plot3d(Cgroove_tag, 
+       soma = T, lwd = 1, add = T, alpha = 0.05, col = Okabe_Ito[8])
+plot3d(Cgroove_sag, 
        soma = T, lwd = 1, add = T, alpha = 0.05, col = Okabe_Ito[8])
 plot3d(intramulticilia, 
        soma = T, lwd = 1, add = T, alpha = 0.05, col = Okabe_Ito[8])
@@ -339,3 +343,4 @@ par3d(zoom=0.61)
 
 #make a snapshot
 rgl.snapshot("manuscript/pictures/balancer_1.png")
+
