@@ -8,7 +8,7 @@ annot <- catmaid_get_annotations_for_skeletons(skids, pid = 35)
 
 # no annotations at all
 skids_with_annot <- annot$skid |> unique()
-skids_without_annot <- setdiff(skids, skids_with_annot)
+# skids_without_annot <- setdiff(skids, skids_with_annot)
 
 # without specific annotations
 no_Q_annot <- annot |> filter(annotation != "Q1" & annotation != "Q2" & annotation != "Q3" & annotation != "Q4" ) |> 
@@ -35,13 +35,14 @@ plot3d(
   alpha = 0.1, lwd = 3
 )
 
+
 get_treenode_pos <- function(treenodeid, pid) {
-  path <- paste(pid, "/treenodes/compact-detail", sep = "")
-  treenode_detail <- catmaid_fetch(path = path, 
-                                   body = list(treenode_ids=treenodeid))
-  xyz <- data.frame(x = treenode_detail[[1]][[3]],
-                    y = treenode_detail[[1]][[4]],
-                    z = treenode_detail[[1]][[5]])
+  path <- paste("/", pid, "/node/get_location", sep = "")
+  pos <- catmaid_fetch(path = path,
+                       body = list(tnid=treenodeid))
+  xyz <- data.frame(x = pos[[2]],
+                    y = pos[[3]],
+                    z = pos[[4]])
 }
 
 
@@ -65,3 +66,41 @@ plot_tag <- function(tagname, pid, color) {
 
 plot_tag("centriole", 35, "magenta")
 plot_tag("basal body", 35, "cyan")
+
+
+
+
+# find cilium tips which are not tagged ----------------------------------------
+tags <- catmaid_get_label_stats(pid = 35)
+
+skids <- tags[tags$labelName == "basal body", "skeletonID"] |> unique()
+
+cilium_annot_mistake <- function(skid) {
+  neurons_info <- read.neurons.catmaid(skid, pid = 35)
+  neuron_info <- neurons_info[[1]]
+  annotations <- neurons_info %>% attr("anndf")
+  if (length(annotations) == 0) {
+    c_pocket <- 0
+  } else {
+    c_pocket <- annotations %>% select(annotation) %>% 
+      filter(annotation == "ciliary_pocket_yes") %>% pull() %>% length()
+  }
+  neuron_name <- catmaid_fetch(path = "/35/skeleton/neuronnames",
+                               body = list(skids=skid))[[1]]
+  n_bb <- neuron_info$tags$`basal body` |> length()
+  n_ctip <- neuron_info$tags$`cilium tip` |> length()
+  n_ccut <- neuron_info$tags$`cilium cut` |> length()
+  n_ct_extra <- neuron_info$tags$`cilium tip extracellular` |> length()
+  n_c_exit <- neuron_info$tags$`exit_ciliary_pocket` |> length()
+  if (n_ctip + n_ccut != n_bb || (c_pocket == 1 && n_ct_extra != n_c_exit)) {
+    return(list(skid=skid, 
+               neuron_name=neuron_name, 
+               n_ctip=n_ctip, 
+               n_ccut=n_ccut, 
+               n_bb=n_bb,
+               n_ct_extra=n_ct_extra,
+               n_c_exit=n_c_exit))
+  }
+}
+
+c_annot_mistakes <- lapply(skids, cilium_annot_mistake) %>% bind_rows()
