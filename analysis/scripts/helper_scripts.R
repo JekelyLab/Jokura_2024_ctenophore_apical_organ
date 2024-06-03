@@ -104,3 +104,45 @@ cilium_annot_mistake <- function(skid) {
 }
 
 c_annot_mistakes <- lapply(skids, cilium_annot_mistake) %>% bind_rows()
+
+
+# find cilia which don't have basal body annotated -----------------------------
+
+tags <- catmaid_get_label_stats(pid = 35)
+
+skids <- tags %>% select(skeletonID) %>% unique()
+
+for (skid in skids) {
+  # check if number of cilia matches number of basal bodies
+  n_ctip <- tags %>% filter(skeletonID == skid) %>% 
+    filter(labelName == "cilium tip" | labelName ==  "cilium cut") %>% nrow()
+  n_bb <- tags %>% filter(skeletonID == skid) %>% 
+    filter(labelName == "basal body") %>% nrow()
+  # if it doesn't, check which cilia don't have basal body
+  if (n_ctip < n_bb) {
+    #paste("skid", skid, "has less cilia than basal bodies.") %>% print()
+  } else if (n_ctip > n_bb) {
+    paste("skid", skid, "has more cilia than basal bodies.") %>% print()
+    ctips <- tags %>% filter(skeletonID == skid) %>% 
+      filter(labelName == "cilium tip" | labelName ==  "cilium cut") %>%
+      select(treenodeID) %>% pull()
+    bbs <- tags %>% filter(skeletonID == skid) %>% 
+      filter(labelName == "basal body") %>%
+      select(treenodeID) %>% pull()
+    neuron_info <- read.neuron.catmaid(skid, pid = 35)
+    for (ctip_id in ctips) {
+      treenode_id <- ctip_id
+      while (!(treenode_id %in% bbs)) {
+        index <- match(treenode_id, neuron_info$d$PointNo)
+        parent_id <- neuron_info$d$Parent[[index]]
+        if (parent_id == -1) {
+          print("root reached before basal body tag, from cilium tip")
+          print(ctip_id)
+          break
+        }
+        treenode_id <- parent_id
+      }
+    }
+  }
+}
+
