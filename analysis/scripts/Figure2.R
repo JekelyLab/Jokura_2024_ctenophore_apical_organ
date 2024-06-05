@@ -194,14 +194,6 @@ ggsave(
 
 
 
-# visNetwork plotting -----------------------------------------------------
-
-## convert to VisNetwork-list
-Conn_graph.visn <- toVisNetworkData(Conn_graph)
-## copy column "weight" to new column "value" in list "edges"
-Conn_graph.visn$edges$value <- Conn_graph.visn$edges$weight
-Conn_graph.visn$nodes$value <- degree
-Conn_graph.visn$nodes$group <- cell_group_attr$type
 
 
 
@@ -212,60 +204,139 @@ Conn_graph.visn$nodes$group <- cell_group_attr$type
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# network---------------------------------------------------------
+
+# cell types
+cell_groups <- list(bridge_Q1Q2, bridge_Q3Q4, 
+                    balancer_Q1, balancer_Q2, balancer_Q3, balancer_Q4, 
+                    SSN_Q1Q2, SSN_Q3Q4, SSN_Q1Q2Q3Q4)
+
+cell_groups_names <- list("bridge_Q1Q2", "bridge_Q3Q4", 
+                          "balancer_Q1", "balancer_Q2", "balancer_Q3", "balancer_Q4", 
+                          "SSN_Q1Q2", "SSN_Q3Q4", "SSN_Q1Q2Q3Q4"
+)
+
+# iterate through cell group neuron lists and get connectivity
+# define empty synapse list with the right dimensions
+synapse_list <- c()
+
+for (i in 1:length(cell_groups)) {
+  for (j in 1:length(cell_groups)) {
+    # get connectors between two cell groups
+    presyn_skids <- attr(cell_groups[i][[1]], "df")$skid
+    postsyn_skids <- attr(cell_groups[j][[1]], "df")$skid
+    connectivity <- catmaid_get_connectors_between(
+      pre = presyn_skids,
+      post = postsyn_skids, pid = 35
+    )
+    # check the number of synapses from group1 -> group2
+    N_synapses <- dim(connectivity)[1]
+    if(length(connectivity) == 0) {N_synapses = 0}
+    # add value to synapse list
+    synapse_list <- c(synapse_list, N_synapses)
+  }
+}
+synapse_list
 # convert synapse list into a matrix of appropriate dimensions
 synapse_matrix <- matrix(
   unlist(synapse_list), byrow = TRUE, 
-  nrow = length(celltypes)
+  nrow = length(cell_groups)
 )
-synapse_matrix
 
-rownames(synapse_matrix) <- as.character(celltype_names)
-colnames(synapse_matrix) <- as.character(celltype_names)
-synapse_matrix
+rownames(synapse_matrix) <- as.character(cell_groups_names)
+colnames(synapse_matrix) <- as.character(cell_groups_names)
 
 # with the make_graph function of igraph we turn it into a graph (input is the list of edge pairs)
-graph <- graph_from_adjacency_matrix(
+cell_groups_graph <- graph_from_adjacency_matrix(
   synapse_matrix,
   mode = c("directed"),
   weighted = TRUE, diag = TRUE
 )
 
-graph |> as_tbl_graph() 
+#cell_groups_graph |> as_tbl_graph() 
 
-
-# calculate node weighted degree ---------------------------------------
+# calculate node weighted degree -------------
 degree=degree(
-  graph, v = V(graph), mode = c("all"), 
+  cell_groups_graph, v = V(cell_groups_graph), mode = c("all"), 
   loops = TRUE, normalized = FALSE
 )
-degree
-
-
 
 # use visNetwork to plot the network --------------------------------------
 
+write_rds(cell_groups_graph, "manuscript/source_data/cell_groups_synapse_matrix.rds")
+cell_groups_graph <- read_rds("manuscript/source_data/cell_groups_synapse_matrix.rds")
+
 ## convert to VisNetwork-list
-graph.visn <- toVisNetworkData(graph)
+cell_groups_graph.visn <- toVisNetworkData(cell_groups_graph)
+
+#filter low-weight edges
+cell_groups_graph.visn$edges$weight
+#cell_groups_graph.visn$edges$weight[cell_groups_graph.visn$edges$weight < 3]  <- 0
+cell_groups_graph.visn$edges$weight <- sqrt(cell_groups_graph.visn$edges$weight)
+cell_groups_graph.visn$edges$weight
 
 ## copy column "weight" to new column "value" in list "edges"
-graph.visn$edges$value <- graph.visn$edges$weight
-graph.visn$nodes$value <- degree
+cell_groups_graph.visn$edges$value <- cell_groups_graph.visn$edges$weight
+cell_groups_graph.visn$nodes$value <- degree
 
 #define node color
-graph.visn$nodes$color <- Okabe_Ito[1:9]
+cell_groups_graph.visn$nodes$color <- Okabe_Ito[1:9]
 
 #hierarchical layout - define level of nodes
-graph.visn$nodes$level <- c(1, 2, 3, 4, 1, 2, 3, 4, 1)
+cell_groups_graph.visn$nodes$level <- c(2, 2, 3, 1, 1, 3, 2, 2, 2)
+#bridge_Q1Q2, bridge_Q3Q4,balancer_Q1, balancer_Q2, balancer_Q3, balancer_Q4,SSN_Q1Q2, SSN_Q3Q4, SSN_Q1Q2Q3Q4
 
 #hierarchical layout
-visNetwork(graph.visn$nodes, graph.visn$edges) %>%
+visNet <- visNetwork(cell_groups_graph.visn$nodes, cell_groups_graph.visn$edges) %>%
   visIgraphLayout(
-    layout = "layout_nicely", physics = TRUE, 
-    randomSeed = 42, type="square"
+    layout = "layout_nicely", physics = FALSE
   ) %>%
   visHierarchicalLayout(
     levelSeparation=250, 
-    nodeSpacing=10,
+    nodeSpacing=200,
     direction='LR',
     sortMethod='hubsize',
     shakeTowards='roots'
@@ -280,90 +351,22 @@ visNetwork(graph.visn$nodes, graph.visn$edges) %>%
   ) %>%
   visNodes(
     borderWidth=0.3, 
-    color = list(background=graph.visn$nodes$color, border='black'),
+    color = list(background=cell_groups_graph.visn$nodes$color, border='black'),
     opacity=0.9,
     shape='dot', 
     font=list(color='black', size=44),
-    scaling = list(label=list(enabled=TRUE, min=48, max=56)),
-    level= graph.visn$nodes$level
-  )
-
-
-
-
-
-
-visNetwork(graph.visn$nodes, graph.visn$edges) %>%
-  visIgraphLayout(
-    layout = "layout_nicely", physics = TRUE, 
-    randomSeed = 42, type="square"
+    scaling = list(label=list(enabled=TRUE, min=22, max=80)),
+    level= cell_groups_graph.visn$nodes$level
   ) %>%
-#  visHierarchicalLayout(
-#    levelSeparation=250, 
-#    nodeSpacing=10,
-#    direction='LR',
-#    sortMethod='hubsize',
-#    shakeTowards='roots'
-#  ) %>%
-  visEdges(
-    smooth = list(type = 'curvedCW', roundness=0.2),
-    scaling=list(min=2, max=12),
-    color = list(inherit=TRUE, opacity=0.7),
-    arrows = list(
-      to = list(enabled = TRUE, 
-                scaleFactor = 1, type = 'arrow'))
-  ) %>%
-  visNodes(
-    borderWidth=0.3, 
-    color = list(background=graph.visn$nodes$color, border='black'),
-    opacity=0.9,
-    shape='dot', 
-    font=list(color='black', size=1),
-    scaling = list(label=list(enabled=TRUE, min=10, max=12)),
-    level= graph.visn$nodes$level
-  )
+  visOptions(highlightNearest = TRUE, width = 1800, height = 1800)
+visNet
+
+
+saveNetwork(visNet, "manuscript/pictures/visNetwork_bridge_balancer_connectome.html")
+webshot2::webshot(url = "manuscript/pictures/visNetwork_bridge_balancer_connectome.html",
+                  file = "manuscript/pictures/visNetwork_bridge_balancer_connectome.png",
+                  vwidth = 1800, vheight = 1800, #define the size of the browser window
+                  cliprect = c(390, 250, 880, 1000), zoom = 1, delay = 1)
 
 
 
-results <- sapply(annot_to_search, function(ann1) {
-  sapply(annot_to_search, function(ann2) {
-    length(skids_by_2annotations(ann1, ann2))
-  })
-})
-
-# add row and col names
-colnames(results) <- annot_to_search
-rownames(results) <- annot_to_search
-results
-
-# convert to tibble
-results.tb <- results %>%
-  as_tibble(rownames = "annotation1") %>%
-  pivot_longer(
-    -annotation1,
-    names_to = "annotation2",
-    values_to = "number"
-  )
-
-results.tb
-
-write.table(results.tb, "source_data/Figure3_fig_suppl3_source_data1.txt", sep = "\t")
-results.tb <- read.table("source_data/Figure3_fig_suppl3_source_data1.txt", sep = "\t")
-
-
-results.tb %>%
-  ggplot(aes(annotation2, annotation1)) +
-  geom_raster(aes(fill = sqrt(number))) +
-  theme(
-    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 10),
-    axis.text.y = element_text(angle = 0, hjust = 1, vjust = 0.5, size = 10),
-    axis.title.x = element_text(size = 15),
-    axis.title.y = element_text(size = 15)
-  ) +
-  labs(x = "annotation 2", y = "annotation 1", title = " ") +
-  scale_x_discrete(limits = unlist(annot_to_search)) +
-  scale_y_discrete(limits = rev(unlist(annot_to_search))) +
-  scale_fill_gradientn(colours = c("white", "#0072B2")) +
-  geom_text(aes(label = number, size = number / (number + 0.1))) +
-  scale_radius(range = c(0, 2)) +
-  guides(size = "none")
