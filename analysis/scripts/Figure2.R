@@ -11,21 +11,18 @@ read_smooth_cell <- function(annotation){
             smooth_neuron(x, sigma = 1000))
 }
 
-#balancer <- read_smooth_cell("celltype:balancer")
-bridge <- read_smooth_cell("celltype:bridge")
-#bristle <- read_smooth_cell("celltype:bristle")
-#dome <- read_smooth_cell("celltype:dome")
-#groove <- read_smooth_cell("celltype:groove")
-#intramulticilia <- read_smooth_cell("celltype:intra-multi-ciliated")
-#lamellate <- read_smooth_cell("celltype:lamellate")
-#lithocyte <- read_smooth_cell("celltype:lithocyte")
-#cell <- read_smooth_cell("celltype:neuron")
-#plumose <- read_smooth_cell("celltype:plumose")
-#dense_vesicle <- read_smooth_cell("celltype:dense_vesicle")
-#monocilia <- read_smooth_cell("celltype:monociliated")
-#bicilia <- read_smooth_cell("celltype:biciliated")
-#non_cilia <- read_smooth_cell("celltype:nonciliated")
 
+bridge_Q1Q2 <-
+  nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:bridge", "Q1Q2"),
+                               pid = 35),
+          function(x)
+            smooth_neuron(x, sigma = 1000))
+
+bridge_Q3Q4 <-
+  nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:bridge", "Q3Q4"),
+                               pid = 35),
+          function(x)
+            smooth_neuron(x, sigma = 1000))
 
 
 balancer_Q1 <-
@@ -50,19 +47,18 @@ balancer_Q4 <-
             smooth_neuron(x, sigma = 1000))
 
 
-
-syncytial_Q1Q2 <-
-  nlapply(read.neurons.catmaid(skids_by_2annotations("syncytial neuron", "Q1Q2"),
+SSN_Q1Q2 <-
+  nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:SSN", "Q1Q2"),
                                pid = 35),
           function(x)
             smooth_neuron(x, sigma = 1000))
-syncytial_Q3Q4 <-
-  nlapply(read.neurons.catmaid(skids_by_2annotations("syncytial neuron", "Q3Q4"),
+SSN_Q3Q4 <-
+  nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:SSN", "Q3Q4"),
                                pid = 35),
           function(x)
             smooth_neuron(x, sigma = 1000))
-syncytial_Q1Q2Q3Q4 <-
-  nlapply(read.neurons.catmaid(skids_by_2annotations("syncytial neuron", "Q1Q2Q3Q4"),
+SSN_Q1Q2Q3Q4 <-
+  nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:SSN", "Q1Q2Q3Q4"),
                                pid = 35),
           function(x)
             smooth_neuron(x, sigma = 1000))
@@ -73,8 +69,10 @@ syncytial_Q1Q2Q3Q4 <-
 # circuit analysis and plotting -------------------------------------------
 
 # get connectivity between mech cell clusters and their output clusters
-cell_groups <- list(balancer_Q1, balancer_Q2, balancer_Q3, balancer_Q4, 
-                    syncytial_Q1Q2, syncytial_Q3Q4, syncytial_Q1Q2Q3Q4)
+cell_groups <- list(bridge_Q1Q2, bridge_Q3Q4, 
+                    balancer_Q1, balancer_Q2, balancer_Q3, balancer_Q4, 
+                    SSN_Q1Q2, SSN_Q3Q4, SSN_Q1Q2Q3Q4)
+
 
 N_cell_groups <- length(cell_groups)
 N_cell_groups
@@ -82,15 +80,19 @@ N_cell_groups
 
 cell_group_attr <- data.frame(
   cell_group_names = c(
+    "bridge_Q1Q2",
+    "bridge_Q3Q4",
     "balancer_Q1",
     "balancer_Q2",
     "balancer_Q3",
     "balancer_Q4",
-    "syncytial_Q1Q2",
-    "syncytial_Q3Q4",
-    "syncytial_Q1Q2Q3Q4"
-  ),
+    "SSN_Q1Q2",
+    "SSN_Q3Q4",
+    "SSN_Q1Q2Q3Q4"
+    ),
   type = c(
+    "bridge",
+    "bridge",
     "balancer",
     "balancer",
     "balancer",
@@ -99,7 +101,7 @@ cell_group_attr <- data.frame(
     "neuron",
     "neuron"
   ),
-  level = c("3", "1", "1", "3", "2", "2", "2")
+  level = c("2", "2", "3", "1", "1", "3", "2", "2", "2")
 )
 
 dim(cell_group_attr)
@@ -171,11 +173,11 @@ as.data.frame((synapse_matrix)) %>%
     axis.title.x = element_text(size = 15),
     axis.title.y = element_text(size = 15)
   ) +
-  labs(x = "postsynaptic cell groups", y = "presynaptic cell groups", title = " ") +
+  labs(x = "postsynaptic cell groups", y = "presynaptic cell groups", title = "") +
   scale_x_discrete(limits = cell_group_attr$cell_group_names) +
   scale_y_discrete(limits = cell_group_attr$cell_group_names) +
   scale_fill_gradientn(colours = c("white", "#0072B2")) +
-  geom_text(aes(label = synapses, size = synapses / (synapses + 0.1))) +
+  geom_text(aes(label = synapses, size = synapses / (synapses + 0.5))) +
   scale_radius(range = c(0, 2)) +
   guides(size = "none")
 
@@ -183,32 +185,12 @@ as.data.frame((synapse_matrix)) %>%
 
 # Saving R ggplot with R ggsave Function
 ggsave(
-  "pictures/mech_girdle_chaeMech_syn_matrix.png",
-  width = 1700,
-  height = 1300,
+  "manuscript/pictures/mech_girdle_chaeMech_syn_matrix.png",
+  width = 1800,
+  height = 1200,
   limitsize = TRUE,
   units = c("px")
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

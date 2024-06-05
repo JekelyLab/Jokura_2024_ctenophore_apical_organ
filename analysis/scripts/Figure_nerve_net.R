@@ -2,7 +2,13 @@
 
 source("analysis/scripts/packages_and_functions.R")
 
-# load cell types from catmaid
+# load cell type ----------------------------------
+
+read_smooth_neuron <- function(annotation){
+  nlapply(read.neurons.catmaid(annotation, pid = 35),
+          function(x)
+            smooth_neuron(x, sigma = 1000))
+}
 
 balancer <- read_smooth_neuron("celltype:balancer")
 syn_neuron <- read_smooth_neuron("celltype:SSN")
