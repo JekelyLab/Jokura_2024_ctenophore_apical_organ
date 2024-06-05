@@ -1,0 +1,3 @@
+[submodule "rcatmaid_functions_library"]
+	path = rcatmaid_functions_library
+	url = https://github.com/SanjaJasek/rcatmaid_functions_library.git

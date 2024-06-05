@@ -25,8 +25,8 @@ library(av)
   conn_http1 = catmaid_login(conn=conn, config=httr::config(ssl_verifypeer=0, http_version=1))
 }
 
-system("git clone https://github.com/SanjaJasek/rcatmaid_functions_library.git")
-system("git -C rcatmaid_functions_library pull https://github.com/SanjaJasek/rcatmaid_functions_library.git")
+system("git submodule init")
+system("git submodule update")
 source("rcatmaid_functions_library/functions.R")
 
 #define some colors

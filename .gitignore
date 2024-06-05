@@ -43,5 +43,3 @@ vignettes/*.pdf
 *.swp
 *.swo
 
-# sourced repo
-rcatmaid_functions_library
