@@ -79,7 +79,7 @@ get_mito_stats <- function(neur) {
        vesicles_syn=n_mito_vesicles_syn,
        vesicles_no_syn=n_mito_vesicles_no_syn,
        vesicles_unclear=n_mito_unclear_vesicles,
-       vesicles_no=n_mito_no_vesicles,
+       vesicles_none=n_mito_no_vesicles,
        total=n_mito_total)
 }
 
@@ -94,19 +94,39 @@ mito_stats <- lapply(mito_done, get_mito_stats) |> bind_rows() |>
 
 # TODO - plot averages instead, and add number of cells per category
 
-mito_in_syn_tidy <-  mito_stats %>% select(1:6) %>%
+
+ves_syn_tbl <- mito_stats %>% group_by(celltype) %>%
+  summarize(mean_vesicles_syn = mean(vesicles_syn)) %>% 
+  arrange(celltype) %>% select(mean_vesicles_syn)
+ves_no_syn_tbl <- mito_stats %>% group_by(celltype) %>%
+  summarize(mean_vesicles_no_syn = mean(vesicles_no_syn)) %>%
+  arrange(celltype) %>% select(mean_vesicles_no_syn)
+ves_unclear_tbl <- mito_stats %>% group_by(celltype) %>%
+  summarize(mean_vesicles_unclear = mean(vesicles_unclear)) %>%
+  arrange(celltype) %>% select(mean_vesicles_unclear)
+ves_none_tbl <- mito_stats %>% group_by(celltype) %>% 
+  summarize(mean_vesicles_none = mean(vesicles_none)) %>%
+  arrange(celltype) %>% select(mean_vesicles_none)
+celltype_numbers <- mito_stats %>% add_count(celltype) %>%
+  select(celltype, n) %>% unique() %>% arrange(celltype)
+mito_means <- bind_cols(celltype_numbers,
+                        ves_syn_tbl, ves_no_syn_tbl,
+                        ves_unclear_tbl, ves_none_tbl)
+
+
+mito_means_tidy <-  mito_means %>%
   #select(total) %>%
   pivot_longer(
-    cols = c("vesicles_syn", "vesicles_no_syn", "vesicles_unclear", "vesicles_no"), 
+    cols = c("mean_vesicles_syn", "mean_vesicles_no_syn", "mean_vesicles_unclear", "mean_vesicles_none"), 
     names_to = "characteristic", 
-    values_to = "count")
+    values_to = "value")
 
 
 mito_in_syn_graph <- mito_in_syn_tidy %>%
   ggplot(aes(as.character(celltype),
              count,
              fill=factor(characteristic,
-                         levels=c("vesicles_syn", "vesicles_no_syn", "vesicles_unclear", "vesicles_no")))) +
+                         levels=c("vesicles_syn", "vesicles_no_syn", "vesicles_unclear", "vesicles_none")))) +
   geom_bar(position="fill",
            stat = "identity") +
   #scale_x_discrete(limits = as.character(mito_stats$celltype)) +
@@ -132,8 +152,11 @@ mito_in_syn_graph <- mito_in_syn_tidy %>%
         text=element_text(family="sans", size = 12))
 mito_in_syn_graph
 
-ggplot(mito_in_syn_tidy, aes(fill=factor(characteristic,
-                                             levels=c("vesicles_syn", "vesicles_no_syn", "vesicles_unclear", "vesicles_no")), y=count, x=celltype)) + 
+
+
+ggplot(mito_means_tidy, aes(fill=factor(characteristic,
+                                        levels=c("mean_vesicles_syn", "mean_vesicles_no_syn", "mean_vesicles_unclear", "mean_vesicles_none")),
+                            y=value, x=interaction(celltype,n))) + 
   geom_bar(position="stack", stat="identity") +
   theme_bw() +
   theme(axis.line = element_blank(),
