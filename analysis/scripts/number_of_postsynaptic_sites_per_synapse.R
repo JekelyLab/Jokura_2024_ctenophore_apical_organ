@@ -147,10 +147,8 @@ ves_none_tbl <- mito_stats %>%
   arrange(celltype) %>%
   select(mean_vesicles_none)
 celltype_numbers <- mito_stats %>%
-  add_count(celltype) %>%
-  ungroup() %>%
-  select(celltype, n) %>%
-  unique() %>%
+  group_by(celltype) %>%
+  tally() %>%
   arrange(celltype)
 mito_means <- bind_cols(
   celltype_numbers,
@@ -189,7 +187,7 @@ ggplot(mito_means_tidy, aes(
     axis.title = element_blank(),
     axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
     legend.title = element_blank(),
-    legend.position=c(.17,.85),
+    legend.position = c(.17, .85),
     text = element_text(family = "sans", size = 12)
   )
 
