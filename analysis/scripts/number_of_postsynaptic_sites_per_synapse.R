@@ -189,6 +189,7 @@ ggplot(mito_means_tidy, aes(
     axis.title = element_blank(),
     axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
     legend.title = element_blank(),
+    legend.position=c(.17,.85),
     text = element_text(family = "sans", size = 12)
   )
 
