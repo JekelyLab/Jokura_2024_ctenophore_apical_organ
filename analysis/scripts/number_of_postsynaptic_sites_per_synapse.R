@@ -89,10 +89,7 @@ mito_stats <- lapply(mito_done, get_mito_stats) |> bind_rows() |>
   arrange(desc(total))
 
 
-#---------------------------------
-
-
-# TODO - plot averages instead, and add number of cells per category
+# create tibble for graph ---------------------------------
 
 
 ves_syn_tbl <- mito_stats %>% group_by(celltype) %>%
@@ -121,6 +118,8 @@ mito_means_tidy <-  mito_means %>%
     names_to = "characteristic", 
     values_to = "value")
 
+
+# plot mito vesicles by celltype -----------------------------------------------
 
 mito_in_syn_graph <- mito_in_syn_tidy %>%
   ggplot(aes(as.character(celltype),
@@ -159,6 +158,7 @@ ggplot(mito_means_tidy, aes(fill=factor(characteristic,
                             y=value, x=interaction(celltype,n))) + 
   geom_bar(position="stack", stat="identity") +
   theme_bw() +
+  scale_fill_manual(values = c("#EE6677", "#DDAA33", "#4477AA", "darkgrey")) +
   theme(axis.line = element_blank(),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
@@ -198,7 +198,7 @@ mito_positions <- tibble(celltype=character(),
                          z=double()
 )
 
-for (neur in neurons) {
+for (neur in mito_done) {
   sskid=neur$NeuronName
   celltype <- catmaid_get_annotations_for_skeletons(sskid, pid=35) |> 
     select(annotation) |> 
@@ -254,7 +254,7 @@ plot3d(pos_ves_syn,
 pos_ves_no_syn <- mito_positions |> filter(mito_type=="ves_no_syn") |> select(x,y,z)
 plot3d(pos_ves_no_syn,
        add = TRUE, 
-       col="#AA3377", 
+       col="#DDAA33", 
        size=5,
        alpha=1)
 
