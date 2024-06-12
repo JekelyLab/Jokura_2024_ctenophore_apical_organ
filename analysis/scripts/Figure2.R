@@ -80,28 +80,28 @@ N_cell_groups
 
 cell_group_attr <- data.frame(
   cell_group_names = c(
-    "bridge_Q1Q2",
-    "bridge_Q3Q4",
-    "balancer_Q1",
-    "balancer_Q2",
-    "balancer_Q3",
-    "balancer_Q4",
-    "SSN_Q1Q2",
-    "SSN_Q3Q4",
-    "SSN_Q1Q2Q3Q4"
+    'bridge_Q1Q2',
+    'bridge_Q3Q4',
+    'balancer_Q1',
+    'balancer_Q2',
+    'balancer_Q3',
+    'balancer_Q4',
+    'SSN_Q1Q2',
+    'SSN_Q3Q4',
+    'SSN_Q1Q2Q3Q4'
     ),
   type = c(
-    "bridge",
-    "bridge",
-    "balancer",
-    "balancer",
-    "balancer",
-    "balancer",
-    "neuron",
-    "neuron",
-    "neuron"
+    'bridge',
+    'bridge',
+    'balancer',
+    'balancer',
+    'balancer',
+    'balancer',
+    'SSN',
+    'SSN',
+    'SSN'
   ),
-  level = c("2", "2", "3", "1", "1", "3", "2", "2", "2")
+  level = c('2', '2', '3', '1', '1', '3', '2', '2', '2')
 )
 
 dim(cell_group_attr)
@@ -323,43 +323,121 @@ cell_groups_graph.visn$edges$value <- cell_groups_graph.visn$edges$weight
 cell_groups_graph.visn$nodes$value <- degree
 
 #define node color
-cell_groups_graph.visn$nodes$color <- Okabe_Ito[1:9]
+#cell_groups_graph.visn$nodes$color <- Okabe_Ito[1:9]
 
 #hierarchical layout - define level of nodes
-cell_groups_graph.visn$nodes$level <- c(2, 2, 3, 1, 1, 3, 2, 2, 2)
+cell_groups_graph.visn$nodes$level <- c(2, 4, 5, 1, 1, 5, 3, 3, 3)
 #bridge_Q1Q2, bridge_Q3Q4,balancer_Q1, balancer_Q2, balancer_Q3, balancer_Q4,SSN_Q1Q2, SSN_Q3Q4, SSN_Q1Q2Q3Q4
+
+#group
+cell_groups_graph.visn$nodes$group <- cell_group_attr$type
+
+
+
+
+
+
+
 
 #hierarchical layout
 visNet <- visNetwork(cell_groups_graph.visn$nodes, cell_groups_graph.visn$edges) %>%
   visIgraphLayout(
     layout = "layout_nicely", physics = FALSE
-  ) %>%
-  visHierarchicalLayout(
-    levelSeparation=250, 
-    nodeSpacing=200,
-    direction='LR',
-    sortMethod='hubsize',
-    shakeTowards='roots'
-  ) %>%
-  visEdges(
-    smooth = list(type = 'curvedCW', roundness=0.2),
-    scaling=list(min=2, max=12),
-    color = list(inherit=TRUE, opacity=0.7),
-    arrows = list(
-      to = list(enabled = TRUE, 
-                scaleFactor = 1, type = 'arrow'))
-  ) %>%
-  visNodes(
-    borderWidth=0.3, 
-    color = list(background=cell_groups_graph.visn$nodes$color, border='black'),
-    opacity=0.9,
-    shape='dot', 
-    font=list(color='black', size=44),
-    scaling = list(label=list(enabled=TRUE, min=22, max=80)),
-    level= cell_groups_graph.visn$nodes$level
-  ) %>%
-  visOptions(highlightNearest = TRUE, width = 1800, height = 1800)
+  ) 
 visNet
+
+
+
+#hierarchical layout
+visNet <- visNetwork(cell_groups_graph.visn$nodes, cell_groups_graph.visn$edges) %>% 
+  visIgraphLayout(
+    layout = "layout_nicely", physics = FALSE) %>%
+  visHierarchicalLayout(levelSeparation=350, 
+                          direction='LR',
+                          sortMethod='hubsize',
+                          shakeTowards='roots') %>%
+    visEdges(smooth = list(type = 'curvedCW', roundness=0.1),
+             scaling=list(min=2, max=18),
+             color = list(inherit=TRUE, opacity=0.5),
+             arrows = list(to = list(enabled = TRUE, 
+                                     scaleFactor = 1.2, type = 'arrow'))) %>%
+    visNodes(borderWidth=0.3, 
+             color = list(background=cell_groups_graph.visn$nodes$color, border='black'),
+             opacity=0.9,
+             shape='dot', 
+             font=list(color='black', size=44),
+             scaling = list(label=list(enabled=TRUE, min=34, max=44)),
+             level= cell_groups_graph.visn$nodes$level) %>%
+    visOptions(highlightNearest = list(enabled=TRUE, degree=1, 
+                                       algorithm='hierarchical',labelOnly=FALSE)) %>%
+    visInteraction(dragNodes = TRUE, dragView = TRUE,
+                   zoomView = TRUE, hover=TRUE,
+                   multiselect=TRUE) %>%
+    visGroups(groupname = "bridge", shape = "ellipse", 
+              opacity=0.7, color=Okabe_Ito[1]) %>%
+    visGroups(groupname = "SSN", "SSN_Q1Q2Q3Q4", shape = "square", 
+              opacity=1, color="#56B4E9") %>%
+    visGroups(groupname = "balancer", shape = "dot", 
+              opacity=1, color="#cccccc")  %>%
+    addFontAwesome()
+visNet
+
+
+
+
+
+
+
+
+
+
+
+visNet <- visNetwork(cell_groups_graph.visn$nodes, cell_groups_graph.visn$edges) %>% 
+  visIgraphLayout() %>%
+  visHierarchicalLayout(levelSeparation=100,
+                        nodeSpacing=150,
+                        direction='UD',
+                        sortMethod='hubsize',
+                        shakeTowards='roots') %>%
+  visEdges(smooth = list(type = 'curvedCW', roundness=0.1),
+           scaling=list(min=1, max=8),
+           color = list(inherit=TRUE, opacity=0.5),
+           arrows = list(to = list(enabled = TRUE, 
+                                   scaleFactor = 0.8, type = 'arrow'))) %>%
+  visOptions(highlightNearest = list(enabled=TRUE, degree=1, 
+                                     algorithm='hierarchical',labelOnly=FALSE)) %>%
+  visInteraction(dragNodes = TRUE, dragView = TRUE,
+                 zoomView = TRUE, hover=TRUE,
+                 multiselect=TRUE) %>%
+  visGroups(groupname = "bridge", shape = "dot", 
+            opacity=0.7, color=Okabe_Ito[1]) %>%
+  visGroups(groupname = "SSN", shape = "dot", 
+            opacity=0.8, color="#56B4E9") %>%
+  visGroups(groupname = "balancer", shape = "dot")
+visNet
+
+
+visNet <- visNetwork(cell_groups_graph.visn$nodes, cell_groups_graph.visn$edges) %>% 
+  visGroups(groupname = 'bridge', shape = "dot", opacity=0.7)
+visNet
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 saveNetwork(visNet, "manuscript/pictures/visNetwork_bridge_balancer_connectome.html")

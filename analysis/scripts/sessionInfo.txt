@@ -19,15 +19,14 @@ other attached packages:
 [21] tidyverse_2.0.0    catmaid_0.10.1     nat_1.10.4         rgl_1.1.3          httr_1.4.6        
 
 loaded via a namespace (and not attached):
- [1] jsonlite_1.8.4    yaml_2.3.7        progress_1.2.2    pillar_1.9.0      backports_1.4.1  
- [6] glue_1.6.2        digest_0.6.31     promises_1.2.0.1  checkmate_2.2.0   colorspace_2.1-0 
-[11] websocket_1.4.1   htmltools_0.5.5   plyr_1.8.8        pkgconfig_2.0.3   nat.utils_0.5.1  
-[16] scales_1.2.1      processx_3.8.1    later_1.3.1       tzdb_0.3.0        timechange_0.2.0 
-[21] generics_0.1.3    farver_2.1.1      ellipsis_0.3.2    withr_2.5.0       cli_3.6.1        
-[26] magrittr_2.0.3    crayon_1.5.2      ps_1.7.5          fansi_1.0.4       xml2_1.3.4       
-[31] textshaping_0.3.6 tools_4.2.1       prettyunits_1.1.1 hms_1.1.3         nabor_0.5.0      
-[36] lifecycle_1.0.3   munsell_0.5.0     compiler_4.2.1    chromote_0.1.1    systemfonts_1.0.4
-[41] rlang_1.1.1       grid_4.2.1        rstudioapi_0.14   htmlwidgets_1.6.2 filehash_2.4-5   
-[46] base64enc_0.1-3   labeling_0.4.2    gtable_0.3.3      codetools_0.2-18  curl_5.0.0       
-[51] R6_2.5.1          knitr_1.42        fastmap_1.1.1     utf8_1.2.3        ragg_1.2.5       
-[56] stringi_1.7.12    Rcpp_1.0.10       vctrs_0.6.2       tidyselect_1.2.0  xfun_0.39        
+ [1] Rcpp_1.0.10       prettyunits_1.1.1 ps_1.7.5          digest_0.6.31     utf8_1.2.3       
+ [6] R6_2.5.1          plyr_1.8.8        backports_1.4.1   pillar_1.9.0      progress_1.2.2   
+[11] rlang_1.1.1       curl_5.0.0        rstudioapi_0.14   checkmate_2.2.0   htmlwidgets_1.6.2
+[16] munsell_0.5.0     compiler_4.2.1    xfun_0.39         pkgconfig_2.0.3   base64enc_0.1-3  
+[21] htmltools_0.5.5   websocket_1.4.1   tidyselect_1.2.0  codetools_0.2-18  fansi_1.0.4      
+[26] crayon_1.5.2      tzdb_0.3.0        withr_2.5.0       later_1.3.1       nat.utils_0.5.1  
+[31] grid_4.2.1        jsonlite_1.8.4    gtable_0.3.3      lifecycle_1.0.3   magrittr_2.0.3   
+[36] scales_1.2.1      cli_3.6.1         stringi_1.7.12    nabor_0.5.0       promises_1.2.0.1 
+[41] xml2_1.3.4        generics_0.1.3    vctrs_0.6.2       tools_4.2.1       glue_1.6.2       
+[46] hms_1.1.3         processx_3.8.1    fastmap_1.1.1     yaml_2.3.7        timechange_0.2.0 
+[51] chromote_0.1.1    colorspace_2.1-0  filehash_2.4-5    knitr_1.42       
