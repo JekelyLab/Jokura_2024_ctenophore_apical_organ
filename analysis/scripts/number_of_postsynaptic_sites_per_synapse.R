@@ -120,7 +120,7 @@ mito_stats <- mito_vesicle_info %>%
   group_by(skid, mito_type) %>%
   count() %>%
   pivot_wider(names_from = mito_type, values_from = n, values_fill = 0) %>%
-  left_join(select(mito_stats2, skid, celltype), by = "skid") %>%
+  left_join(select(mito_vesicle_info, skid, celltype), by = "skid") %>%
   unique() %>%
   select(celltype, skid, vesicles_syn, vesicles_no_syn, vesicles_unc, vesicles_none) %>%
   arrange(desc(vesicles_syn), desc(vesicles_no_syn), desc(vesicles_none)) %>%
@@ -187,7 +187,8 @@ ggplot(mito_means_tidy, aes(
     axis.title = element_blank(),
     axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
     legend.title = element_blank(),
-    legend.position = c(.17, .85),
+    legend.position = "inside",
+    legend.position.inside = c(0.17, .85),
     text = element_text(family = "sans", size = 12)
   )
 
@@ -198,8 +199,9 @@ ggplot(mito_means_tidy, aes(
 plot_background()
 plot3d(neurons, color = "lightgrey", lwd = 2, soma = TRUE, alpha = 0.2)
 
-pos_ves_syn <- mito_positions |>
-  filter(mito_type == "ves_syn") |>
+pos_ves_syn <- mito_vesicle_info |>
+  filter(celltype == "bridge" | celltype == "SSN") |>
+  filter(mito_type == "vesicles_syn") |>
   select(x, y, z)
 plot3d(pos_ves_syn,
   add = TRUE,
@@ -208,8 +210,9 @@ plot3d(pos_ves_syn,
   alpha = 1
 )
 
-pos_ves_no_syn <- mito_positions |>
-  filter(mito_type == "ves_no_syn") |>
+pos_ves_no_syn <- mito_vesicle_info |>
+  filter(celltype == "bridge" | celltype == "SSN") |>
+  filter(mito_type == "vesicles_no_syn") |>
   select(x, y, z)
 plot3d(pos_ves_no_syn,
   add = TRUE,
@@ -218,8 +221,9 @@ plot3d(pos_ves_no_syn,
   alpha = 1
 )
 
-pos_ves_unc <- mito_positions |>
-  filter(mito_type == "ves_unc") |>
+pos_ves_unc <- mito_vesicle_info |>
+  filter(celltype == "bridge" | celltype == "SSN") |>
+  filter(mito_type == "vesicles_unc") |>
   select(x, y, z)
 plot3d(pos_ves_unc,
   add = TRUE,
@@ -228,8 +232,9 @@ plot3d(pos_ves_unc,
   alpha = 1
 )
 
-pos_ves_no <- mito_positions |>
-  filter(mito_type == "ves_no") |>
+pos_ves_no <- mito_vesicle_info |>
+  filter(celltype == "bridge" | celltype == "SSN") |>
+  filter(mito_type == "vesicles_none") |>
   select(x, y, z)
 plot3d(pos_ves_no,
   add = TRUE,
@@ -237,3 +242,9 @@ plot3d(pos_ves_no,
   size = 5,
   alpha = 1
 )
+
+# 
+if (!file.exists("manuscript/pictures/Figure_mito_syn_ves_syn.tif")) {
+  crop_substack("Figure_mito_syn_ves_syn", 700, 700, 0, 0, "manuscript/pictures", 35, 28)
+  
+}
