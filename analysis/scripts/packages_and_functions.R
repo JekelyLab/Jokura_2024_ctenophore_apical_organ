@@ -44,12 +44,7 @@ writeLines(capture.output(rstudioapi::versionInfo()), "analysis/scripts/versionI
 
 # functions ----------------------
 
-skids_by_2annotations <- function(annotation1,annotation2){
-  skids1 <- catmaid_skids(annotation1, pid = 35)
-  skids2 <- catmaid_skids(annotation2, pid = 35)
-  intersect <- intersect(skids1, skids2)
-  return(intersect)
-}
+# skids_by_2annotations has been replaced by get_skids_with_annot from rcatmaid_functions_library
 
 plot_background <- function(x){
   nopen3d() # opens a pannable 3d window

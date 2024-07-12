@@ -5,12 +5,6 @@ source("analysis/scripts/packages_and_functions.R")
 
 # load cell type ----------------------------------
 
-read_smooth_neuron <- function(annotation){
-  nlapply(read.neurons.catmaid(annotation, pid = 35),
-          function(x)
-            smooth_neuron(x, sigma = 1000))
-}
-
 balancer <- read_smooth_neuron("celltype:balancer")
 bridge <- read_smooth_neuron("celltype:bridge")
 bristle <- read_smooth_neuron("celltype:bristle")
@@ -42,19 +36,19 @@ Q4 <- nlapply(read.neurons.catmaid("Q4", pid = 35),
                 smooth_neuron(x, sigma = 1000))
 
 
-balancer_Q1 <- nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:balancer", "Q1"),
+balancer_Q1 <- nlapply(read.neurons.catmaid(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q1")),
                                             pid = 35),
                        function(x)
                          smooth_neuron(x, sigma = 1000))
-balancer_Q2 <- nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:balancer", "Q2"),
+balancer_Q2 <- nlapply(read.neurons.catmaid(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q2")),
                                             pid = 35),
                        function(x)
                          smooth_neuron(x, sigma = 1000))
-balancer_Q3 <- nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:balancer", "Q3"),
+balancer_Q3 <- nlapply(read.neurons.catmaid(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q3")),
                                             pid = 35),
                        function(x)
                          smooth_neuron(x, sigma = 1000))
-balancer_Q4 <- nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:balancer", "Q4"),
+balancer_Q4 <- nlapply(read.neurons.catmaid(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q4")),
                                             pid = 35),
                        function(x)
                          smooth_neuron(x, sigma = 1000))

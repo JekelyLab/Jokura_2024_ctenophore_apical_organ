@@ -13,52 +13,52 @@ read_smooth_cell <- function(annotation){
 
 
 bridge_Q1Q2 <-
-  nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:bridge", "Q1Q2"),
+  nlapply(read.neurons.catmaid(get_skids_with_annot(pid = 35, c("celltype:bridge", "Q1Q2")),
                                pid = 35),
           function(x)
             smooth_neuron(x, sigma = 1000))
 
 bridge_Q3Q4 <-
-  nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:bridge", "Q3Q4"),
+  nlapply(read.neurons.catmaid(get_skids_with_annot(pid = 35, c("celltype:bridge", "Q3Q4")),
                                pid = 35),
           function(x)
             smooth_neuron(x, sigma = 1000))
 
 
 balancer_Q1 <-
-  nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:balancer", "Q2"),
+  nlapply(read.neurons.catmaid(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q2")),
                                pid = 35),
           function(x)
             smooth_neuron(x, sigma = 1000))
 balancer_Q2 <-
-  nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:balancer", "Q2"),
+  nlapply(read.neurons.catmaid(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q2")),
                                pid = 35),
           function(x)
             smooth_neuron(x, sigma = 1000))
 balancer_Q3 <-
-  nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:balancer", "Q3"),
+  nlapply(read.neurons.catmaid(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q3")),
                                pid = 35),
           function(x)
             smooth_neuron(x, sigma = 1000))
 balancer_Q4 <-
-  nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:balancer", "Q4"),
+  nlapply(read.neurons.catmaid(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q4")),
                                pid = 35),
           function(x)
             smooth_neuron(x, sigma = 1000))
 
 
 SSN_Q1Q2 <-
-  nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:SSN", "Q1Q2"),
+  nlapply(read.neurons.catmaid(get_skids_with_annot(pid = 35, c("celltype:SSN", "Q1Q2")),
                                pid = 35),
           function(x)
             smooth_neuron(x, sigma = 1000))
 SSN_Q3Q4 <-
-  nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:SSN", "Q3Q4"),
+  nlapply(read.neurons.catmaid(get_skids_with_annot(pid = 35, c("celltype:SSN", "Q3Q4")),
                                pid = 35),
           function(x)
             smooth_neuron(x, sigma = 1000))
 SSN_Q1Q2Q3Q4 <-
-  nlapply(read.neurons.catmaid(skids_by_2annotations("celltype:SSN", "Q1Q2Q3Q4"),
+  nlapply(read.neurons.catmaid(get_skids_with_annot(pid = 35, c("celltype:SSN", "Q1Q2Q3Q4")),
                                pid = 35),
           function(x)
             smooth_neuron(x, sigma = 1000))

@@ -17,8 +17,8 @@ balancer <- nlapply(
 )
 
 intramulticilia_Q1 <- read_smooth_cell(
-  skids_by_2annotations(
-    "celltype:intra-multi-ciliated", "Q1")
+  get_skids_with_annot(pid = 35, c(
+    "celltype:intra-multi-ciliated", "Q1"))
   )
 
 LB <- nlapply(
