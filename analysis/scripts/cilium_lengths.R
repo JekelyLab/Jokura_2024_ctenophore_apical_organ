@@ -131,11 +131,12 @@ for (cell in cil_neurons) {
     cil_length <- smooth_neuron(cilium, sigma=sigma) %>%
       summary() %>% select(cable.length)
     # check if it has exit_ciliary_pocket tag
+    #print(cilium$tags)
     exit_cil_pocket <- cilium$tags[["exit_ciliary_pocket"]]
-    ctip_intra <- cilium$tags[["cilium tip instracellular"]]
+    ctip_intra <- cilium$tags[["cilium tip intracellular"]]
     if (length(exit_cil_pocket) > 0) {
       pocket <- segments_between_tags(cilium, "exit_ciliary_pocket", "basal body")
-      pocket_length <- smooth_neuron(pocket, sigma = sigma) %>%
+      pocket_length <- smooth_neuron(pocket[[1]], sigma = sigma) %>%
         summary() %>% select(cable.length)
     }
     else if (length(ctip_intra) > 0) {
