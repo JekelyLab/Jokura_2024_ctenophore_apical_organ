@@ -14,7 +14,8 @@ annotations <- attr(cil_neurons, 'anndf') |> as.tibble()
 cilium_lengths <- tibble(celltype=character(),
                          skid=character(),
                          cil_length=integer(),
-                         pocket_length=integer())
+                         pocket_length=integer(),
+                         axoneme=character())
 
 for (cell in cil_neurons) {
   sigma = 2000
@@ -49,10 +50,20 @@ for (cell in cil_neurons) {
     else {
       pocket_length <- 0
     }
+    if (length(cilium$tags[["9+2"]])) {
+      axoneme <- "9+2"
+    } else if (length(cilium$tags[["9+0"]])) {
+      axoneme <- "9+0"
+    } else if (length(cilium$tags[["9+uncertain"]])) {
+      axoneme <- "9+uncertain"
+    } else {
+      axoneme <- "NA"
+    }
     cil_len_tb <- tibble(celltype=as.character(celltype),
                          skid=as.character(sskid),
                          cil_length=as.integer(cil_length),
-                         pocket_length=as.integer(pocket_length))
+                         pocket_length=as.integer(pocket_length),
+                         axoneme=as.character(axoneme))
     
     cilium_lengths <- bind_rows(cilium_lengths, cil_len_tb)
   }
