@@ -70,3 +70,37 @@ for (cell in cil_neurons) {
 }
 
 write.csv(cilium_lengths, "analysis/data/cilium_lengths.csv")
+
+
+# visualize lamellate body cells -----------------------------------------------
+lamellate_intra <- read.neurons.catmaid("celltype:lamellate-intra", pid = 35)
+for (lamellate_intra_cell in lamellate_intra) {
+  cilia <- segments_between_tags(lamellate_intra_cell, "cilium tip", "basal body")
+  # visualize part of cilium in ciliary pocket
+  # this is a bit tricky, because it has "exit_ciliary_pocket" if it exits half way,
+  # but "cilium tip intracellular" if the whole cilium is inside the cell
+  in_pocket <- neuronlist()
+  for (cilium in cilia) {
+    exit_cil_pocket <- cilium$tags[["exit_ciliary_pocket"]]
+    ctip_intra <- cilium$tags[["cilium tip intracellular"]]
+    if (length(exit_cil_pocket) > 0) {
+      pocket <- segments_between_tags(cilium, "exit_ciliary_pocket", "basal body")
+    } else if (length(ctip_intra) > 0) {
+      pocket <- cilium
+    } else {
+      pocket <- neuronlist()
+    }
+    in_pocket <- c(in_pocket, as.neuronlist(pocket))
+  }
+  lamellae <- segments_between_tags(lamellate_intra_cell, "lamellae end", "lamellae start")
+  
+  cell_smooth <- smooth_neuron(lamellate_intra_cell, sigma = 500)
+  cilia_smooth <- lapply(cilia, smooth_neuron, sigma = 500) %>% as.neuronlist()
+  in_pocket_smooth <- lapply(in_pocket, smooth_neuron, sigma = 500) %>% as.neuronlist()
+  lamellae_smooth <- lapply(lamellae, smooth_neuron, sigma = 500) %>% as.neuronlist()
+  
+  plot3d(cell_smooth, soma = TRUE, lwd = 1, color = "grey")
+  plot3d(cilia_smooth, soma = TRUE, lwd = 2, color = "black")
+  plot3d(in_pocket_smooth, soma = TRUE, lwd = 3, color = "blue")
+  plot3d(lamellae_smooth, soma = TRUE, lwd = 4, color = "purple")
+}
