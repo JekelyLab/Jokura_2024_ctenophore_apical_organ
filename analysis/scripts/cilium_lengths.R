@@ -136,3 +136,21 @@ for (cell in lamellate_extra) {
   plot3d(in_pocket_smooth, soma = TRUE, lwd = 5, color = "yellow")
   plot3d(lamellae_smooth, soma = TRUE, lwd = 10, color = "red")
 }
+
+# biciliated cell axoneme comparison
+cilium_lengths %>%
+  filter(celltype=="biciliated") %>%
+  ggplot() +
+  aes(x=axoneme, y=cil_length) +
+    geom_violin() +
+    geom_jitter(shape=16, position=position_jitter(0.2)) +
+    theme_minimal() +
+    theme(
+      panel.grid.major = element_line(linewidth = 0.2),
+      panel.background = element_blank(),
+      axis.ticks = element_line(size = 0.2)
+    ) +
+    scale_fill_manual(
+      values = c("#CC79A7", "#0072B2", "grey40")
+    )
+
