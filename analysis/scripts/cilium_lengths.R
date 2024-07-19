@@ -54,8 +54,8 @@ for (cell in cil_neurons) {
       axoneme <- "9+2"
     } else if (length(cilium$tags[["9+0"]])) {
       axoneme <- "9+0"
-    } else if (length(cilium$tags[["9+uncertain"]])) {
-      axoneme <- "9+uncertain"
+    } else if (length(cilium$tags[["9+unclear"]])) {
+      axoneme <- "9+unclear"
     } else {
       axoneme <- "NA"
     }
@@ -151,6 +151,6 @@ cilium_lengths %>%
       axis.ticks = element_line(size = 0.2)
     ) +
     scale_fill_manual(
-      values = c("#CC79A7", "#0072B2", "grey40")
+      values = c("#CC79A7", "#0072B2", "#E69F00", "grey40")
     )
 
