@@ -51,7 +51,7 @@
   
 \fi
 \setlength{\emergencystretch}{3em} % prevent overfull lines
-\setcounter{secnumdepth}{5}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 % Make \paragraph and \subparagraph free-standing
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
@@ -80,7 +80,7 @@
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
 \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
@@ -90,7 +90,7 @@
 \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
 \newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
 \newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
 \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
@@ -211,7 +211,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={New paper template - title here},
+  pdftitle={Cell-type diversity and connectome of the ctenophore apical organ},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -219,7 +219,8 @@
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
-\title{New paper template - title here}
+\title{Cell-type diversity and connectome of the ctenophore apical
+organ}
 \author{}
 \date{}
 
@@ -228,70 +229,149 @@
 
 \linenumbers
 
-\renewcommand*\contentsname{Table of contents}
-{
-\hypersetup{linkcolor=}
-\setcounter{tocdepth}{3}
-\tableofcontents
-}
 \setstretch{1.2}
 \hfill\break
 
-Author 1\textsuperscript{1,2,*} , Author 2\textsuperscript{2}, Author
-3\textsuperscript{1,2}\\
+Kei Jokura\textsuperscript{1,3,*}, Sanja Jasek\textsuperscript{1,2},
+Lara Kewalow\textsuperscript{2}, Pawel Burkhardt\textsuperscript{4},
+Gáspár Jékely\textsuperscript{1,2,*}\\
 
-\textsuperscript{1}Heidelberg University, Centre for Organismal Studies
-(COS), 69120 Heidelberg, Germany\\
-\textsuperscript{2}Living Systems Institute, University of Exeter,
+\textsuperscript{1}Living Systems Institute, University of Exeter,
 Exeter, EX4 4QD, United Kingdom\\
-\textsuperscript{*}Correspondence: corr\_author@email.com
+\textsuperscript{2}Heidelberg University, Centre for Organismal Studies
+(COS), 69120 Heidelberg, Germany\\
+\textsuperscript{3}Exploratory Research Center on Life and Living
+Systems (ExCELLS), National Institutes of Natural Sciences, Okazaki,
+Japan\\
+\textsuperscript{4}Michael Sars Centre, University of Bergen, Norway\\
+\textsuperscript{*}Correspondence: jokura@nibb.ac.jp,
+gaspar.jekely@cos.uni-heidelberg.de
 
-\section{Abstract}\label{abstract}
-
-This is an R Markdown document. Markdown is a simple formatting syntax
-for authoring HTML, PDF, and MS Word documents. For more details on
-using R Markdown see \url{http://rmarkdown.rstudio.com}.
+\subsection{Abstract}\label{abstract}
 
 \textbf{text in bold} \emph{italic} \ul{underline}
 
-\section{Introduction}\label{introduction}
+\subsection{Introduction}\label{introduction}
 
-You can add references either by referring to their id in the .bib file
-e.g., (Marinković et al., 2019), or by switching to the visual editor
-(Cogwheel in the .Rmd menu -\textgreater{} Use Visual Editor). The
-awesome paper by (Jokura et al., 2019).
+First descriptions of AO: (Aronova, 1974)
 
-In the visual editor mode, go to `Insert' -\textgreater{} @ Citation
+The lobate ctenophore \emph{Mnemiopsis}
 
-You can select a Zotero library, PubMed, CrossRef etc. and insert the
-citations.
+The lithocytes have a large calcium carbonate concretion and\ldots{}
+(Tamm, 2014a) Living lithocytes are transported along the balancer cilia
+to the tip of the statocyst (Noda and Tamm, 2014) The projections of a
+group of bridge cells located on two sides of the apical organ forms an
+arch and connects the balancers along the tentacular plane (Tamm and
+Tamm, 2002).
 
-The easiest way is to use the command line:
+The easiest way is to use the command line to add new refs to the .bib
+file:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ExtensionTok{curl} \AttributeTok{{-}LH} \StringTok{"Accept: application/x{-}bibtex"}\NormalTok{ https://doi.org/10.7554/eLife.91258.1 }\OperatorTok{\textgreater{}\textgreater{}}\NormalTok{ references.bib}
+\CommentTok{\#curl {-}LH "Accept: application/x{-}bibtex" https://doi.org/10.7554/eLife.91258.1 \textgreater{}\textgreater{} references.bib}
 \end{Highlighting}
 \end{Shaded}
 
-\emph{Platynereis dumerilii} is a marine annelid\ldots{} (Ozpolat et
-al., 2021)
+\subsection{Results}\label{results}
 
-The references are stored in manuscript/references.bib (need to be
-defined in the Yaml header). This file will automatically updated when
-you insert a new reference through the Visual editor \textgreater{}
-Insert \textgreater{} Citations.
+\subsubsection{\texorpdfstring{Volume EM reconstruction of the
+\emph{Mnemiopsis} apical
+organ}{Volume EM reconstruction of the Mnemiopsis apical organ}}\label{volume-em-reconstruction-of-the-mnemiopsis-apical-organ}
 
-In this documents, references will be formatted in the style of eLife.
-This is defined in the Yaml header under: csl: elife.csl. The elife.csl
-file is saved in the /manuscript folder.
+\begin{itemize}
+\tightlist
+\item
+  specimen
+\item
+  volume, resolution, fixation, quality
+\item
+  number of sections
+\item
+  skeletonisation in Catmaid
+\item
+  number of cells
+\item
+  general anatomy, regions, quadrants
+\end{itemize}
 
-If you would like to use a different citation format, download the
-respective .csl file (e.g., from the Zotero style repository
-\url{https://www.zotero.org/styles}), save it in the /manuscript folder
-of the project and change the Yaml to csl: your\_favourite\_journal.csl.
+\begin{figure}[H]
 
-\section{Results}\label{results}
+{\centering \includegraphics[width=1\textwidth,height=\textheight]{figures/Figure1.png}
+
+}
+
+\caption{\textbf{Figure 1. Title fig 1} pic of a larva, boxed region of
+AO, schematic, catmaid pic with slice, dimensions, quadrants, regions,
+(A) legend (B) legend.}
+
+\end{figure}%
+
+\subsubsection{Classification of cell
+types}\label{classification-of-cell-types}
+
+\begin{itemize}
+\tightlist
+\item
+  ultrastructural criteria (cilia, vesicles etc)
+\item
+  number of types, cells per type - table
+\end{itemize}
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\textwidth,height=\textheight]{figures/Figure_network.png}
+
+}
+
+\caption{\textbf{Figure 2. Title fig 2} Balancer complex: balancer,
+lithocyte, groove 2 types, bridge - EM pics, (A) legend (B) legend.}
+
+\end{figure}%
+
+``the larval bridge has not yet developed forks at its ends, as seen in
+adult Mnemiopsis bridges''(Tamm and Tamm, 2002)
+
+Figure3 - dome, bicil, monocil, no-cil, plumose, dense vesicle cells
+(rename), gland? cells, oligo/multiciliated cells
+
+Plumose cells (Hernandez-Nicaise, 1984) may be pressure sensors (Tamm,
+2014b)
+
+Figure4 - lamellate body complex, LB, intra-multi-ciliated, relationship
+to balancer
+
+Figure5 - nerve net, different fragments/cells/syntytia, EM, relation to
+entire organ
+
+Figure 6 - cilia? renderings of basal bodies, centrioles, length,
+axoneme structure (table), table about cell types, number of cilia etc.
+
+\subsection{Synapses}\label{synapses}
+
+``synaptic regions with the characteristic presynaptic triad mor-
+phology of ctenophore nerves (i.e., a single layer of vesicles, smooth
+ER sac, and closely apposed mito- chondria (Hernandez-Nicaise, 1973;
+Horridge and Mackay, 1964) Hernandez- Nicaise, 1973)''
+
+Figure 7 - synapses, reconstruction, annotation, numbers, distribution
+of partners, example EM (figure supplement - lots of EM), mitochondria
+(Fig suppl - mitochondrion stats - Sanja)
+
+Gap juntions? Innexins are expressed in the apical organ in specific
+patches of cells in each quadrant (Ortiz et al., 2023)
+
+Ctenophore synapses (Hernandez-Nicaise, 1973)
+
+We found no synapses between bridge and balancer, in agreement with Tamm
+(Tamm and Tamm, 2002).
+
+Figure 8 - connectome cell-type based, quadrant based, nerve net
+syntycia, bridge, quadrants (Fig suppl - cell-based network)
+
+Tamm\&Tamm observed synapses from neurites to bridge cells (2002). and
+in Mnemiopsis larvae observed synapses from bridge cells onto other
+cells
 
 Inserting Figures
 
@@ -301,17 +381,7 @@ can insert them from there. We use knitr::include\_graphics for this.
 The title and legend can also be edited, as will as the width of the
 output figure.
 
-\begin{figure}[H]
-
-{\centering \includegraphics[width=1\textwidth,height=\textheight]{figures/Figure1.png}
-
-}
-
-\caption{\textbf{Figure 1. Title fig 1} (A) legend (B) legend.}
-
-\end{figure}%
-
-\section{Equations}\label{equations}
+\subsection{Equations}\label{equations}
 
 Equations can also be inserted, Insert -\textgreater{} Display Math:
 
@@ -319,7 +389,7 @@ Equations can also be inserted, Insert -\textgreater{} Display Math:
 \bar{X} = \frac{\sum_{i=1}^{n} x_{i}}{n}
 \]
 
-\section{Sourcing code and working with
+\subsection{Sourcing code and working with
 variable}\label{sourcing-code-and-working-with-variable}
 
 The `analysis/scripts/statistics\_for\_paper.R' script is sourced and it
@@ -331,39 +401,68 @@ this number comes from our sourced script).
 If we update the data, the script can recalculate the variable we want
 to refer to in the text and update the number.
 
-\section{Materials and Methods}\label{materials-and-methods}
+\subsection{Materials and Methods}\label{materials-and-methods}
 
-\section{Acknowledgements}\label{acknowledgements}
+\subsection{Acknowledgements}\label{acknowledgements}
 
 We would like to thank the Jekely lab for the R project template
 (\url{https://github.com/JekelyLab/new_paper_template}) we used to write
-this paper. This work was funded by \ldots{}
+this paper. This work was funded by \ldots{} JSPS\ldots{} ERC.. Others
+\ldots{}
 
-\section*{References}\label{references}
-\addcontentsline{toc}{section}{References}
+\subsection{References}\label{references}
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
-\bibitem[\citeproctext]{ref-Jokura_2019}
-Jokura K, Shibata D, Yamaguchi K, Shiba K, Makino Y, Shigenobu S, Inaba
-K. 2019. CTENO64 is required for coordinated paddling of ciliary comb
-plate in ctenophores. \emph{Current Biology} \textbf{29}:3510--3516.e4.
-doi:\href{https://doi.org/10.1016/j.cub.2019.08.059}{10.1016/j.cub.2019.08.059}
+\bibitem[\citeproctext]{ref-aronova1974electron}
+Aronova M. 1974. Electron microscopic observation of the aboral organ of
+ctenophora. I. The gravity receptor. \emph{Zeitschrift fur
+mikroskopisch-anatomische Forschung} \textbf{88}:401--412.
 
-\bibitem[\citeproctext]{ref-Marinkovi2020}
-Marinković M, Berger J, Jékely G. 2019. Neuronal coordination of motile
-cilia in locomotion and feeding. \emph{Philosophical Transactions of the
-Royal Society B: Biological Sciences} \textbf{375}:20190165.
-doi:\href{https://doi.org/10.1098/rstb.2019.0165}{10.1098/rstb.2019.0165}
+\bibitem[\citeproctext]{ref-Hernandez_Nicaise_1984}
+Hernandez-Nicaise M-L. 1984. CtenophoraBiology of the Integument.
+Springer Berlin Heidelberg. pp. 96--111.
+doi:\href{https://doi.org/10.1007/978-3-642-51593-4_9}{10.1007/978-3-642-51593-4\_9}
 
-\bibitem[\citeproctext]{ref-ozpolat2021}
-Ozpolat BD, Randel N, Williams EA, Bezares-Calderón LA, Andreatta G,
-Balavoine G, Bertucci PY, Ferrier DEK, Gambi MC, Gazave E,
-Handberg-Thorsager M, Hardege J, Hird C, Hsieh Y-W, Hui J, Mutemi KN,
-Schneider SQ, Simakov O, Vergara HM, Vervoort M, Jékely G,
-Tessmar-Raible K, Raible F, Arendt D. 2021. The Nereid on the rise:
-Platynereis as a model system. \emph{Zenodo}.
-doi:\href{https://doi.org/10.5281/ZENODO.4907400}{10.5281/ZENODO.4907400}
+\bibitem[\citeproctext]{ref-Hernandez_Nicaise_1973}
+Hernandez-Nicaise M-L. 1973. The nervous system of ctenophores III.
+Ultrastructure of synapses. \emph{Journal of Neurocytology}
+\textbf{2}:249--263.
+doi:\href{https://doi.org/10.1007/bf01104029}{10.1007/bf01104029}
+
+\bibitem[\citeproctext]{ref-Horridge_1964}
+Horridge GA, Mackay B. 1964. Neurociliary synapses in pleurobrachia
+(ctenophora). \emph{Journal of Cell Science} \textbf{S3-105}:163--174.
+doi:\href{https://doi.org/10.1242/jcs.s3-105.70.163}{10.1242/jcs.s3-105.70.163}
+
+\bibitem[\citeproctext]{ref-Noda_2014}
+Noda N, Tamm SL. 2014. Lithocytes are transported along the ciliary
+surface to build the statolith of ctenophores. \emph{Current Biology}
+\textbf{24}:R951--R952.
+doi:\href{https://doi.org/10.1016/j.cub.2014.08.045}{10.1016/j.cub.2014.08.045}
+
+\bibitem[\citeproctext]{ref-Ortiz_2023}
+Ortiz J, Bobkov YV, DeBiasse MB, Mitchell DG, Edgar A, Martindale MQ,
+Moss AG, Babonis LS, Ryan JF. 2023. Independent innexin radiation shaped
+signaling in ctenophores. \emph{Molecular Biology and Evolution}
+\textbf{40}.
+doi:\href{https://doi.org/10.1093/molbev/msad025}{10.1093/molbev/msad025}
+
+\bibitem[\citeproctext]{ref-Tamm_2014}
+Tamm SL. 2014a. Formation of the statolith in the ctenophore mnemiopsis
+leidyi. \emph{The Biological Bulletin} \textbf{227}:7--18.
+doi:\href{https://doi.org/10.1086/bblv227n1p7}{10.1086/bblv227n1p7}
+
+\bibitem[\citeproctext]{ref-Tamm_2014b}
+Tamm SL. 2014b. Cilia and the life of ctenophores. \emph{Invertebrate
+Biology} \textbf{133}:1--46.
+doi:\href{https://doi.org/10.1111/ivb.12042}{10.1111/ivb.12042}
+
+\bibitem[\citeproctext]{ref-Tamm_2002}
+Tamm SL, Tamm S. 2002. Novel bridge of axon‐like processes of epithelial
+cells in the aboral sense organ of ctenophores. \emph{Journal of
+Morphology} \textbf{254}:99--120.
+doi:\href{https://doi.org/10.1002/jmor.10019}{10.1002/jmor.10019}
 
 \end{CSLReferences}
 
