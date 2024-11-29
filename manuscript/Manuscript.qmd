@@ -65,12 +65,11 @@ The easiest way is to use the command line to add new refs to the .bib file:
 
 ### Volume EM reconstruction of the *Mnemiopsis* apical organ
 
--   specimen
--   volume, resolution, fixation, quality
--   number of sections
--   skeletonisation in Catmaid
--   number of cells
--   general anatomy, regions, quadrants
+First, we embedded the entire body of the *Mnemiopsis leidyi* cydippid-stage larvae, five days post-fertilization, in Epon resin following high-pressure freezing. To reconstruct all synaptic-resolution connections among the cells comprising the apical organ, also known as the aboral organ, we prepared approximately 1,000 ultra-thin serial sections (50 nm thick) from the aboral tip of the larval body embedded in the resin block. Using a scanning electron microscope (Gemini SEM 500) with a resolution of 2.0 nm/pixel, we imaged only the region containing the apical organ. Subsequently, 620 of these images were stitched and aligned using TrakEM2. The resulting volumetric EM dataset had dimensions of 60 μm × 40 μm × 30 μm. We traced and annotated all cells in this dataset, ultimately reconstructing 909 cells, each with both nuclei and cell bodies intact.
+
+Cells containing cilia were traced down to the tips of the cilia, and basal bodies were annotated accordingly. For neuronal skeletonization, nodes were placed to interconnect the profiles of the same neuron’s processes across layers, extending the skeleton until all branches were fully traced. Each node was tagged, and skeletons were named and assigned multi-level annotations. As described later, many neurons we identified formed loop-like structures (anastomosed neurons), wherein separated branches often rejoined either the main trunk or other branches. In such cases, branch nodes were placed near the closest existing node and annotated accordingly. The entire skeletonized volume was composed of 134,591 nodes. However, 88 fragments could not be attached to somata-associated skeletons. Most of these fragments represented short skeletal branches that could not be traced beyond gaps or low-quality layers.
+
+Next, we decided to divide the entire apical organ into four broad quadrants to facilitate grouping the identified cells. The general body plan of ctenophores, when viewed from the aboral side, exhibits biradial symmetry around the positions of the anal pores. This symmetry corresponds to the four blastomeres present at the four-cell stage during early embryonic development. We categorized the traced cells into four quadrants and designated these groups as Q1 through Q4 for clarity and consistency.
 
 ```{r, out.width = "100%", fig.cap="**Figure 1. Title fig 1** pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend. " }
 #| echo: false 
@@ -78,30 +77,7 @@ The easiest way is to use the command line to add new refs to the .bib file:
 knitr::include_graphics("figures/Figure1.png")
 ```
 
-### Classification of cell types
-
--   ultrastructural criteria (cilia, vesicles etc)
--   number of types, cells per type - table
-
-```{r, out.width = "100%", fig.cap="**Figure 2. Title fig 2** Balancer complex: balancer, lithocyte, groove 2 types, bridge - EM pics, (A) legend (B) legend. " }
-#| echo: false 
-
-knitr::include_graphics("figures/Figure_network.png")
-```
-
-"the larval bridge has not yet developed forks at its ends, as seen in adult Mnemiopsis bridges"[@Tamm_2002]
-
-Figure3 - dome, bicil, monocil, no-cil, plumose, dense vesicle cells (rename), gland? cells, oligo/multiciliated cells
-
-Plumose cells [@Hernandez_Nicaise_1984] may be pressure sensors [@Tamm_2014b]
-
-Figure4 - lamellate body complex, LB, intra-multi-ciliated, relationship to balancer
-
-Figure5 - nerve net, different fragments/cells/syntytia, EM, relation to entire organ
-
-Figure 6 - cilia? renderings of basal bodies, centrioles, length, axoneme structure (table), table about cell types, number of cilia etc.
-
-## Synapses
+### Synapses
 
 "synaptic regions with the characteristic presynaptic triad mor- phology of ctenophore nerves (i.e., a single layer of vesicles, smooth ER sac, and closely apposed mito- chondria [@Horridge_1964; @Hernandez_Nicaise_1973] Hernandez- Nicaise, 1973)"
 
@@ -121,13 +97,27 @@ Inserting Figures
 
 You can add your figures into the rendered document. We saved the figures into /manuscript/figures or /manuscript/figure_supplements and can insert them from there. We use knitr::include_graphics for this. The title and legend can also be edited, as will as the width of the output figure.
 
-## Equations
+## 
 
-Equations can also be inserted, Insert -\> Display Math:
+### Classification of cell types
 
-$$
-\bar{X} = \frac{\sum_{i=1}^{n} x_{i}}{n}
-$$
+-   ultrastructural criteria (cilia, vesicles etc)
+-   number of types, cells per type - table
+
+```{r, out.width = "100%", fig.cap="**Figure 2. Title fig 2** Balancer complex: balancer, lithocyte, groove 2 types, bridge - EM pics, (A) legend (B) legend. " } #| echo: false   knitr::include_graphics("figures/Figure_network.png")}
+```
+
+"the larval bridge has not yet developed forks at its ends, as seen in adult Mnemiopsis bridges"[@Tamm_2002]
+
+Figure3 - dome, bicil, monocil, no-cil, plumose, dense vesicle cells (rename), gland? cells, oligo/multiciliated cells
+
+Plumose cells [@Hernandez_Nicaise_1984] may be pressure sensors [@Tamm_2014b]
+
+Figure4 - lamellate body complex, LB, intra-multi-ciliated, relationship to balancer
+
+Figure5 - nerve net, different fragments/cells/syntytia, EM, relation to entire organ
+
+Figure 6 - cilia? renderings of basal bodies, centrioles, length, axoneme structure (table), table about cell types, number of cilia etc.
 
 ## Sourcing code and working with variable
 
@@ -156,6 +146,7 @@ We would like to thank the Jekely lab for the R project template (<https://githu
 -->
 <<<<<<< HEAD
 ```
+
 ```{=html}
 <script src="https://hypothes.is/embed.js" async></script>
 ```

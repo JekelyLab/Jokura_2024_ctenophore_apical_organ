@@ -16,6 +16,8 @@ library(igraph)
 library(tidygraph)
 library(av)
 
+
+
 # catmaid connection, needs username, password AND token - weird!
 {
   # can run this separate file using source function
@@ -203,3 +205,4 @@ get_celltypes <- function(pid) {
     select(name) |> pull() |> sub(pattern="^celltype:", replacement="")
   return(celltypes)
 }
+
