@@ -32,6 +32,6 @@ ggsave("manuscript/figures/Figure1.png", limitsize = FALSE,
        units = c("px"), Figure1, width = 2600, height = 1000, bg='white')  
 
 
-ggsave("manuscript/figures/Fig1.pdf", limitsize = FALSE, 
+ggsave("manuscript/figures/Figure1.pdf", limitsize = FALSE, 
        units = c("px"), Figure1, width = 2600, height = 1000) 
 

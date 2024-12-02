@@ -77,27 +77,21 @@ Next, we decided to divide the entire apical organ into four broad quadrants to 
 knitr::include_graphics("figures/Figure1.png")
 ```
 
-### Synapses
+### Identification of Synaptic Structures in Syncytium Neurons
 
-"synaptic regions with the characteristic presynaptic triad mor- phology of ctenophore nerves (i.e., a single layer of vesicles, smooth ER sac, and closely apposed mito- chondria [@Horridge_1964; @Hernandez_Nicaise_1973] Hernandez- Nicaise, 1973)"
+Classical neural staining techniques do not provide clear images of the neurons at the aboral pole. However, ultrastructural studies have provided morphological evidence of elements resembling neurons, based on synaptic structures, located on the epithelial floor of the apical organs [@Horridge_1964; @Hernandez_Nicaise_1973]. Based on these findings, we identified synaptic structures characteristic of ctenophore neurons in our data, using previously identified pre-synaptic triad morphological features, such as single-layered vesicles, smooth endoplasmic reticulum, and tightly packed mitochondria. In our study, we specifically identified synaptic sites and marked mitochondria (orange) as synaptic nodes. The regions where synaptic vesicles align were marked as connectors (light blue arrows) between cells across the membrane. These connectors link the synaptic nodes of the pre-synaptic cytoskeleton to the partner nodes of the post-synaptic cytoskeleton. As previously reported, the specialization of post-synaptic structures in ctenophores is not apparent, so we recognized synaptic vesicle clusters on the pre-synaptic membrane as the point of reference. Synapses were identified as either monoadic or polyadic, with one pre-synaptic neuron forming connections with one or multiple post-synaptic cells.
+
+As mentioned above, following the identification of the presynaptic structures, we reconstructed three major Syncytial neurons. Each of these Syncytial neurons was a cell with multiple nuclei, with membranes fused by continuous plasma membranes. These neurons are distinct in morphology from the Syncytial subepithelial nerve net (SNN) neurons with blebbed morphology previously reconstructed in 3D [@Burkhardt_2023]. Our findings represent the second documented discovery of Syncytial neurons in ctenophores. Furthermore, these neurons exhibited clear morphological differences when compared to other sensory cells reported in the same study, such as mesogleal neurons and sensory cells with presynaptic structures and cilia (types 1-4)[@Burkhardt_2023]. Based on their distinct spatial relationships, we were able to classify these three Syncytial neurons into two categories. The first type is a larger "AO neuron_Q1234," which possesses four (or possibly six?) nuclei spanning four quadrants. It contained X presynaptic structures. The second type consists of "AO neuron_Q12" and "AO neuron_Q34," each having two nuclei spanning two quadrants, and each containing X presynaptic structures.
+
+```{r, out.width = "100%", fig.cap="**Figure 2. Title fig 2** pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend. " }
+#| echo: false 
+
+knitr::include_graphics("figures/Figure2.png")
+```
 
 Figure 7 - synapses, reconstruction, annotation, numbers, distribution of partners, example EM (figure supplement - lots of EM), mitochondria (Fig suppl - mitochondrion stats - Sanja)
 
-Gap juntions? Innexins are expressed in the apical organ in specific patches of cells in each quadrant [@Ortiz_2023]
-
-Ctenophore synapses [@Hernandez_Nicaise_1973]
-
-We found no synapses between bridge and balancer, in agreement with Tamm [@Tamm_2002].
-
 Figure 8 - connectome cell-type based, quadrant based, nerve net syntycia, bridge, quadrants (Fig suppl - cell-based network)
-
-Tamm&Tamm observed synapses from neurites to bridge cells (2002). and in Mnemiopsis larvae observed synapses from bridge cells onto other cells
-
-Inserting Figures
-
-You can add your figures into the rendered document. We saved the figures into /manuscript/figures or /manuscript/figure_supplements and can insert them from there. We use knitr::include_graphics for this. The title and legend can also be edited, as will as the width of the output figure.
-
-## 
 
 ### Classification of cell types
 
