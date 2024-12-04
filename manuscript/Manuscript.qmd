@@ -89,29 +89,19 @@ As mentioned above, following the identification of the presynaptic structures, 
 knitr::include_graphics("figures/Figure2.png")
 ```
 
-Figure 7 - synapses, reconstruction, annotation, numbers, distribution of partners, example EM (figure supplement - lots of EM), mitochondria (Fig suppl - mitochondrion stats - Sanja)
+### Identification the Gravity-Sensitive Neural Circuit via the Syncytial Neurons Network
 
-Figure 8 - connectome cell-type based, quadrant based, nerve net syntycia, bridge, quadrants (Fig suppl - cell-based network)
+We discovered that AO neurons form synaptic connections with each other, and that AO neuron_Q1234 forms self-synapses, or “autapses.” To our knowledge, previous reports have not identified synaptic connections between subepithelial nerve net (SNN) neurons. Thus, our results represent the first report of synaptic connectivity between neurons in the apical organ, forming a network in ctenophores (subject to confirmation). These AO neuron networks were found to form many presynaptic structures in relation to the gravity-sensing balancer cells.
 
-### Classification of cell types
+Balancer cells are monociliated cells, and their cilia protrude longer than those of other monociliated cells. Moreover, the cilia of balancer cells are bundled into four groups at the center of the apical organ, forming a compound cilium. Based on these features, we identified and classified the balancer cells. The cellular arrangement differed clearly when viewed in the lateral view, sagittal plane, and tentacular plane, with the cell bodies gathering toward the apical organ in the tentacular plane. In each quadrant, the number of cells was as follows: Q1: 37, Q2: 32, Q3: 32, Q4: 28. Each cell contained 3 to 10? mitochondria.
 
--   ultrastructural criteria (cilia, vesicles etc)
--   number of types, cells per type - table
+From AO neuron_Q1Q2, synapses were formed with 6 of the 37 balancer cells in the Q1 region, and 8 of the 32 balancer cells in the Q2 region. Similarly, from AO neuron_Q3Q4, synapses were formed with 1 of the 32 balancer cells in the Q3 region, and 5 of the 28 balancer cells in the Q4 region. AO neuron_Q1234 formed input synapses with balancer cells in the Q1 region (7 cells), Q2 region (11 cells), Q3 region (6 cells), and Q4 region (10 cells). Some balancer cells received inputs from both AO neuron_Q1Q2 or AO neuron_Q3Q4 and AO neuron_Q1234.Although previous studies have suggested the presence of afferent synapses from balancer cells to neurons [@Hernandez_Nicaise_1974], our data did not reveal any input synapses from balancer cells to AO neurons.
 
-```{r, out.width = "100%", fig.cap="**Figure 2. Title fig 2** Balancer complex: balancer, lithocyte, groove 2 types, bridge - EM pics, (A) legend (B) legend. " } #| echo: false   knitr::include_graphics("figures/Figure_network.png")}
+```{r, out.width = "100%", fig.cap="**Figure 3. Title fig 3** pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend. " }
+#| echo: false 
+
+knitr::include_graphics("figures/Figure3.png")
 ```
-
-"the larval bridge has not yet developed forks at its ends, as seen in adult Mnemiopsis bridges"[@Tamm_2002]
-
-Figure3 - dome, bicil, monocil, no-cil, plumose, dense vesicle cells (rename), gland? cells, oligo/multiciliated cells
-
-Plumose cells [@Hernandez_Nicaise_1984] may be pressure sensors [@Tamm_2014b]
-
-Figure4 - lamellate body complex, LB, intra-multi-ciliated, relationship to balancer
-
-Figure5 - nerve net, different fragments/cells/syntytia, EM, relation to entire organ
-
-Figure 6 - cilia? renderings of basal bodies, centrioles, length, axoneme structure (table), table about cell types, number of cilia etc.
 
 ## Sourcing code and working with variable
 
