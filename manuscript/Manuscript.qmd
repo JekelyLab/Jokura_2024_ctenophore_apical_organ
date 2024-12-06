@@ -93,9 +93,9 @@ knitr::include_graphics("figures/Figure2.png")
 
 We discovered that AO neurons form synaptic connections with each other, and that AO neuron_Q1234 forms self-synapses, or “autapses.” To our knowledge, previous reports have not identified synaptic connections between subepithelial nerve net (SNN) neurons. Thus, our results represent the first report of synaptic connectivity between neurons in the apical organ, forming a network in ctenophores (subject to confirmation). These AO neuron networks were found to form many presynaptic structures in relation to the gravity-sensing balancer cells.
 
-Balancer cells are monociliated cells, and their cilia protrude longer than those of other monociliated cells. Moreover, the cilia of balancer cells are bundled into four groups at the center of the apical organ, forming a compound cilium. Based on these features, we identified and classified the balancer cells. The cellular arrangement differed clearly when viewed in the lateral view, sagittal plane, and tentacular plane, with the cell bodies gathering toward the apical organ in the tentacular plane. In each quadrant, the number of cells was as follows: Q1: 37, Q2: 32, Q3: 32, Q4: 28. Each cell contained 3 to 10? mitochondria.
+Balancer cells are monociliated cells, and their cilia protrude longer than those of other monociliated cells. Moreover, the cilia of balancer cells are bundled into four groups at the center of the apical organ, forming a compound cilium. Based on these features, we identified and classified the balancer cells. The cellular arrangement differed clearly when viewed in the lateral view, sagittal plane, and tentacular plane, with the cell bodies gathering toward the apical organ in the tentacular plane. In each quadrant, the number of cells was as follows: Q1: 37, Q2: 32, Q3: 32, Q4: 28. Each cell contained 3 to 10 ? mitochondria.
 
-From AO neuron_Q1Q2, synapses were formed with 6 of the 37 balancer cells in the Q1 region, and 8 of the 32 balancer cells in the Q2 region. Similarly, from AO neuron_Q3Q4, synapses were formed with 1 of the 32 balancer cells in the Q3 region, and 5 of the 28 balancer cells in the Q4 region. AO neuron_Q1234 formed input synapses with balancer cells in the Q1 region (7 cells), Q2 region (11 cells), Q3 region (6 cells), and Q4 region (10 cells). Some balancer cells received inputs from both AO neuron_Q1Q2 or AO neuron_Q3Q4 and AO neuron_Q1234.Although previous studies have suggested the presence of afferent synapses from balancer cells to neurons [@Hernandez_Nicaise_1974], our data did not reveal any input synapses from balancer cells to AO neurons.
+From AO neuron_Q1Q2, synapses were formed with 6 of the 37 balancer cells in the Q1 region, and 8 of the 32 balancer cells in the Q2 region. Similarly, from AO neuron_Q3Q4, synapses were formed with 1 of the 32 balancer cells in the Q3 region, and 5 of the 28 balancer cells in the Q4 region. AO neuron_Q1234 formed input synapses with balancer cells in the Q1 region (7 cells), Q2 region (11 cells), Q3 region (6 cells), and Q4 region (10 cells). Some balancer cells received inputs from both AO neuron_Q1Q2 or AO neuron_Q3Q4 and AO neuron_Q1234. While previous studies have suggested the presence of afferent synapses from balancer cells to neurons [@Hernandez_Nicaise_1974], our data did not reveal any synaptic inputs from balancer cells to AO neurons. However, we identified "bridge cells" that actively formed input synapses with AO neurons, highlighting their potential role in the network.
 
 ```{r, out.width = "100%", fig.cap="**Figure 3. Title fig 3** pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend. " }
 #| echo: false 
@@ -103,17 +103,23 @@ From AO neuron_Q1Q2, synapses were formed with 6 of the 37 balancer cells in the
 knitr::include_graphics("figures/Figure3.png")
 ```
 
-## Sourcing code and working with variable
+### Identification of Neuron-like Bridge Cells Forming Afferent Synapses in the Gravity-Sensitive Neural Circuit
 
-```{r}
-#| include: false
-#| eval: true
-#source(here::here("analysis/scripts/statistics_for_paper.R"))
+From our data, we identified several cell groups that form multiple afferent synapses with AO neurons. These cells, based on their morphological features, were found to be the bridge cells first described by Tamm et al. in 2002 [@Tamm_and_Tamm_2002]. These cells are characterized by bundles of elongated processes filled with microtubules that arch over the epithelial layer, resembling a bridge. They originate from the base of paired balancer cells along the tentacle surface and extend across the sagittal plane toward the base of the opposite balancer cells. In regions where the mitochondria of the bridge cells are localized (approximately 30%), a presynaptic triad structure, similar to that of AO neurons, was found, containing synaptic vesicles and smooth endoplasmic reticulum.
+
+Our three-dimensional reconstruction data revealed that the bridge cells form two distinct cell groups across the sagittal plane, between the Q1Q2 and Q3Q4 regions. In the Q1Q2 region, 14 cells were identified, while in the Q3Q4 region, 12 cells were identified, totaling 26 bridge cells. Nearly all of these bridge cells (25 out of 26) exhibited afferent synapses from AO neurons. For bridge cells located in the Q1Q2 region, synaptic inputs came primarily from AO neuron_Q1Q2 (11 cells), AO neuron_Q1234 (1 cell), or both (2 cells). For bridge cells located in the Q3Q4 region, synaptic inputs were received from AO neuron_Q3Q4 (1 cell), AO neuron_Q1234 (7 cells), or both (1 cell). In other words, bridge cells in the Q1Q2 region mainly received input from AO neuron_Q1Q2, while those in the Q3Q4 region received input primarily from AO neuron_Q1234, showing a distinct pattern of input in the two regions.
+
+Some bridge cells also formed afferent synapses with AO neurons. For example, bridge cells in the Q1Q2 region formed synapses with AO neuron_Q1Q2 (3 cells) or both AO neuron_Q1Q2 and AO neuron_Q1234 (2 cells). Bridge cells in the Q3Q4 region formed synapses with AO neuron_Q3Q4 (1 cell) or AO neuron_Q1234 (6 cells). A notable difference was observed between the Q1Q2 and Q3Q4 regions in the proportion of synaptic inputs from bridge cells to AO neurons.
+
+Interestingly, in both regions, bridge cells also formed synapses with adjacent bridge cells. However, no synaptic input was found from bridge cells across the sagittal plane to those in the opposite region. To analyze the grouped synaptic connectivity graph, we classified cell types within each region, collapsed cells of the same type into a single node, summed the number of synapses, and explored directed pathways to effectors (balancer cell groups). The results revealed a feedback pathway from AO neurons through the synaptic connections formed by bridge cells, thereby shedding light on the neural circuit structure involving these cells.
+
+```{r, out.width = "100%", fig.cap="**Figure 4. Title fig 4** pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend. " }
+#| echo: false 
+
+knitr::include_graphics("figures/Figure4.png")
 ```
 
-The 'analysis/scripts/statistics_for_paper.R' script is sourced and it runs but the output is not included in the knitted output. But we can access the variables defined in the sourced script simply by adding \` r var_name \` between \` backticks, in this case max_PRC value is (now this number comes from our sourced script).
-
-If we update the data, the script can recalculate the variable we want to refer to in the text and update the number.
+## Discussion
 
 ## Materials and Methods
 
@@ -134,3 +140,15 @@ We would like to thank the Jekely lab for the R project template (<https://githu
 ```{=html}
 <script src="https://hypothes.is/embed.js" async></script>
 ```
+
+## Sourcing code and working with variable
+
+```{r}
+#| include: false
+#| eval: true
+#source(here::here("analysis/scripts/statistics_for_paper.R"))
+```
+
+The 'analysis/scripts/statistics_for_paper.R' script is sourced and it runs but the output is not included in the knitted output. But we can access the variables defined in the sourced script simply by adding \` r var_name \` between \` backticks, in this case max_PRC value is (now this number comes from our sourced script).
+
+If we update the data, the script can recalculate the variable we want to refer to in the text and update the number.
