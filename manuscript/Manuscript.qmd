@@ -119,6 +119,18 @@ Interestingly, in both regions, bridge cells also formed synapses with adjacent 
 knitr::include_graphics("figures/Figure4.png")
 ```
 
+###Control of Balancer Ciliary Movements by Gravity-Sensitive Neural Circuits
+
+To investigate the function of gravity-sensitive circuits, we conducted a comparative analysis of balancer ciliary movements across different regions. Previous studies (Tamm, 1980, 1982; Lowe, 1997) have established that balancer cilia function as mechanoreceptors, with their beating frequency modulated by inclination. Furthermore, it has been suggested that differences in the asymmetry of statolith morphology and the elongation direction of balancer cilia between the tentacular and sagittal planes could result in variations in the force received from the statolith (Tamm, 2014, 2015). Building on these findings, we standardized conditions for observing balancer cilia by tilting the microscope by 90 degrees and fixing samples such that the aboral-oral axis was aligned parallel to the vertical stage, with the aboral side facing upward. Using connectome analysis, we aimed to evaluate the neural circuit differences by analyzing the control patterns of left and right balancer cilia in the tentacular and sagittal planes. Specifically, we hypothesized that differences in control between Q1 (Q2) and Q3 (Q4) regions, as well as between Q1 (Q4) and Q2 (Q3) regions, would reveal distinct functions of AO neurons (e.g., AO neuron Q12/Q34 vs. AO neuron Q1234). For the sagittal plane, we recorded balancer ciliary movements in the Q1(4) and Q2(3) regions (left and right sides of the image) and, for the tentacular plane, in the Q1(3) and Q2(4) regions, using a high-speed camera (100 fps) for 2 minutes (12,000 frames). Regions of interest (ROIs) were defined in areas where brightness changes indicated ciliary beating. We measured these brightness changes to generate dynamics graphs of balancer ciliary movements for both planes. 
+
+During the 2-minute recordings, balancer cilia exhibited movements that could be fast, slow, or stop abruptly (arrest) and start moving again (re-beat). Occasionally, large contraction responses caused the entire cydippid to move out of frame, and data from these moments were excluded. We focused on two metrics for left-right comparison: (1) the timing of ciliary arrest and (2) the timing of re-beat initiation following an arrest. Due to the low baseline beating frequency of the cilia, rapid synaptic input responses were not evaluated, suggesting that ciliary beat regulation may involve non-synaptic control mechanisms. The analysis revealed that both arrest and re-beat events were synchronized between left and right balancers in both planes within a few milliseconds, suggesting that these events are governed by synaptic input from neurons. Interestingly, while the re-beat timing showed no significant differences between the sagittal and tentacular planes, arrest timing exhibited greater variability in the tentacular plane. Comparing these findings with neural circuit diagrams suggests that in the sagittal plane, the same AO neurons (Q12 or Q34) project to both balancer cell groups, transmitting signals simultaneously and enabling synchronization. In contrast, in the tentacular plane, separate AO neurons project to different regions, potentially introducing an additional synaptic step, which may account for the observed variability in arrest timing.
+
+```{r, out.width = "100%", fig.cap="**Figure 5. Title fig 5** pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend. " }
+#| echo: false 
+
+knitr::include_graphics("figures/Figuer5_maybe.png")
+```
+
 ## Discussion
 
 ## Materials and Methods
