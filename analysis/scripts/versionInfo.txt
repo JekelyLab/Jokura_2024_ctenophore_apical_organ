@@ -19,11 +19,11 @@ $mode
 [1] "desktop"
 
 $version
-[1] ‘2024.9.1.394’
+[1] ‘2024.12.0.467’
 
 $long_version
-[1] "2024.09.1+394"
+[1] "2024.12.0+467"
 
 $release_name
-[1] "Cranberry Hibiscus"
+[1] "Kousa Dogwood"
 

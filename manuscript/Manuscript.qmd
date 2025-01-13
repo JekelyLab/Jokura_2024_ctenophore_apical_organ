@@ -128,10 +128,13 @@ During the 2-minute recordings, balancer cilia exhibited movements that could be
 ```{r, out.width = "100%", fig.cap="**Figure 5. Title fig 5** pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend. " }
 #| echo: false 
 
-knitr::include_graphics("figures/Figuer5_maybe.png")
+knitr::include_graphics("figures/Figuer5.png")
 ```
 
 ## Discussion
+
+
+
 
 ## Materials and Methods
 
