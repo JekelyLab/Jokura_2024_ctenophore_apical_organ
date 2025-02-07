@@ -52,15 +52,6 @@ The lobate ctenophore *Mnemiopsis*
 
 The lithocytes have a large calcium carbonate concretion and... [@Tamm_2014] Living lithocytes are transported along the balancer cilia to the tip of the statocyst [@Noda_2014] The projections of a group of bridge cells located on two sides of the apical organ forms an arch and connects the balancers along the tentacular plane [@Tamm_2002].
 
-The easiest way is to use the command line to add new refs to the .bib file:
-
-```{bash}
-#| echo: true
-#| eval: false
-
-#curl -LH "Accept: application/x-bibtex" https://doi.org/10.7554/eLife.91258.1 >> references.bib
-```
-
 ## Results
 
 ### Volume EM reconstruction of the *Mnemiopsis* apical organ
@@ -132,6 +123,40 @@ knitr::include_graphics("figures/Figure5.png")
 ```
 
 ## Discussion
+
+In this study, we traced all the constituent cells of the aboral organ in five-day-old larvae of *Mnemiopsis leidyi* and completed a comprehensive neural map. As a result, we identified a novel type of syncytial neuron with a previously unreported morphology. Furthermore, we found that three such syncytial neurons project to distinct quadrants, integrating with balancer cell groups to form a gravity-sensing neural circuit. This study represents the first complete neural circuit map reported in ctenophores. Additionally, our analysis of balancer ciliary movements, based on neural circuit data, revealed differences in ciliary arrest control arising from circuit variations.
+
+### Identification of a Previously Unreported Syncytial Neuron
+
+We identified three syncytial neurons with multiple nuclei in the apical organ of five-day-old *M. leidyi* cydippid larvae. Burkhurdt et al. (2023) previously reported that in one-day-old larvae, the sub-epithelial nerve net (SNN) contains neurons that form syncytia. However, the newly discovered syncytial neurons embedded within the apical organ cell cluster did not exhibit the characteristic "pearl necklace-like structure" of the SNN, which consists of microtubules connecting neurons. Instead, their morphology was more reminiscent of fiber cells previously described in Placozoa (Mayorova et al., 2021), with cell bodies extending through intercellular spaces. These morphological characteristics suggest that the newly identified neurons represent a second distinct type of syncytial neuron in ctenophores.
+
+### Functional Diversification of the Three Syncytial Neurons
+
+The three identified neurons may be classified into two distinct functional types based on their spatial arrangement and their influence on the differential control of balancer ciliary movement between the quadrants. In metazoans, a single neuron can directly provide synaptic input to multiple ciliated cells at a distance, synchronizing their movements. For instance, in larvae of the annelid *Platynereis dumerilii*, a cholinergic motor neuron (MC) innervates multiple prototroch ciliated cells, synchronizing their motion such that activation of the neuron leads to simultaneous arrest of ciliary beating (Verasztó et al., 2017). Additionally, a pair of serotonergic neurons, designated Ser-h1, extend axons that cross at the midline; the left Ser-h1_l predominantly innervates right-sided ciliated cells, while the right Ser-h1_r mainly projects to the left-side ciliated cells. Activation of Ser-h1 induces ciliary beating initiation and increases beat frequency.
+
+In the this study, we found that three neurons are closely positioned within the confined space of the apical organ, potentially enabling a single neuron to control distant ciliary movements in a synchronized manner. Moreover, the presence of neurons projecting to the same ciliated cells in distinct patterns suggests that these neurons may serve opposing functions—one inhibiting ciliary activity while the other promotes it, or one modulating ciliary beat frequency. While our synaptic ultrastructure analysis did not allow us to distinguish excitatory from inhibitory neurons, future electrophysiological investigations will be essential to elucidate their functional properties.
+
+```{r, out.width = "100%", fig.cap="**Figure 6. Title fig 6** pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend. " }
+#| echo: false 
+
+knitr::include_graphics("figures/Figure6.png")
+```
+
+### Paracrine Signaling and Synaptic Transmission from Sensory to Neural Cells
+
+Previous electron microscopy studies have suggested the presence of various sensory cells, including photoreceptor and mechanoreceptor cells, within the aboral organ of ctenophores (Horridge, 1965; Krisch, 1973; Aronova, 1974; Vinnikov, 1974). By comparing our dataset with previously reported ultrastructural data, we successfully identified several sensory cells within the apical organ. However, notably, we did not find any clear presynaptic structures between these sensory cells and either neural or other cellular targets. In prior studies, immunostaining for specific neuropeptides in ctenophores has revealed positive signals in distinct cell populations within the apical organ (Sachkova et al., 2021; Hayakawa et al., 2022). These findings suggest that many sensory cells in the apical organ may primarily rely on neuropeptide-mediated paracrine signaling rather than direct synaptic connections, supporting the chemical brain hypothesis (Jekely, 2021). While paracrine transmission is generally slower than synaptic transmission, it allows for a greater diversity of information processing.
+
+Conversely, previous research has demonstrated that mechanoreceptive sensory cells equipped with cilia (referred to as type 3 and type 4 cells) in ctenophores form direct synaptic connections with the sub-epithelial nerve net (SNN) and mesogleal neurons (Burkhurdt et al., 2023). Based on their ultrastructural features, these sensory cells are believed to respond to physical stimuli such as water flow, vibrations, and direct contact, transmitting information rapidly to cilia and muscle cells (Hertwig, 1880; Chun, 1880; Eimer, 1880).
+
+Surprisingly, our study identified bridge cells as the primary cell type forming synaptic inputs onto neurons in the apical organ. Bridge cells were first described by Tamm et al. (2002) based on their morphological characteristics, with cellular projections extending to the basal region of balancer cilia (Tamm & Tamm, 2002). Our findings suggest that bridge cells are electrically coupled to balancer cilia and provide rapid feedback to neurons via synaptic transmission. Future studies analyzing differential responses to various sensory stimuli will not only elucidate the functional roles of bridge cells but also provide insights into the evolutionary relationship between transmission speed and synapse development.
+
+### Circuit Variability as a Driver of Behavioral Diversity
+
+Our study suggests that differences in neural circuits contribute to variations in the timing of ciliary arrest, which may play a role in modulating swimming direction in ctenophores (Richard Satterlie, 2015). This finding provides evidence that increased circuit complexity contributes to behavioral diversification. By integrating multiple neurons and altering circuit structure, information can be branched, allowing for diverse motor patterns within the framework of fast synaptic transmission.
+
+The neural cells identified in the apical organ exhibit a divergent feedforward connectivity pattern, where a single neuron forms presynaptic connections with multiple downstream targets. Such a circuit design minimizes unwanted signal interference, reduces processing delays, and enables relatively fast response execution (Luo, 2024). Moreover, the presence of multiple divergent feedforward circuits suggests that slight variations in the synchronization and phase delay of ciliary beating (within the range of a few hundred milliseconds) may have evolved as a mechanism for generating behavioral diversity.
+
+From a broader neuroanatomical perspective, nervous system structures across various animals have been shaped through selective optimization to adapt to environmental constraints (Bullmore & Sporns, 2012; Perin et al., 2011). For example, in nematodes, the spatial arrangement of ganglia is optimized to minimize the total length of neural wiring (White et al., 1986). Similarly, in ctenophores, understanding how transmission via syncytial neurons and synaptic connections has been selectively optimized at the circuit level will provide crucial insights into the evolutionary scaling of neural networks from early nervous systems to complex brains (Farnworth and Montgomery, 2024). In particular, this research may help elucidate how circuit modularization and layered structures emerged over evolutionary time.
 
 ## Materials and Methods
 
