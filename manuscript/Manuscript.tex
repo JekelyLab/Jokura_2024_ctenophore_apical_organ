@@ -76,46 +76,6 @@
 \fi
 \makeatother
 
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{241,243,245}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
-\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
-\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
@@ -282,15 +242,6 @@ to the tip of the statocyst (Noda and Tamm, 2014) The projections of a
 group of bridge cells located on two sides of the apical organ forms an
 arch and connects the balancers along the tentacular plane (Tamm and
 Tamm, 2002).
-
-The easiest way is to use the command line to add new refs to the .bib
-file:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#curl {-}LH "Accept: application/x{-}bibtex" https://doi.org/10.7554/eLife.91258.1 \textgreater{}\textgreater{} references.bib}
-\end{Highlighting}
-\end{Shaded}
 
 \subsection{Results}\label{results}
 
@@ -515,9 +466,392 @@ AO, schematic, catmaid pic with slice, dimensions, quadrants, regions,
 
 \end{figure}%
 
+\subsubsection{Control of Balancer Ciliary Movements by
+Gravity-Sensitive Neural
+Circuits}\label{control-of-balancer-ciliary-movements-by-gravity-sensitive-neural-circuits}
+
+To investigate the function of gravity-sensitive circuits, we conducted
+a comparative analysis of balancer ciliary movements across different
+regions. Previous studies (Tamm, 1980, 1982; Lowe, 1997) have
+established that balancer cilia function as mechanoreceptors, with their
+beating frequency modulated by inclination. Furthermore, it has been
+suggested that differences in the asymmetry of statolith morphology and
+the elongation direction of balancer cilia between the tentacular and
+sagittal planes could result in variations in the force received from
+the statolith (Tamm, 2014, 2015). Building on these findings, we
+standardized conditions for observing balancer cilia by tilting the
+microscope by 90 degrees and fixing samples such that the aboral-oral
+axis was aligned parallel to the vertical stage, with the aboral side
+facing upward. Using connectome analysis, we aimed to evaluate the
+neural circuit differences by analyzing the control patterns of left and
+right balancer cilia in the tentacular and sagittal planes.
+Specifically, we hypothesized that differences in control between Q1
+(Q2) and Q3 (Q4) regions, as well as between Q1 (Q4) and Q2 (Q3)
+regions, would reveal distinct functions of AO neurons (e.g., AO neuron
+Q12/Q34 vs.~AO neuron Q1234). For the sagittal plane, we recorded
+balancer ciliary movements in the Q1(4) and Q2(3) regions (left and
+right sides of the image) and, for the tentacular plane, in the Q1(3)
+and Q2(4) regions, using a high-speed camera (100 fps) for 2 minutes
+(12,000 frames). Regions of interest (ROIs) were defined in areas where
+brightness changes indicated ciliary beating. We measured these
+brightness changes to generate dynamics graphs of balancer ciliary
+movements for both planes.
+
+During the 2-minute recordings, balancer cilia exhibited movements that
+could be fast, slow, or stop abruptly (arrest) and start moving again
+(re-beat). Occasionally, large contraction responses caused the entire
+cydippid to move out of frame, and data from these moments were
+excluded. We focused on two metrics for left-right comparison: (1) the
+timing of ciliary arrest and (2) the timing of re-beat initiation
+following an arrest. Due to the low baseline beating frequency of the
+cilia, rapid synaptic input responses were not evaluated, suggesting
+that ciliary beat regulation may involve non-synaptic control
+mechanisms. The analysis revealed that both arrest and re-beat events
+were synchronized between left and right balancers in both planes within
+a few milliseconds, suggesting that these events are governed by
+synaptic input from neurons. Interestingly, while the re-beat timing
+showed no significant differences between the sagittal and tentacular
+planes, arrest timing exhibited greater variability in the tentacular
+plane. Comparing these findings with neural circuit diagrams suggests
+that in the sagittal plane, the same AO neurons (Q12 or Q34) project to
+both balancer cell groups, transmitting signals simultaneously and
+enabling synchronization. In contrast, in the tentacular plane, separate
+AO neurons project to different regions, potentially introducing an
+additional synaptic step, which may account for the observed variability
+in arrest timing.
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\textwidth,height=\textheight]{figures/Figure5.png}
+
+}
+
+\caption{\textbf{Figure 5. Title fig 5} pic of a larva, boxed region of
+AO, schematic, catmaid pic with slice, dimensions, quadrants, regions,
+(A) legend (B) legend.}
+
+\end{figure}%
+
 \subsection{Discussion}\label{discussion}
 
+In this study, we traced all the constituent cells of the aboral organ
+in five-day-old larvae of \emph{Mnemiopsis leidyi} and completed a
+comprehensive neural map. As a result, we identified a novel type of
+syncytial neuron with a previously unreported morphology. Furthermore,
+we found that three such syncytial neurons project to distinct
+quadrants, integrating with balancer cell groups to form a
+gravity-sensing neural circuit. This study represents the first complete
+neural circuit map reported in ctenophores. Additionally, our analysis
+of balancer ciliary movements, based on neural circuit data, revealed
+differences in ciliary arrest control arising from circuit variations.
+
+\subsubsection{Identification of a Previously Unreported Syncytial
+Neuron}\label{identification-of-a-previously-unreported-syncytial-neuron}
+
+We identified three syncytial neurons with multiple nuclei in the apical
+organ of five-day-old \emph{M. leidyi} cydippid larvae. Burkhurdt et
+al.~(2023) previously reported that in one-day-old larvae, the
+sub-epithelial nerve net (SNN) contains neurons that form syncytia.
+However, the newly discovered syncytial neurons embedded within the
+apical organ cell cluster did not exhibit the characteristic ``pearl
+necklace-like structure'' of the SNN, which consists of microtubules
+connecting neurons. Instead, their morphology was more reminiscent of
+fiber cells previously described in Placozoa (Mayorova et al., 2021),
+with cell bodies extending through intercellular spaces. These
+morphological characteristics suggest that the newly identified neurons
+represent a second distinct type of syncytial neuron in ctenophores.
+
+\subsubsection{Functional Diversification of the Three Syncytial
+Neurons}\label{functional-diversification-of-the-three-syncytial-neurons}
+
+The three identified neurons may be classified into two distinct
+functional types based on their spatial arrangement and their influence
+on the differential control of balancer ciliary movement between the
+quadrants. In metazoans, a single neuron can directly provide synaptic
+input to multiple ciliated cells at a distance, synchronizing their
+movements. For instance, in larvae of the annelid \emph{Platynereis
+dumerilii}, a cholinergic motor neuron (MC) innervates multiple
+prototroch ciliated cells, synchronizing their motion such that
+activation of the neuron leads to simultaneous arrest of ciliary beating
+(Verasztó et al., 2017). Additionally, a pair of serotonergic neurons,
+designated Ser-h1, extend axons that cross at the midline; the left
+Ser-h1\_l predominantly innervates right-sided ciliated cells, while the
+right Ser-h1\_r mainly projects to the left-side ciliated cells.
+Activation of Ser-h1 induces ciliary beating initiation and increases
+beat frequency.
+
+In the this study, we found that three neurons are closely positioned
+within the confined space of the apical organ, potentially enabling a
+single neuron to control distant ciliary movements in a synchronized
+manner. Moreover, the presence of neurons projecting to the same
+ciliated cells in distinct patterns suggests that these neurons may
+serve opposing functions---one inhibiting ciliary activity while the
+other promotes it, or one modulating ciliary beat frequency. While our
+synaptic ultrastructure analysis did not allow us to distinguish
+excitatory from inhibitory neurons, future electrophysiological
+investigations will be essential to elucidate their functional
+properties.
+
+\begin{figure}[H]
+
+{\centering \includegraphics[width=1\textwidth,height=\textheight]{figures/Figure6.png}
+
+}
+
+\caption{\textbf{Figure 6. Title fig 6} pic of a larva, boxed region of
+AO, schematic, catmaid pic with slice, dimensions, quadrants, regions,
+(A) legend (B) legend.}
+
+\end{figure}%
+
+\subsubsection{Paracrine Signaling and Synaptic Transmission from
+Sensory to Neural
+Cells}\label{paracrine-signaling-and-synaptic-transmission-from-sensory-to-neural-cells}
+
+Previous electron microscopy studies have suggested the presence of
+various sensory cells, including photoreceptor and mechanoreceptor
+cells, within the aboral organ of ctenophores (Horridge, 1965; Krisch,
+1973; Aronova, 1974; Vinnikov, 1974). By comparing our dataset with
+previously reported ultrastructural data, we successfully identified
+several sensory cells within the apical organ. However, notably, we did
+not find any clear presynaptic structures between these sensory cells
+and either neural or other cellular targets. In prior studies,
+immunostaining for specific neuropeptides in ctenophores has revealed
+positive signals in distinct cell populations within the apical organ
+(Sachkova et al., 2021; Hayakawa et al., 2022). These findings suggest
+that many sensory cells in the apical organ may primarily rely on
+neuropeptide-mediated paracrine signaling rather than direct synaptic
+connections, supporting the chemical brain hypothesis (Jekely, 2021).
+While paracrine transmission is generally slower than synaptic
+transmission, it allows for a greater diversity of information
+processing.
+
+Conversely, previous research has demonstrated that mechanoreceptive
+sensory cells equipped with cilia (referred to as type 3 and type 4
+cells) in ctenophores form direct synaptic connections with the
+sub-epithelial nerve net (SNN) and mesogleal neurons (Burkhurdt et al.,
+2023). Based on their ultrastructural features, these sensory cells are
+believed to respond to physical stimuli such as water flow, vibrations,
+and direct contact, transmitting information rapidly to cilia and muscle
+cells (Hertwig, 1880; Chun, 1880; Eimer, 1880).
+
+Surprisingly, our study identified bridge cells as the primary cell type
+forming synaptic inputs onto neurons in the apical organ. Bridge cells
+were first described by Tamm et al.~(2002) based on their morphological
+characteristics, with cellular projections extending to the basal region
+of balancer cilia (Tamm \& Tamm, 2002). Our findings suggest that bridge
+cells are electrically coupled to balancer cilia and provide rapid
+feedback to neurons via synaptic transmission. Future studies analyzing
+differential responses to various sensory stimuli will not only
+elucidate the functional roles of bridge cells but also provide insights
+into the evolutionary relationship between transmission speed and
+synapse development.
+
+\subsubsection{Circuit Variability as a Driver of Behavioral
+Diversity}\label{circuit-variability-as-a-driver-of-behavioral-diversity}
+
+Our study suggests that differences in neural circuits contribute to
+variations in the timing of ciliary arrest, which may play a role in
+modulating swimming direction in ctenophores (Richard Satterlie, 2015).
+This finding provides evidence that increased circuit complexity
+contributes to behavioral diversification. By integrating multiple
+neurons and altering circuit structure, information can be branched,
+allowing for diverse motor patterns within the framework of fast
+synaptic transmission.
+
+The neural cells identified in the apical organ exhibit a divergent
+feedforward connectivity pattern, where a single neuron forms
+presynaptic connections with multiple downstream targets. Such a circuit
+design minimizes unwanted signal interference, reduces processing
+delays, and enables relatively fast response execution (Luo, 2021).
+Moreover, the presence of multiple divergent feedforward circuits
+suggests that slight variations in the synchronization and phase delay
+of ciliary beating (within the range of a few hundred milliseconds) may
+have evolved as a mechanism for generating behavioral diversity.
+
+From a broader neuroanatomical perspective, nervous system structures
+across various animals have been shaped through selective optimization
+to adapt to environmental constraints (Bullmore \& Sporns, 2012; Perin
+et al., 2011). For example, in nematodes, the spatial arrangement of
+ganglia is optimized to minimize the total length of neural wiring
+(White et al., 1986). Similarly, in ctenophores, understanding how
+transmission via syncytial neurons and synaptic connections has been
+selectively optimized at the circuit level will provide crucial insights
+into the evolutionary scaling of neural networks from early nervous
+systems to complex brains (Farnworth and Montgomery, 2024). In
+particular, this research may help elucidate how circuit modularization
+and layered structures emerged over evolutionary time.
+
 \subsection{Materials and Methods}\label{materials-and-methods}
+
+\subsubsection{Data and Code
+Availability}\label{data-and-code-availability}
+
+The following EM image stacks, including all traces and annotations, are
+available at https://catmaid.jekelylab.ex.ac.uk. These datasets can be
+queried either within CATMAID or through the CATMAID application
+programming interface (API) using the catmaid or natverse packages
+(Bates et al., 2020). The dataset encompasses all EM images (in JPG
+format), skeletons, meshes, node tags, connectors, and annotations.
+Additionally, we provide all R scripts used for data acquisition and
+figure generation (Jokura et al., 2025). All plots, figures (including
+anatomical renderings), and figure layouts can be fully reproduced using
+the provided R scripts. While the scripts are mostly organized by
+figure, some general-purpose scripts---for tasks such as loading
+libraries, accessing CATMAID data, and defining common functions---are
+shared across multiple figures.
+
+\subsubsection{Specimen Preparation, Transmission Electron Microscopy,
+and Image
+Processing}\label{specimen-preparation-transmission-electron-microscopy-and-image-processing}
+
+Larvae of Mnemiopsis leidyi (5 days old) were cryofixed using a
+high-pressure freezing apparatus (BAL-TEC HPM 010, Balzers) and
+immediately transferred to liquid nitrogen for storage. The frozen
+samples were processed in a substitution medium containing 2\% (w/v)
+osmium tetroxide and 0.5\% uranyl acetate in acetone, using a
+cryo-substitution device (EM AFS-2, Leica). Cryo-substitution was
+performed by gradually raising the temperature, and the samples were
+embedded in epoxy resin. Serial sections of 50 nm thickness were
+prepared using a Reichert Jung Ultracut E ultramicrotome and a 45º
+DiATOME diamond knife. To enhance section adhesion and improve
+hydrophilicity, a conductive indium tin oxide-coated glass slide (ITO
+Glass, UQG Optics) was treated with air glow discharge using the PELCO
+easiGlow system (Ted Pella, Inc.), rendering the carbon film surface
+negatively charged. Section ribbons were collected on the prepared glass
+slides, slowly dried to ensure proper stretching, and firmly adhered to
+the glass surface. The sections on glass were stained with UranyLess and
+lead citrate (Reynolds) using airless staining bottles (Delta
+Microscopies). The glass slides were mounted on STEM-specific stages
+(Zeiss) using Copper Foil EMI Shielding Tape (3M). Imaging was performed
+using a Gemini SEM 500 (Zeiss) equipped with SmartSEM and Atlas 5
+imaging software (Zeiss). The full dataset consisted of 620 serial
+sections, each 50 nm thick. The imaging resolution was 2.8 nm/pixel,
+using electron holography transmission at an acceleration voltage of 1.5
+kV (in-lens detector, dwell time: 3 µs).
+
+\subsubsection{Image-Stack Realignment and Spatial Data Transformation
+in
+CATMAID}\label{image-stack-realignment-and-spatial-data-transformation-in-catmaid}
+
+To process the image stack, we utilized the TrakEM2 plugin of FIJI
+(ImageJ) (version 2.0.0-rc-15/1.49k / Java 1.6.0\_24 (64-bit) -- 2014).
+A project was created, and all TIFF images were imported using the
+``import sequence as grid'' function. Subsequently, the following
+filters were applied sequentially: Invert, Equalize Histogram, and
+Gaussian Blur.
+
+The alignment process consisted of three stages, each progressively
+refining the spatial accuracy:
+
+Rigid Alignment Initially, a rigid alignment was performed with the
+following parameters: least squares mode (linear feature
+correspondences), encompassing the entire layer range with the first
+layer as the reference. Only visible images were used, without
+propagation. The alignment was executed with an initial Gaussian blur of
+1.6 pixels, three steps per scale octave, a minimum image size of 512
+pixels, and a maximum of 2048 pixels. Additional parameters included a
+feature descriptor size of 8, orientation bins of 8, and a closest ratio
+of 0.92. The alignment allowed clearing the cache, using 32 feature
+extraction threads, a maximal alignment error of 100 pixels, a minimal
+inlier ratio of 0.20, and a minimum of 12 inliers. The expected and
+desired transformations were set to rigid, with testing multiple
+hypotheses (tolerance: 5.00 pixels) and considering up to 5 neighboring
+layers, giving up after 5 failures. Regularization was performed with a
+maximal iteration of 1000, a maximal plateau width of 200, and a rigid
+lambda of 0.10.
+
+Affine Alignment Following the rigid alignment, an affine alignment was
+applied using similar parameters, except the expected and desired
+transformations were set to affine. The minimal image size was reduced
+to 64 pixels, while the other parameters (e.g., Gaussian blur, feature
+descriptor size, inliers, and testing hypotheses) remained unchanged to
+ensure consistent processing.
+
+Elastic Alignment Two iterations of elastic alignment were performed to
+fine-tune the spatial data. Key parameters included a block matching
+layer scale of 0.05, a search radius of 200 pixels, a block radius of
+2000 pixels, and a resolution of 60. Correlation filters were employed
+with a minimal PMCC r of 0.10, a maximal curvature ratio of 1000, and a
+maximal second-best r/best r of 0.90. A local smoothness filter was
+applied with the approximate local transformation set to affine, a local
+region sigma of 1000 pixels, and an absolute maximal local displacement
+of 10 pixels (relative maximal displacement: 3.00). Pre-aligned layers
+were tested for up to 4 neighboring layers. The elastic alignment used a
+rigid approximation, maximal iterations of 3000, a plateau width of 200,
+spring mesh stiffness of 0.01, and a maximal stretch of 2000 pixels. A
+legacy optimizer was employed to enhance performance.
+
+After each alignment stage, the project was saved as an XML file under a
+unique name to preserve iterative progress. Finally, the images were
+exported from FIJI using TrakEM2 in a format compatible with CATMAID.
+
+\subsubsection{Neuron Tracing, Synapse Annotation, and
+Review}\label{neuron-tracing-synapse-annotation-and-review}
+
+The reconstruction of cells and connectivity was performed using CATMAID
+(Saalfeld et al., 2009), analyzing a total of 620 serial sections. To
+digitally reconstruct all neurons within the serial TEM dataset, we
+utilized the collaborative web-based application CATMAID, installed on a
+local server (Saalfeld et al., 2009; Schneider-Mizell et al., 2016). To
+mark the locations of cell bodies, we placed tags at the approximate
+center of each nucleus within the dataset. At each nuclear center, the
+radius of the single node was adjusted according to the size of the cell
+body in that specific layer. All skeletons were rooted at their
+respective cell bodies, and nodes were tagged as ``soma.'' Synapses were
+identified based on four key structural features: the cell membrane,
+synaptic vesicles, the endoplasmic reticulum, and mitochondria. Most
+synapses could be verified across consecutive sections, ensuring
+accurate annotation and connectivity mapping.
+
+\subsubsection{Cell Nomenclature and
+Annotations}\label{cell-nomenclature-and-annotations}
+
+Each cell is assigned a specific type name based on its category
+(balancer, biC, bridge, bristle, dense vesicle cell, dome, EF, IcMC, LB,
+lithocyte, monoC, non-C, plumose cell, SNN, ssCG, SSN, stCG), resulting
+in a total of 17 cell types. Additionally, a quadrant number is appended
+to the cell type name following an underscore (``\_'') to indicate the
+cell body's location. For example, cells located in the first quadrant
+are annotated with ``Q1.'' If a cell is situated between the first and
+second quadrants, the annotation ``Q1Q2'' is applied.
+
+Cells of the same type within the same region are further distinguished
+by serial numbering. Each cell is also assigned multiple annotations,
+which can be utilized to query the database via CATMAID or the CATMAID
+API (e.g., using the R catmaid package). These annotations provide a
+structured and precise framework for identifying and analyzing specific
+cells, facilitating robust data integration and retrieval within the
+dataset.
+
+This system ensures consistent and accurate tracking of cellular data,
+enabling comprehensive analysis of cellular structures and functions
+across regions.
+
+\subsubsection{Analysis of Balancer
+Cilia}\label{analysis-of-balancer-cilia}
+
+We conducted the analysis using the cydippid stage of Mnemiopsis leidyi
+at five days post-fertilization. A coverslip with a thin layer of
+Vaseline applied to two edges was lightly placed on a slide glass.
+Filtered natural seawater was introduced under the coverslip, along with
+the cydippids. By gently moving the coverslip, the desired orientation
+for observation was adjusted, and once positioned, slight pressure was
+applied to immobilize the cydippids. To stabilize the statolith's
+position, the microscope was tilted 90 degrees, arranging the stage
+vertically. The movement of the balancer cilia was observed using a
+differential interference contrast (DIC) microscope (Zeiss Axio
+Imager.M2) equipped with a highly sensitive CMOS monochrome camera
+optimized for the near-infrared (NIR) range (UI-3360CP-NIR-GL Rev.2,
+iDS). Observations were made using a 40x objective lens (Objective LD
+LCI Plan-Apochromat 40x/1.2 Imm Corr DIC M27) with glycerine immersion.
+For recording, we employed a custom-made NIR LED strobe illumination
+system (wavelength: 850 nm) synchronized with the camera's exposure
+signals. The camera and LED strobe system were operated using the Video
+Capture Software BohNavi. Images were recorded at a resolution of
+640×480 pixels with a frame rate of 100 fps for 2 minutes, using 0.05 ms
+pulses from the LED. To analyze the ciliary beating of the balancer
+cilia, we utilized the Multi Kymograph project in Fiji software.
 
 \subsection{Acknowledgements}\label{acknowledgements}
 
