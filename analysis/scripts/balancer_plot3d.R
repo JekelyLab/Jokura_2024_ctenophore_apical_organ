@@ -5,27 +5,27 @@ source("analysis/scripts/packages_and_functions.R")
 
 # load cell type ----------------------------------
 
-read_smooth_neuron <- function(annotation){
-  nlapply(read.neurons.catmaid(annotation, pid = 35),
-          function(x)
-            smooth_neuron(x, sigma = 1000))
-}
-
 balancer <- read_smooth_neuron("celltype:balancer")
+plumose <- read_smooth_neuron("celltype:plumose")
 bridge <- read_smooth_neuron("celltype:bridge")
-bristle <- read_smooth_neuron("celltype:bristle")
+lithocyte <- read_smooth_neuron("celltype:lithocyte")
+SER <- read_smooth_neuron("celltype:SER_epithelia")
 dome <- read_smooth_neuron("celltype:dome")
+bristle <- read_smooth_neuron("celltype:bristle")
+intramulticilia <- read_smooth_neuron("celltype:intra-multi-ciliated")
+bicilia <- read_smooth_neuron("celltype:biciliated")
+monocilia <- read_smooth_neuron("celltype:monociliated")
+non_cilia <- read_smooth_neuron("celltype:nonciliated")
+dense_vesicle <- read_smooth_neuron("celltype:dense_vesicle")
 Cgroove_tag <- read_smooth_neuron("celltype:Cgroove-tag")
 Cgroove_sag <- read_smooth_neuron("celltype:Cgroove-sag")
-intramulticilia <- read_smooth_neuron("celltype:intra-multi-ciliated")
-lamellate <- read_smooth_neuron("celltype:lamellate")
-lithocyte <- read_smooth_neuron("celltype:lithocyte")
-neuron <- read_smooth_neuron("celltype:SSN")
-plumose <- read_smooth_neuron("celltype:plumose")
-dense_vesicle <- read_smooth_neuron("celltype:dense_vesicle")
-monocilia <- read_smooth_neuron("celltype:monociliated")
-bicilia <- read_smooth_neuron("celltype:biciliated")
-non_cilia <- read_smooth_neuron("celltype:nonciliated")
+SSN_neuron <- read_smooth_neuron("celltype:SSN")
+basalbody <- read_smooth_neuron("celltype:basalbody")
+multicentriole <- read_smooth_neuron("celltype:multicentriole")
+SNN_neuron <- read_smooth_neuron("celltype:SNN")
+lamellateE <- read_smooth_neuron("celltype:lamellate-extra")
+lamellateI <- read_smooth_neuron("celltype:lamellate-intra")
+
 
 
 Q1 <- nlapply(read.neurons.catmaid("Q1", pid = 35),
@@ -60,9 +60,14 @@ balancer_Q4 <- nlapply(read.neurons.catmaid(get_skids_with_annot(pid = 35, c("ce
                          smooth_neuron(x, sigma = 1000))
 
 
-all_celltypes <- list(balancer, bridge, bristle, dome, Cgroove_tag, Cgroove_sag,
-                      intramulticilia, lamellate, lithocyte, neuron, 
-                      plumose, dense_vesicle, monocilia, bicilia, non_cilia)
+all_celltypes <- list(
+  balancer, plumose, bridge, lithocyte, 
+  SER, dome, bristle, intramulticilia,
+  bicilia, monocilia, non_cilia, dense_vesicle,
+  Cgroove_tag, Cgroove_sag, SSN_neuron, basalbody,
+  multicentriole, SNN_neuron, lamellateE, lamellateI
+  )
+
 
 
 # plot balancer -----------------------------------------------

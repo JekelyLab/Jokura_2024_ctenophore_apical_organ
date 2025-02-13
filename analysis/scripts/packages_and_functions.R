@@ -15,6 +15,7 @@ library(RColorBrewer)
 library(igraph)
 library(tidygraph)
 library(av)
+library(jpeg)
 
 
 

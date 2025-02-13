@@ -1,5 +1,7 @@
 ---
 title: "Cell-type diversity and connectome of the ctenophore apical organ"
+subtitle: |
+\raggedright  Kei Jokura^1,3,4,\*^, Sanja Jasek^1,2^,  Lara Kewalow^2^, Pawel Burkhardt^5^, Gáspár Jékely^1,2,\*^  \newline<br>^1^Living Systems Institute, University of Exeter, Exeter, EX4 4QD, United Kingdom \newline<br>^2^ \newline<br>^2^Heidelberg University, Centre for Organismal Studies (COS), 69120 Heidelberg, Germany \newline<br>^4^BioSciences, University of Exeter, Stocker Road, Exeter EX4 4QD, Exeter, United Kingdom\newline<br> ^5^Sars Centre \newline<br> ^\*^Correspondence:  jokura@nibb.ac.jp, gaspar.jekely@cos.uni-heidelberg.de \newline<br>
 mainfont: Arial
 monofont: DejaVu Sans Mono #Times New Roman
 fontsize: 11pt
@@ -28,6 +30,17 @@ format:
 bibliography: references.bib #add bibliography in this file
 csl: elife.csl #change according to journal
 ---
+
+```{r}
+#| include: false
+#| eval: true
+#source(here::here("analysis/scripts/statistics_for_paper.R"))
+
+#The 'analysis/scripts/statistics_for_paper.R' script is sourced and it runs but the output is not included in the knitted output. But we can access the variables defined in the sourced script simply by adding \` r var_name \` between \` backticks, in this case max_PRC value is (now this number comes from our sourced script).
+
+```
+
+
 
 \
 
@@ -95,6 +108,7 @@ From AO neuron_Q1Q2, synapses were formed with 6 of the 37 balancer cells in the
 ```{r, out.width = "100%", fig.cap="**Figure 3. Title fig 3** pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend. " }
 #| echo: false 
 
+<<<<<<< Updated upstream
 knitr::include_graphics("figures/Figure3.png")
 ```
 
@@ -201,12 +215,65 @@ This system ensures consistent and accurate tracking of cellular data, enabling 
 ### Analysis of Balancer Cilia
 
 We conducted the analysis using the cydippid stage of Mnemiopsis leidyi at five days post-fertilization. A coverslip with a thin layer of Vaseline applied to two edges was lightly placed on a slide glass. Filtered natural seawater was introduced under the coverslip, along with the cydippids. By gently moving the coverslip, the desired orientation for observation was adjusted, and once positioned, slight pressure was applied to immobilize the cydippids. To stabilize the statolith's position, the microscope was tilted 90 degrees, arranging the stage vertically. The movement of the balancer cilia was observed using a differential interference contrast (DIC) microscope (Zeiss Axio Imager.M2) equipped with a highly sensitive CMOS monochrome camera optimized for the near-infrared (NIR) range (UI-3360CP-NIR-GL Rev.2, iDS). Observations were made using a 40x objective lens (Objective LD LCI Plan-Apochromat 40x/1.2 Imm Corr DIC M27) with glycerine immersion. For recording, we employed a custom-made NIR LED strobe illumination system (wavelength: 850 nm) synchronized with the camera's exposure signals. The camera and LED strobe system were operated using the Video Capture Software BohNavi. Images were recorded at a resolution of 640×480 pixels with a frame rate of 100 fps for 2 minutes, using 0.05 ms pulses from the LED. To analyze the ciliary beating of the balancer cilia, we utilized the Multi Kymograph project in Fiji software.
+=======
+Figure 6 - cilia? renderings of basal bodies, centrioles, length, axoneme structure (table), table about cell types, number of cilia etc.
+
+### Synapses
+
+"synaptic regions with the characteristic presynaptic triad mor- phology of ctenophore nerves (i.e., a single layer of vesicles, smooth ER sac, and closely apposed mito- chondria [@Horridge_1964; @Hernandez_Nicaise_1973] Hernandez- Nicaise, 1973)"
+
+Figure 7 - synapses, reconstruction, annotation, numbers, distribution of partners, example EM (figure supplement - lots of EM), mitochondria (Fig suppl - mitochondrion stats - Sanja)
+
+Gap juntions? Innexins are expressed in the apical organ in specific patches of cells in each quadrant [@Ortiz_2023]
+
+Ctenophore synapses [@Hernandez_Nicaise_1973]
+
+We found no synapses between bridge and balancer, in agreement with Tamm [@Tamm_2002].
+
+Figure 8 - connectome cell-type based, quadrant based, nerve net syntycia, bridge, quadrants (Fig suppl - cell-based network)
+
+Tamm&Tamm observed synapses from neurites to bridge cells (2002). and in Mnemiopsis larvae observed synapses from bridge cells onto other cells
+
+Inserting Figures
+
+You can add your figures into the rendered document. We saved the figures into /manuscript/figures or /manuscript/figure_supplements and can insert them from there. We use knitr::include_graphics for this. The title and legend can also be edited, as will as the width of the output figure.
+
+### Connectivity
+
+### Physiology?
+
+### Discussion
+
+
+## Equations
+
+Equations can also be inserted, Insert -\> Display Math:
+
+$$
+\bar{X} = \frac{\sum_{i=1}^{n} x_{i}}{n}
+$$
+
+
+
+## Materials and Methods
+
+### Volume electron microscopy
+
+### Imaging of balancer activity
+
+### Cell-type annotation and connectome analysis
+
+### Data and code availability
+
+>>>>>>> Stashed changes
 
 ## Acknowledgements
 
-We would like to thank the Jekely lab for the R project template (<https://github.com/JekelyLab/new_paper_template>) we used to write this paper. This work was funded by ... JSPS... ERC.. Others ...
+We would like to thank the Jekely lab for the R project template (<https://github.com/JekelyLab/new_paper_template>) we used to write this paper. This work was funded by ... JSPS... This project has received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (grant agreement No 101020792).
+
 
 ## References
+<<<<<<< Updated upstream
 
 ```{=html}
 <!--
@@ -231,3 +298,5 @@ We would like to thank the Jekely lab for the R project template (<https://githu
 The 'analysis/scripts/statistics_for_paper.R' script is sourced and it runs but the output is not included in the knitted output. But we can access the variables defined in the sourced script simply by adding \` r var_name \` between \` backticks, in this case max_PRC value is (now this number comes from our sourced script).
 
 If we update the data, the script can recalculate the variable we want to refer to in the text and update the number.
+=======
+>>>>>>> Stashed changes
