@@ -3,120 +3,149 @@
 # source packages and functions -----------------
 source("analysis/scripts/packages_and_functions.R")
 
-<<<<<<< Updated upstream
-
-# assemble figure -------------------------------------------------------------
-
-library(jpeg)
-=======
 # load cells ----------------------------------
 
 balancer <- read_smooth_neuron("celltype:balancer")
-
-Q1 <- nlapply(
-  read.neurons.catmaid("Q1", pid = 35),
-  function(x)
-  smooth_neuron(x, sigma = 1000)
-  )
-
-Q2 <- nlapply(
-  read.neurons.catmaid("Q2", pid = 35),
-  function(x)
-  smooth_neuron(x, sigma = 1000)
-  )
-
-Q3 <- nlapply(
-  read.neurons.catmaid("Q3", pid = 35),
-  function(x)
-  smooth_neuron(x, sigma = 1000)
-  )
-
-Q4 <- nlapply(
-  read.neurons.catmaid("Q4", pid = 35),
-  function(x)
-  smooth_neuron(x, sigma = 1000)
-  )
-
-with_soma <- nlapply(
-  read.neurons.catmaid("with_soma", pid = 35),
-  function(x)
-  smooth_neuron(x, sigma = 1000)
-  )
-
+Q1 <- read_smooth_neuron("Q1")
+Q2 <- read_smooth_neuron("Q2")
+Q3 <- read_smooth_neuron("Q3")
+Q4 <- read_smooth_neuron("Q4")
+with_soma <- read_smooth_neuron("with_soma")
+lithocyte <- read_smooth_neuron("celltype:lithocyte")
 
 # plot balancer and quadrants ----------------------
 
+plot_background()
 
+plot3d(
+  balancer, soma = T, lwd = 1, add = T, 
+  alpha = 0.9, col = Okabe_Ito[5],
+  WithConnectors = F
+  )
+plot3d(
+  lithocyte, soma = T, lwd = 1, add = T, 
+  alpha = 0.8, col = Okabe_Ito[8],
+  WithConnectors = F
+)
+plot3d(
+  Q1, soma = T, lwd = 1, add = T, 
+  alpha = 0.15, col = Okabe_Ito[1]
+)
+plot3d(
+  Q2, soma = T, lwd = 1, add = T, 
+  alpha = 0.15, col = Okabe_Ito[2]
+)
+plot3d(
+  Q3, soma = T, lwd = 1, add = T, 
+  alpha = 0.15, col = Okabe_Ito[6]
+)
+plot3d(
+  Q4, soma = T, lwd = 1, add = T, 
+  alpha = 0.15, col = Okabe_Ito[7]
+)
+
+plot3d(
+  outline, add = T, 
+  alpha = 0.06, col = "grey50"
+)
+plot3d(
+  dome_cavity, add = T, 
+  alpha = 0.1, col = "grey50"
+)
+
+
+nview3d("anterior", extramat = rotationMatrix(1.05, 250, -200, 1000))
+
+text3d(15402, 56436, -200, "lithocyte", cex = 2.5)
+text3d(38002, 65436, 10000, "balancer", cex = 2.5)
+text3d(23402, 29436, -200, "Q1", cex = 2.5)
+text3d(11602, 54436, -200, "Q2", cex = 2.5)
+text3d(23402, 65436, -200, "Q3", cex = 2.5)
+text3d(36402, 35436, -200, "Q4", cex = 2.5)
+
+#aboral view
+rgl.snapshot("manuscript/pictures/balancer_Q1_4_aboral_view.png")
+
+#side view
+nview3d("left", extramat = rotationMatrix(300, 4200, 1800, 800))
+rgl.pop()
+rgl.pop()
+rgl.pop()
+rgl.pop()
+text3d(41002, 65436, 18000, "balancer", cex = 2)
+
+rgl.snapshot("manuscript/pictures/balancer_Q1_4_side_view.png")
+
+close3d()
 
 # plot balancer -----------------------------------------------
 
-plot_background()
-close3d()
 # 3d plotting of cells
 nopen3d() 
 mfrow3d(1, 3)  #defines the two scenes
 #define the size of the rgl window, the view and zoom
 #par3d(windowRect = c(0, 0, 1200, 350))
-par3d(windowRect = c(0, 0, 2400, 700))
+par3d(windowRect = c(0, 0, 2400, 800))
 
 #plot aboral view
-plot3d(balancer,
-       soma = T, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
-#for (object in objects) {
-#  plot3d(object, soma = TRUE, lwd = 1, add = TRUE, alpha = 0.05, col = Okabe_Ito[8])
-#}
-
-
+plot3d(
+  balancer, soma = T, lwd = 1, add = T, 
+  alpha = 0.5, col = Okabe_Ito[5],
+  WithConnectors = F
+)
 plot3d(
   with_soma, soma = T, lwd = 1, add = T, 
   alpha = 0.05, col = Okabe_Ito[8]
   )
 
-#texts3d(58000,51000,5000, "INRGW", cex = 3, col = "#56B4E9")
-
 #aboral view
 nview3d("anterior", extramat = rotationMatrix(1.05, 250, -200, 1000))
-#rgl.snapshot("manuscript/pictures/balancer_aboral_view.png")
-par3d(zoom=0.61)
+par3d(zoom=0.7)
+#y-axis clip
+clipplanes3d(1, 0, 0, -11500)
+#x-axis clip
+clipplanes3d(0, 1, 0, -24000)
 
 #move to next panel in rgl window
 next3d(clear=F)
-
-
-
 #plot lateral view of Sagittal plane
-plot3d(balancer,
-       soma = T, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
+plot3d(
+  balancer, soma = T, lwd = 1, add = T, 
+  alpha = 0.5, col = Okabe_Ito[5],
+  WithConnectors = F
+)
 plot3d(
   with_soma, soma = T, lwd = 1, add = T, 
   alpha = 0.05, col = Okabe_Ito[8]
   )
 
 nview3d("left", extramat = rotationMatrix(300, 4200, 1800, 800))
-par3d(zoom=0.61)
+par3d(zoom=0.7)
+#y-axis clip
+clipplanes3d(1, 0, 0, -11500)
+#x-axis clip
+clipplanes3d(0, 1, 0, -24000)
 
 #move to next panel in rgl window
 next3d(clear=F)
 
 #plot lateral view of Tentacular plane
-plot3d(balancer,
-       soma = T, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
+plot3d(
+  balancer, soma = T, lwd = 1, add = T, 
+  alpha = 0.5, col = Okabe_Ito[5],
+  WithConnectors = F
+)
 plot3d(
   with_soma, soma = T, lwd = 1, add = T, 
   alpha = 0.05, col = Okabe_Ito[8]
   )
 
 nview3d("left", extramat = rotationMatrix(-1.7, 190, -120, -140))
-par3d(zoom=0.61)
-
-#move to next panel in rgl window
-next3d(clear=F)
+par3d(zoom=0.7)
+#y-axis clip
+clipplanes3d(1, 0, 0, -11500)
+#x-axis clip
+clipplanes3d(0, 1, 0, -24000)
 
 #make a snapshot to the working directory
 rgl.snapshot("manuscript/pictures/balancer.png")
@@ -128,12 +157,12 @@ close3d()
 
 #read pics
 panel_balancer <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer.png")) +
-  draw_label("balancer cells", x = 0.5, y = 0.95, size = 8.5, fontface="bold", hjust = 0.5) +
-  draw_label("aboral view", x = 0.01, y = 0.86, color="black", size = 6, fontface="plain", hjust = 0) +
-  draw_label("lateral view of PA plane", x = 0.33, y = 0.86, color="black", size = 6, fontface="plain", hjust = 0) +
-  draw_label("lateral view of TA plane", x = 0.69, y = 0.86, color="black", size = 6, fontface="plain", hjust = 0) +
+  draw_label("balancer cells", x = 0.1, y = 0.98, size = 10, fontface="plain") +
+  draw_label("aboral view", x = 0.1, y = 0.86, color="black", size = 8) +
+  draw_label("lateral view of PA plane", x = 0.45, y = 0.86, color="black", size = 8) +
+  draw_label("lateral view of TA plane", x = 0.75, y = 0.86, color="black", size = 8) +
   draw_line(x = c(0.85, 0.95), y = c(0.1, 0.1), color = "black", size = 0.5) +
-  draw_label(expression(paste("25 ", mu, "m")), x = 0.9, y = 0.14, color = "black", size = 7, hjust = 0.5) +
+  draw_label(expression(paste("25 ", mu, " m")), x = 0.9, y = 0.14, color = "black", size = 7, hjust = 0.5) +
   draw_label("TA", x = 0.325, y = 0.16, size = 6, color = "black", hjust = 0.5) +
   geom_segment(aes(x = 0.25, y = 0.16, xend = 0.31, yend = 0.16), color = "black", 
                arrow = arrow(ends = "both", type = "closed", length = unit(0.1,"cm")),
@@ -155,60 +184,32 @@ panel_balancer <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer.pn
                arrow.fill = "black", linewidth = 0.175)
 
 
- 
-panel_larva_5dpf <- ggdraw() + draw_image(readJPEG("manuscript/pictures/Mnemiopsis_larva_5dpf.jpg"))
-
->>>>>>> Stashed changes
-library(magick)
-
 panel_larva_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/Mnemiopsis_larva_5dpf.png"))
 panel_AO_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_mag_pics.png"))
 panel_serial_sectioning <- ggdraw() + draw_image(readPNG("manuscript/pictures/serial sectioning.png"))
 panel_catmaid_overview <- ggdraw() + draw_image(readPNG("manuscript/pictures/overview.png"))
-<<<<<<< Updated upstream
 panel_3d_all_cells <- ggdraw() + draw_image(readPNG("manuscript/pictures/all_cells_3_views.png"))
+panel_bal_ant <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer_Q1_4_aboral_view.png")) +
+  draw_label("four quadrants", x = 0.4, y = 0.98, size = 10, fontface="plain", hjust = 0.5)
+  
+panel_bal_side <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer_Q1_4_side_view.png"))
 
 layout <- "
-AABBBBB#CCC
-###########
-DDEEEEEEEEE
+AABBBBCCC
+#########
+DDEEEEEEE
 "
 
-Figure1 <- panel_larva_pic + panel_AO_pic + 
-  panel_serial_sectioning + panel_catmaid_overview + panel_3d_all_cells +
-  plot_layout(design = layout,heights = c(1,0.1,1.4),widths = c(1,1.5,1,0.2,1,1,1,0.15,1,1,1)) + 
-  plot_annotation(tag_levels = "A") + 
-  theme(plot.tag = element_text(size = 12, face='plain', color='black'))
-
+Figure1 <- panel_larva_pic + panel_AO_pic + panel_catmaid_overview + 
+  panel_bal_ant + panel_balancer +
+  plot_layout(
+    design = layout,
+    heights = c(1,0.1,1.4)) + 
+  plot_annotation(tag_levels = "A") &
+  theme(plot.tag = element_text(size = 12, face = "plain"))
 
 ggsave("manuscript/figures/Figure1.png", limitsize = FALSE, 
        units = c("px"), Figure1, width = 2600, height = 1000, bg='white')  
-=======
-panel_Q <- ggdraw() + draw_image(readPNG("manuscript/pictures/quadrants.png"))
-
-layout <- "
-AABBCCDDD
-#########
-EEEFFGGGG
-"
-
-
-
-
-Figure1 <- panel_larva_5dpf + panel_AO + panel_AO_schema + panel_AO_dimention_schema + 
-  panel_catmaid_overview + panel_Q + panel_balancer +
-  patchwork::plot_layout(design = layout, 
-                         heights = c(1,0.1,1), 
-                         widths = c(1,1,1,1,1,1,1)) + 
-  patchwork::plot_annotation(tag_levels = "A") &  
-  ggplot2::theme(plot.tag = element_text(size = 12, 
-                                         face='plain', color='black'))
-
-
-ggsave("manuscript/figures/Fig1.png", limitsize = FALSE, 
-       units = c("px"), Figure1, width = 2400, height = 1000, bg='white')  
->>>>>>> Stashed changes
-
 
 ggsave("manuscript/figures/Figure1.pdf", limitsize = FALSE, 
        units = c("px"), Figure1, width = 2600, height = 1000) 
