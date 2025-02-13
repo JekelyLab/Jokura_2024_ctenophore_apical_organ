@@ -198,9 +198,9 @@ panel_bal_ant <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer_Q1_
 panel_bal_side <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer_Q1_4_side_view.png"))
 
 layout <- "
-AAAAABBBBBBBBBBBBBBBBBB#CCCCCCCC
-################################
-DDDDDDDDEEEEEEEEEEEEEEEEEEEEEEEE
+AAAAAAAAAAA#BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#CCCCCCCCCCCCCCCC
+################################################################
+DDDDDDDDDDDDDDDDEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
 "
 
 Figure1 <- panel_larva_pic + panel_AO_pic + panel_catmaid_overview + 
@@ -215,5 +215,5 @@ ggsave("manuscript/figures/Figure1.png", limitsize = FALSE,
        units = c("px"), Figure1, width = 2800, height = 1200, bg='white')  
 
 ggsave("manuscript/figures/Figure1.pdf", limitsize = FALSE, 
-       units = c("px"), Figure1, width = 2400, height = 1000) 
+       units = c("px"), Figure1, width = 2800, height = 1200) 
 
