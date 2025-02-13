@@ -1,7 +1,7 @@
 ---
-title: "Cell-type diversity and connectome of the ctenophore apical organ"
+title: "Synaptic connectome of the ctenophore apical organ"
 subtitle: |
-\raggedright  Kei Jokura^1,3,4,\*^, Sanja Jasek^1,2^,  Lara Kewalow^2^, Pawel Burkhardt^5^, Gáspár Jékely^1,2,\*^  \newline<br>^1^Living Systems Institute, University of Exeter, Exeter, EX4 4QD, United Kingdom \newline<br>^2^ \newline<br>^2^Heidelberg University, Centre for Organismal Studies (COS), 69120 Heidelberg, Germany \newline<br>^4^BioSciences, University of Exeter, Stocker Road, Exeter EX4 4QD, Exeter, United Kingdom\newline<br> ^5^Sars Centre \newline<br> ^\*^Correspondence:  jokura@nibb.ac.jp, gaspar.jekely@cos.uni-heidelberg.de \newline<br>
+  \raggedright  Kei Jokura^1,2,4,5\*^, Sanja Jasek^1,3,4^,  Lara Kewalow^3^, Pawel Burkhardt^6^, Gáspár Jékely^1,3,4,\*^  \newline<br>^1^Living Systems Institute, University of Exeter, Exeter, EX4 4QD, United Kingdom \newline<br>^2^Exploratory Research Center on Life and Living Systems (ExCELLS), National Institutes of Natural Sciences, Okazaki, Japan\newline<br>^3^Heidelberg University, Centre for Organismal Studies (COS), 69120 Heidelberg, Germany \newline<br>^4^BioSciences, University of Exeter, Stocker Road, Exeter EX4 4QD, Exeter, United Kingdom\newline<br> ^5^National Institute for Basic Biology (NIBB), National Institutes of Natural Sciences, Okazaki, Japan\newline<br>^6^Michael Sars Centre, University of Bergen, Norway \newline<br> ^\*^Correspondence:  jokura@nibb.ac.jp, gaspar.jekely@cos.uni-heidelberg.de
 mainfont: Arial
 monofont: DejaVu Sans Mono #Times New Roman
 fontsize: 11pt
@@ -39,19 +39,6 @@ csl: elife.csl #change according to journal
 #The 'analysis/scripts/statistics_for_paper.R' script is sourced and it runs but the output is not included in the knitted output. But we can access the variables defined in the sourced script simply by adding \` r var_name \` between \` backticks, in this case max_PRC value is (now this number comes from our sourced script).
 
 ```
-
-
-
-\
-
-Kei Jokura^1,3,4,\*^, Sanja Jasek^1,2^, Lara Kewalow^2^, Pawel Burkhardt^5^, Gáspár Jékely^1,2,\*^\
-
-^1^Living Systems Institute, University of Exeter, Exeter, EX4 4QD, United Kingdom\
-^2^Heidelberg University, Centre for Organismal Studies (COS), 69120 Heidelberg, Germany\
-^3^Exploratory Research Center on Life and Living Systems (ExCELLS), National Institutes of Natural Sciences, Okazaki, Japan\
-^4^National Institute for Basic Biology (NIBB), National Institutes of Natural Sciences, Okazaki, Japan\
-^5^Michael Sars Centre, University of Bergen, Norway\
-^\*^Correspondence: jokura\@nibb.ac.jp, gaspar.jekely\@cos.uni-heidelberg.de
 
 ## Abstract
 
@@ -108,7 +95,6 @@ From AO neuron_Q1Q2, synapses were formed with 6 of the 37 balancer cells in the
 ```{r, out.width = "100%", fig.cap="**Figure 3. Title fig 3** pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend. " }
 #| echo: false 
 
-<<<<<<< Updated upstream
 knitr::include_graphics("figures/Figure3.png")
 ```
 
@@ -269,34 +255,23 @@ $$
 
 ## Acknowledgements
 
-We would like to thank the Jekely lab for the R project template (<https://github.com/JekelyLab/new_paper_template>) we used to write this paper. This work was funded by ... JSPS... This project has received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (grant agreement No 101020792).
+This work was funded by ... JSPS... This project has received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (grant agreement No 101020792).
 
 
-## References
-<<<<<<< Updated upstream
+## References {.unnumbered}
+
+::: {#refs}
+:::
 
 ```{=html}
 <!--
 ## See https://github.com/hypothesis/client
 ## Add commenting functionality with this script
 -->
-<<<<<<< HEAD
 ```
-
 ```{=html}
-<script src="https://hypothes.is/embed.js" async></script>
+<script src="hypothes.is/embed.js" async></script>
 ```
+\newpage
 
-## Sourcing code and working with variable
-
-```{r}
-#| include: false
-#| eval: true
-#source(here::here("analysis/scripts/statistics_for_paper.R"))
-```
-
-The 'analysis/scripts/statistics_for_paper.R' script is sourced and it runs but the output is not included in the knitted output. But we can access the variables defined in the sourced script simply by adding \` r var_name \` between \` backticks, in this case max_PRC value is (now this number comes from our sourced script).
-
-If we update the data, the script can recalculate the variable we want to refer to in the text and update the number.
-=======
->>>>>>> Stashed changes
+## Supplementary material {.unnumbered}
