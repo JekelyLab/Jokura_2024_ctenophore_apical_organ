@@ -66,11 +66,12 @@ Cells containing cilia were traced down to the tips of the cilia, and basal bodi
 
 Next, we decided to divide the entire apical organ into four broad quadrants to facilitate grouping the identified cells. The general body plan of ctenophores, when viewed from the aboral side, exhibits biradial symmetry around the positions of the anal pores. This symmetry corresponds to the four blastomeres present at the four-cell stage during early embryonic development. We categorized the traced cells into four quadrants and designated these groups as Q1 through Q4 for clarity and consistency.
 
-```{r, out.width = "100%", fig.cap="**Figure 1. Title fig 1** pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend. " }
-#| echo: false 
-
-knitr::include_graphics("figures/Figure1.png")
-```
+![**Figure 1. Morphology of the apical organ in *Mnemiopsis leidyi***\
+(A) Whole-body image of a 5-day-old M. leidyi cydippid larva in lateral view, observing the tentacular plane. The boxed region indicates the apical organ. Scale bar: 100 µm.\
+(B) Enlarged views of the apical organ from different perspectives in a 5-day-old M. leidyi cydippid larva. The left panel shows the apical organ from a aboral view. The middle panel presents a sagittal view of the apical organ. The right panel provides a tentacular plane view of the apical organ. Scale bar: 10 µm.\
+(C) Schematic diagram of the serial sectioning process. The entire cydippid larva was embedded in resin, trimmed around the apical organ, and sectioned into serial ultrathin sections, which were collected on glass slides in a ribbon-like arrangement.\
+(D) Example of cell tracing using the collaborative annotation toolkit CATMAID for large-scale electron microscopy image datasets. The spherical objects indicate nuclear positions, while the lines represent the traced cell centers. Scale bar: 10 µm.\
+(E) Three-dimensional reconstruction of all cells composing the apical organ, displayed from different perspectives. The left panel shows a aboral view of the apical organ. The middle panel presents a sagittal plane view. The right panel provides a tentacular plane view. Cells are color-coded according to their types. Scale bar: 10 µm.](figures/Figure1.png)
 
 ### Identification of Synaptic Structures in Syncytium Neurons
 
@@ -78,11 +79,11 @@ Classical neural staining techniques do not provide clear images of the neurons 
 
 As mentioned above, following the identification of the presynaptic structures, we reconstructed three major Syncytial neurons. Each of these Syncytial neurons was a cell with multiple nuclei, with membranes fused by continuous plasma membranes. These neurons are distinct in morphology from the Syncytial subepithelial nerve net (SNN) neurons with blebbed morphology previously reconstructed in 3D [@Burkhardt_2023]. Our findings represent the second documented discovery of Syncytial neurons in ctenophores. Furthermore, these neurons exhibited clear morphological differences when compared to other sensory cells reported in the same study, such as mesogleal neurons and sensory cells with presynaptic structures and cilia (types 1-4)[@Burkhardt_2023]. Based on their distinct spatial relationships, we were able to classify these three Syncytial neurons into two categories. The first type is a larger "AO neuron_Q1234," which possesses four (or possibly six?) nuclei spanning four quadrants. It contained X presynaptic structures. The second type consists of "AO neuron_Q12" and "AO neuron_Q34," each having two nuclei spanning two quadrants, and each containing X presynaptic structures.
 
-```{r, out.width = "100%", fig.cap="**Figure 2. Title fig 2** pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend. " }
-#| echo: false 
-
-knitr::include_graphics("figures/Figure2.png")
-```
+![**Figure 2. Reconstruction of Three Syncytial Neurons in the Apical Organ**\
+(A) Representative electron micrographs of presynaptic triad structures within the dataset. The positions of mitochondria are marked in orange. Postsynaptic target cells were inferred based on the locations of synaptic vesicles and the endoplasmic reticulum, with light blue arrows indicating the direction across the cell membrane. The left panel illustrates a monadic structure, while the right panel shows a polyadic (or dyadic) structure. Scale bar: 500 nm.\
+(B) 3D reconstruction of the syncytial apical organ (AO) neuron Q1Q2Q3Q4, which spans all four quadrants and contains multiple nuclei (light blue). The spheres represent the positions of individual nuclei. The left panel shows a aboral view of the apical organ, the middle panel presents a sagittal plane view, and the right panel provides a tentacular plane view.\
+(C) 3D reconstruction of two syncytial apical organ neurons, AO neuron Q1Q2 (pink) and AO neuron Q3Q4 (orange), each spanning two quadrants and containing multiple nuclei. The spheres indicate the positions of the nuclei. The left panel shows a aboral view of the apical organ, the middle panel presents a sagittal plane view, and the right panel provides a tentacular plane view.\
+(D) Localization of mitochondria within AO neuron Q1Q2Q3Q4. Red indicates mitochondria associated with the presynaptic triad structures, yellow marks mitochondria containing synaptic vesicles but lacking a clearly defined presynaptic triad, blue represents mitochondria with unclear synaptic vesicles, and black denotes mitochondria where no synaptic vesicles were identified.](figures/Figure2.png)
 
 ### Identification the Gravity-Sensitive Neural Circuit via the Syncytial Neurons Network
 
@@ -92,11 +93,11 @@ Balancer cells are monociliated cells, and their cilia protrude longer than thos
 
 From AO neuron_Q1Q2, synapses were formed with 6 of the 37 balancer cells in the Q1 region, and 8 of the 32 balancer cells in the Q2 region. Similarly, from AO neuron_Q3Q4, synapses were formed with 1 of the 32 balancer cells in the Q3 region, and 5 of the 28 balancer cells in the Q4 region. AO neuron_Q1234 formed input synapses with balancer cells in the Q1 region (7 cells), Q2 region (11 cells), Q3 region (6 cells), and Q4 region (10 cells). Some balancer cells received inputs from both AO neuron_Q1Q2 or AO neuron_Q3Q4 and AO neuron_Q1234. While previous studies have suggested the presence of afferent synapses from balancer cells to neurons [@Hernandez_Nicaise_1974], our data did not reveal any synaptic inputs from balancer cells to AO neurons. However, we identified "bridge cells" that actively formed input synapses with AO neurons, highlighting their potential role in the network.
 
-```{r, out.width = "100%", fig.cap="**Figure 3. Title fig 3** pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend. " }
-#| echo: false 
-
-knitr::include_graphics("figures/Figure3.png")
-```
+![**Figure 3. Reconstruction of Balancer Ciliated Cells in the Apical Organ**\
+(A) Connectivity matrix of AO neurons. Columns represent presynaptic AO neurons, rows represent postsynaptic AO neurons, and each number indicates the number of synapses. AO neurons are interconnected via synapses, and AO neuron Q1234 forms a self-synapse, autapse.\
+(B) Three-dimensional reconstruction of balancer ciliated cells in all four quadrant regions. Each quadrant contains approximately 30 cells. All balancer cilia are monocilia. The spheres indicate the positions of the nuclei. The left panel shows a aboral view of the apical organ, the middle panel presents a sagittal plane view, and the right panel provides a tentacular plane view.\
+(C) Synaptic connections from AO neurons to balancer ciliated cells. The left panel presents an aboral view, while the right panel shows a lateral view and a tentacular plane view. Balancer ciliated cells are depicted in light gray, AO neuron Q1234 in black, AO neuron Q12 in orange, and AO neuron Q34 in blue.\
+(D) Connectivity map of three AO neurons (Q1234 in blue, Q12 in pink, and Q34 in orange) and balancer ciliated cells (light blue). The thickness of the arrows and the numbers correspond to the number of synapses. Synaptic structures from the same neuron targeting the same balancer cell are grouped into hexagons, with the number of cells added to the label.](figures/Figure3.png)
 
 ### Identification of Neuron-like Bridge Cells Forming Afferent Synapses in the Gravity-Sensitive Neural Circuit
 
@@ -108,11 +109,12 @@ Some bridge cells also formed afferent synapses with AO neurons. For example, br
 
 Interestingly, in both regions, bridge cells also formed synapses with adjacent bridge cells. However, no synaptic input was found from bridge cells across the sagittal plane to those in the opposite region. To analyze the grouped synaptic connectivity graph, we classified cell types within each region, collapsed cells of the same type into a single node, summed the number of synapses, and explored directed pathways to effectors (balancer cell groups). The results revealed a feedback pathway from AO neurons through the synaptic connections formed by bridge cells, thereby shedding light on the neural circuit structure involving these cells.
 
-```{r, out.width = "100%", fig.cap="**Figure 4. Title fig 4** pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend. " }
-#| echo: false 
-
-knitr::include_graphics("figures/Figure4.png")
-```
+![**Figure 4. Reconstruction of bridge cells and gravity-sensing neural circuits in the apical organ**\
+(A) 3D reconstruction of bridge cells spanning the Q1Q2 and Q3Q4 quadrants. The Q1Q2-side bridge cells (8 cells) are shown in blue, while the Q3Q4-side bridge cells (6 cells) are shown in xxx color. The morphology of individual bridge cells extending across opposite quadrant regions is depicted. The spheres represent the positions of individual nuclei. The left panel shows an aboral view of the apical organ, the middle panel presents a sagittal plane view, and the right panel provides a tentacular plane view.\
+(B) Mitochondrial localization within bridge cells and associated presynaptic triad structures. Red indicates mitochondria associated with presynaptic triad structures, yellow marks mitochondria containing synaptic vesicles but lacking a clearly defined presynaptic triad, blue represents mitochondria with unclear synaptic vesicles, and black denotes mitochondria where no synaptic vesicles were identified. The left panel shows a dorsal view of the apical organ, the middle panel presents a sagittal plane view, and the right panel provides a tentacular plane view.\
+(C) Synaptic connections between AO neurons and bridge cells. The positions of synapses from AO neurons to bridge cells (red) and from bridge cells to AO neurons (light blue) are indicated. The left panel shows an aboral view, while the right panel presents a tentacular plane lateral view. Bridge cells are shown in light gray, AO neurons in Q1234 are in black, AO neurons in Q12 are in orange, and AO neurons in Q34 are in blue.\
+(D) Connectivity matrix of the gravity-sensing neural circuit. Columns represent presynaptic cell groups, while rows represent postsynaptic cell groups. The numbers and varying shades of blue correspond to the number of synapses.\
+(E) Complete connectivity map of the gravity-sensing neural circuit. Cells belonging to the same group are enclosed in hexagons, and the number of cells is added to their labels. The thickness of the arrows and the numerical values indicate the number of synapses. AO neurons in Q1234 are shown in black, AO neurons in Q12 in yellow, AO neurons in Q34 in blue, balancer cell groups in gray, and bridge cell groups in pink.](figures/Figure4.png)
 
 ### Control of Balancer Ciliary Movements by Gravity-Sensitive Neural Circuits
 
@@ -120,11 +122,12 @@ To investigate the function of gravity-sensitive circuits, we conducted a compar
 
 During the 2-minute recordings, balancer cilia exhibited movements that could be fast, slow, or stop abruptly (arrest) and start moving again (re-beat). Occasionally, large contraction responses caused the entire cydippid to move out of frame, and data from these moments were excluded. We focused on two metrics for left-right comparison: (1) the timing of ciliary arrest and (2) the timing of re-beat initiation following an arrest. Due to the low baseline beating frequency of the cilia, rapid synaptic input responses were not evaluated, suggesting that ciliary beat regulation may involve non-synaptic control mechanisms. The analysis revealed that both arrest and re-beat events were synchronized between left and right balancers in both planes within a few milliseconds, suggesting that these events are governed by synaptic input from neurons. Interestingly, while the re-beat timing showed no significant differences between the sagittal and tentacular planes, arrest timing exhibited greater variability in the tentacular plane. Comparing these findings with neural circuit diagrams suggests that in the sagittal plane, the same AO neurons (Q12 or Q34) project to both balancer cell groups, transmitting signals simultaneously and enabling synchronization. In contrast, in the tentacular plane, separate AO neurons project to different regions, potentially introducing an additional synaptic step, which may account for the observed variability in arrest timing.
 
-```{r, out.width = "100%", fig.cap="**Figure 5. Title fig 5** pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend. " }
-#| echo: false 
-
-knitr::include_graphics("figures/Figure5.png")
-```
+![**Figure 5. Differences in Balancer Cilia Movement Control Due to Variations in the Gravity-Sensing Neural Circuit Pathways**\
+(A) Schematic diagram of differential interference contrast (DIC) microscopy setup for imaging balancer cilia movement. The microscope was tilted 90 degrees so that the stage was positioned vertically. A monochrome CMOS camera sensitive to near-infrared (NIR) light was used, synchronized with an 850 nm strobe light source. The movement of the balancer cilia was recorded using a 40× objective lens.\
+(B, C) Sagittal plane view (B) and tentacular plane view (C) of the apical organ under the microscope. The direction of gravity is always oriented downward in the images. The two balancer cilia being compared are indicated by arrowheads.\
+(D, E) Connectivity maps of the gravity-sensing neural circuit corresponding to Figure 3E. These maps emphasize the differences in neural circuits in the sagittal plane (D) and tentacular plane (E), focusing on the balancer cell groups (blue hexagons). AO neuron Q1234 is shown in green, while AO neurons Q12 and Q34 are shown in pink.\
+(F) Kymograph patterns comparing the arrest and re-beat of balancer cilia movement. The left and right balancer cilia movements are compared in both the sagittal plane (left) and tentacular plane (right). The direction and length of the arrows indicate time.\
+(G) Graph showing the time differences in the arrest and re-beat timing of the left and right balancer cilia. S and T represent the sagittal plane and tentacular plane, respectively.](figures/Figure5.png)
 
 ## Discussion
 
