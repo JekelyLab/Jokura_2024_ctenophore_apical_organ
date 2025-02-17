@@ -47,15 +47,6 @@ bibliography: references.bib #add bibliography in this file
 csl: elife.csl #change according to journal
 ---
 
-```{r}
-#| include: false
-#| eval: true
-#source(here::here("analysis/scripts/statistics_for_paper.R"))
-
-#The 'analysis/scripts/statistics_for_paper.R' script is sourced and it runs but the output is not included in the knitted output. But we can access the variables defined in the sourced script simply by adding \` r var_name \` between \` backticks, in this case max_PRC value is (now this number comes from our sourced script).
-
-```
-
 ## Abstract
 
 **text in bold** *italic* [underline]{.underline}
@@ -145,6 +136,35 @@ During the 2-minute recordings, balancer cilia exhibited movements that could be
 (F) Kymograph patterns comparing the arrest and re-beat of balancer cilia movement. The left and right balancer cilia movements are compared in both the sagittal plane (left) and tentacular plane (right). The direction and length of the arrows indicate time.\
 (G) Graph showing the time differences in the arrest and re-beat timing of the left and right balancer cilia. S and T represent the sagittal plane and tentacular plane, respectively.](figures/Figure5.png)
 
+
+
+Figure 6 - cilia? renderings of basal bodies, centrioles, length, axoneme structure (table), table about cell types, number of cilia etc.
+
+### Synapses
+
+"synaptic regions with the characteristic presynaptic triad mor- phology of ctenophore nerves (i.e., a single layer of vesicles, smooth ER sac, and closely apposed mito- chondria [@Horridge_1964; @Hernandez_Nicaise_1973] "
+
+Figure 7 - synapses, reconstruction, annotation, numbers, distribution of partners, example EM (figure supplement - lots of EM), mitochondria (Fig suppl - mitochondrion stats - Sanja)
+
+Gap juntions? Innexins are expressed in the apical organ in specific patches of cells in each quadrant [@Ortiz_2023]
+
+Ctenophore synapses [@Hernandez_Nicaise_1973]
+
+We found no synapses between bridge and balancer, in agreement with Tamm [@Tamm_2002].
+
+Figure 8 - connectome cell-type based, quadrant based, nerve net syntycia, bridge, quadrants (Fig suppl - cell-based network)
+
+Tamm&Tamm observed synapses from neurites to bridge cells (2002). and in Mnemiopsis larvae observed synapses from bridge cells onto other cells
+
+Inserting Figures
+
+You can add your figures into the rendered document. We saved the figures into /manuscript/figures or /manuscript/figure_supplements and can insert them from there. We use knitr::include_graphics for this. The title and legend can also be edited, as will as the width of the output figure.
+
+### Connectivity
+
+### Physiology?
+
+
 ## Discussion
 
 In this study, we traced all the constituent cells of the aboral organ in five-day-old larvae of *Mnemiopsis leidyi* and completed a comprehensive neural map. As a result, we identified a novel type of syncytial neuron with a previously unreported morphology. Furthermore, we found that three such syncytial neurons project to distinct quadrants, integrating with balancer cell groups to form a gravity-sensing neural circuit. This study represents the first complete neural circuit map reported in ctenophores. Additionally, our analysis of balancer ciliary movements, based on neural circuit data, revealed differences in ciliary arrest control arising from circuit variations.
@@ -180,41 +200,6 @@ The neural cells identified in the apical organ exhibit a divergent feedforward 
 
 From a broader neuroanatomical perspective, nervous system structures across various animals have been shaped through selective optimization to adapt to environmental constraints (Bullmore & Sporns, 2012; Perin et al., 2011). For example, in nematodes, the spatial arrangement of ganglia is optimized to minimize the total length of neural wiring (White et al., 1986). Similarly, in ctenophores, understanding how transmission via syncytial neurons and synaptic connections has been selectively optimized at the circuit level will provide crucial insights into the evolutionary scaling of neural networks from early nervous systems to complex brains [@Farnworth2024]. In particular, this research may help elucidate how circuit modularization and layered structures emerged over evolutionary time.
 
-Figure 6 - cilia? renderings of basal bodies, centrioles, length, axoneme structure (table), table about cell types, number of cilia etc.
-
-### Synapses
-
-"synaptic regions with the characteristic presynaptic triad mor- phology of ctenophore nerves (i.e., a single layer of vesicles, smooth ER sac, and closely apposed mito- chondria [@Horridge_1964; @Hernandez_Nicaise_1973] "
-
-Figure 7 - synapses, reconstruction, annotation, numbers, distribution of partners, example EM (figure supplement - lots of EM), mitochondria (Fig suppl - mitochondrion stats - Sanja)
-
-Gap juntions? Innexins are expressed in the apical organ in specific patches of cells in each quadrant [@Ortiz_2023]
-
-Ctenophore synapses [@Hernandez_Nicaise_1973]
-
-We found no synapses between bridge and balancer, in agreement with Tamm [@Tamm_2002].
-
-Figure 8 - connectome cell-type based, quadrant based, nerve net syntycia, bridge, quadrants (Fig suppl - cell-based network)
-
-Tamm&Tamm observed synapses from neurites to bridge cells (2002). and in Mnemiopsis larvae observed synapses from bridge cells onto other cells
-
-Inserting Figures
-
-You can add your figures into the rendered document. We saved the figures into /manuscript/figures or /manuscript/figure_supplements and can insert them from there. We use knitr::include_graphics for this. The title and legend can also be edited, as will as the width of the output figure.
-
-### Connectivity
-
-### Physiology?
-
-### Discussion
-
-## Equations
-
-Equations can also be inserted, Insert -\> Display Math:
-
-$$
-\bar{X} = \frac{\sum_{i=1}^{n} x_{i}}{n}
-$$
 
 ## Materials and Methods
 
