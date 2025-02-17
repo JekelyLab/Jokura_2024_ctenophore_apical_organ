@@ -184,8 +184,18 @@ panel_balancer <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer.pn
                arrow.fill = "black", linewidth = 0.175)
 
 
-panel_larva_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/Mnemiopsis_larva_5dpf.png"))
-panel_AO_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_mag_pics.png"))
+panel_larva_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/Mnemiopsis_larva_5dpf.png")) +
+  draw_label("lateral view of TA plane", x = 0.5, y = 0.99, color="black", size = 8) +
+  draw_line(x = c(0.85, 0.95), y = c(0.1, 0.1), color = "black", size = 0.5) +
+  draw_label(expression(paste("500 ", mu, " m")), x = 0.9, y = 0.14, color = "black", size = 7, hjust = 0.5)
+
+panel_AO_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_mag_pics.png")) +
+  draw_label("aboral view", x = 0.2, y = 0.99, color="black", size = 8) +
+  draw_label("lateral view of PA plane", x = 0.5, y = 0.99, color="black", size = 8) +
+  draw_label("lateral view of TA plane", x = 0.85, y = 0.99, color="black", size = 8) +
+  draw_line(x = c(0.85, 0.95), y = c(0.05, 0.05), color = "black", size = 0.5) +
+  draw_label(expression(paste("50 ", mu, " m")), x = 0.9, y = 0.1, color = "black", size = 7, hjust = 0.5)
+
 panel_serial_sectioning <- ggdraw() + draw_image(readPNG("manuscript/pictures/serial sectioning.png"))
 panel_catmaid_overview <- ggdraw() + draw_image(readPNG("manuscript/pictures/overview.png")) +
   draw_label("serial EM volume", x = 0.3, y = 0.98, size = 10, fontface="plain") +
