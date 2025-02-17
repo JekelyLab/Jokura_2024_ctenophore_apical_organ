@@ -8,8 +8,8 @@ source("analysis/scripts/packages_and_functions.R")
 
 
 panel_synapse <- ggdraw() + draw_image(readPNG("manuscript/pictures/Figure_mito_syn_ves_syn.png"))
-panel_SSN_Q1234 <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_Q1234_panel.png"))
-panel_SSN_Q12_Q34 <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_Q1Q2_Q3Q4_panel.png"))
+panel_SSN_Q1234 <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_Q1234_from_CATMAID.png"))
+panel_SSN_Q12_Q34 <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_Q12_Q34_from_CATMAID.png"))
 panel_mito <- ggdraw() + draw_image(readPNG("manuscript/pictures/mito_pos_SSN_anterior_trim.png"))
 
 layout <- "

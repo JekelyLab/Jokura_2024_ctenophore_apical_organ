@@ -8,8 +8,8 @@ source("analysis/scripts/packages_and_functions.R")
 
 
 panel_AO_matrix <- ggdraw() + draw_image(readPNG("manuscript/pictures/AO_neurons_matrix.png"))
-panel_bal_3d <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer_text.png"))
-panel_bal_syn <- ggdraw() + draw_image(readPNG("manuscript/pictures/bal_syn.png"))
+panel_bal_3d <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer.png"))
+panel_bal_syn <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_prepost_synapse_balancer.png"))
 panel_grav_nc_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/gravity_neural_circuit_graph.png"))
 
 layout <- "

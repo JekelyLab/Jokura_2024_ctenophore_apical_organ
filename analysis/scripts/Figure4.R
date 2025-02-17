@@ -7,9 +7,9 @@ source("analysis/scripts/packages_and_functions.R")
 # assemble figure -------------------------------------------------------------
 
 
-panel_bri_3d <- ggdraw() + draw_image(readPNG("manuscript/pictures/bridge_text.png"))
+panel_bri_3d <- ggdraw() + draw_image(readPNG("manuscript/pictures/bridge.png"))
 panel_bri_mito <- ggdraw() + draw_image(readPNG("manuscript/pictures/mito_pos_bridge_text.png"))
-panel_bri_syn <- ggdraw() + draw_image(readPNG("manuscript/pictures/bridge_syn_text.png"))
+panel_bri_syn <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_prepost_synapse_bridge.png"))
 panel_grav_matrix <- ggdraw() + draw_image(readPNG("manuscript/pictures/mech_girdle_chaeMech_syn_matrix.png"))
 panel_grav_graph_bridge <- ggdraw() + draw_image(readPNG("manuscript/pictures/gravity_neural_circuit_graph_bridge.png"))
 

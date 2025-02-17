@@ -184,7 +184,7 @@ panel_balancer <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer.pn
                arrow.fill = "black", linewidth = 0.175)
 
 
-panel_larva_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/Mnemiopsis_larva_5dpf.png")) +
+panel_larva_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/Mnemiopsis_larva_24hpf.png")) +
   draw_label("lateral view of TA plane", x = 0.5, y = 0.99, color="black", size = 8) +
   draw_line(x = c(0.85, 0.95), y = c(0.1, 0.1), color = "black", size = 0.5) +
   draw_label(expression(paste("500 ", mu, " m")), x = 0.9, y = 0.14, color = "black", size = 7, hjust = 0.5)
@@ -195,6 +195,8 @@ panel_AO_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_mag_pic
   draw_label("lateral view of TA plane", x = 0.85, y = 0.99, color="black", size = 8) +
   draw_line(x = c(0.85, 0.95), y = c(0.05, 0.05), color = "black", size = 0.5) +
   draw_label(expression(paste("50 ", mu, " m")), x = 0.9, y = 0.1, color = "black", size = 7, hjust = 0.5)
+
+panel_schematic <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_schematic.png"))
 
 panel_serial_sectioning <- ggdraw() + draw_image(readPNG("manuscript/pictures/serial sectioning.png"))
 panel_catmaid_overview <- ggdraw() + draw_image(readPNG("manuscript/pictures/overview.png")) +
@@ -208,22 +210,26 @@ panel_bal_ant <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer_Q1_
 panel_bal_side <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer_Q1_4_side_view.png"))
 
 layout <- "
-AAAAAAAAAAA#BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB#CCCCCCCCCCCCCCCC
-################################################################
-DDDDDDDDDDDDDDDDEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+A#B
+###
+C#D
+###
+E#F
 "
 
-Figure1 <- panel_larva_pic + panel_AO_pic + panel_catmaid_overview + 
+Figure1 <- panel_larva_pic + panel_AO_pic + 
+  panel_catmaid_overview + panel_schematic + 
   panel_bal_ant + panel_balancer +
   plot_layout(
     design = layout,
-    heights = c(1, 0.05, 1.4)) + 
+    heights = c(1, 0.1, 1, 0.1, 1),
+    widths = c(1, 0.1, 3)) + 
   plot_annotation(tag_levels = "A") &
   theme(plot.tag = element_text(size = 12, face = "plain"))
 
 ggsave("manuscript/figures/Figure1.png", limitsize = FALSE, 
-       units = c("px"), Figure1, width = 2800, height = 1200, bg='white')  
+       units = c("px"), Figure1, width = 3200, height = 2000, bg='white')  
 
 ggsave("manuscript/figures/Figure1.pdf", limitsize = FALSE, 
-       units = c("px"), Figure1, width = 2800, height = 1200) 
+       units = c("px"), Figure1, width = 3200, height = 2000) 
 

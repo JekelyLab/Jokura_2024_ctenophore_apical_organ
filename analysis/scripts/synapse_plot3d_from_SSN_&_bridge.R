@@ -870,7 +870,7 @@ AO_graph.visn$nodes$value <- degree
 AO_graph.visn$nodes$color <- Okabe_Ito[1:17]
 
 #hierarchical layout - define level of nodes
-AO_graph.visn$nodes$level <- c(2, 4, 1, 1, 3, 3, 3, 3, 3, 4)
+AO_graph.visn$nodes$level <- c(2, 4, 1, 1, 3, 3, 3, 3, 3, 4, 1, 3, 3, 3, 3, 3, 4)
 #balancer, LB, syn_neuron, bridge, monociliated, biciliated, nonciliated, dense_vesicle
 
 #hierarchical layout
@@ -906,10 +906,10 @@ visNet <- visNetwork(AO_graph.visn$nodes, AO_graph.visn$edges) %>%
 visNet
 
 
-saveNetwork(visNet, "manuscript/pictures/visNetwork_celltype_connectome.html")
-webshot2::webshot(url = "manuscript/pictures/visNetwork_celltype_connectome.html",
-                  file = "manuscript/pictures/visNetwork_celltype_connectome.png",
-                  vwidth = 1800, vheight = 1800, #define the size of the browser window
-                  cliprect = c(390, 250, 880, 1000), zoom = 1, delay = 1)
+#saveNetwork(visNet, "manuscript/pictures/visNetwork_celltype_connectome.html")
+#webshot2::webshot(url = "manuscript/pictures/visNetwork_celltype_connectome.html",
+#                  file = "manuscript/pictures/visNetwork_celltype_connectome.png",
+#                  vwidth = 1800, vheight = 1800, #define the size of the browser window
+#                  cliprect = c(390, 250, 880, 1000), zoom = 1, delay = 1)
 
 
