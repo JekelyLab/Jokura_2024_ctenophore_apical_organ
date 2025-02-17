@@ -1,22 +1,64 @@
-#network analysis and plotting
 
+#Synaptic connection from SSN to balancer
+
+# source packages and functions -----------------
 source("analysis/scripts/packages_and_functions.R")
 
 # load cell type ----------------------------------
 
-read_smooth_neuron <- function(annotation){
-  nlapply(read.neurons.catmaid(annotation, pid = 35),
-          function(x)
-            smooth_neuron(x, sigma = 1000))
-}
-
 balancer <- read_smooth_neuron("celltype:balancer")
-syn_neuron <- read_smooth_neuron("celltype:SSN")
+bridge <- read_smooth_neuron("celltype:bridge")
+bristle <- read_smooth_neuron("celltype:bristle")
+Cgroove_sag <- read_smooth_neuron("celltype:Cgroove-sag")
+Cgroove_tag <- read_smooth_neuron("celltype:Cgroove-tag")
+dense_vesicle <- read_smooth_neuron("celltype:dense_vesicle")
+dome <- read_smooth_neuron("celltype:dome")
+epithelial_floor <- read_smooth_neuron("celltype:epithelial_floor")
+intra_multi_ciliated <- read_smooth_neuron("celltype:intra-multi-ciliated")
+lamellate <- read_smooth_neuron("celltype:lamellate")
+lithocyte <- read_smooth_neuron("celltype:lithocyte")
+plumose <- read_smooth_neuron("celltype:plumose")
+SSN <- read_smooth_neuron("celltype:SSN")
+
+monociliated <- read_smooth_neuron("celltype:monociliated")
+biciliated <- read_smooth_neuron("celltype:biciliated")
+multiciliated <- read_smooth_neuron("celltype:multiciliated")
+nonciliated <- read_smooth_neuron("celltype:nonciliated")
+
 Q1 <- read_smooth_neuron("Q1")
 Q2 <- read_smooth_neuron("Q2")
 Q3 <- read_smooth_neuron("Q3")
 Q4 <- read_smooth_neuron("Q4")
-all_celltypes <- read_smooth_neuron("celltype")
+
+all_celltypes <- list(balancer,
+                      bridge,
+                      bristle,
+                      Cgroove_sag,
+                      Cgroove_tag,
+                      dense_vesicle,
+                      dome,
+                      epithelial_floor,
+                      intra_multi_ciliated,
+                      lamellate,
+                      lithocyte,
+                      plumose,
+                      SSN,
+                      monociliated,
+                      biciliated,
+                      multiciliated,
+                      nonciliated)
+
+
+
+
+balancer_Q1 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q1")))
+balancer_Q2 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q2")))
+balancer_Q3 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q3")))
+balancer_Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q4")))
+
+
+
+
 
 # retrieve connectors ----------------
 
@@ -66,8 +108,6 @@ left()
 rgl.snapshot("manuscript/pictures/syn_prepost_left.png")
 
 close3d()
-
-# plot quadrants --------------------
 
 
 # plot syn ----------------------
