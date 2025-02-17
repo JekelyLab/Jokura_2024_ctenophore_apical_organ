@@ -1,103 +1,273 @@
+
+#Synaptic connection from SSN to balancer
+
+# source packages and functions -----------------
+source("analysis/scripts/packages_and_functions.R")
+
+# load cell type ----------------------------------
+
+balancer <- read_smooth_neuron("celltype:balancer")
+bridge <- read_smooth_neuron("celltype:bridge")
+bristle <- read_smooth_neuron("celltype:bristle")
+Cgroove_sag <- read_smooth_neuron("celltype:Cgroove-sag")
+Cgroove_tag <- read_smooth_neuron("celltype:Cgroove-tag")
+dense_vesicle <- read_smooth_neuron("celltype:dense_vesicle")
+dome <- read_smooth_neuron("celltype:dome")
+epithelial_floor <- read_smooth_neuron("celltype:epithelial_floor")
+intra_multi_ciliated <- read_smooth_neuron("celltype:intra-multi-ciliated")
+lamellate <- read_smooth_neuron("celltype:lamellate")
+lithocyte <- read_smooth_neuron("celltype:lithocyte")
+plumose <- read_smooth_neuron("celltype:plumose")
+SSN <- read_smooth_neuron("celltype:SSN")
+
+monociliated <- read_smooth_neuron("celltype:monociliated")
+biciliated <- read_smooth_neuron("celltype:biciliated")
+multiciliated <- read_smooth_neuron("celltype:multiciliated")
+nonciliated <- read_smooth_neuron("celltype:nonciliated")
+
+Q1 <- read_smooth_neuron("Q1")
+Q2 <- read_smooth_neuron("Q2")
+Q3 <- read_smooth_neuron("Q3")
+Q4 <- read_smooth_neuron("Q4")
+
+all_celltypes <- list(balancer,
+                      bridge,
+                      bristle,
+                      Cgroove_sag,
+                      Cgroove_tag,
+                      dense_vesicle,
+                      dome,
+                      epithelial_floor,
+                      intra_multi_ciliated,
+                      lamellate,
+                      lithocyte,
+                      plumose,
+                      SSN,
+                      monociliated,
+                      biciliated,
+                      multiciliated,
+                      nonciliated)
+
+
+# retrieve connectors ----------------
+
+conn_syn <- connectors(SSN)
+presyn_syn <- subset(conn_syn, prepost == 0)
+postsyn_syn <- subset(conn_syn, prepost == 1)
+
+# plot syn ----------------------
+plot_background()
+
+plot3d(
+  SSN, soma = FALSE, 
+  color = c("#1f77b4", "#ff7f0e", "#2ca02c"), 
+  alpha = 0.5, lwd = c(2,3,3)
+)
+
+
+for (i in 1:length(all_celltypes)) {
+  print(i)
+  plot3d(
+    all_celltypes[[i]], soma = TRUE, lwd = 1, add = TRUE, 
+    alpha = 0.05, col = Okabe_Ito[8]
+  )
+}
+
+
+
+#plot3d(
+#  outline, WithNodes = F,
+#  add=T, alpha=0.07, col="#E2E2E2"
+#) 
+
+
+# plot presynapses
+plot3d(
+  presyn_syn$x, 
+  presyn_syn$y, 
+  presyn_syn$z, 
+  size = 7, alpha = 1, col = "red", 
+  add = T
+)
+
+# plot postsynapses
+plot3d(
+  postsyn_syn$x, 
+  postsyn_syn$y, 
+  postsyn_syn$z, 
+  size = 7, alpha = 1, col = "blue", 
+  add = T
+)
+
+anterior()
+rgl.snapshot("manuscript/pictures/syn_prepost_ant.png")
+
+left()
+rgl.snapshot("manuscript/pictures/syn_prepost_left.png")
+
+close3d()
+
+
+# plot syn ----------------------
+plot_background()
+
+plot3d(
+  Q1, soma = TRUE, 
+  color = Okabe_Ito[1], 
+  alpha = 0.7, lwd = c(1,2,3,4)
+)
+plot3d(
+  Q2, soma = TRUE, 
+  color = Okabe_Ito[2], 
+  alpha = 0.7, lwd = c(1,2,3,4)
+)
+plot3d(
+  Q3, soma = TRUE, 
+  color = Okabe_Ito[3], 
+  alpha = 0.7, lwd = c(1,2,3,4)
+)
+plot3d(
+  Q4, soma = TRUE, 
+  color = Okabe_Ito[4], 
+  alpha = 0.7, lwd = c(1,2,3,4)
+)
+
+
+
+rgl.snapshot("manuscript/pictures/quadrants.png")
+
+close3d()
+
+# assemble figure ---------------------------------------------------------
+
+panel_syn_oral <- ggdraw() + draw_image(readPNG("manuscript/pictures/syn_prepost_ant.png")) +
+  draw_label("oral view", x = 0.75, y = 0.95, size = 10) +
+  draw_label("nerve net", x = 0.1, y = 0.95, size = 10, hjust = 0)
+panel_syn_side <- ggdraw() + draw_image(readPNG("manuscript/pictures/syn_prepost_left.png")) +
+  draw_label("side view", x = 0.75, y = 0.95, size = 10)
+
+
+layout <- "
+AB"
+
+Figure_nerve_net <-
+  panel_syn_oral + panel_syn_side +
+  plot_layout(design = layout) +
+  patchwork::plot_layout(design = layout, 
+                         heights = c(1,1,1,1,1), 
+                         widths = c(1,1,1)) +
+  patchwork::plot_annotation(tag_levels = c("A")) &
+  ggplot2::theme(plot.tag = element_text(size = 12, face='plain', color='black'))
+
+
+ggsave(
+  "manuscript/figures/Figure_nerve_net.png", 
+  limitsize = FALSE, units = c("px"), 
+  Figure_nerve_net, width = 1600, height = 800, bg = "white"
+)
+
+ggsave(
+  "manuscript/figures/Figure_nerve_net.pdf", limitsize = FALSE, 
+  units = c("px"), Figure_nerve_net, width = 1600, height = 800
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #network analysis and plotting
 
 source("analysis/scripts/packages_and_functions.R")
 
-# define views --------------
+# load cell type ---------------------------------------------------------------
 
-anterior <- function(){
-  nview3d("anterior", 
-        extramat = rotationMatrix(2.54, 0.1, 0, 1)
-        )
-}
+balancer <- read_smooth_neuron("celltype:balancer")
+bridge <- read_smooth_neuron("celltype:bridge")
+bristle <- read_smooth_neuron("celltype:bristle")
+Cgroove_sag <- read_smooth_neuron("celltype:Cgroove-sag")
+Cgroove_tag <- read_smooth_neuron("celltype:Cgroove-tag")
+dense_vesicle <- read_smooth_neuron("celltype:dense_vesicle")
+dome <- read_smooth_neuron("celltype:dome")
+epithelial_floor <- read_smooth_neuron("celltype:epithelial_floor")
+intra_multi_ciliated <- read_smooth_neuron("celltype:intra-multi-ciliated")
+lamellate <- read_smooth_neuron("celltype:lamellate")
+lithocyte <- read_smooth_neuron("celltype:lithocyte")
+plumose <- read_smooth_neuron("celltype:plumose")
+SSN <- read_smooth_neuron("celltype:SSN")
 
-left <- function(){
-  nview3d("left", extramat = rotationMatrix(-1.7, 190, -120, -140))
-}
-
-
-# load cell types from catmaid
-
-balancer <- nlapply(
-  read.neurons.catmaid(
-    "celltype:balancer", pid = 35
-    ),
-  function(x) smooth_neuron(x, sigma = 1000)
-)
-
-LB <- nlapply(
-  read.neurons.catmaid(
-    "celltype:lamellate", pid = 35
-    ),
-  function(x) smooth_neuron(x, sigma = 1000)
-)
-
-syn_neuron <- nlapply(
-  read.neurons.catmaid(
-    "celltype:SSN", pid = 35
-    ),
-  function(x) smooth_neuron(x, sigma = 1000)
-)
-
-monociliated <- nlapply(
-  read.neurons.catmaid(
-    "celltype:monociliated", pid = 35
-  ),
-  function(x) smooth_neuron(x, sigma = 1000)
-)
-
-biciliated <- nlapply(
-  read.neurons.catmaid(
-    "celltype:biciliated", pid = 35
-  ),
-  function(x) smooth_neuron(x, sigma = 1000)
-)
-
-nonciliated <- nlapply(
-  read.neurons.catmaid(
-    "celltype:nonciliated", pid = 35
-  ),
-  function(x) smooth_neuron(x, sigma = 1000)
-)
-
-bridge <- nlapply(
-  read.neurons.catmaid(
-    "celltype:bridge", pid = 35
-  ),
-  function(x) smooth_neuron(x, sigma = 1000)
-)
-
-dense_vesicle <- nlapply(
-  read.neurons.catmaid(
-    "celltype:dense_vesicle", pid = 35
-  ),
-  function(x) smooth_neuron(x, sigma = 1000)
-)
-
-intra_multiciliated <- nlapply(
-  read.neurons.catmaid(
-    "celltype:intra-multi-ciliated", pid = 35
-  ),
-  function(x) smooth_neuron(x, sigma = 1000)
-)
-
-plumose <- nlapply(
-  read.neurons.catmaid(
-    "celltype:plumose", pid = 35
-  ),
-  function(x) smooth_neuron(x, sigma = 1000)
-)
-
+monociliated <- read_smooth_neuron("celltype:monociliated")
+biciliated <- read_smooth_neuron("celltype:biciliated")
+multiciliated <- read_smooth_neuron("celltype:multiciliated")
+nonciliated <- read_smooth_neuron("celltype:nonciliated")
 
 
 # cell types
-AO_celltypes <- list(
-  balancer, LB, syn_neuron, bridge, monociliated, biciliated, 
-  nonciliated, dense_vesicle, intra_multiciliated, plumose
-  )
-AO_celltype_names <- list(
-  "balancer", "lamellar body", "nerve net", "bridge", "monociliated", "biciliated", "nonciliated", "dense-vesicle", 
-  "intra-multiciliated", "plumose"
-  )
+all_celltypes <- list(balancer,
+                      bridge,
+                      bristle,
+                      Cgroove_sag,
+                      Cgroove_tag,
+                      dense_vesicle,
+                      dome,
+                      epithelial_floor,
+                      intra_multi_ciliated,
+                      lamellate,
+                      lithocyte,
+                      plumose,
+                      SSN,
+                      monociliated,
+                      biciliated,
+                      multiciliated,
+                      nonciliated)
+
+all_celltypes_names <- list("balancer",
+                      "bridge",
+                      "bristle",
+                      "Cgroove_sag",
+                      "Cgroove_tag",
+                      "dense_vesicle",
+                      "dome",
+                      "epithelial_floor",
+                      "intra_multi_ciliated",
+                      "lamellate",
+                      "lithocyte",
+                      "plumose",
+                      "SSN",
+                      "monociliated",
+                      "biciliated",
+                      "multiciliated",
+                      "nonciliated")
+
+
+
+
+
+
 
 # iterate through cell group neuron lists and get connectivity
 # define empty synapse list with the right dimensions
@@ -237,14 +407,17 @@ close3d()
 # plot balancer syn -------------------------------------------------------
 
 plot_background()
+
 plot3d(
   syn_neuron, soma = TRUE, color = Okabe_Ito[c(1,5,8)], 
   alpha = 0.3, lwd = c(4,3,3)
 )
+
 plot3d(
   balancer, soma = TRUE, color = Okabe_Ito[8], 
   alpha = 0.05, lwd = 3
   )
+
 # plot postsynapses
 plot3d(
   postsyn_bal$x, 
