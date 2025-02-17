@@ -152,12 +152,12 @@ crop_catmaid <- function(tagname,
           body = list(
             stack_ids=28,
             min_x=x-half_bb_size_x,
-            min_y=ynview3d("anterior", extramat = rotationMatrix(1.05, 250, -200, 1000))
-            par3d(zoom=0.7)
+            min_y=ynview3d("anterior", extramat = rotationMatrix(1.05, 250, -200, 1000)),
+            par3d(zoom=0.7),
             #y-axis clip
-            clipplanes3d(1, 0, 0, -11500)
+            clipplanes3d(1, 0, 0, -11500),
             #x-axis clip
-            clipplanes3d(0, 1, 0, -24000)
+            clipplanes3d(0, 1, 0, -24000),
             -half_bb_size_y,
             min_z=z-half_bb_size_z,
             max_x=x+half_bb_size_x,

@@ -946,11 +946,11 @@ Figure1 <- panel_balancer + panel_bridge + panel_bristle +
                                          face='plain', color='black'))
 
 
-ggsave("manuscript/figures/Figure1.png", limitsize = FALSE, 
+ggsave("manuscript/figures/Fig2_sup1.png", limitsize = FALSE, 
        units = c("px"), Figure1, width = 3800, height = 2400, bg='white')  
 
 
-ggsave("manuscript/figures/Fig1.pdf", limitsize = FALSE, 
+ggsave("manuscript/figures/Fig2_sup1.pdf", limitsize = FALSE, 
        units = c("px"), Figure1, width = 3800, height = 2400) 
 
 
@@ -1103,12 +1103,12 @@ Figure1 <-
   ggplot2::theme(plot.tag = element_text(size = 12, face='plain', color='black'))
 
 
-ggsave("manuscript/figures/Figure1.png", limitsize = FALSE, 
+ggsave("manuscript/figures/Fig2_sup2.png", limitsize = FALSE, 
        units = c("px"), Figure1, width = 3200, height = 3200, bg = "white")
 
 
 ggsave(
-  "manuscript/figures/Figure1.pdf",
+  "manuscript/figures/Fig2_sup2.pdf",
   limitsize = FALSE,
   units = c("px"),
   Figure1,

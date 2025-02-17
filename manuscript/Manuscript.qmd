@@ -143,11 +143,10 @@ The three identified neurons may be classified into two distinct functional type
 
 In the this study, we found that three neurons are closely positioned within the confined space of the apical organ, potentially enabling a single neuron to control distant ciliary movements in a synchronized manner. Moreover, the presence of neurons projecting to the same ciliated cells in distinct patterns suggests that these neurons may serve opposing functions—one inhibiting ciliary activity while the other promotes it, or one modulating ciliary beat frequency. While our synaptic ultrastructure analysis did not allow us to distinguish excitatory from inhibitory neurons, future electrophysiological investigations will be essential to elucidate their functional properties.
 
-```{r, out.width = "100%", fig.cap="**Figure 6. Title fig 6** pic of a larva, boxed region of AO, schematic, catmaid pic with slice, dimensions, quadrants, regions, (A) legend (B) legend. " }
-#| echo: false 
-
-knitr::include_graphics("figures/Figure6.png")
-```
+![**Figure 6. Comparison of Neural Circuits Regulating Ciliary Movement in *M. leidyi* (Ctenophore) and *P. dumerilii* (Annelid)**\
+Each neuron represented by a circle is color-coded to indicate putative homologous cell types involved in ciliary movement regulation. Ciliated cells are shown in gray. Synapses are indicated by arrows, with magenta representing synapses that induce ciliary arrest and blue representing synapses that induce ciliary re-beat or an increase in ciliary beating frequency.\
+(A) Gravity-sensing neural circuit of *M. leidyi*, as revealed in this study. Bridge cells (yellow squares) are suggested to be electrically coupled (indicated by yellow zigzag lines), implying their potential involvement in feedback mechanisms between neurons and ciliated cells.\
+(B) Neural circuit regulating prototroch ciliary movement in *P. dumerilii*. Serotonergic neurons (Ser-h1 neurons, blue) activate ciliary movement, while cholinergic neurons (MC neurons, magenta) induce ciliary arrest. Arrows directed toward ciliated cells in the head prototroch are color-coded accordingly.](figures/Figure6.png)
 
 ### Paracrine Signaling and Synaptic Transmission from Sensory to Neural Cells
 
