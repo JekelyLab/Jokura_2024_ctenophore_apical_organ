@@ -1,9 +1,12 @@
 # crop EM pictures
 
 # source packages and functions ------------------------------------------------
+
 source("analysis/scripts/packages_and_functions.R")
 
-# crop EM pictures ---------------
+# crop EM pictures -------------------------------------------------------------
+
+dir.create("manuscript/pictures/EM_tiff_stacks")
 
 #crop_catmaid("nice LB", 5000, 5000, 1, 0, "manuscript/pictures/")
 
@@ -14,22 +17,9 @@ crop_catmaid <- function(tagname,
                          zoomlevel,
                          dest_dir)
   
-  #list all files starting with crop
-  system("ls ./manuscript/pictures/crop_*")
+#list all files starting with crop
+system("ls ./manuscript/pictures/crop_*")
 
-
-
-
-
-
-
-
-# crop synapses
-library(catmaid)
-
-conn <- source("~/R/conn.R")
-
-dir.create("synapse_tiff_stacks")
 
 # get all synapses from CATMAID
 all_syn_connectors <- catmaid_fetch(
