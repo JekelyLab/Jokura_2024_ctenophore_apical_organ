@@ -1,14 +1,14 @@
 source("analysis/scripts/packages_and_functions.R")
 
-skid_big <- 2496955
+skid_Q1234 <- 2496955
 skid_Q12 <- 2436172
 skid_Q34 <- 2436531
 
-neuron_big <- read.neuron.catmaid(skid_big, pid = 35)
+neuron_Q1234 <- read.neuron.catmaid(skid_Q1234, pid = 35)
 neuron_Q12 <- read.neuron.catmaid(skid_Q12, pid = 35)
 neuron_Q34 <- read.neuron.catmaid(skid_Q34, pid = 35)
 
-cablelength_big <- summary(neuron_big) %>%
+cablelength_Q1234 <- summary(neuron_Q1234) %>%
   select(cable.length) %>%
   pull()
 
@@ -23,7 +23,7 @@ cablelength_Q34 <- summary(neuron_Q34) %>%
 # compare number of mitochondria per cable length
 mito_counts <- read.csv("analysis/data/mito_per_celltype.csv")
 
-mito_big <- mito_counts %>%
+mito_Q1234 <- mito_counts %>%
   filter(neuron_name == "SSN_Q1-4") %>%
   select(n_mito) %>%
   pull()
@@ -38,40 +38,40 @@ mito_Q34 <- mito_counts %>%
   select(n_mito) %>%
   pull()
 
-mito_ratio_big <- mito_big/cablelength_big
+mito_ratio_Q1234 <- mito_Q1234/cablelength_Q1234
 mito_ratio_Q12 <- mito_Q12/cablelength_Q12
 mito_ratio_Q34 <- mito_Q34/cablelength_Q34
 
-paste(mito_ratio_big, mito_ratio_Q12, mito_ratio_Q34) %>% print()
+paste(mito_ratio_Q1234, mito_ratio_Q12, mito_ratio_Q34) %>% print()
 
 # compare number of outgoing synapses per cable length
 
-pre_big <- sum(neuron_big$connectors$prepost == 0)
+pre_Q1234 <- sum(neuron_Q1234$connectors$prepost == 0)
 pre_Q12 <- sum(neuron_Q12$connectors$prepost == 0)
 pre_Q34 <- sum(neuron_Q34$connectors$prepost == 0)
 
-ratio_pre_big <- pre_big/cablelength_big
+ratio_pre_Q1234 <- pre_Q1234/cablelength_Q1234
 ratio_pre_Q12 <- pre_Q12/cablelength_Q12
 ratio_pre_Q34 <- pre_Q12/cablelength_Q34
 
-paste(ratio_pre_big, ratio_pre_Q12, ratio_pre_Q34) %>% print()
+paste(ratio_pre_Q1234, ratio_pre_Q12, ratio_pre_Q34) %>% print()
 
 # compare number of incoming synapses per cable length
 
-post_big <- sum(neuron_big$connectors$prepost == 1)
+post_Q1234 <- sum(neuron_Q1234$connectors$prepost == 1)
 post_Q12 <- sum(neuron_Q12$connectors$prepost == 1)
 post_Q34 <- sum(neuron_Q34$connectors$prepost == 1)
 
-ratio_post_big <- post_big/cablelength_big
+ratio_post_Q1234 <- post_Q1234/cablelength_Q1234
 ratio_post_Q12 <- post_Q12/cablelength_Q12
 ratio_post_Q34 <- post_Q12/cablelength_Q34
 
-paste(ratio_post_big, ratio_post_Q12, ratio_post_Q34) %>% print()
+paste(ratio_post_Q1234, ratio_post_Q12, ratio_post_Q34) %>% print()
 
 # compare appearance of synapses
 dir.create("analysis/data/synapse_crop")
 
-for (neu in neuronlist(neuron_big, neuron_Q12, neuron_Q34)) {
+for (neu in neuronlist(neuron_Q1234, neuron_Q12, neuron_Q34)) {
   half_bb_size_xy=800
   half_bb_size_z=0
   print(neu)
@@ -136,7 +136,7 @@ for (neu in neuronlist(neuron_big, neuron_Q12, neuron_Q34)) {
   }
 }
 
-syn_img_big <- list.files(path = "analysis/data/synapse_crop", pattern = as.character(skid_big))
+syn_img_Q1234 <- list.files(path = "analysis/data/synapse_crop", pattern = as.character(skid_Q1234))
 pattern <- paste(skid_Q12, "|", skid_Q34, sep = "")
 # sample() to randomize synapses from the 2 small neurons
 syn_img_small <- list.files(path = "analysis/data/synapse_crop", pattern = pattern) %>% sample()
@@ -146,11 +146,11 @@ dir.create("analysis/data/syn_comparison_images")
 library(foreach)
 library(magick)
 i=1
-foreach(filename_big = syn_img_big, filename_small = syn_img_small) %do% {
-  path_big <- paste("analysis/data/synapse_crop/", filename_big, sep = "")
+foreach(filename_Q1234 = syn_img_Q1234, filename_small = syn_img_small) %do% {
+  path_Q1234 <- paste("analysis/data/synapse_crop/", filename_Q1234, sep = "")
   path_small <- paste("analysis/data/synapse_crop/", filename_small, sep = "")
-  print(paste(path_big, path_small))
-  panel1 <- ggdraw() + draw_image(image_read(path_big))
+  print(paste(path_Q1234, path_small))
+  panel1 <- ggdraw() + draw_image(image_read(path_Q1234))
   panel2 <- ggdraw() + draw_image(image_read(path_small))
   layout <- "A#B"
   fig <- panel1 + panel2 + plot_layout(design = layout, heights = 800, widths = c(1, 0.05, 1))
