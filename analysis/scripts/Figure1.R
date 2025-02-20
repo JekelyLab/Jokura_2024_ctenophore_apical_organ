@@ -159,17 +159,17 @@ close3d()
 panel_balancer <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer.png")) +
   draw_label("balancer cells", x = 0.1, y = 0.98, size = 10, fontface="plain") +
   draw_label("aboral view", x = 0.1, y = 0.86, color="black", size = 8) +
-  draw_label("lateral view of PA plane", x = 0.45, y = 0.86, color="black", size = 8) +
+  draw_label("lateral view of SA plane", x = 0.45, y = 0.86, color="black", size = 8) +
   draw_label("lateral view of TA plane", x = 0.75, y = 0.86, color="black", size = 8) +
   draw_line(x = c(0.85, 0.95), y = c(0.1, 0.1), color = "black", size = 0.5) +
   draw_label(expression(paste("25 ", mu, " m")), x = 0.9, y = 0.14, color = "black", size = 7, hjust = 0.5) +
-  draw_label("TA", x = 0.325, y = 0.16, size = 6, color = "black", hjust = 0.5) +
+  draw_label("SA", x = 0.325, y = 0.16, size = 6, color = "black", hjust = 0.5) +
   geom_segment(aes(x = 0.25, y = 0.16, xend = 0.31, yend = 0.16), color = "black", 
                arrow = arrow(ends = "both", type = "closed", length = unit(0.1,"cm")),
                lineend = "butt",
                linejoin = "mitre",
                arrow.fill = "black", linewidth = 0.175) +
-  draw_label("PA", x = 0.28, y = 0.05, size = 6, color = "black", hjust = 0.5) +
+  draw_label("TA", x = 0.28, y = 0.05, size = 6, color = "black", hjust = 0.5) +
   geom_segment(aes(x = 0.28, y = 0.08, xend = 0.28, yend = 0.24), color = "black", 
                arrow = arrow(ends = "both", type = "closed", length = unit(0.1,"cm")),
                lineend = "butt",
@@ -191,7 +191,7 @@ panel_larva_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/Mnemiop
 
 panel_AO_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_mag_pics.png")) +
   draw_label("aboral view", x = 0.2, y = 0.99, color="black", size = 8) +
-  draw_label("lateral view of PA plane", x = 0.5, y = 0.99, color="black", size = 8) +
+  draw_label("lateral view of SA plane", x = 0.5, y = 0.99, color="black", size = 8) +
   draw_label("lateral view of TA plane", x = 0.85, y = 0.99, color="black", size = 8) +
   draw_line(x = c(0.85, 0.95), y = c(0.05, 0.05), color = "black", size = 0.5) +
   draw_label(expression(paste("50 ", mu, " m")), x = 0.9, y = 0.1, color = "black", size = 7, hjust = 0.5)
