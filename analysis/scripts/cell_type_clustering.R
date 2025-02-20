@@ -9,6 +9,7 @@ skids <- unlist(
   catmaid_fetch(path = "/35/skeletons/"))
 
 characters <- list("soma",
+                   "mitochondrion",
                    "centriole",
                    "basal body",
                    "9+0",
@@ -62,7 +63,7 @@ for (skid in skids) {
   }
 }
 
-#write.csv(tag_stats_per_skid, "analysis/data/organelle_stats.csv")
+write.csv(tag_stats_per_skid, "analysis/data/organelle_stats.csv")
 
 tag_stats_noskid <- tag_stats_per_skid[,3:ncol(tag_stats_per_skid)]
 

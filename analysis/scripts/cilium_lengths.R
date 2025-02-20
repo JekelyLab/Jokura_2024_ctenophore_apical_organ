@@ -154,3 +154,29 @@ cilium_lengths %>%
       values = c("#CC79A7", "#0072B2", "#E69F00", "grey40")
     )
 
+
+
+
+cilium_lengths %>%
+  ggplot() +
+  aes(x=celltype, y=cil_length) +
+  geom_violin() +
+  theme_minimal() +
+  theme(
+    panel.grid.major = element_line(linewidth = 0.2),
+    panel.background = element_blank(),
+    axis.ticks = element_line(size = 0.2)
+  )
+
+library(introdataviz)
+cilium_lengths %>% 
+  pivot_longer(ends_with("length"), names_to="cilium_part", values_to = "length") %>%
+  ggplot() +
+  aes(x=celltype, y=length, fill = cilium_part) +
+  geom_split_violin() +
+  theme_minimal() +
+  theme(
+    panel.grid.major = element_line(linewidth = 0.2),
+    panel.background = element_blank(),
+    axis.ticks = element_line(size = 0.2)
+  )
