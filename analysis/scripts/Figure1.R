@@ -272,5 +272,5 @@ ggsave("manuscript/figures/Figure1.png",
 
 ggsave("manuscript/figures/Figure1.pdf",
   limitsize = FALSE,
-  units = c("px"), Figure1, width = 3200, height = 2000
+  units = c("px"), Figure1, width = 3200, height = 2250
 )
