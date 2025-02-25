@@ -8,7 +8,7 @@ source("analysis/scripts/packages_and_functions.R")
 
 dir.create("manuscript/pictures/EM_tiff_stacks")
 
-#crop_catmaid("nice LB", 5000, 5000, 1, 0, "manuscript/pictures/")
+crop_catmaid("nice LB", 5000, 5000, 1, 0, "manuscript/pictures/EM_tiff_stacks/")
 
 ??crop_catmaid
 
