@@ -3,6 +3,7 @@ gc() #free up memory and report the memory usage.
 
 # load some packages
 library(catmaid)
+library(plyr)
 library(tidyverse)
 library(cowplot)
 library(png)
