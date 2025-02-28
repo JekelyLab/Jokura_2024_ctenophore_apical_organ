@@ -20,8 +20,9 @@ celltype_flashcard(celltype) {
   
   ### location by quadrant
   # read, smooth and plot skeletons
-  sigma = 2000
   cells <- read.neurons.catmaid(paste("celltype:", celltype, sep=""), pid=35)
+  
+  sigma = 2000
   lapply(cells, plot_multinucleated_cell, sigma=sigma, color="darkblue", lwd=1)
   # define view
   anterior()
@@ -29,7 +30,7 @@ celltype_flashcard(celltype) {
   par3d(windowRect = c(0, 0, 800, 800)) #resize for frontal view
   # draw lines for quadrants
   
-  ### morphollogy for single cell, with cilia
+  ### morphology for single cell, with cilia
   cell <- cells[[1]]
   cilia <- segments_between_tags(cell, "cilium tip", "basal body")
   # visualize part of cilium in ciliary pocket
@@ -69,6 +70,46 @@ celltype_flashcard(celltype) {
   # get locations of "flashcard" tags
   # we don't know which skeleton has flashcard tag
   
+  for (cell in cells) {
+    if (length(cell$tags$'flashcard:distal') == 1) {
+      flashcard_distal_treenode <- cell$tags$'flashcard:distal'
+    }
+    if (length(cell$tags$'flashcard:proximal') == 1) {
+      flashcard_proximal_treenode <- cell$tags$'flashcard:proximal'
+    }
+    if (length(cell$tags$'flashcard:soma') == 1) {
+      flashcard_soma_treenode <- cell$tags$'flashcard:soma'
+    }
+  }
+  
+  # crop distal
+  pos <- which(cell$d$PointNo == flashcard_distal_treenode)
+  x <- cell$d$X[pos]
+  y <- cell$d$Y[pos]
+  z <- cell$d$Z[pos]
+  crop_substack_point(x, y, z, 500, 500, 0, 0,
+                      paste("manuscript/pictures/", celltype, "flashcard_distal.tif"),
+                      35, 28)
+  
+  # crop proximal
+  pos <- which(cell$d$PointNo == flashcard_proximal_treenode)
+  x <- cell$d$X[pos]
+  y <- cell$d$Y[pos]
+  z <- cell$d$Z[pos]
+  crop_substack_point(x, y, z, 500, 500, 0, 0,
+                      paste("manuscript/pictures/", celltype, "flashcard_proximal.tif"),
+                      35, 28)
+  # crop soma
+  pos <- which(cell$d$PointNo == flashcard_soma_treenode)
+  x <- cell$d$X[pos]
+  y <- cell$d$Y[pos]
+  z <- cell$d$Z[pos]
+  crop_substack_point(x, y, z, 500, 500, 0, 0,
+                      paste("manuscript/pictures/", celltype, "flashcard_soma.tif"),
+                      35, 28)
+  
+  
+  
   
 
   for (cell in cells) {
@@ -107,4 +148,49 @@ celltype_flashcard(celltype) {
     polyadicities <- c(polyadicities, polyadicity)
   }
   avg_celltype_polyadicity <- polyadicities %>% unlist %>% mean
+}
+
+
+
+
+crop_substack_point <- function(x, y, z,
+                                half_bb_size_x, half_bb_size_y, half_bb_size_z,
+                                zoomlevel,
+                                dest_file_path,
+                                pid, stackid) {
+  # this only has one coordinate is input, so we can define filename
+  catmaid_fetch(
+    path = paste(pid, "/crop/", sep = ""),
+    body = list(
+      stack_ids=stackid,
+      min_x=x-half_bb_size_x,
+      min_y=y-half_bb_size_y,
+      min_z=z-half_bb_size_z,
+      max_x=x+half_bb_size_x,
+      max_y=y+half_bb_size_y,
+      max_z=z+half_bb_size_z,
+      zoom_level=zoomlevel,
+      single_channel='true',
+      rotationcw=0
+    )
+  )
+  
+  print("Downloading, this will take some time")
+  
+  # server needs time to process this
+  Sys.sleep(61)
+  
+  cat_messages <- catmaid_fetch(
+    path = "messages/list"
+  )
+  
+  for (k in seq_along(ids)) {
+    cat_message <- cat_messages[[k]]$text
+    link <- regmatches(cat_message, 
+                       regexpr("/crop/download/crop_.{6}.tiff", cat_message))
+    filename <- regmatches(link, 
+                           regexpr("crop_.{6}.tiff", link))
+    full_link <- paste("https:/catmaid.ex.ac.uk", link, sep = "")
+    download.file(full_link, destfile = dest_file_path)
+  }
 }
