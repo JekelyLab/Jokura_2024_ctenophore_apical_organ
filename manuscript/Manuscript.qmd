@@ -1,5 +1,5 @@
 ---
-title: "Synaptic connectome of the ctenophore apical organ"
+title: "Neural Circuit Organization of the Ctenophore Apical Organ and Its Role in Gravity Sensing"
 
 subtitle: |
   **Kei Jokura**$^{1,2,3,*}$, **Sanja Jasek**$^{1,4}$, **Lara Kewalow**$^{4}$, **Pawel Burkhardt**$^{5}$, **Gáspár Jékely**$^{1,4,*}$  
@@ -49,7 +49,7 @@ csl: elife.csl #change according to journal
 
 ## Abstract
 
-**text in bold** *italic* [underline]{.underline}
+Understanding the evolution and function of neurons is crucial for elucidating the origins of animal behavior. Ctenophores, as the earliest-diverging lineage with a nervous system, provide a unique model for investigating neural circuit organization. In this study, we performed volumetric electron microscopy (EM) reconstruction of the apical organ in Mnemiopsis leidyi to characterize its neural network involved in gravity sensing. We reconstructed 909 cells, including novel syncytial neurons spanning multiple quadrants, which form complex synaptic networks with balancer cells—key mechanosensory components controlling ciliary movement. Our connectome analysis revealed that these syncytial neurons establish direct and indirect pathways to balancer cells, with "bridge cells" acting as afferent relay neurons. High-speed imaging of balancer cilia movements further demonstrated differential regulation between sagittal and tentacular planes, suggesting distinct functional roles of apical organ neurons in modulating posture and locomotion. These findings provide new insights into the structure and function of ctenophore neural circuits, shedding light on early nervous system evolution and mechanosensory integration in basal metazoans.
 
 ## Introduction
 
@@ -100,12 +100,6 @@ Balancer cells are monociliated cells, and their cilia protrude longer than thos
 
 From AO neuron_Q1Q2, synapses were formed with 6 of the 37 balancer cells in the Q1 region, and 8 of the 32 balancer cells in the Q2 region. Similarly, from AO neuron_Q3Q4, synapses were formed with 1 of the 32 balancer cells in the Q3 region, and 5 of the 28 balancer cells in the Q4 region. AO neuron_Q1234 formed input synapses with balancer cells in the Q1 region (7 cells), Q2 region (11 cells), Q3 region (6 cells), and Q4 region (10 cells). Some balancer cells received inputs from both AO neuron_Q1Q2 or AO neuron_Q3Q4 and AO neuron_Q1234. While previous studies have suggested the presence of afferent synapses from balancer cells to neurons [@Hernandez_Nicaise_1974], our data did not reveal any synaptic inputs from balancer cells to AO neurons. However, we identified "bridge cells" that actively formed input synapses with AO neurons, highlighting their potential role in the network.
 
-![**Figure 3. Reconstruction of Balancer Ciliated Cells in the Apical Organ**\
-(A) Connectivity matrix of AO neurons. Columns represent presynaptic AO neurons, rows represent postsynaptic AO neurons, and each number indicates the number of synapses. AO neurons are interconnected via synapses, and AO neuron Q1234 forms a self-synapse, autapse.\
-(B) Three-dimensional reconstruction of balancer ciliated cells in all four quadrant regions. Each quadrant contains approximately 30 cells. All balancer cilia are monocilia. The spheres indicate the positions of the nuclei. The left panel shows a aboral view of the apical organ, the middle panel presents a sagittal plane view, and the right panel provides a tentacular plane view.\
-(C) Synaptic connections from AO neurons to balancer ciliated cells. The left panel presents an aboral view, while the right panel shows a lateral view and a tentacular plane view. Balancer ciliated cells are depicted in light gray, AO neuron Q1234 in black, AO neuron Q12 in orange, and AO neuron Q34 in blue.\
-(D) Connectivity map of three AO neurons (Q1234 in blue, Q12 in pink, and Q34 in orange) and balancer ciliated cells (light blue). The thickness of the arrows and the numbers correspond to the number of synapses. Synaptic structures from the same neuron targeting the same balancer cell are grouped into hexagons, with the number of cells added to the label.](figures/Figure3.png)
-
 ### Identification of Neuron-like Bridge Cells Forming Afferent Synapses in the Gravity-Sensitive Neural Circuit
 
 From our data, we identified several cell groups that form multiple afferent synapses with AO neurons. These cells, based on their morphological features, were found to be the bridge cells first described by Tamm et al. in 2002 [@Tamm_and_Tamm_2002]. These cells are characterized by bundles of elongated processes filled with microtubules that arch over the epithelial layer, resembling a bridge. They originate from the base of paired balancer cells along the tentacle surface and extend across the sagittal plane toward the base of the opposite balancer cells. In regions where the mitochondria of the bridge cells are localized (approximately 30%), a presynaptic triad structure, similar to that of AO neurons, was found, containing synaptic vesicles and smooth endoplasmic reticulum.
@@ -116,12 +110,16 @@ Some bridge cells also formed afferent synapses with AO neurons. For example, br
 
 Interestingly, in both regions, bridge cells also formed synapses with adjacent bridge cells. However, no synaptic input was found from bridge cells across the sagittal plane to those in the opposite region. To analyze the grouped synaptic connectivity graph, we classified cell types within each region, collapsed cells of the same type into a single node, summed the number of synapses, and explored directed pathways to effectors (balancer cell groups). The results revealed a feedback pathway from AO neurons through the synaptic connections formed by bridge cells, thereby shedding light on the neural circuit structure involving these cells.
 
-![**Figure 4. Reconstruction of bridge cells and gravity-sensing neural circuits in the apical organ**\
+![**Figure 3. Reconstruction of Balancer Ciliated Cells in the Apical Organ Reconstruction of bridge cells and gravity-sensing neural circuits in the apical organ**\
+(A) Connectivity matrix of AO neurons. Columns represent presynaptic AO neurons, rows represent postsynaptic AO neurons, and each number indicates the number of synapses. AO neurons are interconnected via synapses, and AO neuron Q1234 forms a self-synapse, autapse.\
+(B) Three-dimensional reconstruction of balancer ciliated cells in all four quadrant regions. Each quadrant contains approximately 30 cells. All balancer cilia are monocilia. The spheres indicate the positions of the nuclei. The left panel shows a aboral view of the apical organ, the middle panel presents a sagittal plane view, and the right panel provides a tentacular plane view.\
+(C) Synaptic connections from AO neurons to balancer ciliated cells. The left panel presents an aboral view, while the right panel shows a lateral view and a tentacular plane view. Balancer ciliated cells are depicted in light gray, AO neuron Q1234 in black, AO neuron Q12 in orange, and AO neuron Q34 in blue.\
+(D) Connectivity map of three AO neurons (Q1234 in blue, Q12 in pink, and Q34 in orange) and balancer ciliated cells (light blue). The thickness of the arrows and the numbers correspond to the number of synapses. Synaptic structures from the same neuron targeting the same balancer cell are grouped into hexagons, with the number of cells added to the label.
 (A) 3D reconstruction of bridge cells spanning the Q1Q2 and Q3Q4 quadrants. The Q1Q2-side bridge cells (8 cells) are shown in blue, while the Q3Q4-side bridge cells (6 cells) are shown in xxx color. The morphology of individual bridge cells extending across opposite quadrant regions is depicted. The spheres represent the positions of individual nuclei. The left panel shows an aboral view of the apical organ, the middle panel presents a sagittal plane view, and the right panel provides a tentacular plane view.\
 (B) Mitochondrial localization within bridge cells and associated presynaptic triad structures. Red indicates mitochondria associated with presynaptic triad structures, yellow marks mitochondria containing synaptic vesicles but lacking a clearly defined presynaptic triad, blue represents mitochondria with unclear synaptic vesicles, and black denotes mitochondria where no synaptic vesicles were identified. The left panel shows a dorsal view of the apical organ, the middle panel presents a sagittal plane view, and the right panel provides a tentacular plane view.\
 (C) Synaptic connections between AO neurons and bridge cells. The positions of synapses from AO neurons to bridge cells (red) and from bridge cells to AO neurons (light blue) are indicated. The left panel shows an aboral view, while the right panel presents a tentacular plane lateral view. Bridge cells are shown in light gray, AO neurons in Q1234 are in black, AO neurons in Q12 are in orange, and AO neurons in Q34 are in blue.\
 (D) Connectivity matrix of the gravity-sensing neural circuit. Columns represent presynaptic cell groups, while rows represent postsynaptic cell groups. The numbers and varying shades of blue correspond to the number of synapses.\
-(E) Complete connectivity map of the gravity-sensing neural circuit. Cells belonging to the same group are enclosed in hexagons, and the number of cells is added to their labels. The thickness of the arrows and the numerical values indicate the number of synapses. AO neurons in Q1234 are shown in black, AO neurons in Q12 in yellow, AO neurons in Q34 in blue, balancer cell groups in gray, and bridge cell groups in pink.](figures/Figure4.png)
+(E) Complete connectivity map of the gravity-sensing neural circuit. Cells belonging to the same group are enclosed in hexagons, and the number of cells is added to their labels. The thickness of the arrows and the numerical values indicate the number of synapses. AO neurons in Q1234 are shown in black, AO neurons in Q12 in yellow, AO neurons in Q34 in blue, balancer cell groups in gray, and bridge cell groups in pink.](figures/Figure3.png)
 
 ### Control of Balancer Ciliary Movements by Gravity-Sensitive Neural Circuits
 
@@ -129,40 +127,15 @@ To investigate the function of gravity-sensitive circuits, we conducted a compar
 
 During the 2-minute recordings, balancer cilia exhibited movements that could be fast, slow, or stop abruptly (arrest) and start moving again (re-beat). Occasionally, large contraction responses caused the entire cydippid to move out of frame, and data from these moments were excluded. We focused on two metrics for left-right comparison: (1) the timing of ciliary arrest and (2) the timing of re-beat initiation following an arrest. Due to the low baseline beating frequency of the cilia, rapid synaptic input responses were not evaluated, suggesting that ciliary beat regulation may involve non-synaptic control mechanisms. The analysis revealed that both arrest and re-beat events were synchronized between left and right balancers in both planes within a few milliseconds, suggesting that these events are governed by synaptic input from neurons. Interestingly, while the re-beat timing showed no significant differences between the sagittal and tentacular planes, arrest timing exhibited greater variability in the tentacular plane. Comparing these findings with neural circuit diagrams suggests that in the sagittal plane, the same AO neurons (Q12 or Q34) project to both balancer cell groups, transmitting signals simultaneously and enabling synchronization. In contrast, in the tentacular plane, separate AO neurons project to different regions, potentially introducing an additional synaptic step, which may account for the observed variability in arrest timing.
 
-![**Figure 5. Differences in Balancer Cilia Movement Control Due to Variations in the Gravity-Sensing Neural Circuit Pathways**\
+![**Figure 4. Differences in Balancer Cilia Movement Control Due to Variations in the Gravity-Sensing Neural Circuit Pathways Comparison of Neural Circuits Regulating Ciliary Movement in *M. leidyi* (Ctenophore) and *P. dumerilii* (Annelid)**\
 (A) Schematic diagram of differential interference contrast (DIC) microscopy setup for imaging balancer cilia movement. The microscope was tilted 90 degrees so that the stage was positioned vertically. A monochrome CMOS camera sensitive to near-infrared (NIR) light was used, synchronized with an 850 nm strobe light source. The movement of the balancer cilia was recorded using a 40× objective lens.\
 (B, C) Sagittal plane view (B) and tentacular plane view (C) of the apical organ under the microscope. The direction of gravity is always oriented downward in the images. The two balancer cilia being compared are indicated by arrowheads.\
 (D, E) Connectivity maps of the gravity-sensing neural circuit corresponding to Figure 3E. These maps emphasize the differences in neural circuits in the sagittal plane (D) and tentacular plane (E), focusing on the balancer cell groups (blue hexagons). AO neuron Q1234 is shown in green, while AO neurons Q12 and Q34 are shown in pink.\
 (F) Kymograph patterns comparing the arrest and re-beat of balancer cilia movement. The left and right balancer cilia movements are compared in both the sagittal plane (left) and tentacular plane (right). The direction and length of the arrows indicate time.\
-(G) Graph showing the time differences in the arrest and re-beat timing of the left and right balancer cilia. S and T represent the sagittal plane and tentacular plane, respectively.](figures/Figure5.png)
-
-
-
-Figure 6 - cilia? renderings of basal bodies, centrioles, length, axoneme structure (table), table about cell types, number of cilia etc.
-
-### Synapses
-
-"synaptic regions with the characteristic presynaptic triad mor- phology of ctenophore nerves (i.e., a single layer of vesicles, smooth ER sac, and closely apposed mito- chondria [@Horridge_1964; @Hernandez_Nicaise_1973] "
-
-Figure 7 - synapses, reconstruction, annotation, numbers, distribution of partners, example EM (figure supplement - lots of EM), mitochondria (Fig suppl - mitochondrion stats - Sanja)
-
-Gap juntions? Innexins are expressed in the apical organ in specific patches of cells in each quadrant [@Ortiz_2023]
-
-Ctenophore synapses [@Hernandez_Nicaise_1973]
-
-We found no synapses between bridge and balancer, in agreement with Tamm [@Tamm_2002].
-
-Figure 8 - connectome cell-type based, quadrant based, nerve net syntycia, bridge, quadrants (Fig suppl - cell-based network)
-
-Tamm&Tamm observed synapses from neurites to bridge cells (2002). and in Mnemiopsis larvae observed synapses from bridge cells onto other cells
-
-Inserting Figures
-
-You can add your figures into the rendered document. We saved the figures into /manuscript/figures or /manuscript/figure_supplements and can insert them from there. We use knitr::include_graphics for this. The title and legend can also be edited, as will as the width of the output figure.
-
-### Connectivity
-
-### Physiology?
+(G) Graph showing the time differences in the arrest and re-beat timing of the left and right balancer cilia. S and T represent the sagittal plane and tentacular plane, respectively.
+Each neuron represented by a circle is color-coded to indicate putative homologous cell types involved in ciliary movement regulation. Ciliated cells are shown in gray. Synapses are indicated by arrows, with magenta representing synapses that induce ciliary arrest and blue representing synapses that induce ciliary re-beat or an increase in ciliary beating frequency.\
+(A) Gravity-sensing neural circuit of *M. leidyi*, as revealed in this study. Bridge cells (yellow squares) are suggested to be electrically coupled (indicated by yellow zigzag lines), implying their potential involvement in feedback mechanisms between neurons and ciliated cells.\
+(B) Neural circuit regulating prototroch ciliary movement in *P. dumerilii*. Serotonergic neurons (Ser-h1 neurons, blue) activate ciliary movement, while cholinergic neurons (MC neurons, magenta) induce ciliary arrest. Arrows directed toward ciliated cells in the head prototroch are color-coded accordingly.](figures/Figure4.png)
 
 
 ## Discussion
@@ -178,11 +151,6 @@ We identified three syncytial neurons with multiple nuclei in the apical organ o
 The three identified neurons may be classified into two distinct functional types based on their spatial arrangement and their influence on the differential control of balancer ciliary movement between the quadrants. In metazoans, a single neuron can directly provide synaptic input to multiple ciliated cells at a distance, synchronizing their movements. For instance, in larvae of the annelid *Platynereis dumerilii*, a cholinergic motor neuron (MC) innervates multiple prototroch ciliated cells, synchronizing their motion such that activation of the neuron leads to simultaneous arrest of ciliary beating (Verasztó et al., 2017). Additionally, a pair of serotonergic neurons, designated Ser-h1, extend axons that cross at the midline; the left Ser-h1_l predominantly innervates right-sided ciliated cells, while the right Ser-h1_r mainly projects to the left-side ciliated cells. Activation of Ser-h1 induces ciliary beating initiation and increases beat frequency.
 
 In the this study, we found that three neurons are closely positioned within the confined space of the apical organ, potentially enabling a single neuron to control distant ciliary movements in a synchronized manner. Moreover, the presence of neurons projecting to the same ciliated cells in distinct patterns suggests that these neurons may serve opposing functions—one inhibiting ciliary activity while the other promotes it, or one modulating ciliary beat frequency. While our synaptic ultrastructure analysis did not allow us to distinguish excitatory from inhibitory neurons, future electrophysiological investigations will be essential to elucidate their functional properties.
-
-![**Figure 6. Comparison of Neural Circuits Regulating Ciliary Movement in *M. leidyi* (Ctenophore) and *P. dumerilii* (Annelid)**\
-Each neuron represented by a circle is color-coded to indicate putative homologous cell types involved in ciliary movement regulation. Ciliated cells are shown in gray. Synapses are indicated by arrows, with magenta representing synapses that induce ciliary arrest and blue representing synapses that induce ciliary re-beat or an increase in ciliary beating frequency.\
-(A) Gravity-sensing neural circuit of *M. leidyi*, as revealed in this study. Bridge cells (yellow squares) are suggested to be electrically coupled (indicated by yellow zigzag lines), implying their potential involvement in feedback mechanisms between neurons and ciliated cells.\
-(B) Neural circuit regulating prototroch ciliary movement in *P. dumerilii*. Serotonergic neurons (Ser-h1 neurons, blue) activate ciliary movement, while cholinergic neurons (MC neurons, magenta) induce ciliary arrest. Arrows directed toward ciliated cells in the head prototroch are color-coded accordingly.](figures/Figure6.png)
 
 ### Paracrine Signaling and Synaptic Transmission from Sensory to Neural Cells
 
