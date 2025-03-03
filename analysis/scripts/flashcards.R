@@ -1,6 +1,9 @@
 source("analysis/scripts/packages_and_functions.R")
 
 celltype <- "balancer"
+cilium_lengths <- read_csv("analysis/data/cilium_lengths.csv")
+organelle_stats <- read_csv("analysis/data/organelle_stats.csv")
+stats_master <- read_csv("analysis/data/stats_master.csv")
 
 celltype_flashcard(celltype) {
   # things to show:
@@ -21,6 +24,7 @@ celltype_flashcard(celltype) {
   ### location by quadrant
   # read, smooth and plot skeletons
   cells <- read.neurons.catmaid(paste("celltype:", celltype, sep=""), pid=35)
+  skids <- names(cells)
   
   sigma = 2000
   lapply(cells, plot_multinucleated_cell, sigma=sigma, color="darkblue", lwd=1)
@@ -114,45 +118,55 @@ celltype_flashcard(celltype) {
                       35, 28)
   
   
-  
-  
-
-  for (cell in cells) {
-    sskid <- cell$skid
-    
-    ########## cilia and pocket lengths
-    cilium_lengths <- tibble(cil_length=integer(),
-                             pocket_length=integer())
-    cilia <- segments_between_tags(cell, "cilium tip", "basal body")
-    for (cilium in cilia) {
-      cil_length <- smooth_neuron(cilium, sigma=sigma) %>%
-        summary() %>% select(cable.length)
-      # check if it has exit_ciliary_pocket tag
-      #print(cilium$tags)
-      exit_cil_pocket <- cilium$tags[["exit_ciliary_pocket"]]
-      ctip_intra <- cilium$tags[["cilium tip intracellular"]]
-      if (length(exit_cil_pocket) > 0) {
-        pocket <- segments_between_tags(cilium, "exit_ciliary_pocket", "basal body")
-        pocket_length <- smooth_neuron(pocket[[1]], sigma = sigma) %>%
-          summary() %>% select(cable.length)
-      }
-      else if (length(ctip_intra) > 0) {
-        pocket_length <- cil_length
-      }
-      else {
-        pocket_length <- 0
-      }
-    }
-    cilium_lengths <- tibble(cil_length=integer(),
-                             pocket_length=integer())
-    cilium_lengths <- bind_rows(cilium_lengths, cil_len_tb)
-    
-    ########## polyadicity 
-    polyadicities <- list()
-    polyadicity <- get_syn_polyadicity_for_neuron(cell)
-    polyadicities <- c(polyadicities, polyadicity)
+  n_cilia <- organelle_stats %>%
+    filter(skid %in% skids) %>%
+    select("basal body") %>%
+    pull() %>%
+    mean()
+  skids_with_cilia <- cilium_lengths %>% filter(skid %in% skids)
+  # if there is no basal body, report 0
+  # cilium_lengths table only tells us how many cilium tips there are
+  if (n_cilia == 0) {
+    avg_cil_length <- 0
   }
-  avg_celltype_polyadicity <- polyadicities %>% unlist %>% mean
+  # if there is no "cilium tip" report NA
+  else if (nrow(skid_with_cilia) == 0) {
+    avg_cil_length <- NA
+  } else {
+    avg_cil_length <- cilium_lengths %>%
+      filter(skid %in% skids) %>%
+      select(cil_length) %>%
+      pull() %>% 
+      mean()
+  }
+
+  if (n_cilia == 0) {
+    avg_pocket_length <- 0
+  }
+  # if there is no "cilium tip" report NA
+  else if (nrow(skid_with_cilia) == 0) {
+    avg_pocket_length <- NA
+  } else {
+    avg_cil_length <- cilium_lengths %>%
+      filter(skid %in% skids) %>%
+      select(pocket_length) %>%
+      pull() %>% 
+      mean()
+  }
+  
+  ########### mito count
+  n_mito <- organelle_stats %>%
+    filter(skid %in% skids) %>%
+    select(mitochondrion) %>%
+    pull %>%
+    mean()
+  
+  ######### polyadicity 
+  avg_polyadicity <- stats_master %>%
+   filter(skid %>% skids) %>%
+   select(polyadicity) %>%
+   pull() %>%
+   mean()
 }
 
 
