@@ -209,7 +209,7 @@ for (cell_type in c("SSN", "bridge")) {
 
   for (skid in skids) {
     cell <- mito_done[[as.character(skid)]] %>% smooth_neuron(sigma = 1000)
-    plot3d(cell, color = "grey", lwd = 2, soma = TRUE, alpha = 0.6)
+    plot_multinucleated_cell(cell, color = "grey", lwd = 2, alpha = 0.6)
   }
 
   pos_ves_syn <- mito_vesicle_info |>
