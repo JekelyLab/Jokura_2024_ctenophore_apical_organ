@@ -1,4 +1,4 @@
-# Code to generate Figure 4 of the Jokura et al 2024 Ctenophore apical organ connectome paper
+# Code to generate Figure 5 of the Jokura et al 2024 Ctenophore apical organ connectome paper
 
 # source packages and functions ------------------------------------------------
 source("analysis/scripts/packages_and_functions.R")
@@ -6,32 +6,63 @@ source("analysis/scripts/packages_and_functions.R")
 
 # assemble figure -------------------------------------------------------------
 
-
-panel_bri_3d <- ggdraw() + draw_image(readPNG("manuscript/pictures/bridge.png"))
-panel_bri_mito <- ggdraw() + draw_image(readPNG("manuscript/pictures/mito_pos_bridge_text.png"))
-panel_bri_syn <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_prepost_synapse_bridge.png"))
-panel_grav_matrix <- ggdraw() + draw_image(readPNG("manuscript/pictures/mech_girdle_chaeMech_syn_matrix.png"))
-panel_grav_graph_bridge <- ggdraw() + draw_image(readPNG("manuscript/pictures/gravity_neural_circuit_graph_bridge.png"))
+panel_ms <- ggdraw() + draw_image(readPNG("manuscript/pictures/tilt_microscope.png"))
+panel_bal_s <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer_sagittal.png"))
+panel_bal_t <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer_tentacular.png"))
+panel_map_s <- ggdraw() + draw_image(readPNG("manuscript/pictures/map_sagittal.png"))
+panel_map_t <- ggdraw() + draw_image(readPNG("manuscript/pictures/map_tentacular.png"))
+panel_kymograph <- ggdraw() + draw_image(readPNG("manuscript/pictures/balacer_arrest_rebeat_kymograph.png"))
+panel_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/balacer_arrest_rebeat_graph.png"))
 
 layout <- "
-AAAABBB
-#######
-CCCDDEE
+AA#B#C
+AA####
+AA#D#E
+######
+FFFF#G
 "
 
-Figure4 <- panel_bri_3d + panel_bri_mito + 
-  panel_bri_syn + panel_grav_matrix + panel_grav_graph_bridge +
+
+
+Figure5 <- panel_ms + panel_bal_s + panel_bal_t + panel_map_s + panel_map_t +
+  panel_kymograph + panel_graph +
   plot_layout(design = layout,
-              heights = c(1, 0.1, 1.2),
-              widths = c(1, 1, 1, 1, 1, 1, 0.5)) + 
+              heights = c(1.5, 0.1, 1, 0.1, 3),
+              widths = c(1, 1, 0.1, 1, 0.1, 1)) + 
   plot_annotation(tag_levels = "A") + 
   theme(plot.tag = element_text(size = 12, face='plain', color='black'))
 
 
-ggsave("manuscript/figures/Figure4.png", limitsize = FALSE, 
-       units = c("px"), Figure4, width = 2400, height = 1000, bg='white')  
+ggsave("manuscript/figures/Figure5.png", limitsize = FALSE, 
+       units = c("px"), Figure5, width = 2500, height = 1800, bg='white')  
 
 
-ggsave("manuscript/figures/Figure4.pdf", limitsize = FALSE, 
-       units = c("px"), Figure4, width = 2400, height = 1000) 
+ggsave("manuscript/figures/Figure5.pdf", limitsize = FALSE, 
+       units = c("px"), Figure5, width = 2500, height = 1800) 
+
+
+# assemble figure -------------------------------------------------------------
+
+panel_sum <- ggdraw() + draw_image(readPNG("manuscript/pictures/discussion.png"))
+
+layout <- "
+A
+"
+
+
+
+Figure6 <- panel_sum +
+  plot_layout(design = layout,
+              heights = c(1),
+              widths = c(1)) + 
+  plot_annotation(tag_levels = "A") + 
+  theme(plot.tag = element_text(size = 12, face='plain', color='black'))
+
+
+ggsave("manuscript/figures/Figure6.png", limitsize = FALSE, 
+       units = c("px"), Figure6, width = 2500, height = 1050, bg='white')  
+
+
+ggsave("manuscript/figures/Figure6.pdf", limitsize = FALSE, 
+       units = c("px"), Figure6, width = 2500, height = 1050) 
 
