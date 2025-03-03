@@ -1,4 +1,4 @@
-# Code to generate Figure 5 of the Jokura et al 2024 Ctenophore apical organ connectome paper
+# Code to generate Figure 4 of the Jokura et al 2024 Ctenophore apical organ connectome paper
 
 # source packages and functions ------------------------------------------------
 source("analysis/scripts/packages_and_functions.R")

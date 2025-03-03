@@ -195,8 +195,6 @@ close3d()
 
 
 
-
-
 # assemble figure -------------------------------------------------------------
 
 # read pics
@@ -234,31 +232,30 @@ close3d()
 #  )
 
 
-panel_larva_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/Mnemiopsis_larva_24hpf.png")) +
-  draw_label("lateral view of TA plane", x = 0.5, y = 0.99, color = "black", size = 8) +
-  draw_line(x = c(0.75, 0.85), y = c(0.05, 0.05), color = "black", size = 0.5) +
-  draw_label(expression(paste("100 ", mu, " m")), x = 0.8, y = 0.09, color = "black", size = 7, hjust = 0.5)
+#panel_larva_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/Mnemiopsis_larva_24hpf.png")) +
+#  draw_label("lateral view of TA plane", x = 0.5, y = 0.99, color = "black", size = 8) +
+#  draw_line(x = c(0.75, 0.85), y = c(0.05, 0.05), color = "black", size = 0.5) +
+#  draw_label(expression(paste("100 ", mu, " m")), x = 0.8, y = 0.09, color = "black", size = 7, hjust = 0.5)
 
-panel_AO_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_mag_pics.png")) +
-  draw_label("aboral view", x = 0.2, y = 0.99, color = "black", size = 8) +
-  draw_label("lateral view of SA plane", x = 0.5, y = 0.99, color = "black", size = 8) +
-  draw_label("lateral view of TA plane", x = 0.85, y = 0.99, color = "black", size = 8) +
-  draw_line(x = c(0.89, 0.99), y = c(0.05, 0.05), color = "black", size = 0.5) +
-  draw_label(expression(paste("20 ", mu, " m")), x = 0.94, y = 0.09, color = "black", size = 7, hjust = 0.5)
+#panel_AO_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_mag_pics.png")) +
+#  draw_label("aboral view", x = 0.2, y = 0.99, color = "black", size = 8) +
+#  draw_label("lateral view of SA plane", x = 0.5, y = 0.99, color = "black", size = 8) +
+#  draw_label("lateral view of TA plane", x = 0.85, y = 0.99, color = "black", size = 8) +
+#  draw_line(x = c(0.89, 0.99), y = c(0.05, 0.05), color = "black", size = 0.5) +
+#  draw_label(expression(paste("20 ", mu, " m")), x = 0.94, y = 0.09, color = "black", size = 7, hjust = 0.5)
 
-panel_larva_schematic <- ggdraw() + draw_image(image_read("manuscript/pictures/larva_aboral_view_schematic.png")) +
-  draw_label("aboral view", x = 0.5, y = 0.97, color = "black", size = 8)
+#panel_larva_schematic <- ggdraw() + draw_image(image_read("manuscript/pictures/larva_aboral_view_schematic.png")) +
+#  draw_label("aboral view", x = 0.5, y = 0.97, color = "black", size = 8)
 
-panel_AO_schematic <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_schematic.png")) +
-  draw_label("aboral view", x = 0.25, y = 0.97, color = "black", size = 8) +
-  draw_label("lateral view of SA plane", x = 0.5, y = 0.97, color = "black", size = 8) +
-  draw_label("lateral view of TA plane", x = 0.75, y = 0.97, color = "black", size = 8)
-
+#panel_AO_schematic <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_schematic.png")) +
+#  draw_label("aboral view", x = 0.25, y = 0.97, color = "black", size = 8) +
+#  draw_label("lateral view of SA plane", x = 0.5, y = 0.97, color = "black", size = 8) +
+#  draw_label("lateral view of TA plane", x = 0.75, y = 0.97, color = "black", size = 8)
 
 panel_catmaid_overview <- ggdraw() + draw_image(readPNG("manuscript/pictures/overview.png")) +
-  draw_label("serial EM volume", x = 0.3, y = 0.98, size = 10, fontface = "plain") +
-  draw_label("619 sections", x = 0.05, y = 0.9, color = "black", size = 8, hjust = 0) +
-  draw_label("927 cells", x = 0.05, y = 0.8, color = "black", size = 8, hjust = 0)
+  draw_label("serial EM volume", x = 0.05, y = 0.9, size = 11, fontface = "plain", hjust = 0) +
+  draw_label("619 sections", x = 0.05, y = 0.825, color = "black", size = 8, hjust = 0) +
+  draw_label("927 cells", x = 0.05, y = 0.775, color = "black", size = 8, hjust = 0)
 
 #panel_3d_all_cells <- ggdraw() + draw_image(readPNG("manuscript/pictures/all_cells_3_views.png"))
 
@@ -268,27 +265,15 @@ panel_catmaid_overview <- ggdraw() + draw_image(readPNG("manuscript/pictures/ove
 #panel_bal_side <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer_Q1_4_side_view.png"))
 
 panel_quadrants <- ggdraw() + draw_image(readPNG("manuscript/pictures/quadrants.png")) +
-  draw_label("aboral view", x = 0.25, y = 0.97, color = "black", size = 8) +
-  draw_label("lateral view of SA plane", x = 0.5, y = 0.97, color = "black", size = 8) +
-  draw_label("lateral view of TA plane", x = 0.75, y = 0.97, color = "black", size = 8)  +
-  draw_label("balancer cells", x = 0.5, y = 0.95, size = 8.5, fontface="bold", hjust = 0.5) +
-  draw_label("aboral view", x = 0.01, y = 0.86, color="black", size = 6, fontface="plain", hjust = 0) +
-  draw_label("lateral view of PA plane", x = 0.33, y = 0.86, color="black", size = 6, fontface="plain", hjust = 0) +
-  draw_label("lateral view of TA plane", x = 0.69, y = 0.86, color="black", size = 6, fontface="plain", hjust = 0) +
+  draw_label("aboral view", x = 0.17, y = 0.98, color = "black", size = 10, hjust = 0.5) +
+  draw_label("lateral view of SA plane", x = 0.5, y = 0.98, color = "black", size = 10, hjust = 0.5) +
+  draw_label("lateral view of TA plane", x = 0.83, y = 0.98, color = "black", size = 10, hjust = 0.5)  +
   draw_line(x = c(0.85, 0.95), y = c(0.1, 0.1), color = "black", size = 0.5) +
   draw_label(expression(paste("25 ", mu, "m")), x = 0.9, y = 0.14, color = "black", size = 7, hjust = 0.5) +
   draw_label("TA", x = 0.325, y = 0.16, size = 6, color = "black", hjust = 0.5) +
-  geom_segment(aes(x = 0.25, y = 0.16, xend = 0.31, yend = 0.16), color = "black", 
-               arrow = arrow(ends = "both", type = "closed", length = unit(0.1,"cm")),
-               lineend = "butt",
-               linejoin = "mitre",
-               arrow.fill = "black", linewidth = 0.175) +
-  draw_label("PA", x = 0.28, y = 0.05, size = 6, color = "black", hjust = 0.5) +
-  geom_segment(aes(x = 0.28, y = 0.08, xend = 0.28, yend = 0.24), color = "black", 
-               arrow = arrow(ends = "both", type = "closed", length = unit(0.1,"cm")),
-               lineend = "butt",
-               linejoin = "mitre",
-               arrow.fill = "black", linewidth = 0.175) +
+  geom_segment(aes(x = 0.25, y = 0.16, xend = 0.31, yend = 0.16), color = "black") +
+  draw_label("SA", x = 0.28, y = 0.05, size = 6, color = "black", hjust = 0.5) +
+  geom_segment(aes(x = 0.28, y = 0.08, xend = 0.28, yend = 0.24), color = "black") +
   draw_label("A", x = 0.66, y = 0.25, size = 6, color = "black", hjust = 0.5) +
   draw_label("O", x = 0.66, y = 0.05, size = 6, color = "black", hjust = 0.5) +
   geom_segment(aes(x = 0.66, y = 0.09, xend = 0.66, yend = 0.21), color = "black", 
@@ -333,12 +318,22 @@ panel_quadrants <- ggdraw() + draw_image(readPNG("manuscript/pictures/quadrants.
 
 
 
+
+panel_larva_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/Mnemiopsis_larva_24hpf.png"))
+
+panel_AO_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_mag_pics.png"))
+
+panel_larva_schematic <- ggdraw() + draw_image(image_read("manuscript/pictures/larva_aboral_view_schematic.png"))
+
+panel_AO_schematic <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_schematic.png"))
+
+
 layout <- "
-A#BBB
-#####
-C#DDD
-#####
-E#FFF
+ABBB
+####
+CDDD
+####
+EFFF
 "
 
 Figure1 <- panel_larva_pic + panel_AO_pic + 
@@ -346,8 +341,8 @@ Figure1 <- panel_larva_pic + panel_AO_pic +
   panel_catmaid_overview + panel_quadrants +
   plot_layout(
     design = layout,
-    heights = c(1, 0.1, 1, 0.1, 1),
-    widths = c(1, 0.1, 1, 1, 1)
+    heights = c(1.25, 0.1, 1, 0.1, 1),
+    widths = c(1, 1, 1, 1)
   ) + 
   patchwork::plot_annotation(tag_levels = "A") &  
   ggplot2::theme(plot.tag = element_text(size = 12, 
@@ -356,10 +351,10 @@ Figure1 <- panel_larva_pic + panel_AO_pic +
 
 ggsave("manuscript/figures/Figure1.png",
   limitsize = FALSE,
-  units = c("px"), Figure1, width = 3200, height = 2250, bg = "white"
+  units = c("px"), Figure1, width = 3200, height = 2400, bg = "white"
 )
 
 ggsave("manuscript/figures/Figure1.pdf",
   limitsize = FALSE,
-  units = c("px"), Figure1, width = 3200, height = 2250
+  units = c("px"), Figure1, width = 3200, height = 2400
 )
