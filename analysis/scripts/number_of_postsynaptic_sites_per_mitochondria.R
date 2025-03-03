@@ -109,6 +109,10 @@ get_mito_pos <- function(neur) {
 mito_vesicle_info <- lapply(mito_done, get_mito_pos) |>
   bind_rows()
 
+#for (mito_done_neu in mito_done) {
+#  print(mito_done_neu[1])
+#  get_mito_pos(mito_done_neu)
+#}
 
 # create tibble for graph ---------------------------------
 
@@ -194,7 +198,7 @@ plot_mito_stats <- ggplot(mito_means_tidy, aes(
 # I'm not sure it makes sense to do it for other celltypes because not all cells
 # for them had annotated mito
 for (cell_type in c("SSN", "bridge")) {
-  plot_background()
+  nopen3d()
   # plot3d(outline,
   #  WithNodes = F, add = T, alpha = 0.07, col = "#E2E2E2"
   # )
@@ -205,7 +209,7 @@ for (cell_type in c("SSN", "bridge")) {
 
   for (skid in skids) {
     cell <- mito_done[[as.character(skid)]] %>% smooth_neuron(sigma = 1000)
-    plot3d(cell, color = "grey", lwd = 2, soma = TRUE, alpha = 0.6)
+    plot_multinucleated_cell(cell, color = "grey", lwd = 2, alpha = 0.6)
   }
 
   pos_ves_syn <- mito_vesicle_info |>
@@ -251,10 +255,19 @@ for (cell_type in c("SSN", "bridge")) {
     size = 5,
     alpha = 1
   )
-  anterior()
-  paste("manuscript/pictures/mito_pos_", cell_type, "_anterior.png", sep = "") %>% rgl.snapshot()
-  left()
-  paste("manuscript/pictures/mito_pos_", cell_type, "_left.png", sep = "") %>% rgl.snapshot()
+  par3d(zoom=0.50)
+  # anterior
+  nview3d("anterior", extramat = rotationMatrix(1.05, 250, -200, 1000))
+  par3d(windowRect = c(0, 0, 400, 800))
+  paste("manuscript/pictures/mito_pos_", cell_type, "_aboral.png", sep = "") %>% rgl.snapshot()
+  # sagittal
+  nview3d("left", extramat = rotationMatrix(300, 4200, 1800, 800))
+  par3d(windowRect = c(0, 0, 450, 450))
+  paste("manuscript/pictures/mito_pos_", cell_type, "_sagittal.png", sep = "") %>% rgl.snapshot()
+  # tentacular
+  nview3d("left", extramat = rotationMatrix(-1.7, 190, -120, -140))
+  par3d(windowRect = c(0, 0, 800, 450))
+  paste("manuscript/pictures/mito_pos_", cell_type, "_tentacular.png", sep = "") %>% rgl.snapshot()
   close3d()
 }
 
