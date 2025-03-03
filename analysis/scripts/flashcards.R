@@ -33,6 +33,8 @@ celltype_flashcard(celltype) {
   ### morphology for single cell, with cilia
   cell <- cells[[1]]
   cilia <- segments_between_tags(cell, "cilium tip", "basal body")
+  # here we also want cut cilia
+  cilia_cut <- segments_between_tags(cell, "cilium cut", "basal body")
   # visualize part of cilium in ciliary pocket
   # this is a bit tricky, because it has "exit_ciliary_pocket" if it exits half way,
   # but "cilium tip intracellular" if the whole cilium is inside the cell
@@ -52,11 +54,14 @@ celltype_flashcard(celltype) {
   
   cell_smooth <- smooth_neuron(cell, sigma = 500)
   cilia_smooth <- lapply(cilia, smooth_neuron, sigma = 500) %>% as.neuronlist()
+  cilia_cut_smooth <- lapply(cilia_cut, smooth_neuron, sigma = 500) %>% as.neuronlist()
   in_pocket_smooth <- lapply(in_pocket, smooth_neuron, sigma = 500) %>% as.neuronlist()
-  
   plot3d(cell_smooth, soma = TRUE, lwd = 1, color = "grey")
   if (length(cilia_smooth) > 0) {
     plot3d(cilia_smooth, soma = TRUE, lwd = 2, color = "orange")
+  }
+  if (length(cilia_cut_smooth) > 0) {
+    plot3d(cilia_cut_smooth, soma = TRUE, lwd = 2, color = "orange")
   }
   if (length(in_pocket_smooth) > 0) {
     plot3d(in_pocket_smooth, soma = TRUE, lwd = 5, color = "purple")
