@@ -21,8 +21,8 @@ close3d()
 nopen3d() 
 mfrow3d(1, 3)  #defines the two scenes
 #define the size of the rgl window, the view and zoom
-#par3d(windowRect = c(0, 0, 1200, 350))
-par3d(windowRect = c(0, 0, 2400, 700))
+par3d(windowRect = c(0, 0, 1200, 350))
+#par3d(windowRect = c(0, 0, 2400, 700))
 
 #plot aboral view
 
@@ -37,7 +37,7 @@ par3d(windowRect = c(0, 0, 2400, 700))
 plot3d(
   lithocyte,
   soma = T, lwd = 1, add = T,
-  alpha = 0.5, col = Okabe_Ito[8],
+  alpha = 0.25, col = Okabe_Ito[8],
   WithConnectors = F
 )
 plot3d(
@@ -61,23 +61,23 @@ plot3d(
   alpha = 0.15, col = Okabe_Ito[7]
 )
 
-#plot3d(
-#  outline,
-#  add = T,
-#  alpha = 0.06, col = "grey50"
-#)
+plot3d(
+  outline,
+  add = T,
+  alpha = 0.06, col = "grey50"
+)
 
 
 nview3d("anterior", extramat = rotationMatrix(1.05, 250, -200, 1000))
 
 
 
-text3d(15402, 56436, -200, "lithocyte", cex = 2.5)
+#text3d(15402, 56436, -200, "lithocyte", cex = 2.5)
 #text3d(38002, 65436, 10000, "balancer", cex = 2.5)
-text3d(23402, 29436, -200, "Q1", cex = 2.5)
-text3d(11602, 54436, -200, "Q2", cex = 2.5)
-text3d(23402, 65436, -200, "Q3", cex = 2.5)
-text3d(36402, 35436, -200, "Q4", cex = 2.5)
+#text3d(23402, 29436, -200, "Q1", cex = 2.5)
+#text3d(11602, 54436, -200, "Q2", cex = 2.5)
+#text3d(23402, 65436, -200, "Q3", cex = 2.5)
+#text3d(36402, 35436, -200, "Q4", cex = 2.5)
 
 
 #rgl.snapshot("manuscript/pictures/quadrants_aboral_view.png")
@@ -94,7 +94,7 @@ next3d(clear=F)
 plot3d(
   lithocyte,
   soma = T, lwd = 1, add = T,
-  alpha = 0.5, col = Okabe_Ito[8],
+  alpha = 0.25, col = Okabe_Ito[8],
   WithConnectors = F
 )
 plot3d(
@@ -118,19 +118,19 @@ plot3d(
   alpha = 0.15, col = Okabe_Ito[7]
 )
 
-#plot3d(
-#  outline,
-#  add = T,
-#  alpha = 0.06, col = "grey50"
-#)
+plot3d(
+  outline,
+  add = T,
+  alpha = 0.06, col = "grey50"
+)
 
 
 nview3d("left", extramat = rotationMatrix(300, 4200, 1800, 800))
 
-text3d(23402, 29436, -200, "Q1", cex = 2.5)
-text3d(23402, 29436, 2000, "Q4", cex = 2.5)
-text3d(33402, 70436, -7000, "Q2", cex = 2.5)
-text3d(33402, 70436, -5000, "Q3", cex = 2.5)
+#text3d(23402, 29436, -200, "Q1", cex = 2.5)
+#text3d(23402, 29436, 2000, "Q4", cex = 2.5)
+#text3d(33402, 70436, -7000, "Q2", cex = 2.5)
+#text3d(33402, 70436, -5000, "Q3", cex = 2.5)
 
 #rgl.snapshot("manuscript/pictures/quadrants_viewing_sagittal_plane.png")
 par3d(zoom=0.61)
@@ -145,7 +145,7 @@ next3d(clear=F)
 plot3d(
   lithocyte,
   soma = T, lwd = 1, add = T,
-  alpha = 0.5, col = Okabe_Ito[8],
+  alpha = 0.25, col = Okabe_Ito[8],
   WithConnectors = F
 )
 plot3d(
@@ -169,19 +169,19 @@ plot3d(
   alpha = 0.15, col = Okabe_Ito[7]
 )
 
-#plot3d(
-#  outline,
-#  add = T,
-#  alpha = 0.06, col = "grey50"
-#)
+plot3d(
+  outline,
+  add = T,
+  alpha = 0.06, col = "grey50"
+)
 
 #plot lateral view of Tentacular plane
 nview3d("left", extramat = rotationMatrix(-1.7, 190, -120, -140))
 
-text3d(23402, 25436, -200, "Q1", cex = 2.5)
-text3d(23402, 25436, 2000, "Q2", cex = 2.5)
-text3d(33402, 50436, -4000, "Q3", cex = 2.5)
-text3d(33402, 50436, -2000, "Q4", cex = 2.5)
+#text3d(23402, 25436, -200, "Q1", cex = 2.5)
+#text3d(23402, 25436, 2000, "Q2", cex = 2.5)
+#text3d(33402, 50436, -4000, "Q3", cex = 2.5)
+#text3d(33402, 50436, -2000, "Q4", cex = 2.5)
 
 #rgl.snapshot("manuscript/pictures/quadrants_viewing_tentacular_plane.png")
 par3d(zoom=0.61)

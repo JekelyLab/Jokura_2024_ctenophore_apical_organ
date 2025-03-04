@@ -81,7 +81,7 @@ read_smooth_neuron <- function(annotation){
 }
 
 outline <- catmaid_get_volume(
-  53, rval = c("mesh3d", "catmaidmesh", "raw"),
+  60, rval = c("mesh3d", "catmaidmesh", "raw"),
   invertFaces = T, conn = NULL, pid = 35
   )
 dome_cavity <- catmaid_get_volume(
