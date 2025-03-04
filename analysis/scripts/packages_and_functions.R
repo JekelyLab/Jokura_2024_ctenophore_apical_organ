@@ -28,7 +28,7 @@ library(magick)
   #for this we configure to http/1.1
   conn_http1 = catmaid_login(conn=conn, config=httr::config(ssl_verifypeer=0, http_version=1))
 }
-"manuscript/pictures/balancer_Q1_4_aboral_view.png"
+
 system("git submodule init")
 system("git submodule update")
 source("rcatmaid_functions_library/functions.R")
@@ -92,134 +92,19 @@ dome_cavity <- catmaid_get_volume(
 # define views --------------
 
 anterior <- function(){
-  nview3d("anterior", 
-        extramat = rotationMatrix(2.54, 0.1, 0, 1)
-        )
+  nview3d("anterior", extramat = rotationMatrix(1.05, 250, -200, 1000))
 }
 
-left <- function(){
+sagittal <- function(){
+  nview3d("left", extramat = rotationMatrix(300, 4200, 1800, 800))
+}
+tentacular <- function(){
   nview3d("left", extramat = rotationMatrix(-1.7, 190, -120, -140))
 }
 
+# crop_catmaid function has been replaced by crop_substack from rcatmaid_functions_library
 
-
-# crop from catmaid -----------------------------------------
-
-crop_catmaid <- function(tagname,
-                         half_bb_size_x, half_bb_size_y, half_bb_size_z,
-                         zoomlevel,
-                         dest_dir) {
-  # tag search only returns treenodes with tag, not connectors
-  # however, we want to get either treenodes or connectors, so we have to use generic search
-  tagname_edited <- gsub(" ", "%20", tagname)
-  search_results <- catmaid_fetch(path = paste("35/search?substring=", tagname_edited, sep = ""))
-  # search doesn't accept regex, so we have to filter results
-  ids=c() # keep track of the number of substacks we have to download from the server later
-          # use ids rather than simple counter because it helps with debugging
-  for (i in seq_along(search_results)) {
-    if (search_results[[i]]$name == tagname && search_results[[i]]$class_name == "label") {
-      for (j in seq_along(search_results[[i]]$nodes)) {
-        #print("adding treenode id")
-        #print(search_results[[i]]$nodes[[j]]$id)
-        ids <- c(ids, search_results[[i]]$nodes[[j]]$id)
-        x <- search_results[[i]]$nodes[[j]]$x
-        y <- search_results[[i]]$nodes[[j]]$y
-        z <- search_results[[i]]$nodes[[j]]$z
-        catmaid_fetch(
-          path = "35/crop/",
-          body = list(
-            stack_ids=28,
-            min_x=x-half_bb_size_x,
-            min_y=y-half_bb_size_y,
-            min_z=z-half_bb_size_z,
-            max_x=x+half_bb_size_x,
-            max_y=y+half_bb_size_y,
-            max_z=z+half_bb_size_z,
-            zoom_level=zoomlevel,
-            single_channel='true',
-            rotationcw=0
-          )
-        )
-      }
-      for (j in seq_along(search_results[[i]]$connectors)) {
-        #print("adding connector id")
-        #print(search_results[[i]]$connector[[j]]$id)
-        ids <- c(ids, search_results[[i]]$connectors[[j]]$id)
-        x <- search_results[[i]]$connectors[[j]]$x
-        y <- search_results[[i]]$connectors[[j]]$y
-        z <- search_results[[i]]$connectors[[j]]$z
-        catmaid_fetch(
-          path = "35/crop/",
-          body = list(
-            stack_ids=28,
-            min_x=x-half_bb_size_x,
-            min_y=ynview3d("anterior", extramat = rotationMatrix(1.05, 250, -200, 1000)),
-            par3d(zoom=0.7),
-            #y-axis clip
-            clipplanes3d(1, 0, 0, -11500),
-            #x-axis clip
-            clipplanes3d(0, 1, 0, -24000),
-            -half_bb_size_y,
-            min_z=z-half_bb_size_z,
-            max_x=x+half_bb_size_x,
-            max_y=y+half_bb_size_y,
-            max_z=z+half_bb_size_z,
-            zoom_level=zoomlevel,
-            single_channel='true',
-            rotationcw=0
-          )
-        )
-      }
-    }
-  }
-  print("checkpoint 1")
-  if (length(ids) == 0) {
-    print(paste("No treenodes or connectors tagged with", tagname, "were found"))
-    return()
-  }
-  
-  print(paste("Found", length(ids), "treenodes or connectors tagged with", tagname))
-  print("Downloading the following ids:")
-  print(ids)
-  print("This will take some time")
-        
-  # server needs time to process this
-  Sys.sleep(90)
-  
-  # download stacks ---------------------------------------------------------
-  # the exact file names are needed for download,
-  # to get them we need to check messages from the server
-  # originally I was checking which messages are new, and downloading those
-  # but this could lead to false positives
-  # so I decided that's it's probably safe to download the last n messages
-  # where n is the number of jobs
-  
-  # It would be cool if I can put the synapse ID as file name,
-  # but it's not guaranteed that jobs will return in the same order
-  
-  cat_messages <- catmaid_fetch(
-    path = "messages/list"
-  )
-  
-  for (k in seq_along(ids)) {
-    cat_message <- cat_messages[[k]]$text
-    link <- regmatches(cat_message, 
-                       regexpr("/crop/download/crop_.{6}.tiff", cat_message))
-    filename <- regmatches(link, 
-                           regexpr("crop_.{6}.tiff", link))
-    full_link <- paste("https:/catmaid.ex.ac.uk", link, sep = "")
-    destpath <- paste(dest_dir, "/", filename, sep = "")
-    download.file(full_link, destfile = destpath)
-  }
-}
-
-
-get_celltypes <- function(pid) {
-  annotations <- catmaid_get_annotationlist(pid = 35)
-  celltypes <- annotations$annotations |> filter(grepl("^celltype:", name)) |>
-    select(name) |> pull() |> sub(pattern="^celltype:", replacement="")
-  return(celltypes)
-}
+# get_celltypes function is in rcatmaid_functions_library
 
 
 #function to add a text label to a neuron and a line to one of the neurons of the neuronlist starting from the soma
