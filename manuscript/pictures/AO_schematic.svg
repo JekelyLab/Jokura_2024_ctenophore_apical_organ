@@ -181,7 +181,7 @@
 							<g>
 								<path fill="none" stroke="#231815" stroke-width="1.391" stroke-miterlimit="10" d="M335.05,443.371
 									c-0.386-0.26-0.771-0.519-1.154-0.777"/>
-								<path fill="none" stroke="#231815" stroke-width="1.391" stroke-miterlimit="10" stroke-dasharray="2.7587,2.7587" d="
+								<path fill="none" stroke="#231815" stroke-width="1.391" stroke-miterlimit="10" stroke-dasharray="2.7586,2.7586" d="
 									M331.611,441.049c-92.053-62.464-74.387-74.44-124.445-128.91"/>
 								<path fill="none" stroke="#231815" stroke-width="1.391" stroke-miterlimit="10" d="M206.229,311.123
 									c-0.313-0.338-0.629-0.679-0.948-1.021"/>
@@ -329,10 +329,10 @@
 			</g>
 		</g>
 	</g>
-	<rect x="379.754" y="183.74" fill="none" width="147.59" height="17.71"/>
-	<text transform="matrix(1 0 0 1 387.0073 195.7539)" font-family="'ArialMT'" font-size="14">viewing sagittal plane</text>
-	<rect x="613.491" y="183.739" fill="none" width="166.459" height="17.711"/>
-	<text transform="matrix(1 0 0 1 621.6182 195.7534)" font-family="'ArialMT'" font-size="14">viewing tentacular plane</text>
+	<rect x="354.757" y="183.74" fill="none" width="197.584" height="17.71"/>
+	<text transform="matrix(1 0 0 1 385.0669 195.7539)" font-family="'ArialMT'" font-size="14">lateral view of S plane</text>
+	<rect x="597.423" y="183.739" fill="none" width="207.151" height="17.711"/>
+	<text transform="matrix(1 0 0 1 632.9082 195.7534)" font-family="'ArialMT'" font-size="14">lateral view of T plane</text>
 	<rect x="98.643" y="183.739" fill="none" width="147.589" height="17.711"/>
 	<text transform="matrix(1 0 0 1 137.0308 195.7539)" font-family="'ArialMT'" font-size="14">aboral view</text>
 	<rect x="449.488" y="236.562" fill="none" width="8.121" height="18.836"/>
@@ -384,9 +384,9 @@
 			c1.059-0.07,2.307,1.136,2.107,2.792"/>
 	</g>
 	<rect x="181.235" y="365.371" fill="none" width="26.859" height="17.71"/>
-	<text transform="matrix(1 0 0 1 189.9951 377.3848)" font-family="'ArialMT'" font-size="14">S</text>
+	<text transform="matrix(1 0 0 1 189.9956 377.3848)" font-family="'ArialMT'" font-size="14">S</text>
 	<rect x="295.855" y="246.543" fill="none" width="26.859" height="17.71"/>
-	<text transform="matrix(1 0 0 1 305.0088 258.5571)" font-family="'ArialMT'" font-size="14">T</text>
+	<text transform="matrix(1 0 0 1 305.0083 258.5571)" font-family="'ArialMT'" font-size="14">T</text>
 	<g>
 		<rect x="568.817" y="213.165" fill="none" width="16.523" height="14.461"/>
 		<text transform="matrix(1 0 0 1 572.4541 225.1792)" font-family="'ArialMT'" font-size="14">A</text>
@@ -404,9 +404,9 @@
 	<rect x="254.468" y="326.056" fill="none" width="22.794" height="18.838"/>
 	<text transform="matrix(1 0 0 1 258.5864 338.0703)" fill="#808080" font-family="'ArialMT'" font-size="14">Q4</text>
 	<rect x="345.894" y="352.66" fill="none" width="22.795" height="18.837"/>
-	<text transform="matrix(1 0 0 1 347.9536 364.6748)" fill="#808080" font-family="'ArialMT'" font-size="14">Q1</text>
+	<text transform="matrix(1 0 0 1 347.9536 364.6748)" fill="#808080" font-family="'ArialMT'" font-size="14">Q3</text>
 	<rect x="539.651" y="352.66" fill="none" width="22.794" height="18.837"/>
-	<text transform="matrix(1 0 0 1 541.7109 364.6748)" fill="#808080" font-family="'ArialMT'" font-size="14">Q2</text>
+	<text transform="matrix(1 0 0 1 541.7109 364.6748)" fill="#808080" font-family="'ArialMT'" font-size="14">Q4</text>
 	<rect x="786.196" y="352.66" fill="none" width="22.795" height="18.837"/>
 	<text transform="matrix(1 0 0 1 788.2559 364.6748)" fill="#808080" font-family="'ArialMT'" font-size="14">Q1</text>
 	<rect x="590.696" y="353.123" fill="none" width="22.795" height="18.838"/>

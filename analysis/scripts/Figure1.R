@@ -265,22 +265,44 @@ panel_catmaid_overview <- ggdraw() + draw_image(readPNG("manuscript/pictures/ove
 #panel_bal_side <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer_Q1_4_side_view.png"))
 
 panel_quadrants <- ggdraw() + draw_image(readPNG("manuscript/pictures/quadrants.png")) +
-  draw_label("aboral view", x = 0.17, y = 0.98, color = "black", size = 10, hjust = 0.5) +
-  draw_label("lateral view of SA plane", x = 0.5, y = 0.98, color = "black", size = 10, hjust = 0.5) +
-  draw_label("lateral view of TA plane", x = 0.83, y = 0.98, color = "black", size = 10, hjust = 0.5)  +
-  draw_line(x = c(0.85, 0.95), y = c(0.1, 0.1), color = "black", size = 0.5) +
-  draw_label(expression(paste("25 ", mu, "m")), x = 0.9, y = 0.14, color = "black", size = 7, hjust = 0.5) +
-  draw_label("TA", x = 0.325, y = 0.16, size = 6, color = "black", hjust = 0.5) +
-  geom_segment(aes(x = 0.25, y = 0.16, xend = 0.31, yend = 0.16), color = "black") +
-  draw_label("SA", x = 0.28, y = 0.05, size = 6, color = "black", hjust = 0.5) +
-  geom_segment(aes(x = 0.28, y = 0.08, xend = 0.28, yend = 0.24), color = "black") +
-  draw_label("A", x = 0.66, y = 0.25, size = 6, color = "black", hjust = 0.5) +
-  draw_label("O", x = 0.66, y = 0.05, size = 6, color = "black", hjust = 0.5) +
-  geom_segment(aes(x = 0.66, y = 0.09, xend = 0.66, yend = 0.21), color = "black", 
-               arrow = arrow(ends = "both", type = "closed", length = unit(0.1,"cm")),
-               lineend = "butt",
-               linejoin = "mitre",
-               arrow.fill = "black", linewidth = 0.175) 
+#  draw_line(x = c(0, 1), y = c(0, 0), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0, 1), y = c(0.1, 0.1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0, 1), y = c(0.2, 0.2), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0, 1), y = c(0.3, 0.3), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0, 1), y = c(0.4, 0.4), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0, 1), y = c(0.5, 0.5), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0, 1), y = c(0.6, 0.6), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0, 1), y = c(0.7, 0.7), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0, 1), y = c(0.8, 0.8), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0, 1), y = c(0.9, 0.9), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0, 1), y = c(1, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0, 0), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0.1, 0.1), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0.2, 0.2), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0.3, 0.3), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0.4, 0.4), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0.5, 0.5), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0.6, 0.6), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0.7, 0.7), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0.8, 0.8), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(0.9, 0.9), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#  draw_line(x = c(1, 1), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+  draw_label("Q1", x = 0.3, y = 0.9, color = "black", size = 15, hjust = 0.5, alpha = 0.5) +
+  draw_label("Q2", x = 0.06, y = 0.79, color = "black", size = 15, hjust = 0.5, alpha = 0.5) +
+  draw_label("Q3", x = 0.03, y = 0.08, color = "black", size = 15, hjust = 0.5, alpha = 0.5) +
+  draw_label("Q4", x = 0.275, y = 0.11, color = "black", size = 15, hjust = 0.5, alpha = 0.5) +
+  draw_label("aboral view", x = 0.17, y = 1, color = "black", size = 10.5, hjust = 0.5) +
+  draw_label("lateral view of S plane", x = 0.5, y = 1, color = "black", size = 10.5, hjust = 0.5) +
+  draw_label("lateral view of T plane", x = 0.83, y = 1, color = "black", size = 10.5, hjust = 0.5)  +
+  draw_label(expression(paste("25 ", mu, "m")), x = 0.95, y = 0.1, color = "black", size = 10, hjust = 0.5) +
+  draw_line(x = c(0.91, 0.99), y = c(0.05, 0.05), color = "black", linewidth = 1) +
+#  draw_label("T", x = 0.33, y = 0.1, size = 10, color = "black", hjust = 0.5) +
+#  draw_line(x = c(0.3, 0.32), y = c(0.1, 0.1), color = "black", linewidth = 0.75) +
+#  draw_label("S", x = 0.31, y = 0.03, size = 10, color = "black", hjust = 0.5) +
+#  draw_line(x = c(0.31, 0.31), y = c(0.07, 0.13), color = "black", linewidth = 0.75) +
+  draw_label("A", x = 0.66, y = 0.25, size = 10, color = "black", hjust = 0.5) +
+  draw_label("O", x = 0.66, y = 0.05, size = 10, color = "black", hjust = 0.5) +
+  draw_line(x = c(0.66, 0.66), y = c(0.09, 0.21), color = "black", linewidth = 0.75) 
 
 
 # create panel A, B, create separately for precise alignment
@@ -341,7 +363,7 @@ Figure1 <- panel_larva_pic + panel_AO_pic +
   panel_catmaid_overview + panel_quadrants +
   plot_layout(
     design = layout,
-    heights = c(1.25, 0.1, 1, 0.1, 1),
+    heights = c(1, 0.1, 1, 0.1, 1),
     widths = c(1, 1, 1, 1)
   ) + 
   patchwork::plot_annotation(tag_levels = "A") &  
@@ -351,7 +373,7 @@ Figure1 <- panel_larva_pic + panel_AO_pic +
 
 ggsave("manuscript/figures/Figure1.png",
   limitsize = FALSE,
-  units = c("px"), Figure1, width = 3200, height = 2400, bg = "white"
+  units = c("px"), Figure1, width = 3200, height = 2200, bg = "white"
 )
 
 ggsave("manuscript/figures/Figure1.pdf",
