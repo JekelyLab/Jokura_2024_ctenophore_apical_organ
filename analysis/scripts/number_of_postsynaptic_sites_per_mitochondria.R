@@ -114,6 +114,9 @@ mito_vesicle_info <- lapply(mito_done, get_mito_pos) |>
 #  get_mito_pos(mito_done_neu)
 #}
 
+write.csv(mito_vesicle_info, "analysis/data/mito_vesicle_info.csv")
+mito_vesicle_info <- read.csv("analysis/data/mito_vesicle_info.csv")
+
 # create tibble for graph ---------------------------------
 
 mito_stats <- mito_vesicle_info %>%
@@ -165,6 +168,8 @@ mito_means_tidy <- mito_means %>%
     values_to = "value"
   )
 
+write.csv(mito_means_tidy, "analysis/data/mito_means_tidy.csv")
+mito_means_tidy <- read.csv("analysis/data/mito_means_tidy.csv")
 
 # plot mito vesicles by celltype -----------------------------------------------
 
