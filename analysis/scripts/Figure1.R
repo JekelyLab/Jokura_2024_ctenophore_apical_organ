@@ -253,9 +253,31 @@ close3d()
 #  draw_label("lateral view of TA plane", x = 0.75, y = 0.97, color = "black", size = 8)
 
 panel_catmaid_overview <- ggdraw() + draw_image(readPNG("manuscript/pictures/overview.png")) +
-  draw_label("serial EM volume", x = 0.05, y = 0.9, size = 11, fontface = "plain", hjust = 0) +
-  draw_label("619 sections", x = 0.05, y = 0.825, color = "black", size = 8, hjust = 0) +
-  draw_label("927 cells", x = 0.05, y = 0.775, color = "black", size = 8, hjust = 0)
+#    draw_line(x = c(0, 1), y = c(0, 0), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0, 1), y = c(0.1, 0.1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0, 1), y = c(0.2, 0.2), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0, 1), y = c(0.3, 0.3), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0, 1), y = c(0.4, 0.4), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0, 1), y = c(0.5, 0.5), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0, 1), y = c(0.6, 0.6), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0, 1), y = c(0.7, 0.7), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0, 1), y = c(0.8, 0.8), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0, 1), y = c(0.9, 0.9), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0, 1), y = c(1, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0, 0), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0.1, 0.1), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0.2, 0.2), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0.3, 0.3), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0.4, 0.4), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0.5, 0.5), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0.6, 0.6), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0.7, 0.7), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0.8, 0.8), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(0.9, 0.9), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+#    draw_line(x = c(1, 1), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
+  draw_label("serial EM volume", x = 0.5, y = 0.925, size = 11, fontface = "plain", hjust = 0.5) +
+  draw_label("619 sections", x = 0.025, y = 0.81, color = "black", size = 9, hjust = 0) +
+  draw_label("927 cells", x = 0.025, y = 0.75, color = "black", size = 9, hjust = 0)
 
 #panel_3d_all_cells <- ggdraw() + draw_image(readPNG("manuscript/pictures/all_cells_3_views.png"))
 
@@ -287,13 +309,13 @@ panel_quadrants <- ggdraw() + draw_image(readPNG("manuscript/pictures/quadrants.
 #  draw_line(x = c(0.8, 0.8), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
 #  draw_line(x = c(0.9, 0.9), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
 #  draw_line(x = c(1, 1), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
-  draw_label("Q1", x = 0.3, y = 0.9, color = "black", size = 15, hjust = 0.5, alpha = 0.5) +
-  draw_label("Q2", x = 0.06, y = 0.79, color = "black", size = 15, hjust = 0.5, alpha = 0.5) +
-  draw_label("Q3", x = 0.03, y = 0.08, color = "black", size = 15, hjust = 0.5, alpha = 0.5) +
-  draw_label("Q4", x = 0.275, y = 0.11, color = "black", size = 15, hjust = 0.5, alpha = 0.5) +
-  draw_label("aboral view", x = 0.17, y = 1, color = "black", size = 10.5, hjust = 0.5) +
-  draw_label("lateral view of S plane", x = 0.5, y = 1, color = "black", size = 10.5, hjust = 0.5) +
-  draw_label("lateral view of T plane", x = 0.83, y = 1, color = "black", size = 10.5, hjust = 0.5)  +
+  draw_label("Q1", x = 0.3, y = 0.9, color = "black", size = 13, hjust = 0.5, alpha = 0.5) +
+  draw_label("Q2", x = 0.06, y = 0.79, color = "black", size = 13, hjust = 0.5, alpha = 0.5) +
+  draw_label("Q3", x = 0.03, y = 0.08, color = "black", size = 13, hjust = 0.5, alpha = 0.5) +
+  draw_label("Q4", x = 0.275, y = 0.11, color = "black", size = 13, hjust = 0.5, alpha = 0.5) +
+  draw_label("aboral view", x = 0.17, y = 1, color = "black", size = 11, hjust = 0.5) +
+  draw_label("lateral view of S plane", x = 0.5, y = 1, color = "black", size = 11, hjust = 0.5) +
+  draw_label("lateral view of T plane", x = 0.83, y = 1, color = "black", size = 11, hjust = 0.5)  +
   draw_label(expression(paste("25 ", mu, "m")), x = 0.95, y = 0.1, color = "black", size = 10, hjust = 0.5) +
   draw_line(x = c(0.91, 0.99), y = c(0.05, 0.05), color = "black", linewidth = 1) +
 #  draw_label("T", x = 0.33, y = 0.1, size = 10, color = "black", hjust = 0.5) +
@@ -367,7 +389,7 @@ Figure1 <- panel_larva_pic + panel_AO_pic +
     widths = c(1, 1, 1, 1)
   ) + 
   patchwork::plot_annotation(tag_levels = "A") &  
-  ggplot2::theme(plot.tag = element_text(size = 12, 
+  ggplot2::theme(plot.tag = element_text(size = 16, 
                                          face='plain', color='black'))
 
 
