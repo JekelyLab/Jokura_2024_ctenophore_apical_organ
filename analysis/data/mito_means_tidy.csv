@@ -3,10 +3,10 @@
 "2","Cgroove-sag",1,"mean_vesicles_no_syn",0
 "3","Cgroove-sag",1,"mean_vesicles_unclear",0
 "4","Cgroove-sag",1,"mean_vesicles_none",6
-"5","NA",8,"mean_vesicles_syn",0.375
-"6","NA",8,"mean_vesicles_no_syn",0
-"7","NA",8,"mean_vesicles_unclear",0.125
-"8","NA",8,"mean_vesicles_none",4.75
+"5","Cgroove-tag",1,"mean_vesicles_syn",0
+"6","Cgroove-tag",1,"mean_vesicles_no_syn",0
+"7","Cgroove-tag",1,"mean_vesicles_unclear",0
+"8","Cgroove-tag",1,"mean_vesicles_none",7
 "9","SSN",3,"mean_vesicles_syn",111.333333333333
 "10","SSN",3,"mean_vesicles_no_syn",7.33333333333333
 "11","SSN",3,"mean_vesicles_unclear",7
@@ -67,3 +67,7 @@
 "66","plumose",1,"mean_vesicles_no_syn",0
 "67","plumose",1,"mean_vesicles_unclear",0
 "68","plumose",1,"mean_vesicles_none",8
+"69",NA,8,"mean_vesicles_syn",0.375
+"70",NA,8,"mean_vesicles_no_syn",0
+"71",NA,8,"mean_vesicles_unclear",0.125
+"72",NA,8,"mean_vesicles_none",4.75

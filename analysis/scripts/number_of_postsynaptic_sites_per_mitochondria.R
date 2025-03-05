@@ -197,7 +197,7 @@ plot_mito_stats <- ggplot(mito_means_tidy, aes(
     text = element_text(family = "sans", size = 12)
   )
 
-
+plot_mito_stats
 
 # plot mitochondria positions in SSN and bridge --------------------------------
 # I'm not sure it makes sense to do it for other celltypes because not all cells

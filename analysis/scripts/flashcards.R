@@ -5,6 +5,46 @@ cilium_lengths <- read_csv("analysis/data/cilium_lengths.csv")
 organelle_stats <- read_csv("analysis/data/organelle_stats.csv")
 stats_master <- read_csv("analysis/data/stats_master.csv")
 
+crop_substack_point <- function(x, y, z,
+                                half_bb_size_x, half_bb_size_y, half_bb_size_z,
+                                zoomlevel,
+                                dest_file_path,
+                                pid, stackid) {
+  # this only has one coordinate is input, so we can define filename
+  catmaid_fetch(
+    path = paste(pid, "/crop/", sep = ""),
+    body = list(
+      stack_ids=stackid,
+      min_x=x-half_bb_size_x,
+      min_y=y-half_bb_size_y,
+      min_z=z-half_bb_size_z,
+      max_x=x+half_bb_size_x,
+      max_y=y+half_bb_size_y,
+      max_z=z+half_bb_size_z,
+      zoom_level=zoomlevel,
+      single_channel='true',
+      rotationcw=0
+    )
+  )
+  
+  print("Downloading, this will take some time")
+  
+  # server needs time to process this
+  Sys.sleep(61)
+  
+  cat_messages <- catmaid_fetch(
+    path = "messages/list"
+  )
+  
+  cat_message <- cat_messages[[1]]$text
+  link <- regmatches(cat_message, 
+                     regexpr("/crop/download/crop_.{6}.tiff", cat_message))
+  filename <- regmatches(link, 
+                         regexpr("crop_.{6}.tiff", link))
+  full_link <- paste("https:/catmaid.ex.ac.uk", link, sep = "")
+  download.file(full_link, destfile = dest_file_path)
+}
+
 celltype_flashcard(celltype) {
   # things to show:
   # - location by quadrant
@@ -82,39 +122,45 @@ celltype_flashcard(celltype) {
   for (cell in cells) {
     if (length(cell$tags$'flashcard:distal') == 1) {
       flashcard_distal_treenode <- cell$tags$'flashcard:distal'
+      flashcard_distal_skid <- cell$NeuronName
     }
     if (length(cell$tags$'flashcard:proximal') == 1) {
       flashcard_proximal_treenode <- cell$tags$'flashcard:proximal'
+      flashcard_proximal_skid <- cell$NeuronName
     }
     if (length(cell$tags$'flashcard:soma') == 1) {
       flashcard_soma_treenode <- cell$tags$'flashcard:soma'
+      flashcard_soma_skid <- cell$NeuronName
     }
   }
   
+  dir.create("manuscript/pictures/flashcards_EM/")
+  # define dimensions of cropped image - these aren't pixels, it's catmaid 3D space
+  bbox_xy <- 700
   # crop distal
-  pos <- which(cell$d$PointNo == flashcard_distal_treenode)
-  x <- cell$d$X[pos]
-  y <- cell$d$Y[pos]
-  z <- cell$d$Z[pos]
-  crop_substack_point(x, y, z, 500, 500, 0, 0,
-                      paste("manuscript/pictures/", celltype, "flashcard_distal.tif"),
+  pos <- which(cells[[as.character(flashcard_distal_skid)]]$d$PointNo == flashcard_distal_treenode)
+  x <- cells[[as.character(flashcard_distal_skid)]]$d$X[pos]
+  y <- cells[[as.character(flashcard_distal_skid)]]$d$Y[pos]
+  z <- cells[[as.character(flashcard_distal_skid)]]$d$Z[pos]
+  crop_substack_point(x, y, z, bbox_xy, bbox_xy, 0, 0,
+                      paste("manuscript/pictures/flashcards_EM/", celltype, "_flashcard_distal.tif", sep = ""),
                       35, 28)
   
   # crop proximal
-  pos <- which(cell$d$PointNo == flashcard_proximal_treenode)
-  x <- cell$d$X[pos]
-  y <- cell$d$Y[pos]
-  z <- cell$d$Z[pos]
-  crop_substack_point(x, y, z, 500, 500, 0, 0,
-                      paste("manuscript/pictures/", celltype, "flashcard_proximal.tif"),
+  pos <- which(cells[[as.character(flashcard_proximal_skid)]]$d$PointNo == flashcard_proximal_treenode)
+  x <- cells[[as.character(flashcard_proximal_skid)]]$d$X[pos]
+  y <- cells[[as.character(flashcard_proximal_skid)]]$d$Y[pos]
+  z <- cells[[as.character(flashcard_proximal_skid)]]$d$Z[pos]
+  crop_substack_point(x, y, z, bbox_xy, bbox_xy, 0, 0,
+                      paste("manuscript/pictures/flashcards_EM/", celltype, "_flashcard_proximal.tif", sep = ""),
                       35, 28)
   # crop soma
-  pos <- which(cell$d$PointNo == flashcard_soma_treenode)
-  x <- cell$d$X[pos]
-  y <- cell$d$Y[pos]
-  z <- cell$d$Z[pos]
-  crop_substack_point(x, y, z, 500, 500, 0, 0,
-                      paste("manuscript/pictures/", celltype, "flashcard_soma.tif"),
+  pos <- which(cells[[as.character(flashcard_soma_skid)]]$d$PointNo == flashcard_soma_treenode)
+  x <- cells[[as.character(flashcard_soma_skid)]]$d$X[pos]
+  y <- cells[[as.character(flashcard_soma_skid)]]$d$Y[pos]
+  z <- cells[[as.character(flashcard_soma_skid)]]$d$Z[pos]
+  crop_substack_point(x, y, z, bbox_xy, bbox_xy, 0, 0,
+                      paste("manuscript/pictures/flashcards_EM/", celltype, "_flashcard_soma.tif", sep = ""),
                       35, 28)
   
   
@@ -172,44 +218,4 @@ celltype_flashcard(celltype) {
 
 
 
-crop_substack_point <- function(x, y, z,
-                                half_bb_size_x, half_bb_size_y, half_bb_size_z,
-                                zoomlevel,
-                                dest_file_path,
-                                pid, stackid) {
-  # this only has one coordinate is input, so we can define filename
-  catmaid_fetch(
-    path = paste(pid, "/crop/", sep = ""),
-    body = list(
-      stack_ids=stackid,
-      min_x=x-half_bb_size_x,
-      min_y=y-half_bb_size_y,
-      min_z=z-half_bb_size_z,
-      max_x=x+half_bb_size_x,
-      max_y=y+half_bb_size_y,
-      max_z=z+half_bb_size_z,
-      zoom_level=zoomlevel,
-      single_channel='true',
-      rotationcw=0
-    )
-  )
-  
-  print("Downloading, this will take some time")
-  
-  # server needs time to process this
-  Sys.sleep(61)
-  
-  cat_messages <- catmaid_fetch(
-    path = "messages/list"
-  )
-  
-  for (k in seq_along(ids)) {
-    cat_message <- cat_messages[[k]]$text
-    link <- regmatches(cat_message, 
-                       regexpr("/crop/download/crop_.{6}.tiff", cat_message))
-    filename <- regmatches(link, 
-                           regexpr("crop_.{6}.tiff", link))
-    full_link <- paste("https:/catmaid.ex.ac.uk", link, sep = "")
-    download.file(full_link, destfile = dest_file_path)
-  }
-}
+
