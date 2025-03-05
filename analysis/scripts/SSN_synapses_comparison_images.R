@@ -20,7 +20,7 @@ cablelength_Q34 <- summary(neuron_Q34) %>%
   select(cable.length) %>%
   pull()
 
-# compare number of mitochondria per cable length
+# compare number of mitochondria per cable length-----------------------------
 mito_counts <- read.csv("analysis/data/mito_per_celltype.csv")
 
 mito_Q1234 <- mito_counts %>%
@@ -44,7 +44,7 @@ mito_ratio_Q34 <- mito_Q34/cablelength_Q34
 
 paste(mito_ratio_Q1234, mito_ratio_Q12, mito_ratio_Q34) %>% print()
 
-# compare number of outgoing synapses per cable length
+# compare number of outgoing synapses per cable length--------------------------
 
 pre_Q1234 <- sum(neuron_Q1234$connectors$prepost == 0)
 pre_Q12 <- sum(neuron_Q12$connectors$prepost == 0)
@@ -68,7 +68,7 @@ ratio_post_Q34 <- post_Q12/cablelength_Q34
 
 paste(ratio_post_Q1234, ratio_post_Q12, ratio_post_Q34) %>% print()
 
-# compare appearance of synapses
+# compare appearance of synapses------------------------------------------------
 dir.create("analysis/data/synapse_crop")
 
 for (neu in neuronlist(neuron_Q1234, neuron_Q12, neuron_Q34)) {

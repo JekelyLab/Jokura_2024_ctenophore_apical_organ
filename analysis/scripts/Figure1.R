@@ -15,7 +15,6 @@ lithocyte <- read_smooth_neuron("celltype:lithocyte")
 
 # plot quadrants ----------------------
 
-plot_background()
 close3d()
 # 3d plotting of cells
 nopen3d() 
