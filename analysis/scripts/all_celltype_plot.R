@@ -1,0 +1,256 @@
+# Code to generate all cells
+
+# source packages and functions -----------------
+source("analysis/scripts/packages_and_functions.R")
+
+# load cell type ----------------------------------
+
+read_smooth_neuron <- function(annotation) {
+  nlapply(
+    read.neurons.catmaid(annotation, pid = 35),
+    function(x) {
+      smooth_neuron(x, sigma = 1000)
+    }
+  )
+}
+
+balancer <- read_smooth_neuron("celltype:balancer")
+bridge <- read_smooth_neuron("celltype:bridge")
+bristle <- read_smooth_neuron("celltype:bristle")
+dome <- read_smooth_neuron("celltype:dome")
+Cgroove_tag <- read_smooth_neuron("celltype:Cgroove-tag")
+Cgroove_sag <- read_smooth_neuron("celltype:Cgroove-sag")
+intramulticilia <- read_smooth_neuron("celltype:intra-multi-ciliated")
+lamellate <- read_smooth_neuron("celltype:lamellate")
+lithocyte <- read_smooth_neuron("celltype:lithocyte")
+SSN <- read_smooth_neuron("celltype:SSN")
+plumose <- read_smooth_neuron("celltype:plumose")
+dense_vesicle <- read_smooth_neuron("celltype:dense_vesicle")
+monocilia <- read_smooth_neuron("celltype:monociliated")
+bicilia <- read_smooth_neuron("celltype:biciliated")
+non_cilia <- read_smooth_neuron("celltype:nonciliated")
+
+
+Q1 <- nlapply(
+  read.neurons.catmaid("Q1", pid = 35),
+  function(x) {
+    smooth_neuron(x, sigma = 1000)
+  }
+)
+Q2 <- nlapply(
+  read.neurons.catmaid("Q2", pid = 35),
+  function(x) {
+    smooth_neuron(x, sigma = 1000)
+  }
+)
+Q3 <- nlapply(
+  read.neurons.catmaid("Q3", pid = 35),
+  function(x) {
+    smooth_neuron(x, sigma = 1000)
+  }
+)
+Q4 <- nlapply(
+  read.neurons.catmaid("Q4", pid = 35),
+  function(x) {
+    smooth_neuron(x, sigma = 1000)
+  }
+)
+
+# plot neuron types -------------------
+
+all_celltypes <- list(
+  balancer, bridge, bristle, dome, Cgroove_tag, Cgroove_sag,
+  intramulticilia, lamellate, lithocyte, SSN,
+  plumose, dense_vesicle, monocilia, bicilia, non_cilia
+)
+celltype_names <- c(
+  "balancer", "bridge", "bristle", "dome", "Cgroove_tag", "Cgroove_sag",
+  "intramulticilia", "lamellate", "lithocyte", "SSN",
+  "plumose", "dense_vesicle", "monocilia", "bicilia", "non_cilia"
+)
+
+
+for (i in 1:length(all_celltypes)) {
+  plot_background_2_windows()
+  plot3d(
+    all_celltypes[[i]],
+    soma = T, lwd = 1, add = T,
+    alpha = 0.9, col = Okabe_Ito[5],
+    WithConnectors = F
+  )
+  plot3d(Q1, add = T, soma = T, alpha = 0.1, col = Okabe_Ito[1])
+  plot3d(Q2, add = T, soma = T, alpha = 0.1, col = "grey80")
+  plot3d(Q3, add = T, soma = T, alpha = 0.1, col = Okabe_Ito[1])
+  plot3d(Q4, add = T, soma = T, alpha = 0.1, col = "grey80")
+  plot3d(outline, add = T, alpha = 0.06, col = "grey50")
+  plot3d(dome_cavity, add = T, alpha = 0.1, col = "grey50")
+  next3d(clear = F)
+
+  plot3d(
+    all_celltypes[[i]],
+    soma = T, lwd = 1, add = T,
+    alpha = 0.9, col = Okabe_Ito[5],
+    WithConnectors = F
+  )
+  plot3d(Q1, add = T, soma = T, alpha = 0.1, col = Okabe_Ito[1])
+  plot3d(Q2, add = T, soma = T, alpha = 0.1, col = "grey80")
+  plot3d(Q3, add = T, soma = T, alpha = 0.1, col = Okabe_Ito[1])
+  plot3d(Q4, add = T, soma = T, alpha = 0.1, col = "grey80")
+  plot3d(outline, add = T, alpha = 0.06, col = "grey50")
+  plot3d(dome_cavity, add = T, alpha = 0.1, col = "grey50")
+  nview3d("left", extramat = rotationMatrix(300, 4200, 1800, 800))
+  par3d(zoom = 0.7)
+  # y-axis clip
+  clipplanes3d(1, 0, 0, -11500)
+  # x-axis clip
+  clipplanes3d(0, 1, 0, -24000)
+
+  filename <- paste("manuscript/pictures/2panel_view_", celltype_names[i], ".png", sep = "")
+  # aboral view
+  rgl.snapshot(filename)
+
+  close3d()
+}
+
+
+
+# assemble figure -------------------------------------------------------------
+
+# read pics
+panel_balancer <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer.png")) +
+  draw_label("balancer cells", x = 0.5, y = 0.95, size = 8.5, fontface = "bold", hjust = 0.5) +
+  draw_label("aboral view", x = 0.01, y = 0.86, color = "black", size = 6, fontface = "plain", hjust = 0) +
+  draw_label("lateral view of PA plane", x = 0.33, y = 0.86, color = "black", size = 6, fontface = "plain", hjust = 0) +
+  draw_label("lateral view of TA plane", x = 0.69, y = 0.86, color = "black", size = 6, fontface = "plain", hjust = 0) +
+  draw_line(x = c(0.85, 0.95), y = c(0.1, 0.1), color = "black", size = 0.5) +
+  draw_label(expression(paste("25 ", mu, "m")), x = 0.9, y = 0.14, color = "black", size = 7, hjust = 0.5) +
+  draw_label("TA", x = 0.325, y = 0.16, size = 6, color = "black", hjust = 0.5) +
+  geom_segment(aes(x = 0.25, y = 0.16, xend = 0.31, yend = 0.16),
+    color = "black", # data = arrow_TA,
+    arrow = arrow(ends = "both", type = "closed", length = unit(0.1, "cm")),
+    lineend = "butt",
+    linejoin = "mitre",
+    arrow.fill = "black", size = 0.175
+  ) +
+  draw_label("PA", x = 0.28, y = 0.05, size = 6, color = "black", hjust = 0.5) +
+  geom_segment(aes(x = 0.28, y = 0.08, xend = 0.28, yend = 0.24),
+    color = "black", # data = arrow_PA,
+    arrow = arrow(ends = "both", type = "closed", length = unit(0.1, "cm")),
+    lineend = "butt",
+    linejoin = "mitre",
+    arrow.fill = "black", size = 0.175
+  ) +
+  draw_label("A", x = 0.66, y = 0.25, size = 6, color = "black", hjust = 0.5) +
+  draw_label("O", x = 0.66, y = 0.05, size = 6, color = "black", hjust = 0.5) +
+  geom_segment(aes(x = 0.66, y = 0.09, xend = 0.66, yend = 0.21),
+    color = "black", # data = arrow_AO,
+    arrow = arrow(ends = "both", type = "closed", length = unit(0.1, "cm")),
+    lineend = "butt",
+    linejoin = "mitre",
+    arrow.fill = "black", linewidth = 0.175
+  )
+
+
+img_bridge_aboral <- readPNG("manuscript/pictures/bridge_aboral_view.png")
+img_bridge_tentacular <- readPNG("manuscript/pictures/bridge_tentacular_plane.png")
+img_bridge_sagittal <- readPNG("manuscript/pictures/bridge_sagittal_plane.png")
+img_bristle_aboral <- readPNG("manuscript/pictures/bristle_aboral_view.png")
+img_bristle_tentacular <- readPNG("manuscript/pictures/bristle_tentacular_plane.png")
+img_bristle_sagittal <- readPNG("manuscript/pictures/bristle_sagittal_plane.png")
+img_dome_aboral <- readPNG("manuscript/pictures/dome_aboral_view.png")
+img_dome_tentacular <- readPNG("manuscript/pictures/dome_tentacular_plane.png")
+img_dome_sagittal <- readPNG("manuscript/pictures/dome_sagittal_plane.png")
+img_groove_aboral <- readPNG("manuscript/pictures/groove_aboral_view.png")
+img_groove_tentacular <- readPNG("manuscript/pictures/groove_tentacular_plane.png")
+img_groove_sagittal <- readPNG("manuscript/pictures/groove_sagittal_plane.png")
+img_intramulticilia_aboral <- readPNG("manuscript/pictures/intramulticilia_aboral_view.png")
+img_intramulticilia_tentacular <- readPNG("manuscript/pictures/intramulticilia_tentacular_plane.png")
+img_intramulticilia_sagittal <- readPNG("manuscript/pictures/intramulticilia_sagittal_plane.png")
+img_lamellate_aboral <- readPNG("manuscript/pictures/lamellate_aboral_view.png")
+img_lamellate_tentacular <- readPNG("manuscript/pictures/lamellate_tentacular_plane.png")
+img_lamellate_sagittal <- readPNG("manuscript/pictures/lamellate_sagittal_plane.png")
+img_lithocyte_aboral <- readPNG("manuscript/pictures/lithocyte_aboral_view.png")
+img_lithocyte_tentacular <- readPNG("manuscript/pictures/lithocyte_tentacular_plane.png")
+img_lithocyte_sagittal <- readPNG("manuscript/pictures/lithocyte_sagittal_plane.png")
+img_neuron_aboral <- readPNG("manuscript/pictures/neuron_aboral_view.png")
+img_neuron_tentacular <- readPNG("manuscript/pictures/neuron_tentacular_plane.png")
+img_neuron_sagittal <- readPNG("manuscript/pictures/neuron_sagittal_plane.png")
+img_plumose_aboral <- readPNG("manuscript/pictures/plumose_aboral_view.png")
+img_plumose_tentacular <- readPNG("manuscript/pictures/plumose_tentacular_plane.png")
+img_plumose_sagittal <- readPNG("manuscript/pictures/plumose_sagittal_plane.png")
+img_dense_vesicle_aboral <- readPNG("manuscript/pictures/dense_vesicle_aboral_view.png")
+img_dense_vesicle_tentacular <- readPNG("manuscript/pictures/dense_vesicle_tentacular_plane.png")
+img_dense_vesicle_sagittal <- readPNG("manuscript/pictures/dense_vesicle_sagittal_plane.png")
+img_monocilia_aboral <- readPNG("manuscript/pictures/monocilia_aboral_view.png")
+img_monocilia_tentacular <- readPNG("manuscript/pictures/monocilia_tentacular_plane.png")
+img_monocilia_sagittal <- readPNG("manuscript/pictures/monocilia_sagittal_plane.png")
+img_bicilia_aboral <- readPNG("manuscript/pictures/bicilia_aboral_view.png")
+img_bicilia_tentacular <- readPNG("manuscript/pictures/bicilia_tentacular_plane.png")
+img_bicilia_sagittal <- readPNG("manuscript/pictures/bicilia_sagittal_plane.png")
+img_non_cilia_aboral <- readPNG("manuscript/pictures/non_cilia_aboral_view.png")
+img_non_cilia_tentacular <- readPNG("manuscript/pictures/non_cilia_tentacular_plane.png")
+img_non_cilia_sagittal <- readPNG("manuscript/pictures/non_cilia_sagittal_plane.png")
+
+
+# make panels
+
+panel_balancer <- ggdraw() + draw_image(img_balancer_aboral) +
+  draw_label("aboral view", x = 0.3, y = 0.62, size = 6, fontface = "plain", hjust = 0.5) +
+  ggdraw() + draw_image(img_balancer_sagittal) +
+  draw_label("saggital plane", x = 0.3, y = 0.62, size = 6, fontface = "plain", hjust = 0.5) +
+  ggdraw() + draw_image(img_balancer_tentacular) +
+  draw_label("tentacular plane", x = 0.3, y = 0.62, size = 6, fontface = "plain", hjust = 0.5) +
+  draw_line(x = c(0.58, 0.82), y = c(0.395, 0.395), color = "black", size = 0.5) +
+  draw_label(expression(paste("20 ", mu, "m")), x = 0.7, y = 0.415, color = "black", size = 6, hjust = 0.5)
+
+panel_bridge <- ggdraw() + draw_image(img_bridge_aboral) +
+  ggdraw() + draw_image(img_bridge_sagittal) +
+  ggdraw() + draw_image(img_bridge_tentacular)
+
+panel_bristle <- ggdraw() + draw_image(img_bristle_aboral) +
+  ggdraw() + draw_image(img_bristle_sagittal) +
+  ggdraw() + draw_image(img_bristle_tentacular)
+
+panel_dome <- ggdraw() + draw_image(img_dome_aboral) +
+  ggdraw() + draw_image(img_dome_sagittal) +
+  ggdraw() + draw_image(img_dome_tentacular)
+
+panel_groove <- ggdraw() + draw_image(img_groove_aboral) +
+  ggdraw() + draw_image(img_groove_sagittal) +
+  ggdraw() + draw_image(img_groove_tentacular)
+
+panel_intramulticilia <- ggdraw() + draw_image(img_intramulticilia_aboral) +
+  ggdraw() + draw_image(img_intramulticilia_sagittal) +
+  ggdraw() + draw_image(img_intramulticilia_tentacular)
+
+panel_lamellate <- ggdraw() + draw_image(img_lamellate_aboral) +
+  ggdraw() + draw_image(img_lamellate_sagittal) +
+  ggdraw() + draw_image(img_lamellate_tentacular)
+
+panel_lithocyte <- ggdraw() + draw_image(img_lithocyte_aboral) +
+  ggdraw() + draw_image(img_lithocyte_sagittal) +
+  ggdraw() + draw_image(img_lithocyte_tentacular)
+
+panel_neuron <- ggdraw() + draw_image(img_neuron_aboral) +
+  ggdraw() + draw_image(img_neuron_sagittal) +
+  ggdraw() + draw_image(img_neuron_tentacular)
+
+panel_plumose <- ggdraw() + draw_image(img_plumose_aboral) +
+  ggdraw() + draw_image(img_plumose_sagittal) +
+  ggdraw() + draw_image(img_plumose_tentacular)
+
+panel_dense_vesicle <- ggdraw() + draw_image(img_dense_vesicle_aboral) +
+  ggdraw() + draw_image(img_dense_vesicle_sagittal) +
+  ggdraw() + draw_image(img_dense_vesicle_tentacular)
+
+panel_monocilia <- ggdraw() + draw_image(img_monocilia_aboral) +
+  ggdraw() + draw_image(img_monocilia_sagittal) +
+  ggdraw() + draw_image(img_monocilia_tentacular)
+
+panel_bicilia <- ggdraw() + draw_image(img_bicilia_aboral) +
+  ggdraw() + draw_image(img_bicilia_sagittal) +
+  ggdraw() + draw_image(img_bicilia_tentacular)
+
+panel_non_cilia <- ggdraw() + draw_image(img_non_cilia_aboral) +
+  ggdraw() + draw_image(img_non_cilia_sagittal) +
+  ggdraw() + draw_image(img_non_cilia_tentacular)
