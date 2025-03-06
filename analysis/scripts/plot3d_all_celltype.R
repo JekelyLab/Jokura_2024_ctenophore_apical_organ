@@ -25,10 +25,6 @@ biciliated <- read_smooth_neuron("celltype:biciliated")
 multiciliated <- read_smooth_neuron("celltype:multiciliated")
 nonciliated <- read_smooth_neuron("celltype:nonciliated")
 
-Q1 <- read_smooth_neuron("Q1")
-Q2 <- read_smooth_neuron("Q2")
-Q3 <- read_smooth_neuron("Q3")
-Q4 <- read_smooth_neuron("Q4")
 
 all_celltypes <- list(balancer,
                       bridge,
@@ -52,7 +48,7 @@ all_celltypes <- list(balancer,
 
 # plot all cells ----------------------
 
-colour_palettes <- c(Okabe_Ito, bluepurple, oranges)
+colour_palettes <- c(bluepurple, oranges, Okabe_Ito)
 
 nopen3d() 
 mfrow3d(1, 3)  #defines the two scenes

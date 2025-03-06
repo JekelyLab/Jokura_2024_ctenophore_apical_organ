@@ -26,30 +26,6 @@ biciliated <- read_smooth_neuron("celltype:biciliated")
 multiciliated <- read_smooth_neuron("celltype:multiciliated")
 nonciliated <- read_smooth_neuron("celltype:nonciliated")
 
-Q1 <- read_smooth_neuron("Q1")
-Q2 <- read_smooth_neuron("Q2")
-Q3 <- read_smooth_neuron("Q3")
-Q4 <- read_smooth_neuron("Q4")
-
-all_celltypes <- list(balancer,
-                      bridge,
-                      bristle,
-                      Cgroove_sag,
-                      Cgroove_tag,
-                      dense_vesicle,
-                      dome,
-                      epithelial_floor,
-                      intra_multi_ciliated,
-                      lamellate,
-                      lithocyte,
-                      plumose,
-                      SSN,
-                      monociliated,
-                      biciliated,
-                      multiciliated,
-                      nonciliated)
-
-
 
 # plot balancer -----------------------------------------------
 

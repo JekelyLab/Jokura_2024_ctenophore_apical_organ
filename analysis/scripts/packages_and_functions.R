@@ -52,21 +52,21 @@ writeLines(capture.output(rstudioapi::versionInfo()), "analysis/scripts/versionI
 
 # skids_by_2annotations has been replaced by get_skids_with_annot from rcatmaid_functions_library
 
-plot_background <- function(x){
-  nopen3d() # opens a pannable 3d window
-  par3d(zoom=0.75)
-  nview3d("frontal", extramat=rotationMatrix(1.2, 0, 0, 1))
-  par3d(windowRect = c(0, 0, 800, 800)) #resize for frontal view
-  nview3d("anterior", extramat = rotationMatrix(1.05, 250, -200, 1000))
-  par3d(zoom=0.7)
-  #y-axis clip
-  clipplanes3d(1, 0, 0, -11500)
-  #x-axis clip
-  clipplanes3d(0, 1, 0, -24000)
-  
-}
+#plot_background <- function(x){
+#  nopen3d() # opens a pannable 3d window
+#  par3d(zoom=0.75)
+#  nview3d("frontal", extramat=rotationMatrix(1.2, 0, 0, 1))
+#  par3d(windowRect = c(0, 0, 800, 800)) #resize for frontal view
+#  nview3d("anterior", extramat = rotationMatrix(1.05, 250, -200, 1000))
+#  par3d(zoom=0.7)
+#  #y-axis clip
+#  clipplanes3d(1, 0, 0, -11500)
+#  #x-axis clip
+#  clipplanes3d(0, 1, 0, -24000)
+#  
+#}
 
-plot_background_ventral <- function(x){
+plot_background_oral <- function(x){
   nopen3d() # opens a pannable 3d window
   par3d(zoom=0.75)
   nview3d("ventral", extramat=rotationMatrix(0.9, 0.3, -0.1, 1))
@@ -93,7 +93,7 @@ dome_cavity <- catmaid_get_volume(
 
 # define views --------------
 
-anterior <- function(){
+aboral <- function(){
   nview3d("anterior", extramat = rotationMatrix(1.05, 250, -200, 1000))
 }
 

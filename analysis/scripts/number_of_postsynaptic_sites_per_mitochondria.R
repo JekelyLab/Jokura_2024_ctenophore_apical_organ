@@ -278,25 +278,27 @@ for (cell_type in c("SSN", "bridge")) {
 
 
 
-# TODO: automate renaming. Mybe make the crop funtion return a filename?
-if (!file.exists("manuscript/pictures/Figure_mito_syn_ves_syn.tiff")) {
-  crop_substack("Figure_mito_syn_ves_syn", 700, 700, 0, 0, "manuscript/pictures", 35, 28)
+# crop substack TODO: automate renaming. Mybe make the crop funtion return a filename?------------------------
+
+if (!file.exists("manuscript/pictures/Figure_mito/Figure_mito_syn_ves_syn.tiff")) {
+  crop_substack("Figure_mito_syn_ves_syn", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", 35, 28)
 }
-if (!file.exists("manuscript/pictures/Figure_mito_syn_ves_no_syn.tiff")) {
-  crop_substack("Figure_mito_syn_ves_no_syn", 700, 700, 0, 0, "manuscript/pictures", 35, 28)
+if (!file.exists("manuscript/pictures/Figure_mito/Figure_mito_syn_ves_no_syn.tiff")) {
+  crop_substack("Figure_mito_syn_ves_no_syn", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", 35, 28)
 }
-if (!file.exists("manuscript/pictures/Figure_mito_syn_ves_unc.tiff")) {
-  crop_substack("Figure_mito_syn_ves_unc", 700, 700, 0, 0, "manuscript/pictures", 35, 28)
+if (!file.exists("manuscript/pictures/Figure_mito/Figure_mito_syn_ves_unc.tiff")) {
+  crop_substack("Figure_mito_syn_ves_unc", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", 35, 28)
 }
-if (!file.exists("manuscript/pictures/Figure_mito_syn_ves_none.tiff")) {
-  crop_substack("Figure_mito_syn_ves_none", 700, 700, 0, 0, "manuscript/pictures", 35, 28)
+if (!file.exists("manuscript/pictures/Figure_mito/Figure_mito_syn_ves_none.tiff")) {
+  crop_substack("Figure_mito_syn_ves_none", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", 35, 28)
 }
 
+# assembles--------------------------------------------------
 
-EM_ves_syn <- magick::image_read("manuscript/pictures/Figure_mito_syn_ves_syn.tiff")
-EM_ves_no_syn <- magick::image_read("manuscript/pictures/Figure_mito_syn_ves_no_syn.tiff")
-EM_ves_unc <- magick::image_read("manuscript/pictures/Figure_mito_syn_ves_unc.tiff")
-EM_ves_none <- magick::image_read("manuscript/pictures/Figure_mito_syn_ves_none.tiff")
+EM_ves_syn <- magick::image_read("manuscript/pictures/Figure_mito/Figure_mito_syn_ves_syn.tiff")
+EM_ves_no_syn <- magick::image_read("manuscript/pictures/Figure_mito/Figure_mito_syn_ves_no_syn.tiff")
+EM_ves_unc <- magick::image_read("manuscript/pictures/Figure_mito/Figure_mito_syn_ves_unc.tiff")
+EM_ves_none <- magick::image_read("manuscript/pictures/Figure_mito/Figure_mito_syn_ves_none.tiff")
 
 panel_EM_ves_syn <- ggdraw() + draw_image(EM_ves_syn)
 panel_EM_ves_no_syn <- ggdraw() + draw_image(EM_ves_no_syn)
