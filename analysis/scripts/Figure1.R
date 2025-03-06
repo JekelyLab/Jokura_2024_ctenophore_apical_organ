@@ -18,7 +18,7 @@ lithocyte <- read_smooth_neuron("celltype:lithocyte")
 close3d()
 # 3d plotting of cells
 nopen3d() 
-mfrow3d(1, 3)  #defines the two scenes
+mfrow3d(1, 3)  
 #define the size of the rgl window, the view and zoom
 par3d(windowRect = c(0, 0, 1200, 350))
 #par3d(windowRect = c(0, 0, 2400, 700))

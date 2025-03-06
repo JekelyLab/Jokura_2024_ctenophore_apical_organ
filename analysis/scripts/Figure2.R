@@ -353,7 +353,7 @@ plot_mito_stats <- ggplot(mito_means_tidy, aes(
     legend.position.inside = c(0.3, 0.75),
     text = element_text(size = 11)
   ) +
-  ylab("Number of mitochondria per cell") +
+  ylab("Average number of mitochondria per cell") +
   xlab("Cell types")
 
 plot_mito_stats
@@ -762,16 +762,35 @@ close3d()
 
 # assemble figure -------------------------------------------------------------
 
-panel_SSN_Q1234 <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_Q1234.png"))
-panel_SSN_Q12_Q34 <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_Q12_Q34.png"))
+panel_SSN_Q1234 <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_Q1234.png")) +
+  draw_label("Q1", x = 0.3, y = 0.9, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
+  draw_label("Q2", x = 0.06, y = 0.79, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
+  draw_label("Q3", x = 0.03, y = 0.08, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
+  draw_label("Q4", x = 0.275, y = 0.11, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
+  draw_label("Syncytial synaptic neuron (SSN) Q1-4", x = 0.05, y = 1, color = Okabe_Ito[5], size = 10, hjust = 0)
+
+panel_SSN_Q12_Q34 <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_Q12_Q34.png")) +
+  draw_label("Q1", x = 0.3, y = 0.9, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
+  draw_label("Q2", x = 0.06, y = 0.79, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
+  draw_label("Q3", x = 0.03, y = 0.08, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
+  draw_label("Q4", x = 0.275, y = 0.11, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
+  draw_label("SSN Q1Q2", x = 0.05, y = 1, color = Okabe_Ito[6], size = 10, hjust = 0) +
+  draw_label("SSN Q3Q4", x = 0.225, y = 1, color = Okabe_Ito[7], size = 10, hjust = 0)
 
 panel_mito_bar_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/mito_in_syn.png"))
-panel_mito_pos <- ggdraw() + draw_image(readPNG("manuscript/pictures/mito_pos_SSN.png"))
 
-panel_EM_SSN_Q1234 <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_Q1-4_to_SSN_Q3Q4.png"))
-panel_EM_SSN_Q1Q2 <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_Q1Q2_to_SSN_Q1-4.png"))
+panel_mito_pos <- ggdraw() + draw_image(readPNG("manuscript/pictures/mito_pos_SSN.png")) +
+  draw_label("mitochondria with synapses", x = 0.05, y = 0.98, color = "green4", size = 10.5, hjust = 0) +
+  draw_label("mitochondria not forming synapses", x = 0.05, y = 0.9, color = "black", size = 10.5, hjust = 0, alpha = 0.8) +
+  draw_label("SSN Q1-4", x = 0.85, y = 1, color = Okabe_Ito[5], size = 8, hjust = 0) +
+  draw_label("SSN Q1Q2", x = 0.85, y = 0.94, color = Okabe_Ito[6], size = 8, hjust = 0) +
+  draw_label("SSN Q3Q4", x = 0.85, y = 0.88, color = Okabe_Ito[7], size = 8, hjust = 0)
 
-panel_SSN_prepost_synapse <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_prepost_synapse.png"))
+panel_EM_SSN <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_EM_schematic.png"))
+
+panel_SSN_prepost_synapse <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_prepost_synapse.png")) +
+  draw_label("Synapses from SSN Q1-4 to SSN Q1Q2 or Q3Q4", x = 0.05, y = 1.06, color = "#ff00ff", size = 10, hjust = 0) +
+  draw_label("Synapses from SSN Q1Q2 or Q3Q4 to SSN Q1-4", x = 0.05, y = 0.96, color = "#00c9ff", size = 10, hjust = 0)
 
 
 panel_SSN_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_graph.png"))
@@ -780,17 +799,17 @@ panel_SSN_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_graph.
 layout <- "
 AAAABBBB
 ########
-CCCDDDDH
+CCCDDDDG
 ########
-EEFFGGGG
+EEEEFFFF
 "
 
 Figure2 <- panel_SSN_Q1234 + panel_SSN_Q12_Q34 +
   panel_mito_bar_graph + panel_mito_pos + 
-  panel_EM_SSN_Q1234 + panel_EM_SSN_Q1Q2 + panel_SSN_prepost_synapse + 
+  panel_EM_SSN + panel_SSN_prepost_synapse + 
   panel_SSN_graph +
   plot_layout(design = layout,
-              heights = c(1, 0.1, 1.3, 0.1, 1),
+              heights = c(1, 0.1, 1.3, 0.15, 1),
               widths = c(1, 1, 1, 1, 1, 1, 1, 1)) + 
   patchwork::plot_annotation(tag_levels = "A") &  
   ggplot2::theme(plot.tag = element_text(size = 12, 
@@ -798,7 +817,7 @@ Figure2 <- panel_SSN_Q1234 + panel_SSN_Q12_Q34 +
 
 
 ggsave("manuscript/figures/Figure2.png", limitsize = FALSE, 
-       units = c("px"), Figure2, width = 3000, height = 1600, bg='white')  
+       units = c("px"), Figure2, width = 3000, height = 1700, bg='white')  
 
 
 ggsave("manuscript/figures/Figure2.pdf", limitsize = FALSE, 

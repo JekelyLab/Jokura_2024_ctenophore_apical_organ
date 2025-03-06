@@ -61,30 +61,30 @@
 	</g>
 	<circle fill="#3B9CC9" stroke="#000000" stroke-width="0.4965" stroke-miterlimit="10" cx="414.523" cy="297.488" r="9.058"/>
 	<circle fill="#E57FC6" stroke="#000000" stroke-width="0.4965" stroke-miterlimit="10" cx="414.523" cy="363.437" r="9.058"/>
-	<text transform="matrix(1 0 0 1 425.417 234.7617)" font-family="'ArialMT'" font-size="10.0852">Q12</text>
-	<text transform="matrix(1 0 0 1 425.417 366.6602)" font-family="'ArialMT'" font-size="10.0852">Q34</text>
-	<text transform="matrix(1 0 0 1 425.417 301.0977)" font-family="'ArialMT'" font-size="10.0852">Q1234</text>
+	<text transform="matrix(1 0 0 1 425.417 234.7617)" font-family="'ArialMT'" font-size="10.0852">Q1Q2</text>
+	<text transform="matrix(1 0 0 1 425.417 366.6602)" font-family="'ArialMT'" font-size="10.0852">Q3Q4</text>
+	<text transform="matrix(1 0 0 1 425.417 301.0977)" font-family="'ArialMT'" font-size="10.0852">Q1-4</text>
 	<g>
 		<path fill="none" d="M408.394,297.49"/>
 	</g>
 	<g>
 		
-			<text transform="matrix(1 0 0 1 420.6729 267.3965)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" font-family="'Arial-BoldMT'" font-size="10.0852">9</text>
+			<text transform="matrix(1 0 0 1 420.6733 267.3965)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" font-family="'Arial-BoldMT'" font-size="10.0852">9</text>
 		
-			<text transform="matrix(1 0 0 1 402.7646 267.3965)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" font-family="'Arial-BoldMT'" font-size="10.0852">1</text>
+			<text transform="matrix(1 0 0 1 402.7651 267.3965)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" font-family="'Arial-BoldMT'" font-size="10.0852">1</text>
 		
-			<text transform="matrix(1 0 0 1 402.7637 333.2002)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" font-family="'Arial-BoldMT'" font-size="10.0852">8</text>
+			<text transform="matrix(1 0 0 1 402.7642 333.1992)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" font-family="'Arial-BoldMT'" font-size="10.0852">8</text>
 		
-			<text transform="matrix(1 0 0 1 420.6729 333.2002)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" font-family="'Arial-BoldMT'" font-size="10.0852">9</text>
+			<text transform="matrix(1 0 0 1 420.6733 333.1992)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" font-family="'Arial-BoldMT'" font-size="10.0852">9</text>
 		
-			<text transform="matrix(1 0 0 1 384.6992 300.0664)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" font-family="'Arial-BoldMT'" font-size="10.0852">6</text>
+			<text transform="matrix(1 0 0 1 384.6997 300.0664)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" font-family="'Arial-BoldMT'" font-size="10.0852">6</text>
 	</g>
 	<g>
-		<text transform="matrix(1 0 0 1 420.6729 267.3965)" fill="#666666" font-family="'Arial-BoldMT'" font-size="10.0852">9</text>
-		<text transform="matrix(1 0 0 1 402.7646 267.3965)" fill="#666666" font-family="'Arial-BoldMT'" font-size="10.0852">1</text>
-		<text transform="matrix(1 0 0 1 402.7637 333.2002)" fill="#666666" font-family="'Arial-BoldMT'" font-size="10.0852">8</text>
-		<text transform="matrix(1 0 0 1 420.6729 333.2002)" fill="#666666" font-family="'Arial-BoldMT'" font-size="10.0852">9</text>
-		<text transform="matrix(1 0 0 1 384.6992 300.0664)" fill="#666666" font-family="'Arial-BoldMT'" font-size="10.0852">6</text>
+		<text transform="matrix(1 0 0 1 420.6733 267.3965)" fill="#666666" font-family="'Arial-BoldMT'" font-size="10.0852">9</text>
+		<text transform="matrix(1 0 0 1 402.7651 267.3965)" fill="#666666" font-family="'Arial-BoldMT'" font-size="10.0852">1</text>
+		<text transform="matrix(1 0 0 1 402.7642 333.1992)" fill="#666666" font-family="'Arial-BoldMT'" font-size="10.0852">8</text>
+		<text transform="matrix(1 0 0 1 420.6733 333.1992)" fill="#666666" font-family="'Arial-BoldMT'" font-size="10.0852">9</text>
+		<text transform="matrix(1 0 0 1 384.6997 300.0664)" fill="#666666" font-family="'Arial-BoldMT'" font-size="10.0852">6</text>
 	</g>
 </g>
 </svg>
