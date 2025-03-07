@@ -303,7 +303,7 @@ close3d()
 
 
 
-#load of mitochondrial location information-------------------------------
+# load of mitochondrial location information-------------------------------
 
 mito_done <- read.neurons.catmaid("mitochondria done", pid = 35)
 mito_vesicle_info <- read.csv("analysis/data/mito_vesicle_info.csv")
@@ -619,8 +619,6 @@ plot3d(
   type = "s"
 )
 
-
-#texts3d(58000,51000,5000, "INRGW", cex = 3, col = "#56B4E9")
 
 #aboral view
 nview3d("anterior", extramat = rotationMatrix(1.05, 250, -200, 1000))
