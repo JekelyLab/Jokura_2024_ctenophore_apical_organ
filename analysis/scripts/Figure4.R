@@ -9,23 +9,7 @@ source("analysis/scripts/packages_and_functions.R")
 df_time_dif <- read_csv("analysis/data/arrest_rebeat_time_differences.csv")
 
 
-# statistics analysis of the L-NAME tracking mean vertical position (side UV after 30sec)--------------------------------------
-
-#Change the name to perform the Dunnett
-#df_L_NAME_stat <- df_L_NAME_tracking %>%
-#  filter(sec >= 39.92 & sec < 40)
-#
-##Dunnett's test
-#L_NAME = factor(df_L_NAME_stat$'L-NAME')
-#y_axis = df_L_NAME_stat$y_axis
-#summary(glht(aov(y_axis~L_NAME),linfct=mcp(L_NAME = "Dunnett")))
-#
-##                   Estimate Std. Error t value Pr(>|t|)    
-##0.1 mM - 0 mM == 0   13.805      8.683   1.590 0.223749    
-##1 mM - 0 mM == 0     39.897      8.683   4.595 0.000787 ***
-#
-##‘***’ <0.001 ‘**’ <0.01 ‘*’ <0.05
-
+# plot arrest re-beat graph ----------------------------------------------------
 
 plot_arrest_rebeat <- 
   ggplot(df_time_dif) +
@@ -52,20 +36,7 @@ plot_arrest_rebeat <-
                               "arrest.tentacular" = "tentacular",
                               "re-beat.tentacular" = ""))
 
-               
-
 plot_arrest_rebeat
-
-   
-#  geom_signif(comparisons = list(c("0 mM", "0.1 mM")),
-#              annotations = "0.22",
-#              y_position = 30) +
-#  geom_signif(comparisons = list(c("0 mM", "1 mM")),
-#              annotations = "0.0008",
-#              y_position = 40)
-
-
-
 
 ggsave(
   filename = "manuscript/pictures/arrest_rebeat_graph.png",
@@ -107,6 +78,6 @@ ggsave("manuscript/figures/Figure4.png", limitsize = FALSE,
 
 
 ggsave("manuscript/figures/Figure4.pdf", limitsize = FALSE, 
-       units = c("px"), Figure4, width = 2400, height = 1700) 
+       units = c("px"), Figure4, width = 2300, height = 1500) 
 
 
