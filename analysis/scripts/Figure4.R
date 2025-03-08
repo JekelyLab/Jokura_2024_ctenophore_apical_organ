@@ -26,36 +26,30 @@ df_time_dif <- read_csv("analysis/data/arrest_rebeat_time_differences.csv")
 #
 ##‘***’ <0.001 ‘**’ <0.01 ‘*’ <0.05
 
+install.packages("ggbeeswarm")
 
+library("ggbeeswarm")
 
-
-ggplot(df_time_dif, aes(x=interaction(plane, response), y=time, fill=response)) +
-  geom_boxplot() +
-  labs(y="Time difference (sec)") +
+plot_arrest_rebeat <- 
+  ggplot(df_time_dif) +
+  aes(x = interaction(plane, response), y = time, fill = response) +
+  geom_boxplot(size = 0.5, outlier.shape = NA) +
+  geom_beeswarm(aes(color = time),
+                size = 2,
+                cex = 3.2,
+                alpha = 0.3,
+                color = "gray5") +
+  labs(y = "time difference (sec)") +
   theme_minimal() +
-  scale_fill_manual(values = c("re-beat" = "deepskyblue2", "arrest" = "magenta"))
+  theme(legend.position = 'none',
+        axis.title.x = element_text(size = 9)) +
+  scale_fill_manual(
+    values = c("re-beat" = "deepskyblue2", 
+               "arrest" = "magenta"))
 
 
-ggsave("boxplot.png", plot=plot, width=6, height=4, dpi=300)
+plot_arrest_rebeat
 
-
-#ggplot(df_time_dif) +
-#  aes(x = `L-NAME`, y = y_axis, fill = `L-NAME`) +
-#  geom_boxplot(size = 0.5, outlier.shape = NA) +
-#  geom_beeswarm(aes(color = Genotype),
-#                size = 2,
-#                cex = 3.2,
-#                alpha =.3, 
-#                color = "gray5") +
-#  labs(y = "vertical position [mm]")+
-#  theme_minimal() +
-#  theme(legend.position = 'none',
-#        axis.title.x = element_text(size = 9)) +
-#  ylim(-50, 50) +
-#  scale_fill_manual(
-#    values = c("0 mM" = "grey90", 
-#               "0.1 mM" = Okabe_Ito[1],
-#               "1 mM" = Okabe_Ito[6])) +
 #  scale_x_discrete(labels = c("0 mM" = "0 mM", 
 #                              "0.1 mM" = "0.1 mM",
 #                              "1 mM" = "1.0 mM")) +
@@ -69,9 +63,14 @@ ggsave("boxplot.png", plot=plot, width=6, height=4, dpi=300)
 
 
 
-
-
-
+ggsave(
+  filename = "manuscript/pictures/arrest_rebeat_graph.png",
+  plot = plot_arrest_rebeat,
+  width = 600,
+  height = 700,
+  units = "px",
+  dpi = 300
+)
 
 
 # assemble figure -------------------------------------------------------------
@@ -80,7 +79,7 @@ panel_ms <- ggdraw() + draw_image(readPNG("manuscript/pictures/tilt_microscope.p
 
 panel_kymograph <- ggdraw() + draw_image(readPNG("manuscript/pictures/balacer_arrest_rebeat_kymograph.png"))
 
-panel_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/balacer_arrest_rebeat_graph.png"))
+panel_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/arrest_rebeat_graph.png"))
 
 panel_comparison <- ggdraw() + draw_image(readPNG("manuscript/pictures/comparison.png"))
 

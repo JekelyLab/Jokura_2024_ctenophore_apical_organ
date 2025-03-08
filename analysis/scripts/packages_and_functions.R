@@ -18,6 +18,8 @@ library(tidygraph)
 library(av)
 library(jpeg)
 library(magick)
+library(ggbeeswarm)
+
 
 
 # catmaid connection, needs username, password AND token - weird!
