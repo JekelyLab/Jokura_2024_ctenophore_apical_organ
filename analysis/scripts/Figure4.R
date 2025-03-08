@@ -26,9 +26,6 @@ df_time_dif <- read_csv("analysis/data/arrest_rebeat_time_differences.csv")
 #
 ##‘***’ <0.001 ‘**’ <0.01 ‘*’ <0.05
 
-install.packages("ggbeeswarm")
-
-library("ggbeeswarm")
 
 plot_arrest_rebeat <- 
   ggplot(df_time_dif) +
