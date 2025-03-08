@@ -29,7 +29,7 @@ df_time_dif <- read_csv("analysis/data/arrest_rebeat_time_differences.csv")
 
 plot_arrest_rebeat <- 
   ggplot(df_time_dif) +
-  aes(x = interaction(plane, response), y = time, fill = response) +
+  aes(x = interaction(response, plane), y = time, fill = response) +
   geom_boxplot(size = 0.5, outlier.shape = NA) +
   geom_beeswarm(aes(color = time),
                 size = 2,
@@ -37,19 +37,26 @@ plot_arrest_rebeat <-
                 alpha = 0.3,
                 color = "gray5") +
   labs(y = "time difference (sec)") +
+  xlab("") +
   theme_minimal() +
-  theme(legend.position = 'none',
-        axis.title.x = element_text(size = 9)) +
+  theme(#axis.text.x = element_blank(),
+        legend.title = element_blank(),
+        legend.position = "inside",
+        legend.position.inside = c(0.3, 0.75)
+        ) +
   scale_fill_manual(
-    values = c("re-beat" = "deepskyblue2", 
-               "arrest" = "magenta"))
+    values = c("re-beat" = "#28A8FF", 
+               "arrest" = "#f56EBA")) +
+  scale_x_discrete(labels = c("arrest.sagittal" = "sagittal",
+                              "re-beat.sagittal" = "",
+                              "arrest.tentacular" = "tentacular",
+                              "re-beat.tentacular" = ""))
 
+               
 
 plot_arrest_rebeat
 
-#  scale_x_discrete(labels = c("0 mM" = "0 mM", 
-#                              "0.1 mM" = "0.1 mM",
-#                              "1 mM" = "1.0 mM")) +
+   
 #  geom_signif(comparisons = list(c("0 mM", "0.1 mM")),
 #              annotations = "0.22",
 #              y_position = 30) +
@@ -63,8 +70,8 @@ plot_arrest_rebeat
 ggsave(
   filename = "manuscript/pictures/arrest_rebeat_graph.png",
   plot = plot_arrest_rebeat,
-  width = 600,
-  height = 700,
+  width = 900,
+  height = 1050,
   units = "px",
   dpi = 300
 )
@@ -78,31 +85,25 @@ panel_kymograph <- ggdraw() + draw_image(readPNG("manuscript/pictures/balacer_ar
 
 panel_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/arrest_rebeat_graph.png"))
 
-panel_comparison <- ggdraw() + draw_image(readPNG("manuscript/pictures/comparison.png"))
+panel_comparison <- ggdraw() + draw_image(readPNG("manuscript/pictures/map_comparison.png"))
 
 layout <- "
-AAA#B#C
-AAA#DDD
-AAA#DDD
-#######
-EEFFFFF
+ABB
+###
+CDD
 "
-
-
 
 Figure4 <- panel_ms + panel_kymograph + 
   panel_graph + panel_comparison +
   plot_layout(design = layout,
-              heights = c(1, 1, 1, 0.1, 3),
-              widths = c(1, 1, 1, 0.1, 1, 0.1, 1)) + 
+              heights = c(1, 0.1, 1),
+              widths = c(1, 1, 1)) + 
   patchwork::plot_annotation(tag_levels = "A") &  
   ggplot2::theme(plot.tag = element_text(size = 12, 
                                          face='plain', color='black'))
 
-
-
 ggsave("manuscript/figures/Figure4.png", limitsize = FALSE, 
-       units = c("px"), Figure4, width = 2400, height = 1700, bg='white')  
+       units = c("px"), Figure4, width = 2300, height = 1500, bg='white')  
 
 
 ggsave("manuscript/figures/Figure4.pdf", limitsize = FALSE, 
