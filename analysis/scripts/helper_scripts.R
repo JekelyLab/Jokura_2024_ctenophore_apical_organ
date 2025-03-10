@@ -110,7 +110,7 @@ c_annot_mistakes <- lapply(skids, cilium_annot_mistake) %>% bind_rows()
 
 tags <- catmaid_get_label_stats(pid = 35)
 
-skids <- tags %>% select(skeletonID) %>% unique()
+skids <- tags %>% select(skeletonID) %>% pull() %>% unique()
 
 for (skid in skids) {
   # check if number of cilia matches number of basal bodies

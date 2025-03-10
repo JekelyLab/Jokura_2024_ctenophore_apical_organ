@@ -137,7 +137,7 @@ for (centriole_skel in centriole_skels) {
   skel <- smooth_neuron(centriole_skel, sigma=6000)
   ccount <- length(centriole_skel$tags$centriole)
   # pick discrete colors based on normalised degree
-  shade <- round(ccount/max(tag_stats_per_skid$centriole)*10)
+  shade <- round(ccount/max(as.numeric(tag_stats_per_skid$centriole))*10)
   # if there are no centrioles, skip it
   if (shade == 0) {
     next
