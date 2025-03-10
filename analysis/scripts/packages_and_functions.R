@@ -33,8 +33,7 @@ library(ggbeeswarm)
 
 system("git submodule init")
 system("git submodule update")
-system("cd rcatmaid_functions_library && git pull origin main")
-system("cd rcatmaid_functions_library && git checkout 7d228b0019b96c5031dd6f0611d6647a52d5159f")
+system("cd rcatmaid_functions_library && git pull origin main && git checkout 7d228b0019b96c5031dd6f0611d6647a52d5159f")
 source("rcatmaid_functions_library/functions.R")
 
 #define some colors
