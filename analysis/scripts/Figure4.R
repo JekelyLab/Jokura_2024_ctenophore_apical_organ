@@ -20,7 +20,7 @@ plot_arrest_rebeat <-
                 cex = 3.2,
                 alpha = 0.3,
                 color = "gray5") +
-  labs(y = "time difference (sec)") +
+  labs(y = "Time difference (sec)") +
   xlab("") +
   theme_minimal() +
   theme(#axis.text.x = element_blank(),
@@ -32,9 +32,9 @@ plot_arrest_rebeat <-
     values = c("re-beat" = "#28A8FF", 
                "arrest" = "#f56EBA")) +
   scale_x_discrete(labels = c("arrest.sagittal" = "sagittal",
-                              "re-beat.sagittal" = "",
+                              "re-beat.sagittal" = "sagittal",
                               "arrest.tentacular" = "tentacular",
-                              "re-beat.tentacular" = ""))
+                              "re-beat.tentacular" = "tentacular"))
 
 plot_arrest_rebeat
 
