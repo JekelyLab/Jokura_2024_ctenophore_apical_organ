@@ -561,28 +561,60 @@ pos_big_to_small <- syn_big_to_small %>%
   select(x, y, z)
 plot3d(pos_big_to_small,
        add = TRUE,
-       col = "#4477AA",
+       col = "cyan",
        size = 10,
        alpha = 1
 )
 
 syn_big_to_big <- stats_synapse %>%
   filter(skid==SSN_Q1Q2Q3Q4_skid) %>%
-  filter(connector_id %in% syn_Qbig_out_connectors) %>%
+  filter(connector_id %in% syn_big_out_connectors) %>%
   filter(prepost==1)
 
+pos_big_to_big <- syn_big_to_big %>%
+  select(x, y, z)
+plot3d(pos_big_to_big,
+       add = TRUE,
+       col = "#4477AA",
+       size = 10,
+       alpha = 1
+)
 
 
-syn_small_to_big  <- stats_synapse %>%
-  filter(skid==skid==SSN_Q1Q2_skid | skid==SSN_Q3Q4_skid) %>%
+
+syn_small_out_connectors  <- stats_synapse %>%
+  filter(skid==SSN_Q1Q2_skid | skid==SSN_Q3Q4_skid) %>%
   filter(prepost==0) %>%
   select(connector_id) %>%
   pull()
 
+syn_small_to_big <- stats_synapse %>%
+  filter(skid==SSN_Q1Q2Q3Q4_skid) %>%
+  filter(connector_id %in% syn_small_out_connectors) %>%
+  filter(prepost==1)
 
+pos_small_to_big <- syn_small_to_big %>%
+  select(x, y, z)
+plot3d(pos_small_to_big,
+       add = TRUE,
+       col = "magenta",
+       size = 10,
+       alpha = 1
+)
 
+syn_small_to_small <- stats_synapse %>%
+  filter(skid==SSN_Q1Q2_skid | skid==SSN_Q3Q4_skid) %>%
+  filter(connector_id %in% syn_small_out_connectors) %>%
+  filter(prepost==1)
 
-
+pos_small_to_small <- syn_small_to_small %>%
+  select(x, y, z)
+plot3d(pos_small_to_small,
+       add = TRUE,
+       col = "red",
+       size = 10,
+       alpha = 1
+)
 
 
 
