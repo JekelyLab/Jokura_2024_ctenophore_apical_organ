@@ -60,8 +60,6 @@ all_celltypes <- list(balancer,
 
 # 3d plot SSN Q1Q2 & Q3Q4 neuron -----------------------------------------------
 
-
-
 close3d()
 # 3d plotting of cells
 nopen3d() 
@@ -71,21 +69,11 @@ par3d(windowRect = c(0, 0, 1200, 350))
 #par3d(windowRect = c(0, 0, 2400, 700))
 
 #plot aboral view
-plot3d(SSN_Q1Q2,
-       soma = T, lwd = 1, add = T, alpha = 1, col = Okabe_Ito[6],
-       WithConnectors = F, WithNodes = F)
+plot_multinucleated_cell(SSN_Q1Q2,
+       lwd = 1, alpha = 1, col = Okabe_Ito[6])
 
-plot3d(SSN_Q3Q4,
-       soma = T, lwd = 1, add = T, alpha = 1, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-#for (i in 1:length(all_celltypes)) {
-#  print(i)
-#  plot3d(
-#    all_celltypes[[i]], soma = TRUE, lwd = 0.5, add = TRUE, 
-#    alpha = 0.05, col = Okabe_Ito[8]
-#  )
-#}
+plot_multinucleated_cell(SSN_Q3Q4,
+       lwd = 1, alpha = 1, col = Okabe_Ito[7])
 
 plot3d(with_soma,
        soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
@@ -108,21 +96,11 @@ next3d(clear=F)
 
 
 #plot lateral view of Sagittal plane
-plot3d(SSN_Q1Q2,
-       soma = T, lwd = 1, add = T, alpha = 1, col = Okabe_Ito[6],
-       WithConnectors = F, WithNodes = F)
+plot_multinucleated_cell(SSN_Q1Q2,
+                         lwd = 1, alpha = 1, col = Okabe_Ito[6])
 
-plot3d(SSN_Q3Q4,
-       soma = T, lwd = 1, add = T, alpha = 1, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-#for (i in 1:length(all_celltypes)) {
-#  print(i)
-#  plot3d(
-#    all_celltypes[[i]], soma = TRUE, lwd = 0.5, add = TRUE, 
-#    alpha = 0.05, col = Okabe_Ito[8]
-#  )
-#}
+plot_multinucleated_cell(SSN_Q3Q4,
+                         lwd = 1, alpha = 1, col = Okabe_Ito[7])
 
 plot3d(with_soma,
        soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
@@ -145,21 +123,11 @@ next3d(clear=F)
 
 
 #plot lateral view of Tentacular plane
-plot3d(SSN_Q1Q2,
-       soma = T, lwd = 1, add = T, alpha = 1, col = Okabe_Ito[6],
-       WithConnectors = F, WithNodes = F)
+plot_multinucleated_cell(SSN_Q1Q2,
+                         lwd = 1, alpha = 1, col = Okabe_Ito[6])
 
-plot3d(SSN_Q3Q4,
-       soma = T, lwd = 1, add = T, alpha = 1, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-#for (i in 1:length(all_celltypes)) {
-#  print(i)
-#  plot3d(
-#    all_celltypes[[i]], soma = TRUE, lwd = 0.5, add = TRUE, 
-#    alpha = 0.05, col = Okabe_Ito[8]
-#  )
-#}
+plot_multinucleated_cell(SSN_Q3Q4,
+                         lwd = 1, alpha = 1, col = Okabe_Ito[7])
 
 plot3d(with_soma,
        soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
@@ -197,17 +165,8 @@ par3d(windowRect = c(0, 0, 1200, 350))
 #par3d(windowRect = c(0, 0, 2400, 700))
 
 #plot aboral view
-plot3d(SSN_Q1Q2Q3Q4,
-       soma = T, lwd = 1, add = T, alpha = 1, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
-#for (i in 1:length(all_celltypes)) {
-#  print(i)
-#  plot3d(
-#    all_celltypes[[i]], soma = TRUE, lwd = 0.5, add = TRUE, 
-#    alpha = 0.05, col = Okabe_Ito[8]
-#  )
-#}
+plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
+       lwd = 1, alpha = 1, col = Okabe_Ito[5])
 
 plot3d(with_soma,
        soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
@@ -230,17 +189,8 @@ next3d(clear=F)
 
 
 #plot lateral view of Sagittal plane
-plot3d(SSN_Q1Q2Q3Q4,
-       soma = T, lwd = 1, add = T, alpha = 1, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
-#for (i in 1:length(all_celltypes)) {
-#  print(i)
-#  plot3d(
-#    all_celltypes[[i]], soma = TRUE, lwd = 0.5, add = TRUE, 
-#    alpha = 0.05, col = Okabe_Ito[8]
-#  )
-#}
+plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
+                         lwd = 1, alpha = 1, col = Okabe_Ito[5])
 
 plot3d(with_soma,
        soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
@@ -263,17 +213,8 @@ next3d(clear=F)
 
 
 #plot lateral view of Tentacular plane
-plot3d(SSN_Q1Q2Q3Q4,
-       soma = T, lwd = 1, add = T, alpha = 1, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
-#for (i in 1:length(all_celltypes)) {
-#  print(i)
-#  plot3d(
-#    all_celltypes[[i]], soma = TRUE, lwd = 0.5, add = TRUE, 
-#    alpha = 0.05, col = Okabe_Ito[8]
-#  )
-#}
+plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
+                         lwd = 1, alpha = 1, col = Okabe_Ito[5])
 
 plot3d(with_soma,
        soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],

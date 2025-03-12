@@ -372,15 +372,15 @@ panel_AO_schematic <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_s
 
 
 layout <- "
-ABBB
+ACCC
 ####
-CDDD
+BDDD
 ####
 EFFF
 "
 
-Figure1 <- panel_larva_pic + panel_AO_pic + 
-  panel_larva_schematic + panel_AO_schematic + 
+Figure1 <- panel_larva_pic + panel_larva_schematic +  
+  panel_AO_pic + panel_AO_schematic + 
   panel_catmaid_overview + panel_quadrants +
   plot_layout(
     design = layout,

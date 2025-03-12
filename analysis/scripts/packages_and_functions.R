@@ -101,6 +101,7 @@ aboral <- function(){
 sagittal <- function(){
   nview3d("left", extramat = rotationMatrix(300, 4200, 1800, 800))
 }
+
 tentacular <- function(){
   nview3d("left", extramat = rotationMatrix(-1.7, 190, -120, -140))
 }
