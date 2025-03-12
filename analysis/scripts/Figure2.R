@@ -825,10 +825,28 @@ close3d()
 ############ outputs from SNN
 # bar graph: y-axis - number of inputs from SSNs, x-axis - cell type
 # exclude monoC, biC, multiC, and nonC.
+ 
+# get outgoing syn from SSNs
 
+conn_from_SSNs <- stats_synapse %>%
+  filter(prepost==0) %>%
+  filter(skid==SSN_Q1Q2_skid | skid==SSN_Q3Q4_skid | skid==SSN_Q1Q2Q3Q4_skid) %>%
+  select(connector_id) %>% 
+  pull()
 
+# akeletons that receive synapses from SSNs
+SSN_downstream <- stats_synapse %>%
+  filter(prepost==1) %>%
+  filter(connector_id %in% conn_from_SSNs)
+# in SSN downstream skid is skid of neuron postsynaptic to SSNs
 
+# use get_celltype_annot_for_skid function from cell_statistics_master.R to get celltypes
+# or get celltype from stats_master.csv
+# add celltype as column to SSN_downstream
 
+# filter out monoC, etc
+SNN_downstream %>%
+  filter(celltype != "monoC" | celltype != "biC")
 
 
 
