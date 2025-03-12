@@ -41,7 +41,8 @@ for (skid in skids) {
   stats_synapse <- rbind(stats_synapse, get_syn_stats(skid))
 }
 
-stats_synapse <- stats_synapse %>% group_by(connector_id, skid) %>% slice(1)
+#stats_synapse <- stats_synapse %>% group_by(connector_id, skid) %>% slice(1)
+# commented the above line out because they are actually not duplicates
 
 write.csv(stats_synapse, "analysis/data/stats_synapse.csv")
 stats_synapse <- read.csv("analysis/data/stats_synapse.csv")

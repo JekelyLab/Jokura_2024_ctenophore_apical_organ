@@ -30,9 +30,9 @@ Q2 <- read_smooth_neuron("Q2")
 Q3 <- read_smooth_neuron("Q3")
 Q4 <- read_smooth_neuron("Q4")
 
-SSN_Q1Q2 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:SSN", "Q1Q2")))
-SSN_Q3Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:SSN", "Q3Q4")))
-SSN_Q1Q2Q3Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:SSN", "Q1Q2Q3Q4")))
+SSN_Q1Q2 <- read_smooth_neuron("SSN_Q1Q2")[[1]]
+SSN_Q3Q4 <- read_smooth_neuron("SSN_Q3Q4")[[1]]
+SSN_Q1Q2Q3Q4 <- read_smooth_neuron("SSN_Q1Q2Q3Q4")[[1]]
 
 
 
@@ -75,9 +75,8 @@ plot_multinucleated_cell(SSN_Q1Q2,
 plot_multinucleated_cell(SSN_Q3Q4,
        lwd = 1, alpha = 1, col = Okabe_Ito[7])
 
-plot3d(with_soma,
-       soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
+plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
+                         lwd = 1, alpha = 1, col = Okabe_Ito[7])
 
 plot3d(outline,
        add = T, alpha = 0.05, col = "grey50"
@@ -498,6 +497,22 @@ presyn_syn <- subset(conn_syn, prepost == 0)
 postsyn_syn <- subset(conn_syn, prepost == 1)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 3d plot SSN synapses ---------------------------------------------------------------------
 
 
@@ -508,6 +523,82 @@ mfrow3d(1, 3)  #defines the two scenes
 #define the size of the rgl window, the view and zoom
 par3d(windowRect = c(0, 0, 1200, 350))
 #par3d(windowRect = c(0, 0, 2400, 700))
+
+SSN_Q1Q2_skid <- SSN_Q1Q2$skid
+SSN_Q3Q4_skid <- SSN_Q3Q4$skid
+SSN_Q1Q2Q3Q4_skid <- SSN_Q1Q2Q3Q4$skid
+
+# plot neurons
+plot_multinucleated_cell(SSN_Q1Q2, lwd = 1, alpha = 0.5, color = Okabe_Ito[6])
+plot_multinucleated_cell(SSN_Q3Q4, lwd = 1, alpha = 0.5, color = Okabe_Ito[7])
+plot_multinucleated_cell(SSN_Q1Q2Q3Q4, lwd = 1, alpha = 0.5, color = Okabe_Ito[6])
+
+### Synapses from SSN Q1-4 to SSN Q1Q2 or SSN Q2Q3 magenta
+
+# don't use many_to_many connectors, because getting coords looks a bit complicated
+#syn_Q1Q2Q3Q4_to_Q1Q2 <- catmaid_fetch(path = "/35/connector/list/many_to_many",
+#                                      body = list(skids1=SSN_Q1Q2Q3Q4_skid,
+#                                                  skids2=SSN_Q1Q2_skid,
+#                                                  relation="presynaptic_to"))
+#syn_Q1Q2Q3Q4_to_Q3Q4 <- catmaid_fetch(path = "/35/connector/list/many_to_many",
+#                                      body = list(skids1=SSN_Q1Q2Q3Q4_skid,
+#                                                  skids2=SSN_Q3Q4_skid,
+#                                                  relation="presynaptic_to"))
+stats_synapse <- read.csv("analysis/data/stats_synapse.csv")
+
+syn_big_out_connectors <- stats_synapse %>%
+  filter(skid==SSN_Q1Q2Q3Q4_skid) %>%
+  filter(prepost==0) %>%
+  select(connector_id) %>%
+  pull()
+
+syn_big_to_small <- stats_synapse %>%
+  filter(skid==SSN_Q1Q2_skid | skid==SSN_Q3Q4_skid) %>%
+  filter(connector_id %in% syn_big_out_connectors) %>%
+  filter(prepost==1)
+
+pos_big_to_small <- syn_big_to_small %>%
+  select(x, y, z)
+plot3d(pos_big_to_small,
+       add = TRUE,
+       col = "#4477AA",
+       size = 10,
+       alpha = 1
+)
+
+syn_big_to_big <- stats_synapse %>%
+  filter(skid==SSN_Q1Q2Q3Q4_skid) %>%
+  filter(connector_id %in% syn_Qbig_out_connectors) %>%
+  filter(prepost==1)
+
+
+
+syn_small_to_big  <- stats_synapse %>%
+  filter(skid==skid==SSN_Q1Q2_skid | skid==SSN_Q3Q4_skid) %>%
+  filter(prepost==0) %>%
+  select(connector_id) %>%
+  pull()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #plot aboral view
 plot3d(SSN_Q1Q2,
@@ -699,6 +790,21 @@ close3d()
 
 
 
+############ outputs from SNN
+# bar graph: y-axis - number of inputs from SSNs, x-axis - cell type
+# exclude monoC, biC, multiC, and nonC.
+
+
+
+
+
+
+
+
+
+
+
+
 # assemble figure -------------------------------------------------------------
 
 panel_SSN_Q1234 <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_Q1234.png")) +
@@ -761,4 +867,10 @@ ggsave("manuscript/figures/Figure2.png", limitsize = FALSE,
 
 ggsave("manuscript/figures/Figure2.pdf", limitsize = FALSE, 
        units = c("px"), Figure2, width = 3000, height = 1600) 
+
+
+
+
+
+
 
