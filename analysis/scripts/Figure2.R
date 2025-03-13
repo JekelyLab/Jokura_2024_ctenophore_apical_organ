@@ -756,36 +756,29 @@ close3d()
 # bar graph: y-axis - number of inputs from SSNs, x-axis - cell type
 # exclude monoC, biC, multiC, and nonC.
  
-# get outgoing syn from SSNs
+stats_master <- read.csv("analysis/data/stats_master.csv")
 
+# get outgoing syn from SSNs
 conn_from_SSNs <- stats_synapse %>%
   filter(prepost == 0) %>%
   filter(skid == SSN_Q1Q2_skid | skid == SSN_Q3Q4_skid | skid == SSN_Q1Q2Q3Q4_skid) %>%
   select(connector_id) %>% 
   pull()
 
-
 # skeletons that receive synapses from SSNs
 SSN_downstream <- stats_synapse %>%
   filter(prepost==1) %>%
   filter(connector_id %in% conn_from_SSNs)
+
 # in SSN downstream skid is skid of neuron postsynaptic to SSNs
-
-
+# use get_celltype_annot_for_skid function from cell_statistics_master.R to get celltypes
 SSN_downstream <- SSN_downstream %>%
-  mutate(celltype = get_celltype_annot_for_skid(skid))
+  mutate(celltype = map_chr(skid, get_celltype_annot_for_skid))
 
-
-
+# or get celltype from stats_master.csv
 #stats_master <- read.csv("analysis/data/stats_master.csv") 
 #SSN_downstream <- SSN_downstream %>%
 #  left_join(stats_master %>% select(skid, celltype), by = "skid")
-
-
-
-# use get_celltype_annot_for_skid function from cell_statistics_master.R to get celltypes
-# or get celltype from stats_master.csv
-# add celltype as column to SSN_downstream
 
 # filter out monoC, etc
 #SNN_downstream %>%
@@ -793,10 +786,7 @@ SSN_downstream <- SSN_downstream %>%
 
 
 SSN_downstream_filtered <- SSN_downstream %>%
-  filter(!celltype %in% c("monoC", "biC", "multiC", "nonC"))
-
-
-
+  filter(!celltype %in% c("monociliated", "biciliated", "multiciliated", "nonciliated", NA))
 
 ggplot(SSN_downstream_filtered, aes(x = celltype)) +
   geom_bar(fill = "steelblue") +
@@ -807,12 +797,6 @@ ggplot(SSN_downstream_filtered, aes(x = celltype)) +
     y = "Number of Inputs"
   ) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-
-
-
-
-
 
 
 

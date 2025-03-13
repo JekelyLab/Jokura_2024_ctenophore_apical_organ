@@ -51,18 +51,22 @@ stats_synapse <- read.csv("analysis/data/stats_synapse.csv")
 get_celltype_annot_for_skid <- function(skid) {
   annot <- catmaid_fetch(path = "/35/annotations/forskeletons",
                          body = list(skeleton_ids=skid))
+  
   result <- annot$annotations %>%
     map(~ str_extract(.x, "(?<=celltype:).*")) %>%
     unlist() %>%
     `[`(., . != "") %>%
     na.omit()
-  if (length(result) > 0) {
-    celltype <- as.character(result)
-  } else {
-    celltype <- NA
+  
+  if (length(result) == 0) {
+    return(NA)
+  } else if (length(result) > 1) {
+    stop("Multiple cell type annotations found for skeleton ID", skid)
   }
-  return(celltype)
+  
+  return(as.character(result))
 }
+
 
 get_stats <- function(skid) {
   sskid=skid
