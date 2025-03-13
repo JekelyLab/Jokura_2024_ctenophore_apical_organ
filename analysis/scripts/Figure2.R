@@ -4,7 +4,7 @@
 source("analysis/scripts/packages_and_functions.R")
 
 
-# load cell type ----------------------------------
+# load cell type ---------------------------------------------------------------
 
 balancer <- read_smooth_neuron("celltype:balancer")
 bridge <- read_smooth_neuron("celltype:bridge")
@@ -63,7 +63,7 @@ all_celltypes <- list(balancer,
 close3d()
 # 3d plotting of cells
 nopen3d() 
-mfrow3d(1, 3)  #defines the two scenes
+mfrow3d(1, 3)  
 #define the size of the rgl window, the view and zoom
 par3d(windowRect = c(0, 0, 1200, 350))
 #par3d(windowRect = c(0, 0, 2400, 700))
@@ -158,7 +158,7 @@ close3d()
 close3d()
 # 3d plotting of cells
 nopen3d() 
-mfrow3d(1, 3)  #defines the two scenes
+mfrow3d(1, 3)  
 #define the size of the rgl window, the view and zoom
 par3d(windowRect = c(0, 0, 1200, 350))
 #par3d(windowRect = c(0, 0, 2400, 700))
@@ -313,7 +313,7 @@ ggsave(
 close3d()
 # 3d plotting of cells
 nopen3d() 
-mfrow3d(1, 3)  #defines the two scenes
+mfrow3d(1, 3)  
 #define the size of the rgl window, the view and zoom
 par3d(windowRect = c(0, 0, 1200, 350))
 #par3d(windowRect = c(0, 0, 2400, 700))
@@ -492,50 +492,12 @@ close3d()
 
 # retrieve connectors ----------------------------------------------------------
 
-conn_syn <- connectors(SSN)
-presyn_syn <- subset(conn_syn, prepost == 0)
-postsyn_syn <- subset(conn_syn, prepost == 1)
+#conn_syn <- connectors(SSN)
+#presyn_syn <- subset(conn_syn, prepost == 0)
+#postsyn_syn <- subset(conn_syn, prepost == 1)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# 3d plot SSN synapses ---------------------------------------------------------------------
-
-
-close3d()
-# 3d plotting of cells
-nopen3d() 
-mfrow3d(1, 3)  #defines the two scenes
-#define the size of the rgl window, the view and zoom
-par3d(windowRect = c(0, 0, 1200, 350))
-#par3d(windowRect = c(0, 0, 2400, 700))
-
-SSN_Q1Q2_skid <- SSN_Q1Q2$skid
-SSN_Q3Q4_skid <- SSN_Q3Q4$skid
-SSN_Q1Q2Q3Q4_skid <- SSN_Q1Q2Q3Q4$skid
-
-# plot neurons
-plot_multinucleated_cell(SSN_Q1Q2, lwd = 1, alpha = 0.5, color = Okabe_Ito[6])
-plot_multinucleated_cell(SSN_Q3Q4, lwd = 1, alpha = 0.5, color = Okabe_Ito[7])
-plot_multinucleated_cell(SSN_Q1Q2Q3Q4, lwd = 1, alpha = 0.5, color = Okabe_Ito[6])
-
-### Synapses from SSN Q1-4 to SSN Q1Q2 or SSN Q2Q3 magenta
-
-# don't use many_to_many connectors, because getting coords looks a bit complicated
+# don't use many_to_many connectors, because getting cords looks a bit complicated
 #syn_Q1Q2Q3Q4_to_Q1Q2 <- catmaid_fetch(path = "/35/connector/list/many_to_many",
 #                                      body = list(skids1=SSN_Q1Q2Q3Q4_skid,
 #                                                  skids2=SSN_Q1Q2_skid,
@@ -544,6 +506,14 @@ plot_multinucleated_cell(SSN_Q1Q2Q3Q4, lwd = 1, alpha = 0.5, color = Okabe_Ito[6
 #                                      body = list(skids1=SSN_Q1Q2Q3Q4_skid,
 #                                                  skids2=SSN_Q3Q4_skid,
 #                                                  relation="presynaptic_to"))
+
+SSN_Q1Q2_skid <- SSN_Q1Q2$skid
+SSN_Q3Q4_skid <- SSN_Q3Q4$skid
+SSN_Q1Q2Q3Q4_skid <- SSN_Q1Q2Q3Q4$skid
+
+
+# "presynapse (output)"
+
 stats_synapse <- read.csv("analysis/data/stats_synapse.csv")
 
 syn_big_out_connectors <- stats_synapse %>%
@@ -552,84 +522,46 @@ syn_big_out_connectors <- stats_synapse %>%
   select(connector_id) %>%
   pull()
 
-syn_big_to_small <- stats_synapse %>%
-  filter(skid==SSN_Q1Q2_skid | skid==SSN_Q3Q4_skid) %>%
-  filter(connector_id %in% syn_big_out_connectors) %>%
-  filter(prepost==1)
-
-pos_big_to_small <- syn_big_to_small %>%
-  select(x, y, z)
-plot3d(pos_big_to_small,
-       add = TRUE,
-       col = "cyan",
-       size = 10,
-       alpha = 1
-)
-
-syn_big_to_big <- stats_synapse %>%
-  filter(skid==SSN_Q1Q2Q3Q4_skid) %>%
-  filter(connector_id %in% syn_big_out_connectors) %>%
-  filter(prepost==1)
-
-pos_big_to_big <- syn_big_to_big %>%
-  select(x, y, z)
-plot3d(pos_big_to_big,
-       add = TRUE,
-       col = "#4477AA",
-       size = 10,
-       alpha = 1
-)
-
-
-
 syn_small_out_connectors  <- stats_synapse %>%
   filter(skid==SSN_Q1Q2_skid | skid==SSN_Q3Q4_skid) %>%
   filter(prepost==0) %>%
   select(connector_id) %>%
   pull()
 
+
+# "postsynapse (input)"
+
+syn_big_to_small <- stats_synapse %>%
+  filter(skid==SSN_Q1Q2_skid | skid==SSN_Q3Q4_skid) %>%
+  filter(connector_id %in% syn_big_out_connectors) %>%
+  filter(prepost==1)
+
+syn_big_to_big <- stats_synapse %>%
+  filter(skid==SSN_Q1Q2Q3Q4_skid) %>%
+  filter(connector_id %in% syn_big_out_connectors) %>%
+  filter(prepost==1)
+
 syn_small_to_big <- stats_synapse %>%
   filter(skid==SSN_Q1Q2Q3Q4_skid) %>%
   filter(connector_id %in% syn_small_out_connectors) %>%
   filter(prepost==1)
-
-pos_small_to_big <- syn_small_to_big %>%
-  select(x, y, z)
-plot3d(pos_small_to_big,
-       add = TRUE,
-       col = "magenta",
-       size = 10,
-       alpha = 1
-)
 
 syn_small_to_small <- stats_synapse %>%
   filter(skid==SSN_Q1Q2_skid | skid==SSN_Q3Q4_skid) %>%
   filter(connector_id %in% syn_small_out_connectors) %>%
   filter(prepost==1)
 
-pos_small_to_small <- syn_small_to_small %>%
-  select(x, y, z)
-plot3d(pos_small_to_small,
-       add = TRUE,
-       col = "red",
-       size = 10,
-       alpha = 1
-)
+
+# 3d plot SSN synapses ---------------------------------------------------------
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+close3d()
+# 3d plotting of cells
+nopen3d() 
+mfrow3d(1, 3)  
+#define the size of the rgl window, the view and zoom
+par3d(windowRect = c(0, 0, 1200, 350))
+#par3d(windowRect = c(0, 0, 2400, 700))
 
 
 #plot aboral view
@@ -645,43 +577,49 @@ plot3d(SSN_Q1Q2Q3Q4,
        soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
        WithConnectors = F, WithNodes = F)
 
-#for (i in 1:length(all_celltypes)) {
-#  print(i)
-#  plot3d(
-#    all_celltypes[[i]], soma = TRUE, lwd = 0.5, add = TRUE, 
-#    alpha = 0.05, col = Okabe_Ito[8]
-#  )
-#}
-
-#plot3d(with_soma,
-#       soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
-#       WithConnectors = F, WithNodes = F)
-
 plot3d(outline,
        add = T, alpha = 0.05, col = "grey50"
 )
 
-# plot presynapses
-plot3d(
-  presyn_syn$x, 
-  presyn_syn$y, 
-  presyn_syn$z, 
-  size = 0.6, alpha = 0.5, col = "magenta2", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
+
+# plot synapses
+
+pos_big_to_small <- syn_big_to_small %>%
+  select(x, y, z)
+plot3d(pos_big_to_small,
+       size = 1, alpha = 0.75, col = "magenta2", 
+       add = TRUE,
+       point_antialias = TRUE,
+       type = "s"
 )
 
-# plot postsynapses
-plot3d(
-  postsyn_syn$x, 
-  postsyn_syn$y, 
-  postsyn_syn$z, 
-  size = 0.6, alpha = 0.5, col = "cyan2", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
+pos_small_to_big <- syn_small_to_big %>%
+  select(x, y, z)
+plot3d(pos_small_to_big,
+       size = 1, alpha = 0.75, col = "cyan2", 
+       add = TRUE,
+       point_antialias = TRUE,
+       type = "s"
 )
+
+
+pos_big_to_big <- syn_big_to_big %>%
+  select(x, y, z)
+plot3d(pos_big_to_big,
+       size = 1, alpha = 0.75, col = "#4477AA", 
+       add = TRUE,
+       point_antialias = TRUE,
+       type = "s"
+)
+
+#pos_small_to_small <- syn_small_to_small %>%
+#  select(x, y, z)
+#plot3d(pos_small_to_small,
+#       size = 0.6, alpha = 0.5, col = "#4477AA", 
+#       add = TRUE,
+#       point_antialias = TRUE,
+#       type = "s"
+#)
 
 
 #aboral view
@@ -708,42 +646,38 @@ plot3d(SSN_Q1Q2Q3Q4,
        soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
        WithConnectors = F, WithNodes = F)
 
-#for (i in 1:length(all_celltypes)) {
-#  print(i)
-#  plot3d(
-#    all_celltypes[[i]], soma = TRUE, lwd = 0.5, add = TRUE, 
-#    alpha = 0.05, col = Okabe_Ito[8]
-#  )
-#}
-
-#plot3d(with_soma,
-#       soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
-#       WithConnectors = F, WithNodes = F)
-
 plot3d(outline,
        add = T, alpha = 0.05, col = "grey50"
 )
 
-# plot presynapses
-plot3d(
-  presyn_syn$x, 
-  presyn_syn$y, 
-  presyn_syn$z, 
-  size = 0.6, alpha = 0.5, col = "magenta2", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
+# plot synapses
+
+pos_big_to_small <- syn_big_to_small %>%
+  select(x, y, z)
+plot3d(pos_big_to_small,
+       size = 1, alpha = 0.75, col = "magenta2", 
+       add = TRUE,
+       point_antialias = TRUE,
+       type = "s"
 )
 
-# plot postsynapses
-plot3d(
-  postsyn_syn$x, 
-  postsyn_syn$y, 
-  postsyn_syn$z, 
-  size = 0.6, alpha = 0.5, col = "cyan2", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
+pos_small_to_big <- syn_small_to_big %>%
+  select(x, y, z)
+plot3d(pos_small_to_big,
+       size = 1, alpha = 0.75, col = "cyan2", 
+       add = TRUE,
+       point_antialias = TRUE,
+       type = "s"
+)
+
+
+pos_big_to_big <- syn_big_to_big %>%
+  select(x, y, z)
+plot3d(pos_big_to_big,
+       size = 1, alpha = 0.75, col = "#4477AA", 
+       add = TRUE,
+       point_antialias = TRUE,
+       type = "s"
 )
 
 
@@ -770,42 +704,38 @@ plot3d(SSN_Q1Q2Q3Q4,
        soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
        WithConnectors = F, WithNodes = F)
 
-#for (i in 1:length(all_celltypes)) {
-#  print(i)
-#  plot3d(
-#    all_celltypes[[i]], soma = TRUE, lwd = 0.5, add = TRUE, 
-#    alpha = 0.05, col = Okabe_Ito[8]
-#  )
-#}
-
-#plot3d(with_soma,
-#       soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
-#       WithConnectors = F, WithNodes = F)
-
 plot3d(outline,
        add = T, alpha = 0.05, col = "grey50"
 )
 
-# plot presynapses
-plot3d(
-  presyn_syn$x, 
-  presyn_syn$y, 
-  presyn_syn$z, 
-  size = 0.6, alpha = 0.5, col = "magenta2", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
+# plot synapses
+
+pos_big_to_small <- syn_big_to_small %>%
+  select(x, y, z)
+plot3d(pos_big_to_small,
+       size = 1, alpha = 0.75, col = "magenta2", 
+       add = TRUE,
+       point_antialias = TRUE,
+       type = "s"
 )
 
-# plot postsynapses
-plot3d(
-  postsyn_syn$x, 
-  postsyn_syn$y, 
-  postsyn_syn$z, 
-  size = 0.6, alpha = 0.5, col = "cyan2", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
+pos_small_to_big <- syn_small_to_big %>%
+  select(x, y, z)
+plot3d(pos_small_to_big,
+       size = 1, alpha = 0.75, col = "cyan2", 
+       add = TRUE,
+       point_antialias = TRUE,
+       type = "s"
+)
+
+
+pos_big_to_big <- syn_big_to_big %>%
+  select(x, y, z)
+plot3d(pos_big_to_big,
+       size = 1, alpha = 0.75, col = "#4477AA", 
+       add = TRUE,
+       point_antialias = TRUE,
+       type = "s"
 )
 
 
@@ -822,31 +752,62 @@ close3d()
 
 
 
-############ outputs from SNN
+# outputs from SNN -------------------------------------------------------------
 # bar graph: y-axis - number of inputs from SSNs, x-axis - cell type
 # exclude monoC, biC, multiC, and nonC.
  
 # get outgoing syn from SSNs
 
 conn_from_SSNs <- stats_synapse %>%
-  filter(prepost==0) %>%
-  filter(skid==SSN_Q1Q2_skid | skid==SSN_Q3Q4_skid | skid==SSN_Q1Q2Q3Q4_skid) %>%
+  filter(prepost == 0) %>%
+  filter(skid == SSN_Q1Q2_skid | skid == SSN_Q3Q4_skid | skid == SSN_Q1Q2Q3Q4_skid) %>%
   select(connector_id) %>% 
   pull()
 
-# akeletons that receive synapses from SSNs
+
+# skeletons that receive synapses from SSNs
 SSN_downstream <- stats_synapse %>%
   filter(prepost==1) %>%
   filter(connector_id %in% conn_from_SSNs)
 # in SSN downstream skid is skid of neuron postsynaptic to SSNs
+
+
+SSN_downstream <- SSN_downstream %>%
+  mutate(celltype = get_celltype_annot_for_skid(skid))
+
+
+
+#stats_master <- read.csv("analysis/data/stats_master.csv") 
+#SSN_downstream <- SSN_downstream %>%
+#  left_join(stats_master %>% select(skid, celltype), by = "skid")
+
+
 
 # use get_celltype_annot_for_skid function from cell_statistics_master.R to get celltypes
 # or get celltype from stats_master.csv
 # add celltype as column to SSN_downstream
 
 # filter out monoC, etc
-SNN_downstream %>%
-  filter(celltype != "monoC" | celltype != "biC")
+#SNN_downstream %>%
+#  filter(celltype != "monoC" | celltype != "biC")
+
+
+SSN_downstream_filtered <- SSN_downstream %>%
+  filter(!celltype %in% c("monoC", "biC", "multiC", "nonC"))
+
+
+
+
+ggplot(SSN_downstream_filtered, aes(x = celltype)) +
+  geom_bar(fill = "steelblue") +
+  theme_minimal() +
+  labs(
+    title = "Number of Inputs from SSNs by Cell Type",
+    x = "Cell Type",
+    y = "Number of Inputs"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
 
 
 
