@@ -142,6 +142,8 @@ get_stats <- function(skid) {
   polyadicity <- post_targets_count/length(pre_connectors)
   # use incoming/outgoing and upstream/downstream instead of pre/post to be more clear
   # because pre_syn and pre_partners are opposite and you have to think hard to make sense of it
+  print(skid)
+  print(celltype)
   stats <- tibble(skid=sskid,
                   celltype=celltype,
                   cilia=basal_bodies,
@@ -166,10 +168,10 @@ get_stats <- function(skid) {
 stats_all <- bind_rows(lapply(skids, get_stats))
 
 stats_all <- stats_all %>% mutate_if(is.numeric, ~ ifelse(is.nan(.), NA, .))
-stats_all <- stats_all %>% mutate_if(is.character, ~ ifelse(is.null(.), NA, .))
+#stats_all <- stats_all %>% mutate_if(is.character, ~ ifelse(is.null(.), NA, .)) # this line converts all cell types to balancer?
 # when calculating polyadicity it could be possible to divide by 0
 # this issue could only arise as a tracing mistake, but anyway, let's convert any such cases to NA
-stats <- stats_all %>% mutate(polyadicity = ifelse(abs(polyadicity) == Inf, NA, polyadicity))
+stats_all <- stats_all %>% mutate(polyadicity = ifelse(abs(polyadicity) == Inf, NA, polyadicity))
 # keep in mind that cilium length can be NA even if there is a cilium, 
 # because some cilia extend outside of the scanned volume, so we cannot determine their length
 stats_all$upstream_celltypes <- sapply(stats_all$upstream_celltypes, paste, collapse = ", ")
