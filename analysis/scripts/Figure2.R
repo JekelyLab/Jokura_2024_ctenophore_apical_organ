@@ -249,7 +249,11 @@ mito_done <- read.neurons.catmaid("mitochondria done", pid = 35)
 mito_vesicle_info <- read.csv("analysis/data/mito_vesicle_info.csv")
 mito_means_tidy <- read.csv("analysis/data/mito_means_tidy.csv")
 
-# graph plot mito vesicles by celltype -----------------------------------------------
+# bar graph of mito vesicles ratio by celltype ---------------------------------
+
+selected_celltypes <- c("balancer", "bridge", "bristle", "ciliated_groove", "dense_vesicle", "dome", 
+                        "intra-multi-ciliated", "lamellate", "lithocyte", "plumose", "SSN", 
+                        "epithelial_floor")
 
 mito_means_tidy <- mito_means_tidy %>%
   mutate(
@@ -260,17 +264,17 @@ mito_means_tidy <- mito_means_tidy %>%
                       "ciliated_groove", 
                       celltype)
   ) %>%
-  mutate(celltype = factor(celltype, levels = c(
-    "balancer", "bridge", "bristle", "ciliated_groove", "dense_vesicle", "dome", 
-    "intra-multi-ciliated", "lamellate", "lithocyte", "plumose", "SSN", 
-    "epithelial_floor", "monociliated", "biciliated", "multiciliated", "nonciliated"
-  )))
+  filter(celltype %in% selected_celltypes) %>%
+  mutate(celltype = factor(celltype, levels = selected_celltypes))
+
+
+#plot graph
 
 plot_mito_stats <- ggplot(mito_means_tidy, aes(
   fill = factor(characteristic, levels = c("mean_vesicles_syn", "mean_vesicles_no_syn")),
   y = value,
   x = celltype
-)) +
+  )) +
   geom_bar(position = "stack", stat = "identity") +
   theme_bw() +
   scale_fill_manual(
@@ -301,7 +305,7 @@ plot_mito_stats
 ggsave(
   filename = "manuscript/pictures/mito_in_syn.png",
   plot = plot_mito_stats,
-  width = 1600,
+  width = 1800,
   height = 1100,
   units = "px",
   dpi = 300
@@ -752,10 +756,8 @@ close3d()
 
 
 
-# outputs from SNN -------------------------------------------------------------
-# bar graph: y-axis - number of inputs from SSNs, x-axis - cell type
-# exclude monoC, biC, multiC, and nonC.
- 
+# bar graph of outputs from SNNs -----------------------------------------------
+
 stats_master <- read.csv("analysis/data/stats_master.csv")
 
 # get outgoing syn from SSNs
@@ -772,32 +774,55 @@ SSN_downstream <- stats_synapse %>%
 
 # in SSN downstream skid is skid of neuron postsynaptic to SSNs
 # use get_celltype_annot_for_skid function from cell_statistics_master.R to get celltypes
-SSN_downstream <- SSN_downstream %>%
-  mutate(celltype = map_chr(skid, get_celltype_annot_for_skid))
+#SSN_downstream <- SSN_downstream %>%
+#  mutate(celltype = map_chr(skid, get_celltype_annot_for_skid))
 
 # or get celltype from stats_master.csv
-#stats_master <- read.csv("analysis/data/stats_master.csv") 
-#SSN_downstream <- SSN_downstream %>%
-#  left_join(stats_master %>% select(skid, celltype), by = "skid")
-
-# filter out monoC, etc
-#SNN_downstream %>%
-#  filter(celltype != "monoC" | celltype != "biC")
+stats_master <- read.csv("analysis/data/stats_master.csv")
+SSN_downstream <- SSN_downstream %>%
+  left_join(stats_master %>% select(skid, celltype), by = "skid")
 
 
-SSN_downstream_filtered <- SSN_downstream %>%
-  filter(!celltype %in% c("monociliated", "biciliated", "multiciliated", "nonciliated", NA))
 
-ggplot(SSN_downstream_filtered, aes(x = celltype)) +
-  geom_bar(fill = "steelblue") +
+# bar plot
+all_celltypes <- c("balancer", "bridge", "bristle", "ciliated_groove", "dense_vesicle", "dome", 
+                   "intra-multi-ciliated", "lamellate", "lithocyte", "plumose", "SSN", 
+                   "epithelial_floor")
+
+plot_output_number <- 
+  SSN_downstream %>%
+  filter(!celltype %in% c("monociliated", "biciliated", "multiciliated", "nonciliated", NA)) %>%
+  mutate(celltype = case_when(
+    celltype == "Cgroove-sag" ~ "ciliated_groove",
+    TRUE ~ celltype
+  )) %>%
+  ggplot(aes(x = factor(celltype, levels = all_celltypes))) +
+  geom_bar(fill = "#0072b2") +
   theme_minimal() +
   labs(
-    title = "Number of Inputs from SSNs by Cell Type",
-    x = "Cell Type",
-    y = "Number of Inputs"
+    x = "Cell types",
+    y = "Number of outputs"
   ) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = -70, vjust = 0.5, hjust = 0, size = 11, 
+                                   margin = margin(t = -7)),
+        axis.text.y = element_text(size = 11), 
+        axis.title = element_text(size = 13),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        ) +
+  scale_x_discrete(limits = all_celltypes)
 
+plot_output_number
+
+
+ggsave(
+  filename = "manuscript/pictures/output_from_SSNs.png",
+  plot = plot_output_number,
+  width = 2250,
+  height = 1000,
+  units = "px",
+  dpi = 300
+)
 
 
 # assemble figure -------------------------------------------------------------
@@ -861,7 +886,7 @@ ggsave("manuscript/figures/Figure2.png", limitsize = FALSE,
 
 
 ggsave("manuscript/figures/Figure2.pdf", limitsize = FALSE, 
-       units = c("px"), Figure2, width = 3000, height = 1600) 
+       units = c("px"), Figure2, width = 3000, height = 1700) 
 
 
 

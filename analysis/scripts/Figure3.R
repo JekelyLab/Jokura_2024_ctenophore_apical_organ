@@ -884,6 +884,8 @@ close3d()
 
 # assemble figure -------------------------------------------------------------
 
+panel_output <- ggdraw() + draw_image(readPNG("manuscript/pictures/output_from_SSNs.png"))
+
 panel_bal <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer.png")) +
     #  draw_line(x = c(0, 1), y = c(0, 0), color = "black", linewidth = 0.25, alpha = 0.1) +
     #  draw_line(x = c(0, 1), y = c(0.1, 0.1), color = "black", linewidth = 0.25, alpha = 0.1) +
@@ -935,32 +937,54 @@ panel_SSN_bri <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_prepost_
   draw_label("SSN Q3Q4", x = 0.85, y = 0.99, color = Okabe_Ito[7], size = 7, hjust = 0)
 
 panel_matrix <- ggdraw() + draw_image(readPNG("manuscript/pictures/mech_girdle_chaeMech_syn_matrix.png"))
-panel_map_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/map_balancer_bridge_SSN.png"))
+panel_map_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/map_balancer_bridge_SSN_1.png"))
+
+#layout <- "
+#AAABBBCCC
+##########
+#DDDDFFFGG
+#####FFFGG
+#EEEEFFFGG
+#"
+
+#Figure3 <- panel_bal + panel_bri + panel_bri_mito +
+#  panel_SSN_bal + panel_SSN_bri + 
+#  panel_matrix + panel_map_graph +
+#  plot_layout(design = layout,
+#              heights = c(1, 0.15, 1, 0.1, 1),
+#              widths = c(1, 1, 1, 1, 1, 1, 1, 1, 1)) + 
+#  patchwork::plot_annotation(tag_levels = "A") &  
+#  ggplot2::theme(plot.tag = element_text(size = 12, 
+#                                         face='plain', color='black'))
+
 
 layout <- "
-AAABBBCCC
-#########
-DDDDFFFGG
-####FFFGG
-EEEEFFFGG
+A#EE
+####
+B#FF
+##FF
+C###
+C#GH
+##GH
+D#GH
 "
 
-Figure3 <- panel_bal + panel_bri + panel_bri_mito +
+Figure3 <- panel_output + panel_bal + panel_bri + panel_bri_mito +
   panel_SSN_bal + panel_SSN_bri + 
   panel_matrix + panel_map_graph +
   plot_layout(design = layout,
-              heights = c(1, 0.15, 1, 0.1, 1),
-              widths = c(1, 1, 1, 1, 1, 1, 1, 1, 1)) + 
+              heights = c(1, 0.1, 0.8, 0.2, 0.1, 0.7, 0.1, 0.8),
+              widths = c(1.1, 0.1, 0.8, 0.7)) + 
   patchwork::plot_annotation(tag_levels = "A") &  
   ggplot2::theme(plot.tag = element_text(size = 12, 
                                          face='plain', color='black'))
 
 
 ggsave("manuscript/figures/Figure3.png", limitsize = FALSE, 
-       units = c("px"), Figure3, width = 3000, height = 1200, bg='white')  
+       units = c("px"), Figure3, width = 2700, height = 1700, bg='white')  
 
 
 ggsave("manuscript/figures/Figure3.pdf", limitsize = FALSE, 
-       units = c("px"), Figure3, width = 3000, height = 1200) 
+       units = c("px"), Figure3, width = 2700, height = 1700) 
 
 
