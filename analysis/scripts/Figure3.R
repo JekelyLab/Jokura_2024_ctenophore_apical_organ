@@ -65,6 +65,28 @@ SSN_Q3Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:SSN", 
 SSN_Q1Q2Q3Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:SSN", "Q1Q2Q3Q4")))
 
 
+all_celltypes <- list(balancer_Q1,
+                      balancer_Q2,
+                      balancer_Q3,
+                      balancer_Q4,
+                      bridge_Q1Q2,
+                      bridge_Q3Q4,
+                      SSN_Q1Q2,
+                      SSN_Q3Q4,
+                      SSN_Q1Q2Q3Q4)
+
+all_celltypes_names <- list("balancer_Q1",
+                            "balancer_Q2",
+                            "balancer_Q3",
+                            "balancer_Q4",
+                            "bridge_Q1Q2",
+                            "bridge_Q3Q4",
+                            "SSN_Q1Q2",
+                            "SSN_Q3Q4",
+                            "SSN_Q1Q2Q3Q4")
+
+
+
 # plot balancer -------------------------------------------------------------
 
 close3d()
@@ -880,6 +902,73 @@ next3d(clear=F)
 rgl.snapshot("manuscript/pictures/SSN_prepost_synapse_bridge.png")
 
 close3d()
+
+
+
+
+
+# matrix plot ------------------------------------------------------------------
+
+# iterate through cell group neuron lists and get connectivity
+# define empty synapse list with the right dimensions
+synapse_list <- c()
+
+for (i in 1:length(all_celltypes)) {
+  for (j in 1:length(all_celltypes)) {
+    # get connectors between two cell groups
+    presyn_skids <- attr(all_celltypes[i][[1]], "df")$skid
+    postsyn_skids <- attr(all_celltypes[j][[1]], "df")$skid
+    connectivity <- catmaid_get_connectors_between(
+      pre = presyn_skids,
+      post = postsyn_skids, pid = 35
+    )
+    # check the number of synapses from group1 -> group2
+    N_synapses <- dim(connectivity)[1]
+    if(length(connectivity) == 0) {N_synapses = 0}
+    # add value to synapse list
+    synapse_list <- c(synapse_list, N_synapses)
+  }
+}
+synapse_list
+# convert synapse list into a matrix of appropriate dimensions
+synapse_matrix <- matrix(
+  unlist(synapse_list), byrow = TRUE, 
+  nrow = length(all_celltypes)
+)
+
+rownames(synapse_matrix) <- as.character(all_celltypes_names)
+colnames(synapse_matrix) <- as.character(all_celltypes_names)
+
+syn_df <- as.data.frame(as.table(synapse_matrix))
+
+write.csv(syn_df, "manuscript/source_data/synapse_matrix_df.csv", row.names = FALSE)
+
+plot_syn_matrix <- 
+  ggplot(syn_df, aes(x = Var2, y = Var1, fill = Freq)) +
+  geom_tile() + 
+  geom_text(aes(label = Freq), color = "black") +
+  scale_fill_gradient(low = "white", high = "#0072b2") + 
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = -45, hjust = 0),
+    axis.text.y = element_text(size = 8),
+    axis.title.x = element_text(size = 10),
+    axis.title.y = element_text(size = 10)
+  ) +
+  labs(
+    x = "postsynaptic cell groups",
+    y = "presynaptic cell groups"
+  )
+
+
+ggsave(
+  filename = "manuscript/pictures/mech_girdle_chaeMech_syn_matrix.png",
+  plot = plot_syn_matrix,
+  width = 2000,
+  height = 1700,
+  units = "px",
+  dpi = 300
+)
 
 
 # assemble figure -------------------------------------------------------------
