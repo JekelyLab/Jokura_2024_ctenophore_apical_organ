@@ -13,7 +13,7 @@ df_time_dif <- read_csv("analysis/data/arrest_rebeat_time_differences.csv")
 
 plot_arrest_rebeat <- 
   ggplot(df_time_dif) +
-  aes(x = interaction(response, plane), y = time, fill = response) +
+  aes(x = response, y = time, fill = response) +  
   geom_boxplot(size = 0.5, outlier.shape = NA) +
   geom_beeswarm(aes(color = time),
                 size = 2,
@@ -23,18 +23,21 @@ plot_arrest_rebeat <-
   labs(y = "Time difference (sec)") +
   xlab("") +
   theme_minimal() +
-  theme(#axis.text.x = element_blank(),
-        legend.title = element_blank(),
-        legend.position = "inside",
-        legend.position.inside = c(0.3, 0.75)
-        ) +
+  theme(
+    legend.title = element_blank(),
+    legend.position = "inside",
+    legend.position.inside = c(0.3, 0.75),
+    strip.text = element_text(size = 11),  
+    strip.placement = "outside",  
+    strip.background = element_blank(),  
+    axis.text.x = element_blank(),  
+    axis.ticks.x = element_blank()  
+  ) +
   scale_fill_manual(
     values = c("re-beat" = "#28A8FF", 
                "arrest" = "#f56EBA")) +
-  scale_x_discrete(labels = c("arrest.sagittal" = "sagittal",
-                              "re-beat.sagittal" = "sagittal",
-                              "arrest.tentacular" = "tentacular",
-                              "re-beat.tentacular" = "tentacular"))
+  facet_grid(~ plane, scales = "free_x", space = "free_x", switch = "x")  
+
 
 plot_arrest_rebeat
 
