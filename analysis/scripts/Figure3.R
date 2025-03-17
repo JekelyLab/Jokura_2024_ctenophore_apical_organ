@@ -4,53 +4,12 @@
 source("analysis/scripts/packages_and_functions.R")
 
 
-# load cell type ----------------------------------
-
-balancer <- read_smooth_neuron("celltype:balancer")
-bridge <- read_smooth_neuron("celltype:bridge")
-bristle <- read_smooth_neuron("celltype:bristle")
-Cgroove_sag <- read_smooth_neuron("celltype:Cgroove-sag")
-Cgroove_tag <- read_smooth_neuron("celltype:Cgroove-tag")
-dense_vesicle <- read_smooth_neuron("celltype:dense_vesicle")
-dome <- read_smooth_neuron("celltype:dome")
-epithelial_floor <- read_smooth_neuron("celltype:epithelial_floor")
-intra_multi_ciliated <- read_smooth_neuron("celltype:intra-multi-ciliated")
-lamellate <- read_smooth_neuron("celltype:lamellate")
-lithocyte <- read_smooth_neuron("celltype:lithocyte")
-plumose <- read_smooth_neuron("celltype:plumose")
-SSN <- read_smooth_neuron("celltype:SSN")
-
-monociliated <- read_smooth_neuron("celltype:monociliated")
-biciliated <- read_smooth_neuron("celltype:biciliated")
-multiciliated <- read_smooth_neuron("celltype:multiciliated")
-nonciliated <- read_smooth_neuron("celltype:nonciliated")
+# load cell type ---------------------------------------------------------------
 
 with_soma <- read_smooth_neuron("with_soma")
 
-all_celltypes <- list(balancer,
-                      bridge,
-                      bristle,
-                      Cgroove_sag,
-                      Cgroove_tag,
-                      dense_vesicle,
-                      dome,
-                      epithelial_floor,
-                      intra_multi_ciliated,
-                      lamellate,
-                      lithocyte,
-                      plumose,
-                      SSN,
-                      monociliated,
-                      biciliated,
-                      multiciliated,
-                      nonciliated)
-
-
-Q1 <- read_smooth_neuron("Q1")
-Q2 <- read_smooth_neuron("Q2")
-Q3 <- read_smooth_neuron("Q3")
-Q4 <- read_smooth_neuron("Q4")
-
+balancer <- read_smooth_neuron("celltype:balancer")
+bridge <- read_smooth_neuron("celltype:bridge")
 
 balancer_Q1 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q1")))
 balancer_Q2 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q2")))
@@ -60,30 +19,127 @@ balancer_Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:bal
 bridge_Q1Q2 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:bridge", "Q1Q2")))
 bridge_Q3Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:bridge", "Q3Q4")))
 
-SSN_Q1Q2 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:SSN", "Q1Q2")))
-SSN_Q3Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:SSN", "Q3Q4")))
-SSN_Q1Q2Q3Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:SSN", "Q1Q2Q3Q4")))
+SSN_Q1Q2 <- read_smooth_neuron("SSN_Q1Q2")[[1]]
+SSN_Q3Q4 <- read_smooth_neuron("SSN_Q3Q4")[[1]]
+SSN_Q1Q2Q3Q4 <- read_smooth_neuron("SSN_Q1Q2Q3Q4")[[1]]
 
 
-all_celltypes <- list(balancer_Q1,
-                      balancer_Q2,
-                      balancer_Q3,
-                      balancer_Q4,
-                      bridge_Q1Q2,
-                      bridge_Q3Q4,
-                      SSN_Q1Q2,
-                      SSN_Q3Q4,
-                      SSN_Q1Q2Q3Q4)
+# bar graph of outputs from SNNs -----------------------------------------------
 
-all_celltypes_names <- list("balancer_Q1",
-                            "balancer_Q2",
-                            "balancer_Q3",
-                            "balancer_Q4",
-                            "bridge_Q1Q2",
-                            "bridge_Q3Q4",
-                            "SSN_Q1Q2",
-                            "SSN_Q3Q4",
-                            "SSN_Q1Q2Q3Q4")
+SSN_Q1Q2_skid <- SSN_Q1Q2$skid
+SSN_Q3Q4_skid <- SSN_Q3Q4$skid
+SSN_Q1Q2Q3Q4_skid <- SSN_Q1Q2Q3Q4$skid
+
+
+# "presynapse (output)"
+
+stats_synapse <- read.csv("analysis/data/stats_synapse.csv")
+
+syn_cent_out_connectors <- stats_synapse %>%
+  filter(skid==SSN_Q1Q2Q3Q4_skid) %>%
+  filter(prepost==0) %>%
+  select(connector_id) %>%
+  pull()
+
+syn_lateral_out_connectors  <- stats_synapse %>%
+  filter(skid==SSN_Q1Q2_skid | skid==SSN_Q3Q4_skid) %>%
+  filter(prepost==0) %>%
+  select(connector_id) %>%
+  pull()
+
+
+# "postsynapse (input)"
+
+syn_cent_to_lateral <- stats_synapse %>%
+  filter(skid==SSN_Q1Q2_skid | skid==SSN_Q3Q4_skid) %>%
+  filter(connector_id %in% syn_cent_out_connectors) %>%
+  filter(prepost==1)
+
+syn_cent_to_cent <- stats_synapse %>%
+  filter(skid==SSN_Q1Q2Q3Q4_skid) %>%
+  filter(connector_id %in% syn_cent_out_connectors) %>%
+  filter(prepost==1)
+
+syn_lateral_to_cent <- stats_synapse %>%
+  filter(skid==SSN_Q1Q2Q3Q4_skid) %>%
+  filter(connector_id %in% syn_lateral_out_connectors) %>%
+  filter(prepost==1)
+
+syn_lateral_to_lateral <- stats_synapse %>%
+  filter(skid==SSN_Q1Q2_skid | skid==SSN_Q3Q4_skid) %>%
+  filter(connector_id %in% syn_lateral_out_connectors) %>%
+  filter(prepost==1)
+
+
+stats_master <- read.csv("analysis/data/stats_master.csv")
+
+# get outgoing syn from SSNs
+conn_from_SSNs <- stats_synapse %>%
+  filter(prepost == 0) %>%
+  filter(skid == SSN_Q1Q2_skid | skid == SSN_Q3Q4_skid | skid == SSN_Q1Q2Q3Q4_skid) %>%
+  select(connector_id) %>% 
+  pull()
+
+# skeletons that receive synapses from SSNs
+SSN_downstream <- stats_synapse %>%
+  filter(prepost==1) %>%
+  filter(connector_id %in% conn_from_SSNs)
+
+# in SSN downstream skid is skid of neuron postsynaptic to SSNs
+# use get_celltype_annot_for_skid function from cell_statistics_master.R to get celltypes
+#SSN_downstream <- SSN_downstream %>%
+#  mutate(celltype = map_chr(skid, get_celltype_annot_for_skid))
+
+# or get celltype from stats_master.csv
+stats_master <- read.csv("analysis/data/stats_master.csv")
+SSN_downstream <- SSN_downstream %>%
+  left_join(stats_master %>% select(skid, celltype), by = "skid")
+
+
+
+# bar plot
+all_celltypes <- c("balancer", "bridge", "bristle", "Cgroove", "dense_vesicle", "dome", 
+                   "intra-multi-ciliated", "lamellate", "lithocyte", "plumose", "SSN", 
+                   "epithelial_floor")
+
+label_mapping <- c(
+  "balancer" = "bal", "bridge" = "brg", "bristle" = "bsl", 
+  "Cgroove" = "cg", 
+  "dense_vesicle" = "dv", "dome" = "do", 
+  "intra-multi-ciliated" = "imc", "lamellate" = "la", "lithocyte" = "li", 
+  "plumose" = "pl", "SSN" = "ANN", "epithelial_floor" = "ef"
+)
+
+
+plot_output_number <- 
+  SSN_downstream %>%
+  filter(!celltype %in% c("monociliated", "biciliated", "multiciliated", "nonciliated", NA)) %>%
+  ggplot(aes(x = factor(celltype, levels = all_celltypes))) +
+  geom_bar(fill = "#0072b2") +
+  theme_minimal() +
+  labs(
+    x = "Cell types",
+    y = "Number of outputs"
+  ) +
+  theme(
+    axis.text.x = element_text(size = 17, angle = -70, vjust = 0.5, hjust = 0, margin = margin(t = -7)),
+    axis.text.y = element_text(size = 17), 
+    axis.title = element_text(size = 18),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()
+  ) +
+  scale_x_discrete(limits = all_celltypes, labels = label_mapping)
+
+plot_output_number
+
+ggsave(
+  filename = "manuscript/pictures/output_from_SSNs.png",
+  plot = plot_output_number,
+  width = 2250,
+  height = 1000,
+  units = "px",
+  dpi = 300
+)
 
 
 
@@ -401,7 +457,7 @@ pos_ves_syn <- mito_vesicle_info |>
 plot3d(pos_ves_syn, 
        add = TRUE,
        col = "green3",
-       size = 0.9, 
+       size = 1.1, 
        alpha = 1,
        point_antialias = TRUE,
        type = "s"
@@ -454,7 +510,7 @@ pos_ves_syn <- mito_vesicle_info |>
 plot3d(pos_ves_syn, 
        add = TRUE,
        col = "green3",
-       size = 0.9, 
+       size = 1.1, 
        alpha = 1,
        point_antialias = TRUE,
        type = "s"
@@ -507,7 +563,7 @@ pos_ves_syn <- mito_vesicle_info |>
 plot3d(pos_ves_syn, 
        add = TRUE,
        col = "green3",
-       size = 0.9, 
+       size = 1.1, 
        alpha = 1,
        point_antialias = TRUE,
        type = "s"
@@ -552,7 +608,7 @@ presyn_bridge <- subset(bridge_conn, prepost == 0)
 postsyn_bridge <- subset(bridge_conn, prepost == 1)
 
 
-# 3D plot of synaptic input from SSN to balancer ---------------------------------------------------------------------
+# 3D plot of synaptic input from SSN to balancer -------------------------------
 
 close3d()
 # 3d plotting of cells
@@ -907,17 +963,41 @@ close3d()
 
 
 
-# matrix plot ------------------------------------------------------------------
+# get connectivity for matrix plot ---------------------------------------------
 
-# iterate through cell group neuron lists and get connectivity
+SSN_Q1Q2 <- read_smooth_neuron("SSN_Q1Q2")
+SSN_Q3Q4 <- read_smooth_neuron("SSN_Q3Q4")
+SSN_Q1Q2Q3Q4 <- read_smooth_neuron("SSN_Q1Q2Q3Q4")
+
+
+matrix_celltypes <- list(balancer_Q1,
+                         balancer_Q2,
+                         balancer_Q3,
+                         balancer_Q4,
+                         bridge_Q1Q2,
+                         bridge_Q3Q4,
+                         SSN_Q1Q2,
+                         SSN_Q3Q4,
+                         SSN_Q1Q2Q3Q4)
+
+matrix_celltypes_names <- list("balancer_Q1",
+                               "balancer_Q2",
+                               "balancer_Q3",
+                               "balancer_Q4",
+                               "bridge_Q1Q2",
+                               "bridge_Q3Q4",
+                               "SSN_Q1Q2",
+                               "SSN_Q3Q4",
+                               "SSN_Q1Q2Q3Q4")
+
 # define empty synapse list with the right dimensions
 synapse_list <- c()
 
-for (i in 1:length(all_celltypes)) {
-  for (j in 1:length(all_celltypes)) {
+for (i in 1:length(matrix_celltypes)) {
+  for (j in 1:length(matrix_celltypes)) {
     # get connectors between two cell groups
-    presyn_skids <- attr(all_celltypes[i][[1]], "df")$skid
-    postsyn_skids <- attr(all_celltypes[j][[1]], "df")$skid
+    presyn_skids <- attr(matrix_celltypes[i][[1]], "df")$skid
+    postsyn_skids <- attr(matrix_celltypes[j][[1]], "df")$skid
     connectivity <- catmaid_get_connectors_between(
       pre = presyn_skids,
       post = postsyn_skids, pid = 35
@@ -929,40 +1009,77 @@ for (i in 1:length(all_celltypes)) {
     synapse_list <- c(synapse_list, N_synapses)
   }
 }
+
 synapse_list
+
 # convert synapse list into a matrix of appropriate dimensions
 synapse_matrix <- matrix(
   unlist(synapse_list), byrow = TRUE, 
-  nrow = length(all_celltypes)
+  nrow = length(matrix_celltypes)
 )
 
-rownames(synapse_matrix) <- as.character(all_celltypes_names)
-colnames(synapse_matrix) <- as.character(all_celltypes_names)
+rownames(synapse_matrix) <- as.character(matrix_celltypes_names)
+colnames(synapse_matrix) <- as.character(matrix_celltypes_names)
 
 syn_df <- as.data.frame(as.table(synapse_matrix))
 
 write.csv(syn_df, "manuscript/source_data/synapse_matrix_df.csv", row.names = FALSE)
 
-plot_syn_matrix <- 
-  ggplot(syn_df, aes(x = Var2, y = Var1, fill = Freq)) +
-  geom_tile() + 
-  geom_text(aes(label = Freq), color = "black") +
-  scale_fill_gradient(low = "white", high = "#0072b2") + 
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = -45, hjust = 0),
-    axis.text.y = element_text(size = 8),
-    axis.title.x = element_text(size = 10),
-    axis.title.y = element_text(size = 10)
-  ) +
-  labs(
-    x = "postsynaptic cell groups",
-    y = "presynaptic cell groups"
+
+
+# matrix plot ------------------------------------------------------------------
+
+rename_map <- c("balancer_Q1" = "bal_Q1", 
+                "balancer_Q2" = "bal_Q2", 
+                "balancer_Q3" = "bal_Q3", 
+                "balancer_Q4" = "bal_Q4",
+                "bridge_Q1Q2" = "brg_Q1Q2",
+                "bridge_Q3Q4" = "brg_Q3Q4",
+                "SSN_Q1Q2" = "ANN_Q1Q2", 
+                "SSN_Q3Q4" = "ANN_Q3Q4", 
+                "SSN_Q1Q2Q3Q4" = "ANN_Q1-4")
+
+custom_order <- c("bal_Q1", "bal_Q2", "brg_Q1Q2", "ANN_Q1Q2", 
+                  "bal_Q3", "bal_Q4", "brg_Q3Q4", "ANN_Q3Q4", 
+                  "ANN_Q1-4")
+
+syn_df <- syn_df %>%
+  mutate(
+    Var1 = factor(recode(Var1, !!!rename_map), levels = rev(custom_order)),
+    Var2 = factor(recode(Var2, !!!rename_map), levels = custom_order)
   )
 
 
+plot_syn_matrix <- ggplot(syn_df, aes(x = Var2, y = Var1, fill = Freq)) +
+  geom_tile(color = "lightgrey") + 
+  geom_text(aes(label = ifelse(Freq == 0, "", Freq)), 
+            color = "black",
+            size = 5) +
+  scale_fill_gradient(name = "Number",
+                      low = "white", high = "#0072b2", 
+                      limits = c(0, 30), 
+                      oob = scales::squish,
+                      labels = function(x) ifelse(x == 30, "30>", as.character(x))) + 
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(size = 16, angle = -45, hjust = 0),
+    axis.text.y = element_text(size = 16),
+    axis.title.x = element_text(size = 18, margin = margin(t = 10)),
+    axis.title.y = element_text(size = 18, margin = margin(r = 10)),
+    legend.text = element_text(size = 15),
+    legend.title = element_text(size = 15, margin = margin(b = 12))
+  ) +
+  labs(
+    x = "Postsynaptic",
+    y = "Presynaptic"
+    )
+
+
+plot_syn_matrix
+
+
 ggsave(
-  filename = "manuscript/pictures/mech_girdle_chaeMech_syn_matrix.png",
+  filename = "manuscript/pictures/balancers_bridges_matrix.png",
   plot = plot_syn_matrix,
   width = 2000,
   height = 1700,
@@ -1012,20 +1129,20 @@ panel_bri <- ggdraw() + draw_image(readPNG("manuscript/pictures/bridge.png")) +
 panel_bri_mito <- ggdraw() + draw_image(readPNG("manuscript/pictures/mito_pos_bridge.png")) +
   draw_label("mitochondria with synapses", x = 0.06, y = 0.99, color = "green4", size = 8.5, hjust = 0) +
   draw_label("mitochondria not forming synapses", x = 0.06, y = 0.91, color = "black", size = 8.5, hjust = 0, alpha = 0.7) +
-  draw_label("bridge Q1Q2", x = 0.95, y = 1, color = Okabe_Ito[2], size = 7, hjust = 1) +
-  draw_label("bridge Q3Q4", x = 0.95, y = 0.92, color = Okabe_Ito[7], size = 7, hjust = 1)
+  draw_label("bridge_Q1Q2", x = 0.95, y = 1, color = Okabe_Ito[2], size = 7, hjust = 1) +
+  draw_label("bridge_Q3Q4", x = 0.95, y = 0.92, color = Okabe_Ito[7], size = 7, hjust = 1)
 
 panel_SSN_bal <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_prepost_synapse_balancer.png")) +
-  draw_label("SSN to balancers", x = 0.06, y = 1, color = "#ff00ff", size = 8, hjust = 0)
+  draw_label("ANN to balancers", x = 0.06, y = 1, color = "#ff00ff", size = 8, hjust = 0)
 
 panel_SSN_bri <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_prepost_synapse_bridge.png")) +
-  draw_label("SSN to bridges", x = 0.06, y = 1, color = "#ff00ff", size = 8, hjust = 0) +
-  draw_label("bridges to SSN", x = 0.25, y = 1, color = "#00c9ff", size = 8, hjust = 0) +
-  draw_label("SSN Q1-4", x = 0.85, y = 1.15, color = Okabe_Ito[5], size = 7, hjust = 0) +
-  draw_label("SSN Q1Q2", x = 0.85, y = 1.07, color = Okabe_Ito[6], size = 7, hjust = 0) +
-  draw_label("SSN Q3Q4", x = 0.85, y = 0.99, color = Okabe_Ito[7], size = 7, hjust = 0)
+  draw_label("ANN to bridges", x = 0.06, y = 1, color = "#ff00ff", size = 8, hjust = 0) +
+  draw_label("bridges to ANN", x = 0.25, y = 1, color = "#00c9ff", size = 8, hjust = 0) +
+  draw_label("ANN_Q1-4", x = 0.85, y = 1.15, color = Okabe_Ito[5], size = 7, hjust = 0) +
+  draw_label("ANN_Q1Q2", x = 0.85, y = 1.07, color = Okabe_Ito[6], size = 7, hjust = 0) +
+  draw_label("ANN_Q3Q4", x = 0.85, y = 0.99, color = Okabe_Ito[7], size = 7, hjust = 0)
 
-panel_matrix <- ggdraw() + draw_image(readPNG("manuscript/pictures/mech_girdle_chaeMech_syn_matrix.png"))
+panel_matrix <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancers_bridges_matrix.png"))
 panel_map_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/map_balancer_bridge_SSN_1.png"))
 
 #layout <- "

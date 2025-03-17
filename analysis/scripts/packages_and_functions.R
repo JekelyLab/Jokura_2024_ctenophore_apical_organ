@@ -19,6 +19,7 @@ library(av)
 library(jpeg)
 library(magick)
 library(ggbeeswarm)
+library(scales)
 
 
 

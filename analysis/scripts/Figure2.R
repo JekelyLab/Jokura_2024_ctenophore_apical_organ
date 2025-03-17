@@ -6,55 +6,40 @@ source("analysis/scripts/packages_and_functions.R")
 
 # load cell type ---------------------------------------------------------------
 
-balancer <- read_smooth_neuron("celltype:balancer")
-bridge <- read_smooth_neuron("celltype:bridge")
-bristle <- read_smooth_neuron("celltype:bristle")
-Cgroove_sag <- read_smooth_neuron("celltype:Cgroove-sag")
-Cgroove_tag <- read_smooth_neuron("celltype:Cgroove-tag")
-dense_vesicle <- read_smooth_neuron("celltype:dense_vesicle")
-dome <- read_smooth_neuron("celltype:dome")
-epithelial_floor <- read_smooth_neuron("celltype:epithelial_floor")
-intra_multi_ciliated <- read_smooth_neuron("celltype:intra-multi-ciliated")
-lamellate <- read_smooth_neuron("celltype:lamellate")
-lithocyte <- read_smooth_neuron("celltype:lithocyte")
-plumose <- read_smooth_neuron("celltype:plumose")
-SSN <- read_smooth_neuron("celltype:SSN")
+#balancer <- read_smooth_neuron("celltype:balancer")
+#bridge <- read_smooth_neuron("celltype:bridge")
+#bristle <- read_smooth_neuron("celltype:bristle")
+#Cgroove <- read_smooth_neuron("celltype:Cgroove")
+#dense_vesicle <- read_smooth_neuron("celltype:dense_vesicle")
+#dome <- read_smooth_neuron("celltype:dome")
+#epithelial_floor <- read_smooth_neuron("celltype:epithelial_floor")
+#intra_multi_ciliated <- read_smooth_neuron("celltype:intra-multi-ciliated")
+#lamellate <- read_smooth_neuron("celltype:lamellate")
+#lithocyte <- read_smooth_neuron("celltype:lithocyte")
+#plumose <- read_smooth_neuron("celltype:plumose")
+#SSN <- read_smooth_neuron("celltype:SSN")
 
-monociliated <- read_smooth_neuron("celltype:monociliated")
-biciliated <- read_smooth_neuron("celltype:biciliated")
-multiciliated <- read_smooth_neuron("celltype:multiciliated")
-nonciliated <- read_smooth_neuron("celltype:nonciliated")
+#monociliated <- read_smooth_neuron("celltype:monociliated")
+#biciliated <- read_smooth_neuron("celltype:biciliated")
+#multiciliated <- read_smooth_neuron("celltype:multiciliated")
+#nonciliated <- read_smooth_neuron("celltype:nonciliated")
 
-Q1 <- read_smooth_neuron("Q1")
-Q2 <- read_smooth_neuron("Q2")
-Q3 <- read_smooth_neuron("Q3")
-Q4 <- read_smooth_neuron("Q4")
+#Q1 <- read_smooth_neuron("Q1")
+#Q2 <- read_smooth_neuron("Q2")
+#Q3 <- read_smooth_neuron("Q3")
+#Q4 <- read_smooth_neuron("Q4")
 
 SSN_Q1Q2 <- read_smooth_neuron("SSN_Q1Q2")[[1]]
 SSN_Q3Q4 <- read_smooth_neuron("SSN_Q3Q4")[[1]]
 SSN_Q1Q2Q3Q4 <- read_smooth_neuron("SSN_Q1Q2Q3Q4")[[1]]
 
-
-
 with_soma <- read_smooth_neuron("with_soma")
 
-all_celltypes <- list(balancer,
-                      bridge,
-                      bristle,
-                      Cgroove_sag,
-                      Cgroove_tag,
-                      dense_vesicle,
-                      dome,
-                      epithelial_floor,
-                      intra_multi_ciliated,
-                      lamellate,
-                      lithocyte,
-                      plumose,
-                      SSN,
-                      monociliated,
-                      biciliated,
-                      multiciliated,
-                      nonciliated)
+#all_celltypes <- list(balancer,bridge,bristle,Cgroove,
+#                      dense_vesicle,dome,epithelial_floor,
+#                      intra_multi_ciliated,
+#                      lamellate,lithocyte,plumose,SSN,
+#                      monociliated,biciliated,multiciliated,nonciliated)
 
 
 
@@ -70,12 +55,9 @@ par3d(windowRect = c(0, 0, 1200, 350))
 
 #plot aboral view
 plot_multinucleated_cell(SSN_Q1Q2,
-       lwd = 1, alpha = 1, col = Okabe_Ito[6])
+                         lwd = 1, alpha = 1, col = Okabe_Ito[6])
 
 plot_multinucleated_cell(SSN_Q3Q4,
-       lwd = 1, alpha = 1, col = Okabe_Ito[7])
-
-plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
                          lwd = 1, alpha = 1, col = Okabe_Ito[7])
 
 plot3d(outline,
@@ -251,30 +233,18 @@ mito_means_tidy <- read.csv("analysis/data/mito_means_tidy.csv")
 
 # bar graph of mito vesicles ratio by celltype ---------------------------------
 
-selected_celltypes <- c("balancer", "bridge", "bristle", "ciliated_groove", "dense_vesicle", "dome", 
-                        "intra-multi-ciliated", "lamellate", "lithocyte", "plumose", "SSN", 
-                        "epithelial_floor")
-
-mito_means_tidy <- mito_means_tidy %>%
-  mutate(
-    characteristic = ifelse(characteristic == "mean_vesicles_syn", 
-                            "mean_vesicles_syn", 
-                            "mean_vesicles_no_syn"),
-    celltype = ifelse(celltype %in% c("Cgroove-sag", "Cgroove-tag"), 
-                      "ciliated_groove", 
-                      celltype)
-  ) %>%
-  filter(celltype %in% selected_celltypes) %>%
-  mutate(celltype = factor(celltype, levels = selected_celltypes))
-
-
-#plot graph
+label_mapping <- c(
+  "balancer" = "bal", "bridge" = "brg", "bristle" = "bsl", 
+  "ciliated_groove" = "cg", "dense_vesicle" = "dv", "dome" = "do", 
+  "intra-multi-ciliated" = "imc", "lamellate" = "la", "lithocyte" = "li", 
+  "plumose" = "pl", "SSN" = "ANN", "epithelial_floor" = "ef"
+)
 
 plot_mito_stats <- ggplot(mito_means_tidy, aes(
   fill = factor(characteristic, levels = c("mean_vesicles_syn", "mean_vesicles_no_syn")),
   y = value,
   x = celltype
-  )) +
+)) +
   geom_bar(position = "stack", stat = "identity") +
   theme_bw() +
   scale_fill_manual(
@@ -282,6 +252,7 @@ plot_mito_stats <- ggplot(mito_means_tidy, aes(
     labels = c("mean_vesicles_syn" = "mitochondria with synapses", 
                "mean_vesicles_no_syn" = "mitochondria not forming synapses")
   ) +
+  scale_x_discrete(labels = label_mapping) +
   theme(
     axis.line = element_blank(),
     panel.grid.major = element_blank(),
@@ -289,16 +260,18 @@ plot_mito_stats <- ggplot(mito_means_tidy, aes(
     panel.border = element_blank(),
     panel.background = element_blank(),
     axis.ticks = element_blank(),
-    axis.text.x = element_text(angle = -70, vjust = 0.5, hjust = 0, size = 9, margin = margin(t = -7)),
-    axis.text.y = element_text(size = 10), 
-    axis.title = element_text(size = 10),
+    axis.text.x = element_text(size = 15, 
+                               angle = -70, vjust = 0.5, hjust = 0, margin = margin(t = -7)),
+    axis.text.y = element_text(size = 15), 
+    axis.title = element_text(size = 15),
     legend.title = element_blank(),
     legend.position = "inside",
     legend.position.inside = c(0.3, 0.75),
-    text = element_text(size = 11)
+    text = element_text(size = 15)
   ) +
   ylab("Average number of mitochondria per cell") +
   xlab("Cell types")
+
 
 plot_mito_stats
 
@@ -755,76 +728,6 @@ close3d()
 
 
 
-
-# bar graph of outputs from SNNs -----------------------------------------------
-
-stats_master <- read.csv("analysis/data/stats_master.csv")
-
-# get outgoing syn from SSNs
-conn_from_SSNs <- stats_synapse %>%
-  filter(prepost == 0) %>%
-  filter(skid == SSN_Q1Q2_skid | skid == SSN_Q3Q4_skid | skid == SSN_Q1Q2Q3Q4_skid) %>%
-  select(connector_id) %>% 
-  pull()
-
-# skeletons that receive synapses from SSNs
-SSN_downstream <- stats_synapse %>%
-  filter(prepost==1) %>%
-  filter(connector_id %in% conn_from_SSNs)
-
-# in SSN downstream skid is skid of neuron postsynaptic to SSNs
-# use get_celltype_annot_for_skid function from cell_statistics_master.R to get celltypes
-#SSN_downstream <- SSN_downstream %>%
-#  mutate(celltype = map_chr(skid, get_celltype_annot_for_skid))
-
-# or get celltype from stats_master.csv
-stats_master <- read.csv("analysis/data/stats_master.csv")
-SSN_downstream <- SSN_downstream %>%
-  left_join(stats_master %>% select(skid, celltype), by = "skid")
-
-
-
-# bar plot
-all_celltypes <- c("balancer", "bridge", "bristle", "ciliated_groove", "dense_vesicle", "dome", 
-                   "intra-multi-ciliated", "lamellate", "lithocyte", "plumose", "SSN", 
-                   "epithelial_floor")
-
-plot_output_number <- 
-  SSN_downstream %>%
-  filter(!celltype %in% c("monociliated", "biciliated", "multiciliated", "nonciliated", NA)) %>%
-  mutate(celltype = case_when(
-    celltype == "Cgroove-sag" ~ "ciliated_groove",
-    TRUE ~ celltype
-  )) %>%
-  ggplot(aes(x = factor(celltype, levels = all_celltypes))) +
-  geom_bar(fill = "#0072b2") +
-  theme_minimal() +
-  labs(
-    x = "Cell types",
-    y = "Number of outputs"
-  ) +
-  theme(axis.text.x = element_text(angle = -70, vjust = 0.5, hjust = 0, size = 11, 
-                                   margin = margin(t = -7)),
-        axis.text.y = element_text(size = 11), 
-        axis.title = element_text(size = 13),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        ) +
-  scale_x_discrete(limits = all_celltypes)
-
-plot_output_number
-
-
-ggsave(
-  filename = "manuscript/pictures/output_from_SSNs.png",
-  plot = plot_output_number,
-  width = 2250,
-  height = 1000,
-  units = "px",
-  dpi = 300
-)
-
-
 # assemble figure -------------------------------------------------------------
 
 panel_SSN_Q1234 <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_Q1234.png")) +
@@ -832,30 +735,30 @@ panel_SSN_Q1234 <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_Q1234.
   draw_label("Q2", x = 0.06, y = 0.79, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
   draw_label("Q3", x = 0.03, y = 0.08, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
   draw_label("Q4", x = 0.275, y = 0.11, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
-  draw_label("Syncytial synaptic neuron (SSN) Q1-4", x = 0.05, y = 1, color = Okabe_Ito[5], size = 10, hjust = 0)
+  draw_label("Aboral nerve net (ANN) Q1-4", x = 0.05, y = 1, color = Okabe_Ito[5], size = 10, hjust = 0)
 
 panel_SSN_Q12_Q34 <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_Q12_Q34.png")) +
   draw_label("Q1", x = 0.3, y = 0.9, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
   draw_label("Q2", x = 0.06, y = 0.79, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
   draw_label("Q3", x = 0.03, y = 0.08, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
   draw_label("Q4", x = 0.275, y = 0.11, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
-  draw_label("SSN Q1Q2", x = 0.05, y = 1, color = Okabe_Ito[6], size = 10, hjust = 0) +
-  draw_label("SSN Q3Q4", x = 0.225, y = 1, color = Okabe_Ito[7], size = 10, hjust = 0)
+  draw_label("ANN Q1Q2", x = 0.05, y = 1, color = Okabe_Ito[6], size = 10, hjust = 0) +
+  draw_label("ANN Q3Q4", x = 0.225, y = 1, color = Okabe_Ito[7], size = 10, hjust = 0)
 
 panel_mito_bar_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/mito_in_syn.png"))
 
 panel_mito_pos <- ggdraw() + draw_image(readPNG("manuscript/pictures/mito_pos_SSN.png")) +
   draw_label("mitochondria with synapses", x = 0.05, y = 0.98, color = "green4", size = 10.5, hjust = 0) +
   draw_label("mitochondria not forming synapses", x = 0.05, y = 0.9, color = "black", size = 10.5, hjust = 0, alpha = 0.8) +
-  draw_label("SSN Q1-4", x = 0.85, y = 1, color = Okabe_Ito[5], size = 8, hjust = 0) +
-  draw_label("SSN Q1Q2", x = 0.85, y = 0.94, color = Okabe_Ito[6], size = 8, hjust = 0) +
-  draw_label("SSN Q3Q4", x = 0.85, y = 0.88, color = Okabe_Ito[7], size = 8, hjust = 0)
+  draw_label("ANN Q1-4", x = 0.85, y = 1, color = Okabe_Ito[5], size = 8, hjust = 0) +
+  draw_label("ANN Q1Q2", x = 0.85, y = 0.94, color = Okabe_Ito[6], size = 8, hjust = 0) +
+  draw_label("ANN Q3Q4", x = 0.85, y = 0.88, color = Okabe_Ito[7], size = 8, hjust = 0)
 
 panel_EM_SSN <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_EM_schematic.png"))
 
 panel_SSN_prepost_synapse <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_prepost_synapse.png")) +
-  draw_label("Synapses from SSN Q1-4 to SSN Q1Q2 or Q3Q4", x = 0.05, y = 1.06, color = "#ff00ff", size = 10, hjust = 0) +
-  draw_label("Synapses from SSN Q1Q2 or Q3Q4 to SSN Q1-4", x = 0.05, y = 0.96, color = "#00c9ff", size = 10, hjust = 0)
+  draw_label("Synapses from Q1-4 to Q1Q2 or Q3Q4", x = 0.05, y = 1.06, color = "#ff00ff", size = 10, hjust = 0) +
+  draw_label("Synapses from Q1Q2 or Q3Q4 to Q1-4", x = 0.05, y = 0.96, color = "#00c9ff", size = 10, hjust = 0)
 
 
 panel_SSN_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_graph.png"))

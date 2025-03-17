@@ -33,7 +33,7 @@
 "bridge_Q1Q2","balancer_Q4",0
 "bridge_Q3Q4","balancer_Q4",0
 "SSN_Q1Q2","balancer_Q4",0
-"SSN_Q3Q4","balancer_Q4",5
+"SSN_Q3Q4","balancer_Q4",3
 "SSN_Q1Q2Q3Q4","balancer_Q4",19
 "balancer_Q1","bridge_Q1Q2",0
 "balancer_Q2","bridge_Q1Q2",0
@@ -70,7 +70,7 @@
 "bridge_Q3Q4","SSN_Q3Q4",6
 "SSN_Q1Q2","SSN_Q3Q4",0
 "SSN_Q3Q4","SSN_Q3Q4",0
-"SSN_Q1Q2Q3Q4","SSN_Q3Q4",8
+"SSN_Q1Q2Q3Q4","SSN_Q3Q4",6
 "balancer_Q1","SSN_Q1Q2Q3Q4",0
 "balancer_Q2","SSN_Q1Q2Q3Q4",0
 "balancer_Q3","SSN_Q1Q2Q3Q4",0
