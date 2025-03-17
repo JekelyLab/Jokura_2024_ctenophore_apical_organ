@@ -228,3 +228,7 @@ This work was funded by ... JSPS... This project has received funding from the E
 \newpage
 
 ## Supplementary material {.unnumbered}
+
+![**Supplemental figure**\
+(A)...](figures/Supplemental_figure.png)
+
