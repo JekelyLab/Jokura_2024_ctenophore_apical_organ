@@ -272,7 +272,7 @@ panel_all_cells <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/al
 panel_SNN <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_SNN.png"))
 
 
-Suppl_fig <- panel_all_assemble + panel_all_cells + panel_SSN
+Suppl_fig <- panel_all_assemble + panel_all_cells + panel_SNN
 
 ggsave("manuscript/figures/Supplemental_figure.png", limitsize = FALSE, 
        units = c("px"), Suppl_fig, width = 2700, height = 500, bg='white')  

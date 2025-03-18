@@ -330,23 +330,23 @@
 		</g>
 	</g>
 	<rect x="354.757" y="183.74" fill="none" width="197.584" height="17.71"/>
-	<text transform="matrix(1 0 0 1 385.0669 195.7539)" font-family="'ArialMT'" font-size="14">lateral view of S plane</text>
+	<text transform="matrix(1 0 0 1 412.2974 195.7539)" font-family="'ArialMT'" font-size="14">sagittal plane</text>
 	<rect x="597.423" y="183.739" fill="none" width="207.151" height="17.711"/>
-	<text transform="matrix(1 0 0 1 632.9082 195.7534)" font-family="'ArialMT'" font-size="14">lateral view of T plane</text>
+	<text transform="matrix(1 0 0 1 651.1855 195.7534)" font-family="'ArialMT'" font-size="14">tentacular plane</text>
 	<rect x="98.643" y="183.739" fill="none" width="147.589" height="17.711"/>
 	<text transform="matrix(1 0 0 1 137.0308 195.7539)" font-family="'ArialMT'" font-size="14">aboral view</text>
 	<rect x="449.488" y="236.562" fill="none" width="8.121" height="18.836"/>
 	<text transform="matrix(1 0 0 1 449.4883 248.5762)" font-family="'ArialMT'" font-size="14">li</text>
 	<rect x="397.076" y="221.079" fill="none" width="19.245" height="18.836"/>
 	<text transform="matrix(1 0 0 1 397.0762 233.0933)" font-family="'ArialMT'" font-size="14">dc</text>
-	<rect x="473.857" y="240.308" fill="none" width="17.83" height="18.836"/>
-	<text transform="matrix(1 0 0 1 473.8574 252.3223)" font-family="'ArialMT'" font-size="14">bc</text>
+	<rect x="471.438" y="242.2" fill="none" width="22.668" height="18.836"/>
+	<text transform="matrix(1 0 0 1 471.4385 254.2144)" font-family="'ArialMT'" font-size="14">bal</text>
 	<rect x="168.377" y="245.98" fill="none" width="8.121" height="18.836"/>
 	<text transform="matrix(1 0 0 1 168.377 257.9941)" font-family="'ArialMT'" font-size="14">li</text>
 	<rect x="127.433" y="213.849" fill="none" width="15.86" height="18.836"/>
 	<text transform="matrix(1 0 0 1 127.4331 225.8628)" font-family="'ArialMT'" font-size="14">cg</text>
-	<rect x="205.097" y="261.731" fill="none" width="15.86" height="18.836"/>
-	<text transform="matrix(1 0 0 1 205.0972 273.7451)" font-family="'ArialMT'" font-size="14">ba</text>
+	<rect x="205.097" y="261.731" fill="none" width="21.043" height="18.836"/>
+	<text transform="matrix(1 0 0 1 205.0972 273.7456)" font-family="'ArialMT'" font-size="14">bal</text>
 	<g opacity="0.5">
 		<path fill="#FFFFFF" stroke="#000000" stroke-width="0.6677" stroke-miterlimit="10" d="M299.181,278.039
 			c0.605,5.24,3.382,9.325,5.215,9.113c1.837-0.211,2.033-4.64,1.429-9.881c-0.605-5.24-1.781-9.325-3.617-9.113

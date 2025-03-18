@@ -225,20 +225,30 @@ close3d()
 
 
 
-# load of mitochondrial location information-------------------------------
+# load of mitochondrial tidy csv file ------------------------------------------
 
-mito_done <- read.neurons.catmaid("mitochondria done", pid = 35)
-mito_vesicle_info <- read.csv("analysis/data/mito_vesicle_info.csv")
 mito_means_tidy <- read.csv("analysis/data/mito_means_tidy.csv")
 
-# bar graph of mito vesicles ratio by celltype ---------------------------------
+# bar graph of mito vesicles ratio by celltypes ---------------------------------
+
+mito_means_tidy <- mito_means_tidy %>%
+  mutate(
+    celltype = ifelse(celltype %in% c("Cgroove-sag", "Cgroove-tag"), "cg", celltype),
+    characteristic = ifelse(characteristic %in% c("mean_vesicles_none", "mean_vesicles_unclear"), 
+                            "mean_vesicles_no_syn", 
+                            characteristic)
+  ) %>%
+  filter(!celltype %in% c("nonciliated", "multiciliated", "monociliated", "biciliated"))
 
 label_mapping <- c(
-  "balancer" = "bal", "bridge" = "brg", "bristle" = "bsl", 
-  "ciliated_groove" = "cg", "dense_vesicle" = "dv", "dome" = "do", 
-  "intra-multi-ciliated" = "imc", "lamellate" = "la", "lithocyte" = "li", 
-  "plumose" = "pl", "SSN" = "ANN", "epithelial_floor" = "ef"
+  "balancer" = "bal", "bridge" = "brg", "bristle" = "bsl", "cg" = "cg",
+  "dense_vesicle" = "dv", "dome" = "do", "intra-multi-ciliated" = "imc", 
+  "lamellate" = "la", "lithocyte" = "li", "plumose" = "pl", 
+  "SSN" = "ANN", "epithelial_floor" = "ef"
 )
+
+mito_means_tidy <- mito_means_tidy %>%
+  mutate(celltype = factor(celltype, levels = names(label_mapping)))
 
 plot_mito_stats <- ggplot(mito_means_tidy, aes(
   fill = factor(characteristic, levels = c("mean_vesicles_syn", "mean_vesicles_no_syn")),
@@ -269,7 +279,7 @@ plot_mito_stats <- ggplot(mito_means_tidy, aes(
     legend.position.inside = c(0.3, 0.75),
     text = element_text(size = 15)
   ) +
-  ylab("Average number of mitochondria per cell") +
+  ylab("Average number of mitochondria") +
   xlab("Cell types")
 
 
@@ -284,6 +294,10 @@ ggsave(
   dpi = 300
 )
 
+# load of mitochondrial location information-------------------------------
+
+#mito_done <- read.neurons.catmaid("mitochondria done", pid = 35)
+mito_vesicle_info <- read.csv("analysis/data/mito_vesicle_info.csv")
 
 # 3d plot mitochondria positions in SSN ----------------------------------------
 
@@ -749,27 +763,30 @@ panel_mito_bar_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/mito_
 
 panel_mito_pos <- ggdraw() + draw_image(readPNG("manuscript/pictures/mito_pos_SSN.png")) +
   draw_label("mitochondria with synapses", x = 0.05, y = 0.98, color = "green4", size = 10.5, hjust = 0) +
-  draw_label("mitochondria not forming synapses", x = 0.05, y = 0.9, color = "black", size = 10.5, hjust = 0, alpha = 0.8) +
+  draw_label("not forming synapses", x = 0.05, y = 0.9, color = "black", size = 10.5, hjust = 0, alpha = 0.8) +
   draw_label("ANN Q1-4", x = 0.85, y = 1, color = Okabe_Ito[5], size = 8, hjust = 0) +
   draw_label("ANN Q1Q2", x = 0.85, y = 0.94, color = Okabe_Ito[6], size = 8, hjust = 0) +
   draw_label("ANN Q3Q4", x = 0.85, y = 0.88, color = Okabe_Ito[7], size = 8, hjust = 0)
 
 panel_EM_SSN <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_EM_schematic.png"))
 
+
 panel_SSN_prepost_synapse <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_prepost_synapse.png")) +
-  draw_label("Synapses from Q1-4 to Q1Q2 or Q3Q4", x = 0.05, y = 1.06, color = "#ff00ff", size = 10, hjust = 0) +
-  draw_label("Synapses from Q1Q2 or Q3Q4 to Q1-4", x = 0.05, y = 0.96, color = "#00c9ff", size = 10, hjust = 0)
+  draw_label("Q1-4 → Q1Q2 or Q3Q4", x = 0.05, y = 1.06, color = "#ff00ff", size = 10, hjust = 0) +
+  draw_label("Q1Q2 or Q3Q4 → Q1-4", x = 0.05, y = 0.96, color = "#00c9ff", size = 10, hjust = 0)
 
 
 panel_SSN_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_graph.png"))
 
 
 layout <- "
-AAAABBBB
-########
-CCCDDDDG
-########
-EEEEFFFF
+#########
+AAAA#BBBB
+#########
+CCCDDDDDG
+#########
+EEEE#FFFF
+#########
 "
 
 Figure2 <- panel_SSN_Q1234 + panel_SSN_Q12_Q34 +
@@ -777,15 +794,15 @@ Figure2 <- panel_SSN_Q1234 + panel_SSN_Q12_Q34 +
   panel_EM_SSN + panel_SSN_prepost_synapse + 
   panel_SSN_graph +
   plot_layout(design = layout,
-              heights = c(1, 0.1, 1.3, 0.15, 1),
-              widths = c(1, 1, 1, 1, 1, 1, 1, 1)) + 
+              heights = c(0.05, 1, 0.15, 1.3, 0.15, 1, 0.05),
+              widths = c(1, 1, 1, 1, 0.2, 1, 1, 1, 1)) + 
   patchwork::plot_annotation(tag_levels = "A") &  
   ggplot2::theme(plot.tag = element_text(size = 12, 
                                          face='plain', color='black'))
 
 
 ggsave("manuscript/figures/Figure2.png", limitsize = FALSE, 
-       units = c("px"), Figure2, width = 3000, height = 1700, bg='white')  
+       units = c("px"), Figure2, width = 3000, height = 1800, bg='white')  
 
 
 ggsave("manuscript/figures/Figure2.pdf", limitsize = FALSE, 
