@@ -2,22 +2,22 @@
 title: "Neural Circuit Organization of the Ctenophore Apical Organ"
 
 subtitle: |
-  **Kei Jokura**$^{1,2,3,*}$, **Sanja Jasek**$^{1,4}$, **Lara Kewalow**$^{4}$, **Pawel Burkhardt**$^{5}$, **Gáspár Jékely**$^{1,4,*}$  
+  **Kei Jokura**$^{1,2,3,4*}$, **Sanja Jasek**$^{1,2,6}$, **Lara Kewalow**$^{6}$, **Pawel Burkhardt**$^{5}$, **Gáspár Jékely**$^{1,2,6,*}$  
   <br><br>  
   $^{1}$ Living Systems Institute, University of Exeter, Exeter, EX4 4QD, United Kingdom  
+  <br>
+  $^{2}$ Biosciences, Faculty of Health and Life Sciences, University of Exeter, Exeter EX4 4QD, UK
+  <br>
+  $^{3}$ Exploratory Research Center on Life and Living Systems (ExCELLS), Okazaki, 444-8787, Japan  
   <br>  
-  $^{2}$ Exploratory Research Center on Life and Living Systems (ExCELLS), Okazaki, 444-8787, Japan  
-  <br>  
-  $^{3}$ National Institute for Basic Biology (NIBB), Okazaki, 444-8585, Japan  
-  <br>  
-  $^{4}$ Heidelberg University, Centre for Organismal Studies (COS), 69120 Heidelberg, Germany  
+  $^{4}$ National Institute for Basic Biology (NIBB), Okazaki, 444-8585, Japan  
   <br>  
   $^{5}$ Michael Sars Centre, University of Bergen, Norway  
-  <br><br>  
+  <br>
+  $^{6}$ Heidelberg University, Centre for Organismal Studies (COS), 69120 Heidelberg, Germany  <br><br>  
   **$^{*}$ Correspondence:**  
   [jokura@nibb.ac.jp](mailto:jokura@nibb.ac.jp),  
   [gaspar.jekely@cos.uni-heidelberg.de](mailto:gaspar.jekely@cos.uni-heidelberg.de)
-
 mainfont: Arial
 monofont: DejaVu Sans Mono #Times New Roman
 fontsize: 11pt
@@ -48,30 +48,62 @@ csl: elife.csl #change according to journal
 ---
 
 ## Abstract
-
-Understanding the evolution and function of neurons is crucial for elucidating the origins of animal behavior. Ctenophores, as the earliest-diverging lineage with a nervous system, provide a unique model for investigating neural circuit organization. In this study, we performed volumetric electron microscopy (EM) reconstruction of the apical organ in Mnemiopsis leidyi to characterize its neural network involved in gravity sensing. We reconstructed 909 cells, including novel syncytial neurons spanning multiple quadrants, which form complex synaptic networks with balancer cells—key mechanosensory components controlling ciliary movement. Our connectome analysis revealed that these syncytial neurons establish direct and indirect pathways to balancer cells, with "bridge cells" acting as afferent relay neurons. High-speed imaging of balancer cilia movements further demonstrated differential regulation between sagittal and tentacular planes, suggesting distinct functional roles of apical organ neurons in modulating posture and locomotion. These findings provide new insights into the structure and function of ctenophore neural circuits, shedding light on early nervous system evolution and mechanosensory integration in basal metazoans.
+<!--# I rewrote a bit the abstract, please check -->
+Ctenophores possess a unique gravity receptor (statocyst) in their aboral organ formed by four clusters of ciliated balancer cells that collectively support a statolyth. During reorientation, differential load on the balancer cilia leads to altered beating of the ciliated comb rows to elicit turns. To study the neural bases of gravity sensing, we imaged by volume electron microscopy (vEM) the apical organ of the ctenophore *Mnemiopsis leidyi*. We reconstructed 909 cells, including syncytial neurons that form a nerve net and synapse on the balancer cells. Our connectome analysis revealed that these syncytial neurons establish direct and indirect pathways to balancer cells, with "bridge cells" acting as relay neurons. High-speed imaging revealed that balancer cilia beat and arrest in a coordinated manner but with differences between the sagittal and tentacular planes of the animal, reflecting nerve-net organisation. Given that ctenophores branched off early from other animals, these results inform our understanding of the early divergence of nervous systems.
 
 ## Introduction
 
-Understanding how neurons evolved and what their initial functions were is key to elucidating the processes by which animals developed flexible behaviors. Neurons do not function in isolation; rather, they form networks that integrate and process information, enabling the emergence of complex behaviors. Therefore, understanding the structure and function of neural circuits is essential for investigating the mechanisms underlying animal behavior.
+<!--# the paper is not so much about evolution, so I suggest to start by introducing the cteno balancer organ -->
 
-Recent comparative genomic studies [@Ryan2013; @Whelan2015a; @Whelan2017; @Whelan2023; @Li2021] and chromosome-level synteny analyses across different animal phyla [@Schultz2023] suggest that ctenophores are the sister group to all other metazoans and were the first animals to evolve a nervous system. This has led to attempts to compare genes and molecular modules in ctenophores using single-cell analyses, in which neuropeptides have been employed as neuronal markers [@Sebé-Pedrós2018; @Sachkova2021; @Hayakawa2022]. However, the homologous relationships between ctenophore genes and those of other animals are highly divergent, limiting the feasibility of sequence-based comparisons. Given these challenges, we considered an alternative approach: linking neural circuits to physiological responses to gain insight into neural function.
+<!--# the things that need to be mentioned are -->
 
-Despite their phylogenetic position, ctenophores exhibit sophisticated and dynamic behavioral patterns in response to a wide range of external stimuli. These behaviors are thought to be regulated by multiple neural systems, including the subepithelial nerve net (SNN), mesogleal neurons, an apical organ, and tentacle nerves. However, the mechanisms by which these neural systems control behavior remain largely unexplored.
+Ctenophores are gelatinous ...
+ ciliary comb rows ... 
+ active swimming and reorientation ...
 
-Among these, we focused on the apical organ of ctenophores. In many bilaterian and non-bilaterian animals, an apical nervous system is located at one pole of the body, forming a specialized sensory structure that governs physiological functions and motor activities. In ctenophores, ultrastructural analyses have revealed that the aboral pole contains a diverse array of sensory cells and neuronal components [@Hernandez-Nicaise1968; @Hernandez_Nicaise_1973; @Hernandez-Nicaise1974; @Tamm1982]. Additionally, immunostaining using an anti-tyrosylated α-tubulin antibody has identified a neural structure called the deep nerve net within the apical organ, suggesting its involvement in neural regulation of sensory-motor control [@Jager2011].
 
-In this study, we specifically examined the gravity-sensing system within the apical organ. The apical organ of ctenophores contains a dense mineralized mass known as the statocyst, supported by four mechanosensory ciliated cells called balancer cells [@Noda_2014]. The ciliary movements of these balancer cells function as pacemakers for the eight rows of comb plates that control posture and swimming through mechanotransduction [@Tamm_2014; @Tamm1982]. Synaptic connections projecting to the balancer cells have also been reported [@aronova1974electron]. Therefore, we conducted a connectome analysis to characterize the network structure of the apical organ and elucidate the neural circuits that link sensory input to behavioral responses in ctenophores.
+
+<!--# then introduce the nervous system of ctenos -->
+
+Ctenophores show sophisticated and dynamic behavioral patterns and respond to a wide range of external stimuli. These behaviors are thought to be regulated by multiple neural systems, including the subepithelial nerve net (SNN), mesogleal neurons, an apical organ, and tentacular nerves. However, the mechanisms by which these neural systems control behavior remain largely unexplored.
+Molecular phylogeny and chromosome-level synteny analyses suggest that ctenophores may be the sister group to all other animals [@Ryan2013; @Whelan2015a; @Whelan2017; @Whelan2023; @Li2021; @Schultz2023]. In agreement with this early divergence from all other animals with a nervous system, the ctenophore nervous system shows several unique features that suggest independent evolution from other animals <!--# cite some Moroz papers -->.
+
+... syncytial nerve net
+... highly peptidergic
+
+The molecular makeup of ctenophore neurons is so divergent, that the first single-cell analyses did not identify a neuronal cluster [@Sebe-Pedros2018]. Only through the analysis of proneuropeptide markers were neuronal clusters identified [@Sachkova2021; @Hayakawa2022]. 
+... organisation largely unknown
+... synapse structure
+
+
+<!--# the phylogeny is not really relevant here, ctenos are interesting in their own right, so I would cut this a bit and we don't need to cite all the same genomic and tree papers, rater cite all the nice Tamm papers and EM papers etc -->
+
+Another unique feature of ctenophores is their aboral organ that contains the statocyst. Ultrastructural analyses have revealed that the aboral organ contains a diverse array of sensory cells and neuronal components [@Hernandez-Nicaise1968; @Hernandez_Nicaise_1973; @Hernandez-Nicaise1974; @Tamm1982]. Immunostaining with an antibody labelling tyrosylated α-tubulin identified a neural structure called the deep nerve net within the apical organ, suggesting its involvement in neural regulation of sensory-motor control [@Jager2011].
+
+<!--# then the makeup and function of the balancer -->
+
+...balancer in the aboral organ
+
+The apical organ, also known as aboral organ, of ctenophores contains a dense mineralized mass known as the statocyst, supported by four mechanosensory ciliated cells called balancer cells [@Noda_2014]. The ciliary movements of these balancer cells function as pacemakers for the eight rows of comb plates that control posture and swimming through mechanotransduction [@Tamm_2014; @Tamm1982]. Synaptic connections projecting to the balancer cells have also been reported [@aronova1974electron].
+
+... balancer cilia, statolyth
+... tuning of frequency
+... pacemaker function
+... reorientation
+
+
+In this study, we combine volume EM and high-speed imaging to examine the gravity-sensing system within the apical organ of the ctenophore *Mnemiopsis leidyi*. Through connectome analysis, we uncovered the structure and synaptic organisation of the aboral nerve net. Our imaging experiments revealed correlated changes in the activity of balancer cilia, suggesting a coordinating activity for the aboral nerve net. 
 
 ## Results
 
 ### Volume EM reconstruction of the *Mnemiopsis* apical organ
 
-First, we embedded the entire body of the *Mnemiopsis leidyi* cydippid-stage larvae, five days post-fertilization, in Epon resin following high-pressure freezing. To reconstruct all synaptic-resolution connections among the cells comprising the apical organ, also known as the aboral organ, we prepared approximately 1,000 ultra-thin serial sections (50 nm thick) from the aboral tip of the larval body embedded in the resin block. Using a scanning electron microscope (Zeiss Gemini 500) with a resolution of 2.0 nm/pixel, we imaged only the region containing the apical organ. Subsequently, 620 of these images were stitched and aligned using TrakEM2. The resulting volumetric EM dataset had dimensions of 60 μm × 40 μm × 30 μm. We traced and annotated all cells in this dataset, ultimately reconstructing 909 cells, each with both nuclei and cell bodies intact.
+For vEM analysis, we used a five-day-old cydippid larva of *Mnemiopsis leidyi*. To obtain high-quality ultrastructural preservation, we used high pressure freezing followed by freeze substitution and resin embedding (Epon). The specimen was sectioned from the aboral tip and we collected approximately 1,000 ultra-thin (50 nm) serial sections as ribbons. The sections were imaged in a Zeiss Gemini 500 scanning electron microscope at 2.0 nm/pixel (xy). We imaged only the region containing the apical organ. Subsequently, 620 of these images were stitched and aligned in TrakEM2 <!--# add reference-->. The final vEM dataset encompassed a volume of 60 μm × 40 μm × 30 μm. We skeletonised and annotated  all cells in this dataset in CATMAID <!--#  ref-->, resulting in a reconstruction of 909 cells with nuclei and cell bodies intact. Most of the cells, including the balancers and the aboral nerve net neurons are fully contained within the volume, due to the compact and mostly self-contained organisation of the aboral organ.
 
-Cells containing cilia were traced down to the tips of the cilia, and basal bodies were annotated accordingly. For neuronal skeletonization, nodes were placed to interconnect the profiles of the same neuron’s processes across layers, extending the skeleton until all branches were fully traced. Each node was tagged, and skeletons were named and assigned multi-level annotations. As described later, many neurons we identified formed loop-like structures (anastomosed neurons), wherein separated branches often rejoined either the main trunk or other branches. In such cases, branch nodes were placed near the closest existing node and annotated accordingly. The entire skeletonized volume was composed of 134,591 nodes. However, 88 fragments could not be attached to somata-associated skeletons. Most of these fragments represented short skeletal branches that could not be traced beyond gaps or low-quality layers.
 
-Next, we decided to divide the entire apical organ into four broad quadrants to facilitate grouping the identified cells. The general body plan of ctenophores, when viewed from the aboral side, exhibits biradial symmetry around the positions of the anal pores. This symmetry corresponds to the four blastomeres present at the four-cell stage during early embryonic development. We categorized the traced cells into four quadrants and designated these groups as Q1 through Q4 for clarity and consistency.
+In cells containing cilia, we also traced cilia along their length and annotated all basal bodies. For neuronal skeletonization, nodes were placed to interconnect the profiles of the same neuron’s processes across layers, extending the skeleton until all branches were fully traced. Each node was tagged <!--# is this true? not only a subset?  -->, and skeletons were named and assigned multi-level annotations. As described later, some neurons formed loop-like structures (anastomosed neurons), wherein separated branches often rejoined either the main branch or smaller branches <!--#  ref Burkhardt-->. In such cases, branch nodes were placed near the closest existing node and annotated accordingly (CATMAID only supports skeleton trees). The entire skeletonized volume was composed of 134,591 nodes. 88 fragments could not be attached to somata-associated skeletons. Most of these fragments represent short skeletal branches that could not be traced beyond gaps or low-quality layers.
+
+Next, we divided the entire apical organ into four broad quadrants (Q1-Q4) to facilitate grouping the identified cells (Figure 1F)<!--#  add reference to figures also elsewhere-->. The general body plan of ctenophores, when viewed from the aboral side, exhibits biradial symmetry around the anal pores <!--#  ref-->. This symmetry corresponds to the four blastomeres present at the four-cell stage during early embryonic development<!--# ref -->. We assigned each of the 909 skeletonised cells to one of the four quadrants.
 
 ![**Figure 1. Morphology of the apical organ in *Mnemiopsis leidyi***\
 (A) Whole-body image of a 5-day-old *M. leidyi* cydippid larva in lateral view. The boxed region indicates the apical organ (ao). Scale bar: 100 µm.\
@@ -83,9 +115,12 @@ Next, we decided to divide the entire apical organ into four broad quadrants to 
 
 ### Identification of Synaptic Structures in Syncytium Neurons
 
-Classical neural staining techniques do not provide clear images of the neurons at the aboral pole. However, ultrastructural studies have provided morphological evidence of elements resembling neurons, based on synaptic structures, located on the epithelial floor of the apical organs [@Horridge_1964; @Hernandez_Nicaise_1973]. Based on these findings, we identified synaptic structures characteristic of ctenophore neurons in our data, using previously identified pre-synaptic triad morphological features, such as single-layered vesicles, smooth endoplasmic reticulum, and tightly packed mitochondria. In our study, we specifically identified synaptic sites and marked mitochondria (orange) as synaptic nodes. The regions where synaptic vesicles align were marked as connectors (light blue arrows) between cells across the membrane. These connectors link the synaptic nodes of the pre-synaptic cytoskeleton to the partner nodes of the post-synaptic cytoskeleton. As previously reported, the specialization of post-synaptic structures in ctenophores is not apparent, so we recognized synaptic vesicle clusters on the pre-synaptic membrane as the point of reference. Synapses were identified as either monoadic or polyadic, with one pre-synaptic neuron forming connections with one or multiple post-synaptic cells.
+Classical neural staining techniques did not provide clear images of neurons at the aboral pole. However, ultrastructural studies revealed morphological evidence for neural elements, including synapses that are located on the epithelial floor <!--# what is this exactly? are there epithelial cells? -->of the apical organ [@Horridge_1964; @Hernandez_Nicaise_1973]. In our dataset, we identified synapses based on the previously described pre-synaptic triad morphology consisting of a single layer of vesicles, a cisterna of smooth endoplasmic reticulum and an associated mitochondrion. At synaptic sites, we marked mitochondria as synaptic nodes (orange in CATMAID) and connected this node to the nearest node in postsynaptic cells across the regions where synaptic vesicles aligned with the presynaptic cell's membrane (light blue arrows in CATMAID) <!--# figure.. -->. We could not detect specialized post-synaptic structures, in agreement with previous studies <!--# refs -->. Synapses were identified as either monoadic or polyadic, with one pre-synaptic neuron forming connections with one or multiple post-synaptic cells <!--# figure of the distribution -->. 
 
-As mentioned above, following the identification of the presynaptic structures, we reconstructed three major Syncytial neurons. Each of these Syncytial neurons was a cell with multiple nuclei, with membranes fused by continuous plasma membranes. These neurons are distinct in morphology from the Syncytial subepithelial nerve net (SNN) neurons with blebbed morphology previously reconstructed in 3D [@Burkhardt2023]. Our findings represent the second documented discovery of Syncytial neurons in ctenophores. Furthermore, these neurons exhibited clear morphological differences when compared to other sensory cells reported in the same study, such as mesogleal neurons and sensory cells with presynaptic structures and cilia (types 1-4)[@Burkhardt2023]. Based on their distinct spatial relationships, we were able to classify these three Syncytial neurons into two categories. The first type is a larger "ANN_Q1-4," which possesses four (or possibly five?) nuclei spanning four quadrants. It contained X presynaptic structures. The second type consists of "ANN_Q1Q2" and "ANN_Q3Q4," each having two nuclei spanning two quadrants, and each containing X presynaptic structures.
+We reconstructed three aboral nerve-net (ANN) neurons, each with a syncytial morphology. Each ANN had multiple nuclei <!--# add numbers e.g. (2-5 nuclei) -->, with anastomosing membranes <!--# show example EM pictures -->. These neurons are distinct from the syncytial subepithelial nerve net (SNN) neurons with blebbed morphology previously identified by vEM in the body wall of *Mnemiopsis* [@Burkhardt2023]. Our results reveal a second type of syncytial neurons in ctenophores. <!--# describe the differences and also mention the classical SNNs that Sanja reconstructed -->
+
+Furthermore, ANNs are also different from other neurons previously reported by EM, including mesogleal neurons and ciliated sensory cells that synalse on the SNN (types 1-4)[@Burkhardt2023]. Based on their distinct size and position, we classified the ANNs into two types. The first type is a single large neuron (ANN_Q1-4) that has four (possibly five) nuclei and spans all four quadrants (Q1-Q4). This neuron has X <!--# add number --> presynaptic sites. The second type consists of two neurons (ANN_Q1Q2 and ANN_Q3Q4), each with two nuclei spanning two quadrants, and each containing X presynaptic structures.
+<!--#  -->
 
 ![**Figure 2. Identification of Three Syncytial Neurons in the Apical Organ**\
 (A) 3D reconstruction of the aboral nerve net (ANN) Q1Q2Q3Q4 (Q1-4), which spans all four quadrants and contains multiple nuclei (blue). The spheres represent the positions of individual nuclei. The left panel shows a aboral view of the apical organ, the middle panel presents a sagittal plane view, and the right panel provides a tentacular plane view.\
