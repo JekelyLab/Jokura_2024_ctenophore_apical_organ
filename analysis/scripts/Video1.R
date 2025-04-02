@@ -1,63 +1,38 @@
 #Video1 of the Jokura et al ctenophore AO paper
+#Sanja Jasek, Kei Jokura, Gaspar Jekely
 
+#load packages and functions ------------
 source("analysis/scripts/packages_and_functions.R")
 
-#create temp dir to store video frames
+#create temp dir to store video frames -----------
 mainDir = getwd()
 dir.create(file.path(mainDir, "videoframes"), showWarnings = FALSE)
 
+# load cell types from CATMAID ---------
 
-# load cell types from catmaid
-
-balancer <- nlapply(
-  read.neurons.catmaid(
-    "celltype:balancer", pid = 35
-    ),
-  function(x) smooth_neuron(x, sigma = 1000)
-)
-
-intramulticilia_Q1 <- read_smooth_cell(
-  get_skids_with_annot(pid = 35, c(
-    "celltype:intra-multi-ciliated", "Q1"))
-  )
-
-LB <- nlapply(
-  read.neurons.catmaid(
-    "celltype:lamellate", pid = 35
-    ),
-  function(x) smooth_neuron(x, sigma = 1000)
-)
-
-syn_neuron <- nlapply(
-  read.neurons.catmaid(
-    "celltype:neuron", pid = 35
-    ),
-  function(x) smooth_neuron(x, sigma = 1000)
-)
-
-monociliated <- nlapply(
-  read.neurons.catmaid(
-    "monociliated_cell", pid = 35
-  ),
-  function(x) smooth_neuron(x, sigma = 1000)
-)
-
-bridge <- nlapply(
-  read.neurons.catmaid(
-    "celltype:bridge", pid = 35
-  ),
-  function(x) smooth_neuron(x, sigma = 1000)
-)
-
-# cell types
-AO_celltypes <- list(
-  balancer, LB, syn_neuron, bridge, monociliated
-  )
-AO_celltype_names <- list(
-  "balancer", "LB", "syn_neuron", "bridge", "monociliated"
-  )
-
+#with_soma <- read_smooth_neuron("with_soma")
 bounding_dots <- read.neurons.catmaid("bounding dot", pid = 35)
+balancer <- read_smooth_neuron("celltype:balancer")
+lithocyte <- read_smooth_neuron("celltype:lithocyte")
+
+balancer_Q1 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q1")))
+balancer_Q2 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q2")))
+balancer_Q3 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q3")))
+balancer_Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q4")))
+
+bridge_Q1Q2 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:bridge", "Q1Q2")))
+bridge_Q3Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:bridge", "Q3Q4")))
+
+SSN_Q1Q2 <- read_smooth_neuron("SSN_Q1Q2")[[1]]
+SSN_Q3Q4 <- read_smooth_neuron("SSN_Q3Q4")[[1]]
+SSN_Q1Q2Q3Q4 <- read_smooth_neuron("SSN_Q1Q2Q3Q4")[[1]]
+
+
+# retrieve connectors ----------------------------------------------------------
+
+balancer_conn <- connectors(balancer)
+presyn_balancer <- subset(balancer_conn, prepost == 0)
+postsyn_balancer <- subset(balancer_conn, prepost == 1)
 
 # plot cells ----------------
 
@@ -70,10 +45,43 @@ par3d(zoom=0.9)
 nview3d("left", extramat = rotationMatrix(-1.7, 190, -120, -140))
 
 
+
 plot3d(
-  balancer, soma = TRUE, color = Okabe_Ito[1], 
-  alpha = 0.6, lwd = 3
-  )
+  balancer_Q1,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.6, col = Okabe_Ito[1]
+)
+plot3d(
+  balancer_Q2,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.6, col = Okabe_Ito[2]
+)
+plot3d(
+  balancer_Q3,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.6, col = Okabe_Ito[6]
+)
+plot3d(
+  balancer_Q4,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.6, col = Okabe_Ito[7]
+)
+plot3d(
+  lithocyte,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.9, col = Okabe_Ito[8]
+)
+#plot3d(
+#  with_soma,
+#  soma = T, lwd = 1, add = T,
+#  alpha = 0.01, col = Okabe_Ito[8]
+#)
+
+plot3d(
+  outline,
+  add = T, alpha = 0.05, col = "grey50"
+)
+
 plot3d(bounding_dots, alpha = 0, lwd = 0)
 par3d(zoom=0.6)
 texts3d(
@@ -85,12 +93,44 @@ next3d(clear=FALSE)
 nview3d("anterior", 
         extramat = rotationMatrix(2.54, 0.1, 0, 1)
         )
+
 plot3d(
-  balancer, soma = TRUE, color = Okabe_Ito[1], 
-  alpha = 0.6, lwd = 3
+  balancer_Q1,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.6, col = Okabe_Ito[1]
 )
-plot3d(bounding_dots, alpha = 0, lwd = 0)
-par3d(zoom=0.6)
+plot3d(
+  balancer_Q2,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.6, col = Okabe_Ito[2]
+)
+plot3d(
+  balancer_Q3,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.6, col = Okabe_Ito[6]
+)
+plot3d(
+  balancer_Q4,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.6, col = Okabe_Ito[7]
+)
+plot3d(
+  lithocyte,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.9, col = Okabe_Ito[8]
+)
+#plot3d(
+#  with_soma,
+#  soma = T, lwd = 1, add = T,
+#  alpha = 0.01, col = Okabe_Ito[8]
+#)
+
+plot3d(
+  outline,
+  add = T, alpha = 0.05, col = "grey50"
+)
+
+par3d(zoom=0.7)
 
 for(i in 101:120){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
@@ -100,19 +140,31 @@ next3d(clear=FALSE)
 #remove text
 rgl.pop(id = as_tibble(ids3d()) |> filter(type =="text") |> pull(id))
 
+
 plot3d(
-  intramulticilia, soma = TRUE, color = Okabe_Ito[2], 
-  alpha = 0.6, lwd = 2
+  bridge_Q1Q2,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.8, col = Okabe_Ito[2]
+)
+plot3d(
+  bridge_Q3Q4,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.8, col = Okabe_Ito[7]
 )
 texts3d(
-  15000, 32000, 1000, text = "intra-multiciliated", col='black', cex = 2
+  15000, 32000, 1000, text = "bridge", col='black', cex = 2
 )
 next3d(clear=FALSE)
 plot3d(
-  intramulticilia, soma = TRUE, color = Okabe_Ito[2], 
-  alpha = 0.6, lwd = 2
+  bridge_Q1Q2,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.8, col = Okabe_Ito[2]
 )
-
+plot3d(
+  bridge_Q3Q4,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.8, col = Okabe_Ito[7]
+)
 for(i in 121:140){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
@@ -121,19 +173,47 @@ next3d(clear=FALSE)
 #remove text
 rgl.pop(id = as_tibble(ids3d()) |> filter(type =="text") |> pull(id))
 
-plot3d(
-  LB, soma = TRUE, color = Okabe_Ito[3], 
-  alpha = 0.6, lwd = 2
-)
+#plot nerve net ---------------
+plot_multinucleated_cell(SSN_Q1Q2,
+                         lwd = 2, alpha = 1, col = Okabe_Ito[6])
+plot_multinucleated_cell(SSN_Q3Q4,
+                         lwd = 2, alpha = 1, col = Okabe_Ito[7])
+plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
+                         lwd = 2, alpha = 1, col = Okabe_Ito[5])
 texts3d(
-  15000, 32000, 1000, text = "lamellate body", col='black', cex = 2
+  15000, 32000, 1000, text = "nerve net", col='black', cex = 2
+)
+# input from SSN to balancer
+plot3d(
+  postsyn_balancer$x, 
+  postsyn_balancer$y, 
+  postsyn_balancer$z, 
+  size = 0.6, alpha = 1, col = "red", 
+  add = TRUE,
+  point_antialias = TRUE,
+  type = "s"
 )
 
+
 next3d(clear=FALSE)
+plot_multinucleated_cell(SSN_Q1Q2,
+                         lwd = 2, alpha = 1, col = Okabe_Ito[6])
+plot_multinucleated_cell(SSN_Q3Q4,
+                         lwd = 2, alpha = 1, col = Okabe_Ito[7])
+plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
+                         lwd = 2, alpha = 1, col = Okabe_Ito[5])
+
+# input from SSN to balancer
 plot3d(
-  LB, soma = TRUE, color = Okabe_Ito[3], 
-  alpha = 0.6, lwd = 2
+  postsyn_balancer$x, 
+  postsyn_balancer$y, 
+  postsyn_balancer$z, 
+  size = 0.6, alpha = 1, col = "red", 
+  add = TRUE,
+  point_antialias = TRUE,
+  type = "s"
 )
+
 
 for(i in 141:160){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
@@ -141,64 +221,6 @@ for(i in 141:160){
 
 next3d(clear=FALSE)
 rgl.pop(id = as_tibble(ids3d()) |> filter(type =="text") |> pull(id))
-
-plot3d(
-  syn_neuron, soma = TRUE, color = Okabe_Ito[4], 
-  alpha = 0.6, lwd = 4
-)
-texts3d(
-  15000, 32000, 1000, text = "nerve net", col='black', cex = 2
-)
-
-next3d(clear=FALSE)
-plot3d(
-  syn_neuron, soma = TRUE, color = Okabe_Ito[4], 
-  alpha = 0.6, lwd = 4
-)
-
-
-for(i in 161:180){
-  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
-}
-
-next3d(clear=FALSE)
-rgl.pop(id = as_tibble(ids3d()) |> filter(type =="text") |> pull(id))
-
-
-plot3d(
-  bridge, soma = TRUE, color = Okabe_Ito[8], 
-  alpha = 0.6, lwd = 3
-)
-texts3d(
-  15000, 32000, 1000, text = "bridge", col='black', cex = 2
-)
-
-next3d(clear=FALSE)
-plot3d(
-  bridge, soma = TRUE, color = Okabe_Ito[8], 
-  alpha = 0.6, lwd = 3
-)
-
-for(i in 181:200){
-  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
-}
-next3d(clear=FALSE)
-rgl.pop(id = as_tibble(ids3d()) |> filter(type =="text") |> pull(id))
-
-plot3d(
-  monociliated, soma = TRUE, color = "grey50", 
-  alpha = 0.1, lwd = 1
-)
-
-next3d(clear=FALSE)
-plot3d(
-  monociliated, soma = TRUE, color = "grey50", 
-  alpha = 0.1, lwd = 1
-)
-
-for(i in 201:220){
-  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
-}
 
 
 # get rotation matrix
