@@ -1,6 +1,5 @@
 ---
-title: "Neural Circuit Organization of the Ctenophore Aboral Organ"
-
+title: "Neural Connectome of the Ctenophore Statocyst"
 subtitle: |
   **Kei Jokura**$^{1,2,3,4*}$, **Sanja Jasek**$^{1,2,6}$, **Lara Kewalow**$^{6}$, **Pawel Burkhardt**$^{5}$, **Gáspár Jékely**$^{1,2,6,*}$  
   <br><br>  
@@ -51,7 +50,7 @@ csl: elife.csl #change according to journal
 
 <!--# I rewrote a bit the abstract, please check -->
 
-Ctenophores possess a unique gravity receptor (statocyst) in their aboral organ formed by four clusters of ciliated balancer cells that collectively support a statolyth. During reorientation, differential load on the balancer cilia leads to altered beating of the ciliated comb rows to elicit turns. To study the neural bases of gravity sensing, we imaged by volume electron microscopy (vEM) the aboral organ of the ctenophore *Mnemiopsis leidyi*. We reconstructed 909 cells, including syncytial neurons that form a nerve net and synapse on the balancer cells. Our connectome analysis revealed that these syncytial neurons establish direct and indirect pathways to balancer cells, with "bridge cells" acting as relay neurons. High-speed imaging revealed that balancer cilia beat and arrest in a coordinated manner but with differences between the sagittal and tentacular planes of the animal, reflecting nerve-net organisation. Given that ctenophores branched off early from other animals, these results inform our understanding of the early divergence of nervous systems.
+Ctenophores possess a unique gravity receptor (statocyst) in their aboral organ formed by four clusters of ciliated balancer cells that collectively support a statolyth. During reorientation, differential load on the balancer cilia leads to altered beating of the ciliated comb rows to elicit turns. To study the neural bases of gravity sensing, we imaged by volume electron microscopy (vEM) the aboral organ of the ctenophore *Mnemiopsis leidyi*. We reconstructed 909 cells, including syncytial neurons that form a nerve net. The syncytial neurons synapse on the balancer cells and also form reciprocal connection with the bridge cells that span the statocyst. High-speed imaging revealed that balancer cilia beat and arrest in a coordinated manner but with differences between the sagittal and tentacular planes of the animal, reflecting nerve-net organisation. Our results suggest a coordinating rather than effector function for the nerve net and inform our understanding of the diversity of nervous-systems organisation across animals.
 
 ## Introduction
 
@@ -107,7 +106,7 @@ Classical neural staining techniques did not provide clear images of neurons at 
 
 We reconstructed three aboral nerve-net (ANN) neurons, each with a syncytial morphology. Each ANN had multiple nuclei <!--# add numbers e.g. (2-5 nuclei) -->, with anastomosing membranes <!--# show example EM pictures -->. These neurons are distinct from the syncytial subepithelial nerve net (SNN) neurons with blebbed morphology previously identified by vEM in the body wall of *Mnemiopsis* [@Burkhardt2023]. Our results reveal a second type of syncytial neurons in ctenophores. <!--# describe the differences and also mention the classical SNNs that Sanja reconstructed -->
 
-Furthermore, ANNs are also different from other neurons previously reported by EM, including mesogleal neurons and ciliated sensory cells that synalse on the SNN (types 1-4)[@Burkhardt2023]. Based on their distinct size and position, we classified the ANNs into two types. The first type is a single large neuron (ANN_Q1-4) spans all four quadrants (Q1-Q4) and has four (possibly five) nuclei This neuron has X <!--# add number --> presynaptic sites. The second type consists of two neurons (ANN_Q1Q2 and ANN_Q3Q4), each spanning two quadrants and with two nuclei, and each containing X presynaptic structures. <!--#  -->
+Furthermore, ANNs are also different from other neurons previously reported by EM, including mesogleal neurons and ciliated sensory cells that synapse on the SNN (types 1-4)[@Burkhardt2023]. Based on their distinct size and position, we classified the ANNs into two types. The first type is a single large neuron (ANN_Q1-4) spans all four quadrants (Q1-Q4) and has four (possibly five) nuclei This neuron has X <!--# add number --> presynaptic sites. The second type consists of two neurons (ANN_Q1Q2 and ANN_Q3Q4), each spanning two quadrants and with two nuclei, and each containing X presynaptic structures. <!--#  -->
 
 ![**Figure 2. Organisation of the aboral synaptic nerve net**\
 (A) 3D reconstruction of the aboral nerve net (ANN) Q1Q2Q3Q4 (Q1-4), which spans all four quadrants and contains multiple nuclei (blue). The spheres represent the positions of individual nuclei. The left panel shows a aboral view of the aboral organ, the middle panel presents a sagittal plane view, and the right panel provides a tentacular plane view.\
@@ -158,6 +157,9 @@ During the two-minute recordings, balancer cilia could beat fast, slow, or exhib
 
 We found that arrest and re-beat events were synchronized between balancers across the sagittal plane. However, while the timing of re-beat was also near-simultaneous along the tentacular plane, arrest timing was offset by up to 2.xy <!--# add max value--> seconds (Figure 4) <!--# save source data for all plots in manuscript/source_data with the naming convention e.g. Figure 1A--source data 1 -->. Overall, these data reveal that arrests are only coordinated between Q1-Q2 and Q3-Q4, whereas re-beat is coordinated over all four quadrants.
 
+
+<!--# discuss frequency data -->
+
 Evaluating these data in light of the circuit diagram suggests that shared ANN inputs (ANN_Q1Q2 or ANN_Q3Q4) to a pair of balancers along the sagittal plane may underlie their synchronized arrests. In contrast, in the tentacular plane, separate ANNs innervate the balancer pairs. At the same time, the ANN_Q1-4 neuron synapses on all four balancers, hinting at a neural substrate for their synchronised re-beat.
 
 ![**Figure 4. Differences in Balancer Cilia Movement Control Due to Variations in the Neural Circuit Pathways and Comparison of Neural Circuits Regulating Ciliary Movement**\
@@ -171,6 +173,8 @@ Evaluating these data in light of the circuit diagram suggests that shared ANN i
 ## Discussion
 
 In this study, we traced all the constituent cells of the aboral organ in five-day-old larvae of *Mnemiopsis leidyi* and completed a comprehensive neural map. As a result, we identified a novel type of syncytial neuron with a previously unreported morphology. Furthermore, we found that three such syncytial neurons project to distinct quadrants, integrating with balancer cell groups to form a gravity-sensing neural circuit. This study represents the first complete neural circuit map reported in ctenophores. Additionally, our analysis of balancer ciliary movements, based on neural circuit data, revealed differences in ciliary arrest control arising from circuit variations.
+
+<!--#  discuss that it is a complete circuit, with no neuronal connections in or out - effector output is likely by hydrodynamics, as suggested by Tamm -->
 
 ### Identification of a Previously Unreported Syncytial Neuron
 

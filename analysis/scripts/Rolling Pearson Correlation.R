@@ -148,8 +148,9 @@ plot_boxplot <- function(results, window) {
   }
 
   p <- ggplot(results, aes(x = plane, y = mean_correlation, color = plane)) +
-    geom_boxplot(fill = "lightgray", alpha = 0.5, outlier.shape = NA) +
+  #  geom_boxplot(fill = "lightgray", alpha = 0.5, outlier.shape = NA) +
     geom_jitter(width = 0.2, size = 3, alpha = 0.6) +
+    geom_violin(size = 1, alpha = 0.4, trim = FALSE, scale = "count") +
     scale_color_manual(values = c("S" = "#0F52BA", "T" = "#F28500")) +
     labs(
       x = "Plane",
@@ -166,24 +167,8 @@ plot_boxplot <- function(results, window) {
   print(test)
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Run
-window_sizes <- c(10, 20, 30)
+# Run ------------
+window_sizes <- c(3, 10, 20, 30)
 for (window in window_sizes) {
   results <- data.frame(file_name = character(), plane = character(), mean_correlation = numeric())
   for (i in 1:nrow(filtered_files)) {
