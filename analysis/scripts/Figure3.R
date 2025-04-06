@@ -419,6 +419,145 @@ rgl.snapshot("manuscript/pictures/bridge.png")
 close3d()
 
 
+# plot bridge -----------------------------------------------
+
+close3d()
+
+# 3d plotting of cells
+nopen3d()
+mfrow3d(1, 3) 
+# define the size of the rgl window, the view and zoom
+par3d(windowRect = c(0, 0, 1200, 350))
+#par3d(windowRect = c(0, 0, 2400, 700))
+
+# plot aboral view
+
+plot3d(balancer,
+       soma = T, lwd = 1, add = T, 
+       alpha = 0.1, col = Okabe_Ito[8],
+       WithConnectors = F, WithNodes = F)
+
+plot3d(
+  bridge_Q1Q2,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.75, col = Okabe_Ito[2]
+)
+plot3d(
+  bridge_Q3Q4,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.75, col = Okabe_Ito[7]
+)
+
+plot3d(
+  with_soma,
+  soma = T, lwd = 1, add = T,
+  alpha = 0.01, col = Okabe_Ito[8]
+)
+
+plot3d(
+  outline,
+  add = T, alpha = 0.05, col = "grey50"
+)
+
+#aboral view
+aboral()
+par3d(zoom = 0.61)
+
+## y-axis clip
+#clipplanes3d(1, 0, 0, -11500)
+## x-axis clip
+#clipplanes3d(0, 1, 0, -24000)
+
+
+# move to next panel in rgl window
+next3d(clear = F)
+
+# plot lateral view of Sagittal plane
+
+plot3d(balancer,
+       soma = T, lwd = 1, add = T, 
+       alpha = 0.1, col = Okabe_Ito[8],
+       WithConnectors = F, WithNodes = F)
+
+plot3d(
+  bridge_Q1Q2,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.75, col = Okabe_Ito[2]
+)
+plot3d(
+  bridge_Q3Q4,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.75, col = Okabe_Ito[7]
+)
+
+plot3d(
+  with_soma,
+  soma = T, lwd = 1, add = T,
+  alpha = 0.01, col = Okabe_Ito[8]
+)
+
+plot3d(
+  outline,
+  add = T, alpha = 0.05, col = "grey50"
+)
+
+sagittal()
+par3d(zoom = 0.61)
+
+# y-axis clip
+#clipplanes3d(1, 0, 0, -11500)
+# x-axis clip
+#clipplanes3d(0, 1, 0, -24000)
+
+# move to next panel in rgl window
+next3d(clear = F)
+
+# plot lateral view of Tentacular plane
+
+plot3d(balancer,
+       soma = T, lwd = 1, add = T, 
+       alpha = 0.1, col = Okabe_Ito[8],
+       WithConnectors = F, WithNodes = F)
+
+plot3d(
+  bridge_Q1Q2,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.75, col = Okabe_Ito[2]
+)
+plot3d(
+  bridge_Q3Q4,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.75, col = Okabe_Ito[7]
+)
+
+plot3d(
+  with_soma,
+  soma = T, lwd = 1, add = T,
+  alpha = 0.01, col = Okabe_Ito[8]
+)
+
+plot3d(
+  outline,
+  add = T, alpha = 0.05, col = "grey50"
+)
+
+tentacular()
+par3d(zoom = 0.61)
+
+# y-axis clip
+#clipplanes3d(1, 0, 0, -11500)
+# x-axis clip
+#clipplanes3d(0, 1, 0, -24000)
+
+
+#make a snapshot to the working directory
+rgl.snapshot("manuscript/pictures/bridge_and_balancer.png")
+
+
+close3d()
+
+
+
 # load of mitochondrial location information-------------------------------
 
 mito_vesicle_info <- read.csv("analysis/data/mito_vesicle_info.csv")

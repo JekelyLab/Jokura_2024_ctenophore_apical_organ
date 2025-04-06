@@ -25,7 +25,7 @@ filtered_files <- balancer_info %>%
   filter(abs_angle >= 0 & abs_angle < 20) %>%
   select(file_name, plane)
 
-# Barplot
+# Barplot-----------------------------------------------------------------------
 plot_bar <- function(df, file_name, plane) {
   df <- df %>%
     filter(!is.na(left) & !is.na(right)) %>% # remove NA
@@ -33,7 +33,7 @@ plot_bar <- function(df, file_name, plane) {
     filter(is.finite(left) & is.finite(right)) %>% # remove Inf/NaN
     mutate(frame = row_number())
 
-  colors <- list(S = c("#00BFFF", "#4169E1"), T = c("#FFA500", "#FF4500"))
+  colors <- list(S = c("#0e6b76", "#77c2cc"), T = c("#a55e00", "#f5be6b"))
   c_left <- colors[[plane]][1]
   c_right <- colors[[plane]][2]
 
@@ -46,31 +46,13 @@ plot_bar <- function(df, file_name, plane) {
     theme(plot.title = element_blank())
 
   ggsave(file.path(output_barplot, paste0("CBF_barplot_", file_name, ".png")),
-    plot = p, width = 8, height = 4.5, dpi = 300, bg = "white"
+    plot = p, width = 4, height = 3, dpi = 300, bg = "white"
   )
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Rolling correlation
+# Rolling correlation-----------------------------------------------------------
 calc_rolling_corr <- function(df, window) {
   rollapply(1:(nrow(df) - window + 1), 1, function(i) {
     x <- df$left[i:(i + window - 1)]
@@ -103,7 +85,7 @@ plot_rolling <- function(corr, file_name, plane, window) {
     return(NULL)
   }
 
-  color <- ifelse(plane == "S", "#0F52BA", "#F28500")
+  color <- ifelse(plane == "S", "#148daa", "#e89014")
 
   p <- ggplot(plot_data, aes(x = time_index, y = rolling_corr)) +
     geom_line(color = color, size = 1) +
@@ -121,7 +103,7 @@ plot_rolling <- function(corr, file_name, plane, window) {
   )
 }
 
-# Boxplot
+# Boxplot-----------------------------------------------------------------------
 plot_boxplot <- function(results, window) {
   s_vals <- results %>%
     filter(plane == "S") %>%
@@ -148,27 +130,32 @@ plot_boxplot <- function(results, window) {
   }
 
   p <- ggplot(results, aes(x = plane, y = mean_correlation, color = plane)) +
-  #  geom_boxplot(fill = "lightgray", alpha = 0.5, outlier.shape = NA) +
+    geom_boxplot(fill = "lightgray", alpha = 0.5, outlier.shape = NA) +
     geom_jitter(width = 0.2, size = 3, alpha = 0.6) +
-    geom_violin(size = 1, alpha = 0.4, trim = FALSE, scale = "count") +
-    scale_color_manual(values = c("S" = "#0F52BA", "T" = "#F28500")) +
+    #  geom_violin(size = 1, alpha = 0.4, trim = FALSE, scale = "count") +
+    scale_color_manual(values = c("S" = "#148daa", "T" = "#e89014")) +
     labs(
-      x = "Plane",
-      y = paste("Mean Rolling Pearson Correlation (Window =", window, ")"),
-      title = paste("Angle 0–20,", test_name, "p =", round(test$p.value, 3))
+      x = NULL,
+      y = paste("Mean Rolling Pearson Correlation (Window =", window,")"),
+      title = paste(test_name, "p =", round(test$p.value, 3))
     ) +
     theme_minimal() +
-    theme(plot.title = element_text(hjust = 0.5)) +
+    theme(
+      plot.title = element_text(hjust = 0.5),
+      legend.position = "none",
+      axis.title.x = element_blank()) +
     ylim(-1, 1)
 
   ggsave(file.path(output_boxplot, paste0("boxplot_correlation_angle_0-20_win_", window, ".png")),
-    plot = p, width = 8, height = 5, dpi = 300, bg = "white"
+    plot = p, width = 3, height = 5, dpi = 300, bg = "white"
   )
   print(test)
 }
 
-# Run ------------
-window_sizes <- c(3, 10, 20, 30)
+# Run --------------------------------------------------------------------------
+
+window_sizes <- c(20)
+
 for (window in window_sizes) {
   results <- data.frame(file_name = character(), plane = character(), mean_correlation = numeric())
   for (i in 1:nrow(filtered_files)) {
