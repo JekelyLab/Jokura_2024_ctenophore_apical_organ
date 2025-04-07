@@ -738,9 +738,41 @@ close3d()
 
 # retrieve connectors ----------------------------------------------------------
 
-balancer_conn <- connectors(balancer)
-presyn_balancer <- subset(balancer_conn, prepost == 0)
-postsyn_balancer <- subset(balancer_conn, prepost == 1)
+# starting from balancers doesn't give me accurate synapse count?
+
+outgoing_SSN_Q1Q2 <- stats_synapse %>%
+  filter(skid == SSN_Q1Q2_skid) %>%
+  filter(prepost == 0) %>%
+  select(connector_id) %>%
+  pull()
+
+SSN_Q1Q2_to_balancer <- stats_synapse %>%
+  filter(connector_id %in% outgoing_SSN_Q1Q2) %>%
+  filter(prepost == 1) %>%
+  filter(skid %in% balancer_skids)
+
+outgoing_SSN_Q3Q4 <- stats_synapse %>%
+  filter(skid == SSN_Q3Q4_skid) %>%
+  filter(prepost == 0) %>%
+  select(connector_id) %>%
+  pull()
+
+SSN_Q3Q4_to_balancer <- stats_synapse %>%
+  filter(connector_id %in% outgoing_SSN_Q3Q4) %>%
+  filter(prepost == 1) %>%
+  filter(skid %in% balancer_skids)
+
+outgoing_SSN_Q1Q2Q3Q4 <- stats_synapse %>%
+  filter(skid == SSN_Q1Q2Q3Q4_skid) %>%
+  filter(prepost == 0) %>%
+  select(connector_id) %>%
+  pull()
+
+SSN_Q1Q2Q3Q4_to_balancer <- stats_synapse %>%
+  filter(connector_id %in% outgoing_SSN_Q1Q2Q3Q4) %>%
+  filter(prepost == 1) %>%
+  filter(skid %in% balancer_skids)
+
 
 bridge_conn <- connectors(bridge)
 presyn_bridge <- subset(bridge_conn, prepost == 0)
@@ -748,6 +780,74 @@ postsyn_bridge <- subset(bridge_conn, prepost == 1)
 
 
 # 3D plot of synaptic input from SSN to balancer -------------------------------
+
+plot_SNN_to_balancer <- function() {
+  
+  plot3d(balancer_Q1,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(balancer_Q2,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(balancer_Q3,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(balancer_Q4,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(SSN_Q1Q2Q3Q4,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(SSN_Q1Q2,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[6],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(SSN_Q3Q4,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
+         WithConnectors = F, WithNodes = F)
+  
+  
+  
+  plot3d(outline,
+         add = T, alpha = 0.05, col = "grey50"
+  )
+  
+  # input from SSN to balancer
+  plot3d(
+    SSN_Q1Q2_to_balancer$x, 
+    SSN_Q1Q2_to_balancer$y,
+    SSN_Q1Q2_to_balancer$z,
+    size = 0.6, alpha = 1, col = "orange", 
+    add = TRUE,
+    point_antialias = TRUE,
+    type = "s"
+  )
+  
+  plot3d(
+    SSN_Q3Q4_to_balancer$x, 
+    SSN_Q3Q4_to_balancer$y,
+    SSN_Q3Q4_to_balancer$z,
+    size = 0.6, alpha = 1, col = "magenta", 
+    add = TRUE,
+    point_antialias = TRUE,
+    type = "s"
+  )
+  
+  plot3d(
+    SSN_Q1Q2Q3Q4_to_balancer$x, 
+    SSN_Q1Q2Q3Q4_to_balancer$y,
+    SSN_Q1Q2Q3Q4_to_balancer$z,
+    size = 0.6, alpha = 1, col = "blue", 
+    add = TRUE,
+    point_antialias = TRUE,
+    type = "s"
+  )
+}
 
 close3d()
 # 3d plotting of cells
@@ -758,159 +858,21 @@ par3d(windowRect = c(0, 0, 1200, 350))
 #par3d(windowRect = c(0, 0, 2400, 700))
 
 #plot aboral view
-
-plot3d(balancer_Q1,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(balancer_Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(balancer_Q3,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(balancer_Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[6],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-# input from SSN to balancer
-plot3d(
-  postsyn_balancer$x, 
-  postsyn_balancer$y, 
-  postsyn_balancer$z, 
-  size = 0.6, alpha = 1, col = "magenta2", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
-)
-
-#aboral view
+plot_SNN_to_balancer()
 aboral()
 par3d(zoom=0.61)
 
 #move to next panel in rgl window
 next3d(clear=F)
 
-
 #plot lateral view of Sagittal plane
-
-plot3d(balancer_Q1,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(balancer_Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(balancer_Q3,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(balancer_Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[6],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-# input from SSN to balancer
-plot3d(
-  postsyn_balancer$x, 
-  postsyn_balancer$y, 
-  postsyn_balancer$z, 
-  size = 0.6, alpha = 1, col = "magenta2", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
-)
-
+plot_SNN_to_balancer()
 sagittal()
 par3d(zoom=0.61)
 next3d(clear=F)
 
-
-
 #plot lateral view of Tentacular plane
-plot3d(balancer_Q1,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(balancer_Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(balancer_Q3,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(balancer_Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[6],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-# input from SSN to balancer
-plot3d(
-  postsyn_balancer$x, 
-  postsyn_balancer$y, 
-  postsyn_balancer$z, 
-  size = 0.6, alpha = 1, col = "magenta2", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
-)
-
+plot_SNN_to_balancer()
 tentacular()
 par3d(zoom=0.61)
 
@@ -918,8 +880,6 @@ par3d(zoom=0.61)
 rgl.snapshot("manuscript/pictures/SSN_prepost_synapse_balancer.png")
 
 close3d()
-
-
 
 
 
