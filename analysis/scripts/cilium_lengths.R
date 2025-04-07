@@ -73,7 +73,7 @@ write.csv(cilium_lengths, "analysis/data/cilium_lengths.csv")
 
 
 # visualize lamellate body cells -----------------------------------------------
-lamellate_intra <- read.neurons.catmaid("celltype:lamellate-intra", pid = 35)
+lamellate_intra <- read.neurons.catmaid("celltype:lamellate", pid = 35)
 for (cell in lamellate_intra) {
   cilia <- segments_between_tags(cell, "cilium tip", "basal body")
   # visualize part of cilium in ciliary pocket
