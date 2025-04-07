@@ -1,6 +1,5 @@
 source("analysis/scripts/packages_and_functions.R")
 
-
 # calculate average number of post-synaptic sites per synapse  -----
 
 pre_connectors <- catmaid_fetch(
