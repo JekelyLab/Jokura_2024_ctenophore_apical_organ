@@ -1,19 +1,22 @@
 ---
 title: "Neural Connectome of the Ctenophore Statocyst"
 subtitle: |
-  **Kei Jokura**$^{1,2,3,4*}$, **Sanja Jasek**$^{1,2,6}$, **Lara Kewalow**$^{6}$, **Pawel Burkhardt**$^{5}$, **Gáspár Jékely**$^{1,2,6,*}$  
+  **Kei Jokura**$^{1,2,3,4,5*}$, **Sanja Jasek**$^{1,2,6}$, **Lara Kewalow**$^{6}$, **Pawel Burkhardt**$^{7}$, **Gáspár Jékely**$^{1,2,6,*}$  
   <br><br>  
   $^{1}$ Living Systems Institute, University of Exeter, Exeter, EX4 4QD, United Kingdom  
   <br>
   $^{2}$ Biosciences, Faculty of Health and Life Sciences, University of Exeter, Exeter EX4 4QD, UK
-  <br>
-  $^{3}$ Exploratory Research Center on Life and Living Systems (ExCELLS), Okazaki, 444-8787, Japan  
   <br>  
-  $^{4}$ National Institute for Basic Biology (NIBB), Okazaki, 444-8585, Japan  
+  $^{3}$ Grass Laboratory, Marine Biological Laboratory, Woods Hole, MA 02543, USA  
+  <br> 
+  $^{4}$ Exploratory Research Center on Life and Living Systems (ExCELLS), Okazaki, 444-8787, Japan  
   <br>  
-  $^{5}$ Michael Sars Centre, University of Bergen, Norway  
+  $^{5}$ National Institute for Basic Biology (NIBB), Okazaki, 444-8585, Japan  
+  <br> 
+  $^{6}$ Heidelberg University, Centre for Organismal Studies (COS), 69120 Heidelberg, Germany  
   <br>
-  $^{6}$ Heidelberg University, Centre for Organismal Studies (COS), 69120 Heidelberg, Germany  <br><br>  
+  $^{7}$ Michael Sars Centre, University of Bergen, Norway
+  <br><br>  
   **$^{*}$ Correspondence:**  
   [jokura@nibb.ac.jp](mailto:jokura@nibb.ac.jp),  
   [gaspar.jekely@cos.uni-heidelberg.de](mailto:gaspar.jekely@cos.uni-heidelberg.de)
@@ -245,7 +248,7 @@ The following EM image stacks, including all traces and annotations, are availab
 
 ## Acknowledgements
 
-This work was funded by ... JSPS... This project has received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme (grant agreement No 101020792).
+This work was supported by the Japan Society for the Promotion of Science (JSPS) Overseas Research Fellowships, the Grass Foundation, the Kavli Foundation, and the Marine Biological Laboratory (MBL). This project also received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement No. 101020792). We thank Dr. Réza Shahidi for sectioning and imaging, and Paulina Cherek for high-pressure freezing and sample preparation. We are also grateful to Dr. Chris Bjornsson, the MBL Central Microscopy Facility, Dr. Shoji A. Baba, and Dr. Kogiku Shiba (Shimoda Marine Research Center) for their assistance with microscopy.
 
 ## References {.unnumbered}
 
