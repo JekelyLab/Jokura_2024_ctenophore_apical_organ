@@ -58,16 +58,16 @@ ggsave(
 
 panel_ms <- ggdraw() + draw_image(readPNG("manuscript/pictures/tilt_microscope.png"))
 panel_balancer <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer_closeup.png")) +
-  draw_label("sagittal", x = 0.25, y = 0.99, size = 7, hjust = 0.5) +
-  draw_label("tentacular", x = 0.75, y = 0.99, size = 7, hjust = 0.5)
+  draw_label("sagittal", x = 0.25, y = 0.95, size = 9, hjust = 0.5) +
+  draw_label("tentacular", x = 0.75, y = 0.95, size = 9, hjust = 0.5)
 
 panel_kymograph <- ggdraw() + draw_image(readPNG("manuscript/pictures/balacer_arrest_rebeat_kymograph.png"))
 panel_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/arrest_rebeat_graph.png"))
 
 panel_cbf_bar_sag <- ggdraw() + draw_image(readPNG("analysis/data/balancer_CBF_Pearson_correlation_analysis/output/CBF_barplot/CBF_barplot_23_08_04_WT1_030_Rec_at_100.73fps_dark.csv.png")) +
-  draw_label("sagittal", x = 0.5, y = 0.99, size = 7, hjust = 0.5)
+  draw_label("sagittal", x = 0.5, y = 0.95, size = 9, hjust = 0.5)
 panel_cbf_bar_tent <- ggdraw() + draw_image(readPNG("analysis/data/balancer_CBF_Pearson_correlation_analysis/output/CBF_barplot/CBF_barplot_23_08_01_WT1_007_Rec_at_100.20fps_dark.csv.png")) +
-  draw_label("tentacular", x = 0.5, y = 0.99, size = 7, hjust = 0.5)
+  draw_label("tentacular", x = 0.5, y = 0.95, size = 9, hjust = 0.5)
 panel_cor_graph <- ggdraw() + draw_image(readPNG("analysis/data/balancer_CBF_Pearson_correlation_analysis/output/pearson_boxplot/boxplot_correlation_angle_0-20_win_20.png"))
 
 panel_comparison <- ggdraw() + draw_image(readPNG("manuscript/pictures/map_comparison.png"))

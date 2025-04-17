@@ -47,7 +47,7 @@ for (i in 1:nrow(filtered_files)) {
 # STEP 2: Load preprocessed data and analyze ----------------------------------------
 
 # Parameters
-window_sizes <- c(25)
+window_sizes <- c(20)
 
 # Barplot
 plot_bar <- function(df, file_name, plane) {
@@ -60,7 +60,12 @@ plot_bar <- function(df, file_name, plane) {
     geom_bar(aes(y = -right), stat = "identity", fill = c_right, alpha = 0.7, na.rm = TRUE) +
     labs(x = "Time (sec)", y = "CBF (Hz)") +
     theme_minimal() +
-    theme(plot.title = element_blank())
+    theme(
+      plot.title = element_blank(),
+      text = element_text(size = 14),        
+      axis.title = element_text(size = 14),  
+      axis.text = element_text(size = 12)   
+    )
   
   ggsave(file.path(output_barplot, paste0("CBF_barplot_", file_name, ".png")),
          plot = p, width = 4, height = 3, dpi = 300, bg = "white")
@@ -100,7 +105,12 @@ plot_rolling <- function(corr, file_name, plane, window) {
     geom_point(color = color, size = 2) +
     labs(x = "Time Index", y = "Rolling Pearson Correlation") +
     theme_minimal() +
-    theme(plot.title = element_blank()) +
+    theme(
+      plot.title = element_blank(),
+      text = element_text(size = 14),
+      axis.title = element_text(size = 14),
+      axis.text = element_text(size = 12)
+    ) +
     ylim(-1, 1)
   
   sub_dir <- file.path(output_corrplot, paste0("window_", window))
@@ -134,6 +144,7 @@ plot_boxplot <- function(results, window) {
     geom_boxplot(fill = "lightgray", alpha = 0.5, outlier.shape = NA) +
     geom_jitter(width = 0.2, size = 3, alpha = 0.6) +
     scale_color_manual(values = c("S" = "#148daa", "T" = "#e89014")) +
+    scale_x_discrete(labels = c("S" = "sagittal", "T" = "tentacular")) + 
     labs(
       x = NULL,
       y = paste("Mean Rolling Pearson Correlation (Window =", window, ")"),
@@ -141,9 +152,10 @@ plot_boxplot <- function(results, window) {
     ) +
     theme_minimal() +
     theme(
-      plot.title = element_text(hjust = 0.5),
-      legend.position = "none",
-      axis.title.x = element_blank()
+      plot.title = element_text(hjust = 0.5, size = 12),
+      axis.title.y = element_text(size = 14),
+      axis.text = element_text(size = 14),
+      legend.position = "none"
     ) +
     ylim(-1, 1)
   
