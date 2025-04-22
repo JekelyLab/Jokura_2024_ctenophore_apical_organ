@@ -57,15 +57,16 @@ Ctenophores possess a unique gravity receptor (statocyst) in their aboral organ 
 
 ## Introduction
 
-<!--# the paper is not so much about evolution, so I suggest to start by introducing the cteno balancer organ -->
+Ctenophores, or comb jellies, are gelatinous marine animals that actively swim by beating rows of fused cilia known as comb plates. These coordinated ciliary movements not only generate propulsion but also allow precise control of body orientation and directional changes within the water column. Despite lacking a centralized nervous system, ctenophores exhibit sophisticated and dynamic behavioral patterns and respond to a broad range of external stimuli, suggesting the presence of an evolutionarily unique and functionally integrated sensorimotor system.
 
-<!--# the things that need to be mentioned are -->
 
-Ctenophores are gelatinous ... ciliary comb rows ... active swimming and reorientation ...
 
-<!--# then introduce the nervous system of ctenos -->
 
-Ctenophores show sophisticated and dynamic behavioral patterns and respond to a wide range of external stimuli. These behaviors are thought to be regulated by multiple neural systems, including the subepithelial nerve net (SNN), mesogleal neurons, an aboral organ, and tentacular nerves. However, the mechanisms by which these neural systems control behavior remain largely unexplored. Molecular phylogeny and chromosome-level synteny analyses suggest that ctenophores may be the sister group to all other animals [@Ryan2013; @Whelan2015a; @Whelan2017; @Whelan2023; @Li2021; @Schultz2023]. In agreement with this early divergence from all other animals with a nervous system, the ctenophore nervous system shows several unique features that suggest independent evolution from other animals <!--# cite some Moroz papers -->.
+
+
+These behaviors are thought to be regulated by multiple neural systems, including the subepithelial nerve net (SNN), mesogleal neurons, an aboral organ, and tentacular nerves. However, the mechanisms by which these neural systems control behavior remain largely unexplored. Molecular phylogeny and chromosome-level synteny analyses suggest that ctenophores may be the sister group to all other animals [@Ryan2013; @Whelan2015a; @Whelan2017; @Whelan2023; @Li2021; @Schultz2023]. In agreement with this early divergence from all other animals with a nervous system, the ctenophore nervous system shows several unique features that suggest independent evolution from other animals 
+
+<!--# cite some Moroz papers -->.
 
 ... syncytial nerve net ... highly peptidergic
 
