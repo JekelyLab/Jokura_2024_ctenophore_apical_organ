@@ -51,40 +51,20 @@ csl: elife.csl #change according to journal
 
 ## Abstract
 
-<!--# I rewrote a bit the abstract, please check -->
-
 Ctenophores possess a unique gravity receptor (statocyst) in their aboral organ formed by four clusters of ciliated balancer cells that collectively support a statolyth. During reorientation, differential load on the balancer cilia leads to altered beating of the ciliated comb rows to elicit turns. To study the neural bases of gravity sensing, we imaged by volume electron microscopy (vEM) the aboral organ of the ctenophore *Mnemiopsis leidyi*. We reconstructed 909 cells, including syncytial neurons that form a nerve net. The syncytial neurons synapse on the balancer cells and also form reciprocal connection with the bridge cells that span the statocyst. High-speed imaging revealed that balancer cilia beat and arrest in a coordinated manner but with differences between the sagittal and tentacular planes of the animal, reflecting nerve-net organisation. Our results suggest a coordinating rather than effector function for the nerve net and inform our understanding of the diversity of nervous-systems organisation across animals.
 
 ## Introduction
 
 Ctenophores, or comb jellies, are gelatinous marine animals that actively swim by beating rows of fused cilia known as comb plates. These coordinated ciliary movements not only generate propulsion but also allow precise control of body orientation and directional changes within the water column. Despite lacking a centralized nervous system, ctenophores exhibit sophisticated and dynamic behavioral patterns and respond to a broad range of external stimuli, suggesting the presence of an evolutionarily unique and functionally integrated sensorimotor system.
+Several components of the ctenophore nervous system have been described, including a subepithelial nerve net (SNN), mesogleal neurons, tentacular nerves, and elements of nervous system in the aboral organ [@Hertwig; @Hernandez-Nicaise; @Jager]. These neural structures are characterized by unique features such as a syncytial architecture [@Burkhardt] and an extensive repertoire of lineage-specific neuropeptides not found in other metazoans [@Sachkova2021; @Hayakawa2022]. Notably, early single-cell transcriptomic studies failed to identify canonical neuronal clusters using conventional markers [@Sebe-Pedros2018]. It was only through the use of pro-neuropeptide-based markers that distinct neural cell types were subsequently identified [@Sachkova2021; @Hayakawa2022].
+In parallel, phylogenomic and chromosomal synteny analyses have suggested that ctenophores may represent the sister group to all other animals [@Ryan2013; @Whelan2015; @Li2021; @Schultz2023], raising the possibility that their nervous system evolved independently from those of other metazoans [@Moroz]. This hypothesis positions ctenophores as a key lineage for re-evaluating the origins and diversity of neural systems.
+However, without a detailed understanding of how ctenophore neurons are spatially organized and interconnected, it remains unclear how their nervous system gives rise to behavior. Clarifying this relationship between neural architecture and behavioral control is essential to uncovering the logic of ctenophore neural function.
 
+To address the lack of structural understanding of how ctenophores control behavior, we focused on a unique sensory structure—the aboral organ. This gravity-sensing organ contains a statocyst supported by four mechanosensory balancer cells, which act as pacemakers for comb plate beating and posture control [@Horiddge1965; @Tamm1980]. Ultrastructural and immunohistochemical studies have revealed that the aboral organ contains diverse sensory and neural components, including a distinct neural structure termed the deep nerve net [@aronova1974electron; @Hernandez-Nicaise1968; @Jager2011].
+A key feature of balancer cilia is their bidirectional, mechanoresponsive control of beat frequency. Depending on the direction of deflection and the animal’s geotactic state, balancer cilia may either increase or decrease their activity, indicating a dynamic response system not fixed like vertebrate hair cells [@Horridge1965; @Tamm1982; @Tamm2014]. 
+Previous studies have implicated membrane potential, intracellular calcium concentration, and synaptic input in modulating this response [@Lowe1997]. In particular, deflection-induced excitation can be abolished by calcium channel inhibitors or calcium-free conditions [@Lowe1997], while high extracellular K⁺ depolarizes and activates cilia in the absence of mechanical stimuli [@Lowe1997]. Local calcium application further suggests that Ca²⁺ influx at the ciliary base may be required for the excitatory response [@Lowe1997]. These findings support the hypothesis that neural modulation plays a critical role in shaping balancer cell output [@Lowe1997].
 
-
-
-
-
-These behaviors are thought to be regulated by multiple neural systems, including the subepithelial nerve net (SNN), mesogleal neurons, an aboral organ, and tentacular nerves. However, the mechanisms by which these neural systems control behavior remain largely unexplored. Molecular phylogeny and chromosome-level synteny analyses suggest that ctenophores may be the sister group to all other animals [@Ryan2013; @Whelan2015a; @Whelan2017; @Whelan2023; @Li2021; @Schultz2023]. In agreement with this early divergence from all other animals with a nervous system, the ctenophore nervous system shows several unique features that suggest independent evolution from other animals 
-
-<!--# cite some Moroz papers -->.
-
-... syncytial nerve net ... highly peptidergic
-
-The molecular makeup of ctenophore neurons is so divergent, that the first single-cell analyses did not identify a neuronal cluster [@Sebe-Pedros2018]. Only through the analysis of proneuropeptide markers were neuronal clusters identified [@Sachkova2021; @Hayakawa2022]. ... organisation largely unknown ... synapse structure
-
-<!--# the phylogeny is not really relevant here, ctenos are interesting in their own right, so I would cut this a bit and we don't need to cite all the same genomic and tree papers, rater cite all the nice Tamm papers and EM papers etc -->
-
-Another unique feature of ctenophores is their aboral organ that contains the statocyst. Ultrastructural analyses have revealed that the aboral organ contains a diverse array of sensory cells and neuronal components [@Hernandez-Nicaise1968; @Hernandez_Nicaise_1973; @Hernandez-Nicaise1974; @Tamm1982]. Immunostaining with an antibody labelling tyrosylated α-tubulin identified a neural structure called the deep nerve net within the aboral organ, suggesting its involvement in neural regulation of sensory-motor control [@Jager2011].
-
-<!--# then the makeup and function of the balancer -->
-
-...balancer in the aboral organ
-
-The aboral organ, also known as aboral organ, of ctenophores contains a dense mineralized mass known as the statocyst, supported by four mechanosensory ciliated cells called balancer cells [@Noda_2014]. The ciliary movements of these balancer cells function as pacemakers for the eight rows of comb plates that control posture and swimming through mechanotransduction [@Tamm_2014; @Tamm1982]. Synaptic connections projecting to the balancer cells have also been reported [@aronova1974electron].
-
-... balancer cilia, statolyth ... tuning of frequency ... pacemaker function ... reorientation
-
-In this study, we combine volume EM and high-speed imaging to examine the gravity-sensing system within the aboral organ of the ctenophore *Mnemiopsis leidyi*. Through connectome analysis, we uncovered the structure and synaptic organisation of the aboral nerve net. Our imaging experiments revealed correlated changes in the activity of balancer cilia, suggesting a coordinating activity for the aboral nerve net.
+To investigate how balancer cilia are modulated within the aboral organ, we combined volume electron microscopy and high-speed imaging in the ctenophore *Mnemiopsis leidyi*. Through connectomic reconstruction, we characterized the synaptic architecture of the aboral nerve net, and functional imaging revealed correlated activity patterns in balancer cilia. These results suggest that the aboral nerve net plays a central role in integrating sensory input and coordinating motor output.
 
 ## Results
 
