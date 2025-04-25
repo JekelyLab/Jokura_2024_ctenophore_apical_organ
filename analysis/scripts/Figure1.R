@@ -102,7 +102,9 @@ close3d()
 panel_catmaid_overview <- ggdraw() + draw_image(readPNG("manuscript/pictures/overview.png")) +
   draw_label("serial EM volume", x = 0.5, y = 0.925, size = 11, fontface = "plain", hjust = 0.5) +
   draw_label("619 sections", x = 0.025, y = 0.81, color = "black", size = 9, hjust = 0) +
-  draw_label("927 cells", x = 0.025, y = 0.75, color = "black", size = 9, hjust = 0)
+  draw_label("927 cells", x = 0.025, y = 0.75, color = "black", size = 9, hjust = 0) +
+  draw_line(x = c(0.75, 0.9), y = c(0.05, 0.05), color = "black", size = 0.5) +
+  draw_label(expression(paste("10 ", mu, "m")), x = 0.825, y = 0.09, color = "black", size = 8, hjust = 0.5)
 
 #panel_3d_all_cells <- ggdraw() + draw_image(readPNG("manuscript/pictures/all_cells_3_views.png"))
 
@@ -138,7 +140,8 @@ panel_quadrants <- ggdraw() + draw_image(readPNG("manuscript/pictures/quadrants.
   draw_label("Q2", x = 0.06, y = 0.79, color = Okabe_Ito[2], size = 13, hjust = 0.5, alpha = 1) +
   draw_label("Q3", x = 0.03, y = 0.08, color = Okabe_Ito[6], size = 13, hjust = 0.5, alpha = 1) +
   draw_label("Q4", x = 0.275, y = 0.11, color = Okabe_Ito[7], size = 13, hjust = 0.5, alpha = 1) +
-  draw_label("aboral view", x = 0.17, y = 1, color = "black", size = 11, hjust = 0.5) +
+  draw_label("aboral view", x = 0.17, y = 1.1, color = "black", size = 12, hjust = 0.5) +
+  draw_label("lateral view", x = 0.66, y = 1.1, color = "black", size = 12, hjust = 0.5) +
   draw_label("sagittal plane", x = 0.5, y = 1, color = "black", size = 11, hjust = 0.5) +
   draw_label("tentacular plane", x = 0.83, y = 1, color = "black", size = 11, hjust = 0.5)  +
   draw_label(expression(paste("25 ", mu, "m")), x = 0.95, y = 0.1, color = "black", size = 10, hjust = 0.5) +
@@ -192,27 +195,32 @@ panel_quadrants <- ggdraw() + draw_image(readPNG("manuscript/pictures/quadrants.
 
 panel_larva_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/Mnemiopsis_larva_24hpf.png"))
 
+panel_AO_aov <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_mag_pics_schem_aboral_view.png"))
+
 panel_AO_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_mag_pics.png"))
+panel_AO_pic_lv <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_mag_pics_lateral_view.png"))
 
 panel_larva_schematic <- ggdraw() + draw_image(image_read("manuscript/pictures/larva_aboral_view_schematic.png"))
 
-panel_AO_schematic <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_schematic.png"))
+panel_AO_schem <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_schematic.png"))
+panel_AO_schem_lv <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_schematic_lateral_view.png"))
+
 
 
 layout <- "
-ACCC
+ABCC
 ####
-BDDD
+DDEE
 ####
-EFFF
+FGGG
 "
 
-Figure1 <- panel_larva_pic + panel_larva_schematic +  
-  panel_AO_pic + panel_AO_schematic + 
+Figure1 <- panel_larva_pic + panel_larva_schematic + panel_AO_aov +  
+  panel_AO_pic_lv + panel_AO_schem_lv + 
   panel_catmaid_overview + panel_quadrants +
   plot_layout(
     design = layout,
-    heights = c(1, 0.1, 1, 0.1, 1),
+    heights = c(1, 0.2, 1.2, 0.2, 1),
     widths = c(1, 1, 1, 1)
   ) + 
   patchwork::plot_annotation(tag_levels = "A") &  
@@ -222,10 +230,10 @@ Figure1 <- panel_larva_pic + panel_larva_schematic +
 
 ggsave("manuscript/figures/Figure1.png",
   limitsize = FALSE,
-  units = c("px"), Figure1, width = 3200, height = 2200, bg = "white"
+  units = c("px"), Figure1, width = 3200, height = 2500, bg = "white"
 )
 
 ggsave("manuscript/figures/Figure1.pdf",
   limitsize = FALSE,
-  units = c("px"), Figure1, width = 3200, height = 2200
+  units = c("px"), Figure1, width = 3200, height = 2500
 )
