@@ -20,7 +20,8 @@ library(jpeg)
 library(magick)
 library(ggbeeswarm)
 library(scales)
-
+library(ggsignif)
+library(rstatix)
 
 
 # catmaid connection, needs username, password AND token - weird!

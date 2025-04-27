@@ -225,44 +225,93 @@ close3d()
 
 
 
-# load of mitochondrial tidy csv file ------------------------------------------
+# load of mitochondrial data csv file ------------------------------------------
 
-mito_means_tidy <- read.csv("analysis/data/mito_means_tidy.csv")
+df <- read_csv("analysis/data/mito_vesicle_info.csv")
 
-# bar graph of mito vesicles ratio by celltypes ---------------------------------
+# mitochondrial data csv file ------------------------------------------
 
-mito_means_tidy <- mito_means_tidy %>%
-  mutate(
-    celltype = ifelse(celltype %in% c("Cgroove-sag", "Cgroove-tag"), "cg", celltype),
-    characteristic = ifelse(characteristic %in% c("mean_vesicles_none", "mean_vesicles_unclear"), 
-                            "mean_vesicles_no_syn", 
-                            characteristic)
-  ) %>%
-  filter(!celltype %in% c("nonciliated", "multiciliated", "monociliated", "biciliated"))
+df <- df %>%
+  mutate(synapse_related = ifelse(mito_type == "vesicles_syn", "mean_vesicles_syn", "mean_vesicles_no_syn"))
 
-label_mapping <- c(
-  "balancer" = "bal", "bridge" = "brg", "bristle" = "bsl", "cg" = "cg",
-  "dense_vesicle" = "dv", "dome" = "do", "intra-multi-ciliated" = "imc", 
-  "lamellate" = "la", "lithocyte" = "li", "plumose" = "pl", 
-  "SSN" = "ANN", "epithelial_floor" = "ef"
+exclude_types <- c("biciliated", "monociliated", "multiciliated", "nonciliated", "SNN", NA)
+
+df <- df %>%
+  filter(!(celltype %in% exclude_types))
+
+rename_map <- c(
+  "balancer" = "bal", 
+  "bridge" = "brg", 
+  "bristle" = "bsl", 
+  "Cgroove" = "cg",
+  "dense_vesicle" = "dv", 
+  "dome" = "do", 
+  "intra-multi-ciliated" = "imc", 
+  "lamellate" = "la", 
+  "lithocyte" = "li", 
+  "plumose" = "pl", 
+  "SSN" = "ANN", 
+  "epithelial_floor" = "ef"
 )
 
-mito_means_tidy <- mito_means_tidy %>%
-  mutate(celltype = factor(celltype, levels = names(label_mapping)))
+df <- df %>%
+  mutate(celltype = recode(celltype, !!!rename_map))
 
-plot_mito_stats <- ggplot(mito_means_tidy, aes(
-  fill = factor(characteristic, levels = c("mean_vesicles_syn", "mean_vesicles_no_syn")),
-  y = value,
-  x = celltype
-)) +
-  geom_bar(position = "stack", stat = "identity") +
-  theme_bw() +
+# calculate averages using mitochondrial data and format the data --------------
+
+# Aggregation of individual cell data
+summary_df <- df %>%
+  group_by(celltype, skid, synapse_related) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  pivot_wider(names_from = synapse_related, values_from = count, values_fill = 0)
+
+# Creation of average data (for bar graphs)
+mean_summary <- summary_df %>%
+  group_by(celltype) %>%
+  summarise(
+    mean_vesicles_syn = mean(mean_vesicles_syn),
+    mean_vesicles_no_syn = mean(mean_vesicles_no_syn),
+    .groups = "drop"
+  ) %>%
+  pivot_longer(cols = c(mean_vesicles_syn, mean_vesicles_no_syn), names_to = "characteristic", values_to = "value")
+
+
+# Align the number of cells (n) of each celltype with celltype_order
+celltype_order <- c("bal", "brg", "bsl", "cg", "dv", "do", "imc", "la", "li", "pl", "ANN", "ef")
+
+n_counts <- summary_df %>%
+  group_by(celltype) %>%
+  summarise(n = n()) %>%
+  arrange(factor(celltype, levels = celltype_order))
+
+n_labels <- paste0(n_counts$celltype, " (", n_counts$n, ")")
+
+mean_summary$celltype <- factor(mean_summary$celltype, levels = celltype_order)
+summary_df$celltype <- factor(summary_df$celltype, levels = celltype_order)
+
+
+# plot Average number of mitochondria per cell -----------------------------------------------------------
+
+plot_mito_stats <- 
+  ggplot() +
+  geom_bar(data = mean_summary, aes(
+    x = celltype, 
+    y = value, 
+    fill = factor(characteristic, 
+                  levels = c("mean_vesicles_syn", "mean_vesicles_no_syn"))), 
+    stat = "identity", position = "stack", width = 0.7) +
+  geom_jitter(data = summary_df, 
+              aes(x = celltype, y = mean_vesicles_no_syn), 
+              width = 0.2, color = "black", size = 1, alpha = 0.5) +
+  geom_jitter(data = summary_df %>% filter(mean_vesicles_syn > 0), 
+              aes(x = celltype, y = mean_vesicles_syn + mean_vesicles_no_syn), 
+              width = 0.2, color = "green3", size = 1.5, alpha = 0.75) +
   scale_fill_manual(
     values = c("mean_vesicles_syn" = "green4", "mean_vesicles_no_syn" = "darkgrey"),
     labels = c("mean_vesicles_syn" = "mitochondria with synapses", 
-               "mean_vesicles_no_syn" = "mitochondria not forming synapses")
-  ) +
-  scale_x_discrete(labels = label_mapping) +
+               "mean_vesicles_no_syn" = "mitochondria not forming synapses")) +
+  theme_bw() +
+  scale_x_discrete(labels = n_labels) +
   theme(
     axis.line = element_blank(),
     panel.grid.major = element_blank(),
@@ -270,29 +319,24 @@ plot_mito_stats <- ggplot(mito_means_tidy, aes(
     panel.border = element_blank(),
     panel.background = element_blank(),
     axis.ticks = element_blank(),
-    axis.text.x = element_text(size = 15, 
-                               angle = -70, vjust = 0.5, hjust = 0, margin = margin(t = -7)),
-    axis.text.y = element_text(size = 15), 
-    axis.title = element_text(size = 15),
+    axis.text.x = element_text(size = 15, angle = -70, vjust = 0.5, hjust = 0, margin = margin(t = -7)),
+    axis.text.y = element_text(size = 15),
+    axis.title.x = element_text(size = 15),
+    axis.title.y = element_text(size = 13),
     legend.title = element_blank(),
-    legend.position = "inside",
-    legend.position.inside = c(0.3, 0.75),
+    legend.position = c(0.3, 0.75),
     text = element_text(size = 15)
   ) +
-  ylab("Average number of mitochondria") +
+  ylab("Mean mitochondria count per cell") +
   xlab("Cell types")
 
+ggsave("manuscript/pictures/plot_mito_stats.png", 
+       plot = plot_mito_stats,
+       width = 2000,
+       height = 1100,
+       units = "px",
+       dpi = 300)
 
-plot_mito_stats
-
-ggsave(
-  filename = "manuscript/pictures/mito_in_syn.png",
-  plot = plot_mito_stats,
-  width = 1800,
-  height = 1100,
-  units = "px",
-  dpi = 300
-)
 
 # load of mitochondrial location information-------------------------------
 
@@ -745,21 +789,32 @@ close3d()
 # assemble figure -------------------------------------------------------------
 
 panel_SSN_Q1234 <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_Q1234.png")) +
+  draw_label("Aboral nerve net (ANN) Q1-4", x = 0.5, y = 1.05, color = Okabe_Ito[5], size = 10, hjust = 0.5) +
+  draw_label("aboral view", x = 0.18, y = 0.95, color = "black", size = 8, hjust = 0.5) +
+  draw_label("lateral view", x = 0.67, y = 0.95, color = "black", size = 8, hjust = 0.5) +
   draw_label("Q1", x = 0.3, y = 0.9, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
   draw_label("Q2", x = 0.06, y = 0.79, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
   draw_label("Q3", x = 0.03, y = 0.08, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
   draw_label("Q4", x = 0.275, y = 0.11, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
-  draw_label("Aboral nerve net (ANN) Q1-4", x = 0.05, y = 1, color = Okabe_Ito[5], size = 10, hjust = 0)
+  draw_label("sagittal plane", x = 0.5, y = 0.86, color = "black", size = 7.5, hjust = 0.5) +
+  draw_label("tentacular plane", x = 0.83, y = 0.86, color = "black", size = 7.5, hjust = 0.5) +
+  draw_label("A", x = 0.67, y = 0.85, size = 7, color = "black", hjust = 0.5) +
+  draw_label("O", x = 0.67, y = 0.65, size = 7, color = "black", hjust = 0.5) +
+  draw_line(x = c(0.67, 0.67), y = c(0.69, 0.81), color = "black", linewidth = 0.65) +
+  draw_label(expression(paste("25 ", mu, "m")), x = 0.95, y = 0.1, color = "black", size = 7, hjust = 0.5) +
+  draw_line(x = c(0.91, 0.99), y = c(0.05, 0.05), color = "black", linewidth = 0.7)
 
 panel_SSN_Q12_Q34 <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_Q12_Q34.png")) +
+#  draw_label("ANN Q1Q2, ANN Q3Q4", x = 0.5, y = 1, color = "gray", size = 10, hjust = 0.5) +
+  draw_label("ANN Q1Q2", x = 0.347, y = 1, color = Okabe_Ito[6], size = 10, hjust = 0) +
+  draw_label(",", x = 0.492, y = 1, color = "black", size = 10, hjust = 0) +
+  draw_label("ANN Q3Q4", x = 0.507, y = 1, color = Okabe_Ito[7], size = 10, hjust = 0) +
   draw_label("Q1", x = 0.3, y = 0.9, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
   draw_label("Q2", x = 0.06, y = 0.79, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
   draw_label("Q3", x = 0.03, y = 0.08, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
-  draw_label("Q4", x = 0.275, y = 0.11, color = "black", size = 9, hjust = 0.5, alpha = 0.5) +
-  draw_label("ANN Q1Q2", x = 0.05, y = 1, color = Okabe_Ito[6], size = 10, hjust = 0) +
-  draw_label("ANN Q3Q4", x = 0.225, y = 1, color = Okabe_Ito[7], size = 10, hjust = 0)
+  draw_label("Q4", x = 0.275, y = 0.11, color = "black", size = 9, hjust = 0.5, alpha = 0.5)
 
-panel_mito_bar_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/mito_in_syn.png"))
+panel_mito_bar_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/plot_mito_stats.png"))
 
 panel_mito_pos <- ggdraw() + draw_image(readPNG("manuscript/pictures/mito_pos_SSN.png")) +
   draw_label("mitochondria with synapses", x = 0.05, y = 0.98, color = "green4", size = 10.5, hjust = 0) +
@@ -770,20 +825,39 @@ panel_mito_pos <- ggdraw() + draw_image(readPNG("manuscript/pictures/mito_pos_SS
 
 panel_EM_SSN <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_EM_schematic.png"))
 
+circle_m <- ggdraw() + draw_image(readPNG("manuscript/pictures/synapse_magenta.png"))
+circle_lb <- ggdraw() + draw_image(readPNG("manuscript/pictures/synapse_lightblue.png"))
+circle_db <- ggdraw() + draw_image(readPNG("manuscript/pictures/synapse_darkblue.png"))
 
 panel_SSN_prepost_synapse <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_prepost_synapse.png")) +
-  draw_label("Q1-4 → Q1Q2 or Q3Q4", x = 0.05, y = 1.06, color = "#ff00ff", size = 10, hjust = 0) +
-  draw_label("Q1Q2 or Q3Q4 → Q1-4", x = 0.05, y = 0.96, color = "#00c9ff", size = 10, hjust = 0)
+#  draw_label("ANN Q1-4 → ANN Q1Q2 or Q3Q4", x = 0.06, y = 1.06, color = "gray", size = 8.5, hjust = 0) +
+  draw_label("ANN Q1-4", x = 0.06, y = 1.06, color = Okabe_Ito[5], size = 8.5, hjust = 0) +
+  draw_label(" → ", x = 0.175, y = 1.06, color = "black", size = 8.5, hjust = 0) +
+  draw_label("ANN Q1Q2", x = 0.21, y = 1.06, color = Okabe_Ito[6], size = 8.5, hjust = 0) +
+  draw_label(" or ", x = 0.335, y = 1.06, color = "black", size = 8.5, hjust = 0) +
+  draw_label("Q3Q4", x = 0.37, y = 1.06, color = Okabe_Ito[7], size = 8.5, hjust = 0) +
+#  draw_label("ANN Q1Q2 or Q3Q4 → ANN Q1-4", x = 0.06, y = 0.96, color = "gray", size = 8.5, hjust = 0) +
+  draw_label("ANN Q1Q2", x = 0.06, y = 0.96, color = Okabe_Ito[6], size = 8.5, hjust = 0) +
+  draw_label(" or ", x = 0.185, y = 0.96, color = "black", size = 8.5, hjust = 0) +
+  draw_label("Q3Q4", x = 0.22, y = 0.96, color = Okabe_Ito[7], size = 8.5, hjust = 0) +
+  draw_label(" → ", x = 0.285, y = 0.96, color = "black", size = 8.5, hjust = 0) +
+  draw_label("ANN Q1-4", x = 0.32, y = 0.96, color = Okabe_Ito[5], size = 8.5, hjust = 0) +
+#  draw_label("ANN Q1-4 → ANN Q1-4", x = 0.56, y = 1.06, color = "gray", size = 8.5, hjust = 0) +
+  draw_label("ANN Q1-4", x = 0.56, y = 1.06, color = Okabe_Ito[5], size = 8.5, hjust = 0) +
+  draw_label(" → ", x = 0.675, y = 1.06, color = "black", size = 8.5, hjust = 0) +
+  draw_label("ANN Q1-4", x = 0.71, y = 1.06, color = Okabe_Ito[5], size = 8.5, hjust = 0) +
+  draw_plot(circle_m, x = 0.02, y = 1.035, width = 0.05, height = 0.05) +
+  draw_plot(circle_lb, x = 0.02, y = 0.935, width = 0.05, height = 0.05) +
+  draw_plot(circle_db, x = 0.52, y = 1.035, width = 0.05, height = 0.05)
 
-
-panel_SSN_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_graph.png"))
+#panel_SSN_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_graph.png"))
 
 
 layout <- "
 #########
 AAAA#BBBB
 #########
-CCCDDDDDG
+CCCC#DDDD
 #########
 EEEE#FFFF
 #########
@@ -791,8 +865,7 @@ EEEE#FFFF
 
 Figure2 <- panel_SSN_Q1234 + panel_SSN_Q12_Q34 +
   panel_mito_bar_graph + panel_mito_pos + 
-  panel_EM_SSN + panel_SSN_prepost_synapse + 
-  panel_SSN_graph +
+  panel_EM_SSN + panel_SSN_prepost_synapse +
   plot_layout(design = layout,
               heights = c(0.05, 1, 0.15, 1.3, 0.15, 1, 0.05),
               widths = c(1, 1, 1, 1, 0.2, 1, 1, 1, 1)) + 
@@ -806,7 +879,7 @@ ggsave("manuscript/figures/Figure2.png", limitsize = FALSE,
 
 
 ggsave("manuscript/figures/Figure2.pdf", limitsize = FALSE, 
-       units = c("px"), Figure2, width = 3000, height = 1700) 
+       units = c("px"), Figure2, width = 3000, height = 1800) 
 
 
 
