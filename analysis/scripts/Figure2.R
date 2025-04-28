@@ -224,6 +224,90 @@ close3d()
 
 
 
+# calculate percentage of mitochondria which have vesicles or synapses associated with them -----
+
+mito_done <- read.neurons.catmaid("mitochondria done", pid = 35)
+
+get_pos_of_tags_in_neuron <- function(neur, tagname) {
+  # argument is neuron (data type), not skid
+  tag_positions <- tibble(
+    treenodeid = character(),
+    x = double(),
+    y = double(),
+    z = double()
+  )
+  tags <- neur$tags[[tagname]]
+  for (tag in tags) {
+    pos <- neur$d |>
+      filter(PointNo == tag) |>
+      select(X, Y, Z)
+    tag <- as.character(tag)
+    tag_positions <- tag_positions |> bind_rows(list(
+      treenodeid = tag,
+      x = pos$X, y = pos$Y, z = pos$Z
+    ))
+  }
+  return(tag_positions)
+}
+
+get_mito_pos <- function(neur) {
+  # accepts neuron as input
+  sskid <- neur$NeuronName
+  celltype <- catmaid_get_annotations_for_skeletons(sskid, pid = 35) |>
+    select(annotation) |>
+    filter(grepl("celltype:", annotation)) |>
+    pull()
+  celltype <- gsub(".*:", "", celltype)
+  if (length(celltype) == 0) {
+    celltype <- "NA"
+  }
+  
+  ves_none <- get_pos_of_tags_in_neuron(neur, "mitochondrion no vesicles")
+  ves_none <- bind_cols(mito_type = "vesicles_none", ves_none)
+  
+  if (nrow(ves_none) == 0) {
+    ves_none <- get_pos_of_tags_in_neuron(neur, "mitochondrion")
+    ves_none <- bind_cols(mito_type = "vesicles_none", ves_none)
+  }
+  
+  ves_unc <- get_pos_of_tags_in_neuron(neur, "mitochondrion unclear vesicles")
+  ves_unc <- bind_cols(mito_type = "vesicles_unc", ves_unc)
+  
+  ves_yes <- get_pos_of_tags_in_neuron(neur, "mitochondrion vesicles")
+  ves_yes <- bind_cols(mito_type = "vesicles", ves_yes)
+  # treenodes with outgoing synapses
+  connectors <- neur$connectors
+  if (!is.null(connectors)) {
+    syn_out_treenodes <- connectors |>
+      filter(prepost == 0) |>
+      select(treenode_id) |>
+      pull()
+  } else {
+    syn_out_treenodes <- integer()
+  }
+  # check if the mitochondrion is associated with a synapse
+  for (treenode in ves_yes$treenodeid) {
+    if (treenode %in% syn_out_treenodes) {
+      mitotype <- "vesicles_syn"
+    } else {
+      mitotype <- "vesicles_no_syn"
+    }
+    ves_yes <- ves_yes |>
+      mutate(mito_type = replace(mito_type, treenodeid == treenode, mitotype))
+  }
+  mito_pos <- bind_rows(ves_none, ves_unc, ves_yes)
+  mito_pos <- bind_cols(
+    celltype = celltype,
+    skid = sskid,
+    mito_pos
+  )
+  return(mito_pos)
+}
+
+mito_vesicle_info <- lapply(mito_done, get_mito_pos) |>
+  bind_rows()
+
+write.csv(mito_vesicle_info, "analysis/data/mito_vesicle_info.csv")
 
 # load of mitochondrial data csv file ------------------------------------------
 
@@ -311,7 +395,7 @@ plot_mito_stats <-
     labels = c("mean_vesicles_syn" = "mitochondria with synapses", 
                "mean_vesicles_no_syn" = "mitochondria not forming synapses")) +
   theme_bw() +
-  scale_x_discrete(labels = n_labels) +
+#  scale_x_discrete(labels = n_labels) +
   theme(
     axis.line = element_blank(),
     panel.grid.major = element_blank(),
@@ -322,7 +406,7 @@ plot_mito_stats <-
     axis.text.x = element_text(size = 15, angle = -70, vjust = 0.5, hjust = 0, margin = margin(t = -7)),
     axis.text.y = element_text(size = 15),
     axis.title.x = element_text(size = 15),
-    axis.title.y = element_text(size = 13),
+    axis.title.y = element_text(size = 13, margin = margin(r = 15)),
     legend.title = element_blank(),
     legend.position = c(0.3, 0.75),
     text = element_text(size = 15)
@@ -332,7 +416,7 @@ plot_mito_stats <-
 
 ggsave("manuscript/pictures/plot_mito_stats.png", 
        plot = plot_mito_stats,
-       width = 2000,
+       width = 2400,
        height = 1100,
        units = "px",
        dpi = 300)

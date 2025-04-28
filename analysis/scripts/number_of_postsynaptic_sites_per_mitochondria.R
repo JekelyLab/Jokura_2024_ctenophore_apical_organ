@@ -1,6 +1,6 @@
 source("analysis/scripts/packages_and_functions.R")
 
-# calculate average number of post-synaptic sites per synapse  -----
+# calculate average number of post-synaptic sites per synapse  -----------------
 
 pre_connectors <- catmaid_fetch(
   path = "35/connectors/",
@@ -117,7 +117,7 @@ mito_vesicle_info <- lapply(mito_done, get_mito_pos) |>
 write.csv(mito_vesicle_info, "analysis/data/mito_vesicle_info.csv")
 mito_vesicle_info <- read.csv("analysis/data/mito_vesicle_info.csv")
 
-# create tibble for graph ---------------------------------
+# create tibble for graph ------------------------------------------------------
 
 mito_stats <- mito_vesicle_info %>%
   group_by(skid, mito_type) %>%

@@ -173,12 +173,61 @@ ggsave("manuscript/pictures/3d_plot/all_assemble.png", limitsize = FALSE,
 
 
 # load Subepithelial nerve net -------------------------------------------------
+
 SNN <- read_smooth_neuron("celltype:SNN")
 
 # 3d plot Subepithelial nerve net -----------------------------------------------
 
-plot_multinucleated_views("SNN", SNN)
+close3d()
+# 3d plotting of cells
+nopen3d() 
+mfrow3d(1, 3)  
+#define the size of the rgl window, the view and zoom
+par3d(windowRect = c(0, 0, 1200, 350))
 
+#plot aboral view
+plot_multinucleated_cell(SNN, lwd = 1.25, alpha = 0.8, col = Okabe_Ito[5])
+plot3d(outline, add = TRUE, alpha = 0.025, col = Okabe_Ito[8])
+
+#aboral view
+aboral()
+par3d(zoom = 0.7)
+
+#move to next panel in rgl window
+next3d(clear=F)
+
+
+
+#plot lateral view of Sagittal plane
+plot_multinucleated_cell(SNN, lwd = 1.25, alpha = 0.8, col = Okabe_Ito[5])
+plot3d(outline, add = TRUE, alpha = 0.025, col = Okabe_Ito[8])
+
+#lateral view of Sagittal plane
+sagittal()
+par3d(zoom = 0.7)
+
+#move to next panel in rgl window
+next3d(clear=F)
+
+
+
+#plot lateral view of Tentacular plane
+plot_multinucleated_cell(SNN, lwd = 1.25, alpha = 0.8, col = Okabe_Ito[5])
+plot3d(outline, add = TRUE, alpha = 0.025, col = Okabe_Ito[8])
+
+#lateral view of Tentacular plane
+tentacular()
+par3d(zoom = 0.7)
+
+#move to next panel in rgl window
+next3d(clear=F)
+
+
+#make a snapshot to the working directory
+rgl.snapshot("manuscript/pictures/3d_plot/plot_SNN.png")
+
+
+close3d()
 
 
 
@@ -269,13 +318,33 @@ panel_all_assemble <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot
 
 panel_all_cells <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/all_cells_3_views_alt.png"))
 
-panel_SNN <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_SNN.png"))
+panel_SNN_3d <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_SNN.png"))
+panel_SNN_EM <- ggdraw() + draw_image(readPNG("manuscript/pictures/SNN_EM.png"))
 
 
-Suppl_fig <- panel_all_assemble + panel_all_cells + panel_SNN
+panel_CAT_pic <- ggdraw() + draw_image(readPNG("manuscript/pictures/figure_sup2_1.png"))
+
+panel_mono_vs_poly <- ggdraw() + draw_image(readPNG("manuscript/pictures/figure_sup2_2.png"))
+
+panel_multi_nucleus <- ggdraw() + draw_image(readPNG("manuscript/pictures/multi_nucleus.png"))
+
+layout <- "
+ABC
+DEF
+"
+
+Suppl_fig <- panel_all_assemble + panel_all_cells + 
+  panel_CAT_pic + panel_mono_vs_poly + panel_multi_nucleus +
+  panel_SNN_3d + panel_SNN_EM +
+  plot_layout(design = layout,
+              heights = c(),
+              widths = c()) + 
+  patchwork::plot_annotation(tag_levels = "A") &  
+  ggplot2::theme(plot.tag = element_text(size = 12, 
+                                         face='plain', color='black'))
 
 ggsave("manuscript/figures/Supplemental_figure.png", limitsize = FALSE, 
-       units = c("px"), Suppl_fig, width = 2700, height = 500, bg='white')  
+       units = c("px"), Suppl_fig, width = 2700, height = 1000, bg='white')  
 
 
 
