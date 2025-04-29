@@ -20,6 +20,9 @@ bridge_Q1Q2 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:bri
 bridge_Q3Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:bridge", "Q3Q4")))
 
 
+balancer_skids <- names(balancer)
+
+
 # bar graph of outputs from SNNs -----------------------------------------------
 
 SSN_Q1Q2 <- read_smooth_neuron("SSN_Q1Q2")[[1]]
