@@ -19,12 +19,12 @@ balancer_Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:bal
 bridge_Q1Q2 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:bridge", "Q1Q2")))
 bridge_Q3Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:bridge", "Q3Q4")))
 
+
+# bar graph of outputs from SNNs -----------------------------------------------
+
 SSN_Q1Q2 <- read_smooth_neuron("SSN_Q1Q2")[[1]]
 SSN_Q3Q4 <- read_smooth_neuron("SSN_Q3Q4")[[1]]
 SSN_Q1Q2Q3Q4 <- read_smooth_neuron("SSN_Q1Q2Q3Q4")[[1]]
-
-
-# bar graph of outputs from SNNs -----------------------------------------------
 
 SSN_Q1Q2_skid <- SSN_Q1Q2$skid
 SSN_Q3Q4_skid <- SSN_Q3Q4$skid
@@ -111,36 +111,83 @@ label_mapping <- c(
 )
 
 
+# pre-synapse (take output-side connector)
+syn_out_SSN_Q1Q2 <- stats_synapse %>%
+  filter(prepost == 0, skid == SSN_Q1Q2_skid) %>%
+  select(connector_id) %>%
+  mutate(SSN_source = "SSN_Q1Q2")
+
+syn_out_SSN_Q3Q4 <- stats_synapse %>%
+  filter(prepost == 0, skid == SSN_Q3Q4_skid) %>%
+  select(connector_id) %>%
+  mutate(SSN_source = "SSN_Q3Q4")
+
+syn_out_SSN_Q1Q2Q3Q4 <- stats_synapse %>%
+  filter(prepost == 0, skid == SSN_Q1Q2Q3Q4_skid) %>%
+  select(connector_id) %>%
+  mutate(SSN_source = "SSN_Q1Q2Q3Q4")
+
+# Putting together all the connector_id and SSN_source
+connector_source_table <- bind_rows(
+  syn_out_SSN_Q1Q2,
+  syn_out_SSN_Q3Q4,
+  syn_out_SSN_Q1Q2Q3Q4
+)
+
+# join to connector_id when taking postsynapse
+SSN_downstream <- stats_synapse %>%
+  filter(prepost == 1) %>%
+  inner_join(connector_source_table, by = "connector_id") %>%
+  left_join(stats_master %>% select(skid, celltype), by = "skid")
+
+
+
+# plot
 plot_output_number <- 
   SSN_downstream %>%
   filter(!celltype %in% c("monociliated", "biciliated", "multiciliated", "nonciliated", NA)) %>%
-  ggplot(aes(x = factor(celltype, levels = all_celltypes))) +
-  geom_bar(fill = "#0072b2") +
+  ggplot(aes(x = factor(celltype, levels = all_celltypes), 
+             fill = factor(SSN_source, levels = c("SSN_Q1Q2Q3Q4", "SSN_Q1Q2", "SSN_Q3Q4")))) +
+  geom_bar(position = "stack", alpha = 0.75) +
   theme_minimal() +
   labs(
-    x = "Cell types",
-    y = "Number of outputs"
+    x = "Postsynaptic cell types",
+    y = "# of synapses from ANNs",
+    fill = NULL  
   ) +
   theme(
     axis.text.x = element_text(size = 17, angle = -70, vjust = 0.5, hjust = 0, margin = margin(t = -7)),
-    axis.text.y = element_text(size = 17), 
+    axis.text.y = element_text(size = 17),
     axis.title = element_text(size = 18),
     panel.grid.major = element_blank(),
-    panel.grid.minor = element_blank()
+    panel.grid.minor = element_blank(),
+    legend.text = element_text(size = 13)
   ) +
-  scale_x_discrete(limits = all_celltypes, labels = label_mapping)
+  scale_x_discrete(limits = all_celltypes, labels = label_mapping) +
+  scale_fill_manual(
+    values = c(
+      "SSN_Q1Q2Q3Q4" = Okabe_Ito[5],   
+      "SSN_Q1Q2" = Okabe_Ito[6],
+      "SSN_Q3Q4" = Okabe_Ito[7]
+    ),
+    labels = c(
+      "SSN_Q1Q2Q3Q4" = "ANN Q1-4",
+      "SSN_Q1Q2" = "ANN Q1Q2",
+      "SSN_Q3Q4" = "ANN Q3Q4"
+    )
+  )
 
 plot_output_number
 
 ggsave(
   filename = "manuscript/pictures/output_from_SSNs.png",
   plot = plot_output_number,
-  width = 2250,
-  height = 1000,
+  width = 2585,
+  height = 1100,
   units = "px",
-  dpi = 300
+  dpi = 300,
+  bg='white'
 )
-
 
 
 # plot balancer -------------------------------------------------------------
@@ -419,7 +466,7 @@ rgl.snapshot("manuscript/pictures/bridge.png")
 close3d()
 
 
-# plot bridge -----------------------------------------------
+# plot bridge and balancer -----------------------------------------------------
 
 close3d()
 
@@ -822,7 +869,7 @@ plot_SNN_to_balancer <- function() {
     SSN_Q1Q2_to_balancer$x, 
     SSN_Q1Q2_to_balancer$y,
     SSN_Q1Q2_to_balancer$z,
-    size = 0.6, alpha = 1, col = "orange", 
+    size = 0.8, alpha = 0.7, col = "orange", 
     add = TRUE,
     point_antialias = TRUE,
     type = "s"
@@ -832,7 +879,7 @@ plot_SNN_to_balancer <- function() {
     SSN_Q3Q4_to_balancer$x, 
     SSN_Q3Q4_to_balancer$y,
     SSN_Q3Q4_to_balancer$z,
-    size = 0.6, alpha = 1, col = "magenta", 
+    size = 0.8, alpha = 0.7, col = "magenta", 
     add = TRUE,
     point_antialias = TRUE,
     type = "s"
@@ -842,12 +889,13 @@ plot_SNN_to_balancer <- function() {
     SSN_Q1Q2Q3Q4_to_balancer$x, 
     SSN_Q1Q2Q3Q4_to_balancer$y,
     SSN_Q1Q2Q3Q4_to_balancer$z,
-    size = 0.6, alpha = 1, col = "blue", 
+    size = 0.8, alpha = 0.7, col = "dodgerblue2", 
     add = TRUE,
     point_antialias = TRUE,
     type = "s"
   )
 }
+
 
 close3d()
 # 3d plotting of cells
@@ -1128,19 +1176,19 @@ write.csv(syn_df, "manuscript/source_data/synapse_matrix_df.csv", row.names = FA
 
 # matrix plot ------------------------------------------------------------------
 
-rename_map <- c("balancer_Q1" = "bal_Q1", 
-                "balancer_Q2" = "bal_Q2", 
-                "balancer_Q3" = "bal_Q3", 
-                "balancer_Q4" = "bal_Q4",
-                "bridge_Q1Q2" = "brg_Q1Q2",
-                "bridge_Q3Q4" = "brg_Q3Q4",
-                "SSN_Q1Q2" = "ANN_Q1Q2", 
-                "SSN_Q3Q4" = "ANN_Q3Q4", 
-                "SSN_Q1Q2Q3Q4" = "ANN_Q1-4")
+rename_map <- c("balancer_Q1" = "bal Q1", 
+                "balancer_Q2" = "bal Q2", 
+                "balancer_Q3" = "bal Q3", 
+                "balancer_Q4" = "bal Q4",
+                "bridge_Q1Q2" = "brg Q1Q2",
+                "bridge_Q3Q4" = "brg Q3Q4",
+                "SSN_Q1Q2" = "ANN Q1Q2", 
+                "SSN_Q3Q4" = "ANN Q3Q4", 
+                "SSN_Q1Q2Q3Q4" = "ANN Q1-4")
 
-custom_order <- c("bal_Q1", "bal_Q2", "brg_Q1Q2", "ANN_Q1Q2", 
-                  "bal_Q3", "bal_Q4", "brg_Q3Q4", "ANN_Q3Q4", 
-                  "ANN_Q1-4")
+custom_order <- c("bal Q1", "bal Q2", "brg Q1Q2", "ANN Q1Q2", 
+                  "bal Q3", "bal Q4", "brg Q3Q4", "ANN Q3Q4", 
+                  "ANN Q1-4")
 
 syn_df <- syn_df %>%
   mutate(
@@ -1183,8 +1231,10 @@ ggsave(
   width = 2000,
   height = 1700,
   units = "px",
-  dpi = 300
+  dpi = 300,
+  bg='white'
 )
+
 
 
 # assemble figure -------------------------------------------------------------
@@ -1192,82 +1242,72 @@ ggsave(
 panel_output <- ggdraw() + draw_image(readPNG("manuscript/pictures/output_from_SSNs.png"))
 
 panel_bal <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer.png")) +
-    #  draw_line(x = c(0, 1), y = c(0, 0), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0, 1), y = c(0.1, 0.1), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0, 1), y = c(0.2, 0.2), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0, 1), y = c(0.3, 0.3), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0, 1), y = c(0.4, 0.4), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0, 1), y = c(0.5, 0.5), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0, 1), y = c(0.6, 0.6), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0, 1), y = c(0.7, 0.7), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0, 1), y = c(0.8, 0.8), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0, 1), y = c(0.9, 0.9), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0, 1), y = c(1, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0, 0), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0.1, 0.1), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0.2, 0.2), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0.3, 0.3), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0.4, 0.4), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0.5, 0.5), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0.6, 0.6), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0.7, 0.7), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0.8, 0.8), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(0.9, 0.9), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
-    #  draw_line(x = c(1, 1), y = c(0, 1), color = "black", linewidth = 0.25, alpha = 0.1) +
-  draw_label("Q1", x = 0.25, y = 0.88, color = Okabe_Ito[1], size = 9, hjust = 0, alpha = 1) +
-  draw_label("Q2", x = 0.1, y = 0.78, color = Okabe_Ito[2], size = 9, hjust = 1, alpha = 1) +
-  draw_label("Q3", x = 0.075, y = 0.1, color = Okabe_Ito[6], size = 9, hjust = 1, alpha = 1) +
-  draw_label("Q4", x = 0.24, y = 0.2, color = Okabe_Ito[7], size = 9, hjust = 0, alpha = 1) +
-  draw_label("Balancer cells", x = 0.5, y = 1, color = "black", size = 10, hjust = 0.5)
+  draw_label("Balancers", x = 0.5, y = 1.05, color = "black", size = 10, hjust = 0.5) +
+  draw_label("Q1", x = 0.25, y = 0.84, color = Okabe_Ito[1], size = 9, hjust = 0, alpha = 1) +
+  draw_label("Q2", x = 0.1, y = 0.77, color = Okabe_Ito[2], size = 9, hjust = 1, alpha = 1) +
+  draw_label("Q3", x = 0.075, y = 0.13, color = Okabe_Ito[6], size = 9, hjust = 1, alpha = 1) +
+  draw_label("Q4", x = 0.22, y = 0.2, color = Okabe_Ito[7], size = 9, hjust = 0, alpha = 1) +
+  draw_label("aboral view", x = 0.18, y = 0.95, color = "black", size = 8, hjust = 0.5) +
+  draw_label("lateral view", x = 0.67, y = 0.95, color = "black", size = 8, hjust = 0.5) +
+  draw_label("sagittal plane", x = 0.5, y = 0.86, color = "black", size = 7.5, hjust = 0.5) +
+  draw_label("tentacular plane", x = 0.83, y = 0.86, color = "black", size = 7.5, hjust = 0.5) +
+  draw_label("A", x = 0.67, y = 0.85, size = 7, color = "black", hjust = 0.5) +
+  draw_label("O", x = 0.67, y = 0.65, size = 7, color = "black", hjust = 0.5) +
+  draw_line(x = c(0.67, 0.67), y = c(0.69, 0.81), color = "black", linewidth = 0.65) +
+  draw_label(expression(paste("25 ", mu, "m")), x = 0.95, y = 0.1, color = "black", size = 7, hjust = 0.5) +
+  draw_line(x = c(0.91, 0.99), y = c(0.05, 0.05), color = "black", linewidth = 0.7)
 
 panel_bri <- ggdraw() + draw_image(readPNG("manuscript/pictures/bridge.png")) +
-  draw_label("Q1Q2", x = 0.2, y = 0.88, color = Okabe_Ito[2], size = 9, hjust = 0, alpha = 1) +
-  draw_label("Q3Q4", x = 0.2, y = 0.18, color = Okabe_Ito[7], size = 9, hjust = 0, alpha = 1) +
-  draw_label("Bridge cells", x = 0.5, y = 1, color = "black", size = 10, hjust = 0.5)
+  draw_label("Bridges", x = 0.5, y = 0.95, color = "black", size = 10, hjust = 0.5) +
+  draw_label("Q1Q2", x = 0.2, y = 0.86, color = Okabe_Ito[2], size = 9, hjust = 0, alpha = 1) +
+  draw_label("Q3Q4", x = 0.19, y = 0.18, color = Okabe_Ito[7], size = 9, hjust = 0, alpha = 1)
+
+circle_g <- ggdraw() + draw_image(readPNG("manuscript/pictures/synapse_green.png"))
+circle_gy <- ggdraw() + draw_image(readPNG("manuscript/pictures/synapse_gray.png"))
 
 panel_bri_mito <- ggdraw() + draw_image(readPNG("manuscript/pictures/mito_pos_bridge.png")) +
-  draw_label("mitochondria with synapses", x = 0.06, y = 0.99, color = "green4", size = 8.5, hjust = 0) +
-  draw_label("mitochondria not forming synapses", x = 0.06, y = 0.91, color = "black", size = 8.5, hjust = 0, alpha = 0.7) +
-  draw_label("bridge_Q1Q2", x = 0.95, y = 1, color = Okabe_Ito[2], size = 7, hjust = 1) +
-  draw_label("bridge_Q3Q4", x = 0.95, y = 0.92, color = Okabe_Ito[7], size = 7, hjust = 1)
+  draw_plot(circle_g, x = 0.06, y = 0.995, width = 0.05, height = 0.05) +
+  draw_label("With synapses", x = 0.1, y = 1.02, color = "green4", size = 8.5, hjust = 0) +
+  draw_plot(circle_gy, x = 0.06, y = 0.915, width = 0.05, height = 0.05) +
+  draw_label("Not forming synapses", x = 0.1, y = 0.94, color = "black", size = 8.5, hjust = 0, alpha = 0.7) +
+  draw_label("bridge_Q1Q2", x = 0.95, y = 1.015, color = Okabe_Ito[2], size = 7.5, hjust = 1) +
+  draw_label("bridge_Q3Q4", x = 0.95, y = 0.92, color = Okabe_Ito[7], size = 7.5, hjust = 1)
+
+circle_dob <- ggdraw() + draw_image(readPNG("manuscript/pictures/synapse_dodgerblue.png"))
+circle_or <- ggdraw() + draw_image(readPNG("manuscript/pictures/synapse_orange.png"))
+circle_m <- ggdraw() + draw_image(readPNG("manuscript/pictures/synapse_magenta.png"))
 
 panel_SSN_bal <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_prepost_synapse_balancer.png")) +
-  draw_label("ANN to balancers", x = 0.06, y = 1, color = "#ff00ff", size = 8, hjust = 0)
+  draw_label("→ Balancers", x = 0.505, y = 1.025, color = "gray30", size = 8, hjust = 0) +
+  draw_plot(circle_dob, x = 0.065, y = 1, width = 0.05, height = 0.05) +
+  draw_plot(circle_or, x = 0.2, y = 1, width = 0.05, height = 0.05) +
+  draw_plot(circle_m, x = 0.345, y = 1, width = 0.05, height = 0.05) +
+  draw_label("ANN Q1-4", x = 0.1, y = 1.025, color = Okabe_Ito[5], size = 8, hjust = 0) +
+  draw_label("ANN Q1Q2", x = 0.235, y = 1.025, color = Okabe_Ito[6], size = 8, hjust = 0) +
+  draw_label("ANN Q3Q4", x = 0.38, y = 1.025, color = Okabe_Ito[7], size = 8, hjust = 0)
+
+circle_m <- ggdraw() + draw_image(readPNG("manuscript/pictures/synapse_magenta.png"))
+circle_lb <- ggdraw() + draw_image(readPNG("manuscript/pictures/synapse_lightblue.png"))
 
 panel_SSN_bri <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_prepost_synapse_bridge.png")) +
-  draw_label("ANN to bridges", x = 0.06, y = 1, color = "#ff00ff", size = 8, hjust = 0) +
-  draw_label("bridges to ANN", x = 0.25, y = 1, color = "#00c9ff", size = 8, hjust = 0) +
-  draw_label("ANN_Q1-4", x = 0.85, y = 1.15, color = Okabe_Ito[5], size = 7, hjust = 0) +
-  draw_label("ANN_Q1Q2", x = 0.85, y = 1.07, color = Okabe_Ito[6], size = 7, hjust = 0) +
-  draw_label("ANN_Q3Q4", x = 0.85, y = 0.99, color = Okabe_Ito[7], size = 7, hjust = 0)
+  draw_plot(circle_m, x = 0.06, y = 0.975, width = 0.05, height = 0.05) +
+  draw_label("ANN → Bridges", x = 0.1, y = 1, color = "gray30", size = 8, hjust = 0) +
+  draw_plot(circle_lb, x = 0.26, y = 0.975, width = 0.05, height = 0.05) +
+  draw_label("Bridges → ANN", x = 0.3, y = 1, color = "gray30", size = 8, hjust = 0) +
+  draw_label("ANN Q1-4", x = 0.85, y = 1.13, color = Okabe_Ito[5], size = 7, hjust = 0) +
+  draw_label("ANN Q1Q2", x = 0.85, y = 1.06, color = Okabe_Ito[6], size = 7, hjust = 0) +
+  draw_label("ANN Q3Q4", x = 0.85, y = 0.99, color = Okabe_Ito[7], size = 7, hjust = 0)
 
 panel_matrix <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancers_bridges_matrix.png"))
 panel_map_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/map_balancer_bridge_SSN_1.png"))
 
-#layout <- "
-#AAABBBCCC
-##########
-#DDDDFFFGG
-#####FFFGG
-#EEEEFFFGG
-#"
-
-#Figure3 <- panel_bal + panel_bri + panel_bri_mito +
-#  panel_SSN_bal + panel_SSN_bri + 
-#  panel_matrix + panel_map_graph +
-#  plot_layout(design = layout,
-#              heights = c(1, 0.15, 1, 0.1, 1),
-#              widths = c(1, 1, 1, 1, 1, 1, 1, 1, 1)) + 
-#  patchwork::plot_annotation(tag_levels = "A") &  
-#  ggplot2::theme(plot.tag = element_text(size = 12, 
-#                                         face='plain', color='black'))
 
 
 layout <- "
+####
 A#EE
 ####
 B#FF
-##FF
 C###
 C#GH
 ##GH
@@ -1278,18 +1318,18 @@ Figure3 <- panel_output + panel_bal + panel_bri + panel_bri_mito +
   panel_SSN_bal + panel_SSN_bri + 
   panel_matrix + panel_map_graph +
   plot_layout(design = layout,
-              heights = c(1, 0.1, 0.8, 0.2, 0.1, 0.7, 0.1, 0.8),
-              widths = c(1.1, 0.1, 0.8, 0.7)) + 
+              heights = c(0.05, 1.1, 0.2, 1.1, 0.1, 0.9, 0.1, 0.9),
+              widths = c(1.6, 0.1, 1.1, 0.9)) + 
   patchwork::plot_annotation(tag_levels = "A") &  
   ggplot2::theme(plot.tag = element_text(size = 12, 
                                          face='plain', color='black'))
 
 
 ggsave("manuscript/figures/Figure3.png", limitsize = FALSE, 
-       units = c("px"), Figure3, width = 2700, height = 1700, bg='white')  
+       units = c("px"), Figure3, width = 3000, height = 2100, bg='white')  
 
 
 ggsave("manuscript/figures/Figure3.pdf", limitsize = FALSE, 
-       units = c("px"), Figure3, width = 2700, height = 1700) 
+       units = c("px"), Figure3, width = 3000, height = 2100) 
 
 

@@ -900,9 +900,14 @@ panel_SSN_Q12_Q34 <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_Q12_
 
 panel_mito_bar_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/plot_mito_stats.png"))
 
+circle_g <- ggdraw() + draw_image(readPNG("manuscript/pictures/synapse_green.png"))
+circle_gy <- ggdraw() + draw_image(readPNG("manuscript/pictures/synapse_gray.png"))
+
 panel_mito_pos <- ggdraw() + draw_image(readPNG("manuscript/pictures/mito_pos_SSN.png")) +
-  draw_label("mitochondria with synapses", x = 0.05, y = 0.98, color = "green4", size = 10.5, hjust = 0) +
-  draw_label("not forming synapses", x = 0.05, y = 0.9, color = "black", size = 10.5, hjust = 0, alpha = 0.8) +
+  draw_plot(circle_g, x = 0.06, y = 0.955, width = 0.05, height = 0.05) +
+  draw_label("Mitochondria with synapses", x = 0.1, y = 0.98, color = "green4", size = 10.5, hjust = 0) +
+  draw_plot(circle_gy, x = 0.06, y = 0.875, width = 0.05, height = 0.05) +
+  draw_label("Not forming synapses", x = 0.1, y = 0.9, color = "black", size = 10.5, hjust = 0, alpha = 0.7) +
   draw_label("ANN Q1-4", x = 0.85, y = 1, color = Okabe_Ito[5], size = 8, hjust = 0) +
   draw_label("ANN Q1Q2", x = 0.85, y = 0.94, color = Okabe_Ito[6], size = 8, hjust = 0) +
   draw_label("ANN Q3Q4", x = 0.85, y = 0.88, color = Okabe_Ito[7], size = 8, hjust = 0)
@@ -914,25 +919,25 @@ circle_lb <- ggdraw() + draw_image(readPNG("manuscript/pictures/synapse_lightblu
 circle_db <- ggdraw() + draw_image(readPNG("manuscript/pictures/synapse_darkblue.png"))
 
 panel_SSN_prepost_synapse <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_prepost_synapse.png")) +
-#  draw_label("ANN Q1-4 → ANN Q1Q2 or Q3Q4", x = 0.06, y = 1.06, color = "gray", size = 8.5, hjust = 0) +
+  #  draw_label("ANN Q1-4 → ANN Q1Q2 or Q3Q4", x = 0.06, y = 1.06, color = "gray", size = 8.5, hjust = 0) +
+  draw_plot(circle_m, x = 0.02, y = 1.035, width = 0.05, height = 0.05) +
   draw_label("ANN Q1-4", x = 0.06, y = 1.06, color = Okabe_Ito[5], size = 8.5, hjust = 0) +
   draw_label(" → ", x = 0.175, y = 1.06, color = "black", size = 8.5, hjust = 0) +
   draw_label("ANN Q1Q2", x = 0.21, y = 1.06, color = Okabe_Ito[6], size = 8.5, hjust = 0) +
   draw_label(" or ", x = 0.335, y = 1.06, color = "black", size = 8.5, hjust = 0) +
   draw_label("Q3Q4", x = 0.37, y = 1.06, color = Okabe_Ito[7], size = 8.5, hjust = 0) +
-#  draw_label("ANN Q1Q2 or Q3Q4 → ANN Q1-4", x = 0.06, y = 0.96, color = "gray", size = 8.5, hjust = 0) +
+  #  draw_label("ANN Q1Q2 or Q3Q4 → ANN Q1-4", x = 0.06, y = 0.96, color = "gray", size = 8.5, hjust = 0) +
+  draw_plot(circle_lb, x = 0.02, y = 0.935, width = 0.05, height = 0.05) +
   draw_label("ANN Q1Q2", x = 0.06, y = 0.96, color = Okabe_Ito[6], size = 8.5, hjust = 0) +
   draw_label(" or ", x = 0.185, y = 0.96, color = "black", size = 8.5, hjust = 0) +
   draw_label("Q3Q4", x = 0.22, y = 0.96, color = Okabe_Ito[7], size = 8.5, hjust = 0) +
   draw_label(" → ", x = 0.285, y = 0.96, color = "black", size = 8.5, hjust = 0) +
   draw_label("ANN Q1-4", x = 0.32, y = 0.96, color = Okabe_Ito[5], size = 8.5, hjust = 0) +
-#  draw_label("ANN Q1-4 → ANN Q1-4", x = 0.56, y = 1.06, color = "gray", size = 8.5, hjust = 0) +
+  #  draw_label("ANN Q1-4 → ANN Q1-4", x = 0.56, y = 1.06, color = "gray", size = 8.5, hjust = 0) +
+  draw_plot(circle_db, x = 0.52, y = 1.035, width = 0.05, height = 0.05) +
   draw_label("ANN Q1-4", x = 0.56, y = 1.06, color = Okabe_Ito[5], size = 8.5, hjust = 0) +
   draw_label(" → ", x = 0.675, y = 1.06, color = "black", size = 8.5, hjust = 0) +
-  draw_label("ANN Q1-4", x = 0.71, y = 1.06, color = Okabe_Ito[5], size = 8.5, hjust = 0) +
-  draw_plot(circle_m, x = 0.02, y = 1.035, width = 0.05, height = 0.05) +
-  draw_plot(circle_lb, x = 0.02, y = 0.935, width = 0.05, height = 0.05) +
-  draw_plot(circle_db, x = 0.52, y = 1.035, width = 0.05, height = 0.05)
+  draw_label("ANN Q1-4", x = 0.71, y = 1.06, color = Okabe_Ito[5], size = 8.5, hjust = 0)
 
 #panel_SSN_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/SSN_graph.png"))
 
