@@ -186,3 +186,7 @@ for (window in window_sizes) {
   
   plot_boxplot(results, window)
 }
+
+# Use if you want to save the result as a csv file just in case ----------------
+
+write_csv(results, "analysis/data/balancer_CBF_Pearson_correlation_analysis/output/csv/correlation_results.csv")
