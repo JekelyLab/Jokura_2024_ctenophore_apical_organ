@@ -118,6 +118,15 @@ for (info in files_info) {
   )
 }
 
+panel_cbf_bar_sag <- ggdraw() + draw_image(readPNG("manuscript/pictures/CBF_barplot_23_08_04_WT1_030_Rec_at_100.73fps_dark_f.png"))
+panel_cbf_bar_tent <- ggdraw() + draw_image(readPNG("manuscript/pictures/CBF_barplot_23_08_01_WT1_007_Rec_at_100.20fps_dark.png"))
+
+panel_cbf_bars_combined <- panel_cbf_bar_sag + panel_cbf_bar_tent +
+  plot_layout(ncol = 2, widths = c(1, 1))
+
+ggsave("manuscript/pictures/panel_cbf_bars_combined.png",
+       plot = panel_cbf_bars_combined,
+       width = 8, height = 3, dpi = 300, bg = "white")
 
 # boxplot of pearson comparison S vs T (windows = 20)---------------------------
 
@@ -185,25 +194,23 @@ panel_balancer <- ggdraw() + draw_image(readPNG("manuscript/pictures/balancer_cl
 panel_kymograph <- ggdraw() + draw_image(readPNG("manuscript/pictures/balacer_arrest_rebeat_kymograph.png"))
 panel_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/arrest_rebeat_graph.png"))
 
-panel_cbf_bar_sag <- ggdraw() + draw_image(readPNG("manuscript/pictures/CBF_barplot_23_08_04_WT1_030_Rec_at_100.73fps_dark_f.png")) +
-  draw_label("sagittal plane", x = 0.5, y = 0.95, size = 10, hjust = 0.5)
-panel_cbf_bar_tent <- ggdraw() + draw_image(readPNG("manuscript/pictures/CBF_barplot_23_08_01_WT1_007_Rec_at_100.20fps_dark.png")) +
-  draw_label("tentacular plane", x = 0.5, y = 0.95, size = 10, hjust = 0.5)
-panel_cor_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/boxplot_correlation_angle_0-20_win_20.png"))
+panel_cbf_bars <- ggdraw() + draw_image(readPNG("manuscript/pictures/panel_cbf_bars_combined.png")) +
+  draw_label("sagittal plane", x = 0.25, y = 0.975, size = 10, hjust = 0.5) +
+  draw_label("tentacular plane", x = 0.75, y = 0.975, size = 10, hjust = 0.5) 
 
-panel_comparison <- ggdraw() + draw_image(readPNG("manuscript/pictures/map_comparison.png"))
+panel_cor_graph <- ggdraw() + draw_image(readPNG("manuscript/pictures/boxplot_correlation_angle_0-20_win_20.png"))
 
 layout <- "
 A#BBB
 #####
 CCC#D
 #####
-E#F#G
+EEE#F
 "
 
 Figure4 <- panel_ms + panel_balancer + 
   panel_kymograph + panel_graph + 
-  panel_cbf_bar_sag + panel_cbf_bar_tent + panel_cor_graph +
+  panel_cbf_bars + panel_cor_graph +
   plot_layout(design = layout,
               heights = c(1, 0.05, 1.2, 0.2, 1),
               widths = c(1, 0.05, 1, 0.05, 1)) + 
