@@ -5,7 +5,7 @@ source("analysis/scripts/packages_and_functions.R")
 
 # assemble figure -------------------------------------------------------------
 
-panel_comparison <- ggdraw() + draw_image(readPNG("manuscript/pictures/map_comparison.png"))
+panel_comparison <- ggdraw() + draw_image(readPNG("manuscript/pictures/map_comparison_full.png"))
 
 layout <- "
 A
