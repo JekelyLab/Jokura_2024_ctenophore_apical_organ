@@ -1,5 +1,4 @@
-# Code to generate Supplement Figures of the Jokura et al 2024 Ctenophore apical organ connectome paper
-# not sure yet which figure this will be used to supplement, so store everything in this file for now
+# Code to generate Figure 1 Supplements of the Jokura et al 2024 Ctenophore apical organ connectome paper
 
 # source packages and functions ------------------------------------------------
 source("analysis/scripts/packages_and_functions.R")
@@ -92,147 +91,6 @@ plot_multinucleated_views <- function(neuron_name, neuron_data) {
 
 plot_multinucleated_views("SSN", SSN)
 
-# assemble individual plots -------------------------------------------------------------
-
-#read pics
-panel_balancer <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_balancer.png")) +
-  draw_label("balancer cells", x = 0.5, y = 0.95, size = 8.5, fontface="bold", hjust = 0.5) +
-  draw_label("aboral view", x = 0.01, y = 0.86, color="black", size = 6, fontface="plain", hjust = 0) +
-  draw_label("sagittal plane", x = 0.33, y = 0.86, color="black", size = 6, fontface="plain", hjust = 0) +
-  draw_label("tentacular plane", x = 0.69, y = 0.86, color="black", size = 6, fontface="plain", hjust = 0) +
-  draw_line(x = c(0.85, 0.95), y = c(0.1, 0.1), color = "black", size = 0.5) +
-  draw_label(expression(paste("25 ", mu, "m")), x = 0.9, y = 0.14, color = "black", size = 7, hjust = 0.5) +
-  draw_label("TA", x = 0.325, y = 0.16, size = 6, color = "black", hjust = 0.5) +
-  geom_segment(aes(x = 0.25, y = 0.16, xend = 0.31, yend = 0.16), color = "black", 
-               arrow = arrow(ends = "both", type = "closed", length = unit(0.1,"cm")),
-               lineend = "butt",
-               linejoin = "mitre",
-               arrow.fill = "black", linewidth = 0.175) +
-  draw_label("SA", x = 0.28, y = 0.05, size = 6, color = "black", hjust = 0.5) +
-  geom_segment(aes(x = 0.28, y = 0.08, xend = 0.28, yend = 0.24), color = "black", 
-               arrow = arrow(ends = "both", type = "closed", length = unit(0.1,"cm")),
-               lineend = "butt",
-               linejoin = "mitre",
-               arrow.fill = "black", linewidth = 0.175) +
-  draw_label("A", x = 0.66, y = 0.25, size = 6, color = "black", hjust = 0.5) +
-  draw_label("O", x = 0.66, y = 0.05, size = 6, color = "black", hjust = 0.5) +
-  geom_segment(aes(x = 0.66, y = 0.09, xend = 0.66, yend = 0.21), color = "black", 
-               arrow = arrow(ends = "both", type = "closed", length = unit(0.1,"cm")),
-               lineend = "butt",
-               linejoin = "mitre",
-               arrow.fill = "black", linewidth = 0.175)
-
-panel_bridge <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_bridge.png")) +
-  draw_label("bridge cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_bristle <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_bristle.png")) +
-  draw_label("bristle cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_Cgroove <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_Cgroove.png")) +
-  draw_label("ciliated groove cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_dense_vesicle <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_dense_vesicle.png")) +
-  draw_label("dense vesicle cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_dome <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_dome.png")) +
-  draw_label("dome cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_intra_multi_ciliated <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_intra_multi_ciliated.png")) +
-  draw_label("intra-multiciliated cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_lamellate <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_lamellate.png")) +
-  draw_label("lamellate bodies", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_lithocyte <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_lithocyte.png")) +
-  draw_label("lithocytes", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_plumose <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_plumose.png")) +
-  draw_label("plumose cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_SSN <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_SSN.png")) +
-  draw_label("aboral nerve net neurons", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_epithelial_floor <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_epithelial_floor.png")) +
-  draw_label("epithelial floor cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-
-layout <- "
-A#B#C
-#####
-D#E#F
-#####
-G#H#I
-#####
-J#K#L
-"
-
-all_assemble <- panel_balancer + panel_bridge + panel_bristle +
-  panel_Cgroove + panel_dense_vesicle + panel_dome + 
-  panel_intra_multi_ciliated + panel_lamellate + panel_lithocyte + 
-  panel_plumose + panel_SSN + panel_epithelial_floor +
-  patchwork::plot_layout(design = layout, 
-                         heights = c(1,0.05,1,0.05,1,0.05,1,0.05,1), 
-                         widths = c(1,0.05,1,0.05,1)) + 
-  patchwork::plot_annotation(tag_levels = "A") &  
-  ggplot2::theme(plot.tag = element_text(size = 12, 
-                                         face='plain', color='black'))
-
-
-ggsave("manuscript/pictures/3d_plot/all_assemble.png", limitsize = FALSE, 
-       units = c("px"), all_assemble, width = 3800, height = 2000, bg='white')  
-
-
-
-# load Subepithelial nerve net -------------------------------------------------
-
-SNN <- read_smooth_neuron("celltype:SNN")
-
-# 3d plot Subepithelial nerve net -----------------------------------------------
-
-close3d()
-# 3d plotting of cells
-nopen3d() 
-mfrow3d(1, 3)  
-#define the size of the rgl window, the view and zoom
-par3d(windowRect = c(0, 0, 1200, 350))
-
-#plot aboral view
-plot_multinucleated_cell(SNN, lwd = 1.25, alpha = 0.8, col = Okabe_Ito[5])
-plot3d(outline, add = TRUE, alpha = 0.025, col = Okabe_Ito[8])
-
-#aboral view
-aboral()
-par3d(zoom = 0.7)
-
-#move to next panel in rgl window
-next3d(clear=F)
-
-
-
-#plot lateral view of Sagittal plane
-plot_multinucleated_cell(SNN, lwd = 1.25, alpha = 0.8, col = Okabe_Ito[5])
-plot3d(outline, add = TRUE, alpha = 0.025, col = Okabe_Ito[8])
-
-#lateral view of Sagittal plane
-sagittal()
-par3d(zoom = 0.7)
-
-#move to next panel in rgl window
-next3d(clear=F)
-
-
-
-#plot lateral view of Tentacular plane
-plot_multinucleated_cell(SNN, lwd = 1.25, alpha = 0.8, col = Okabe_Ito[5])
-plot3d(outline, add = TRUE, alpha = 0.025, col = Okabe_Ito[8])
-
-#lateral view of Tentacular plane
-tentacular()
-par3d(zoom = 0.7)
-
-#move to next panel in rgl window
-next3d(clear=F)
-
-
-#make a snapshot to the working directory
-rgl.snapshot("manuscript/pictures/3d_plot/plot_SNN.png")
-
-
-close3d()
-
-
-
-
-
 
 # Display all cell types together in one 3d plot--------------------------------
 # get all cell types 
@@ -300,42 +158,124 @@ plot_celltypes_views <- function(celltypes_list, colour_palettes, output_file) {
 plot_celltypes_views(celltypes_list, colour_palettes, "manuscript/pictures/3d_plot/all_cells_3_views_alt.png")
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 # assemble figure -------------------------------------------------------------
 
-panel_all_assemble <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/all_assemble.png"))
 
-panel_all_cells <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/all_cells_3_views_alt.png"))
+#Figure1 Supplement1
+#read pics
+panel_balancer <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_balancer.png")) +
+  draw_label("balancer cells", x = 0.5, y = 0.95, size = 8.5, fontface="bold", hjust = 0.5) +
+  draw_label("aboral view", x = 0.01, y = 0.86, color="black", size = 6, fontface="plain", hjust = 0) +
+  draw_label("sagittal plane", x = 0.33, y = 0.86, color="black", size = 6, fontface="plain", hjust = 0) +
+  draw_label("tentacular plane", x = 0.69, y = 0.86, color="black", size = 6, fontface="plain", hjust = 0) +
+  draw_line(x = c(0.85, 0.95), y = c(0.1, 0.1), color = "black", size = 0.5) +
+  draw_label(expression(paste("25 ", mu, "m")), x = 0.9, y = 0.14, color = "black", size = 7, hjust = 0.5) +
+  draw_label("TA", x = 0.325, y = 0.16, size = 6, color = "black", hjust = 0.5) +
+  geom_segment(aes(x = 0.25, y = 0.16, xend = 0.31, yend = 0.16), color = "black", 
+               arrow = arrow(ends = "both", type = "closed", length = unit(0.1,"cm")),
+               lineend = "butt",
+               linejoin = "mitre",
+               arrow.fill = "black", linewidth = 0.175) +
+  draw_label("SA", x = 0.28, y = 0.05, size = 6, color = "black", hjust = 0.5) +
+  geom_segment(aes(x = 0.28, y = 0.08, xend = 0.28, yend = 0.24), color = "black", 
+               arrow = arrow(ends = "both", type = "closed", length = unit(0.1,"cm")),
+               lineend = "butt",
+               linejoin = "mitre",
+               arrow.fill = "black", linewidth = 0.175) +
+  draw_label("A", x = 0.66, y = 0.25, size = 6, color = "black", hjust = 0.5) +
+  draw_label("O", x = 0.66, y = 0.05, size = 6, color = "black", hjust = 0.5) +
+  geom_segment(aes(x = 0.66, y = 0.09, xend = 0.66, yend = 0.21), color = "black", 
+               arrow = arrow(ends = "both", type = "closed", length = unit(0.1,"cm")),
+               lineend = "butt",
+               linejoin = "mitre",
+               arrow.fill = "black", linewidth = 0.175)
 
-panel_SNN_3d <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_SNN.png"))
-panel_SNN_EM <- ggdraw() + draw_image(readPNG("manuscript/pictures/SNN_EM.png"))
-
-
-panel_CAT_pic <- ggdraw() + draw_image(readPNG("manuscript/pictures/figure_sup2_1.png"))
-
-panel_mono_vs_poly <- ggdraw() + draw_image(readPNG("manuscript/pictures/figure_sup2_2.png"))
-
-panel_multi_nucleus <- ggdraw() + draw_image(readPNG("manuscript/pictures/multi_nucleus.png"))
+panel_bridge <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_bridge.png")) +
+  draw_label("bridge cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
+panel_bristle <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_bristle.png")) +
+  draw_label("bristle cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
+panel_Cgroove <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_Cgroove.png")) +
+  draw_label("ciliated groove cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
+panel_dense_vesicle <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_dense_vesicle.png")) +
+  draw_label("dense vesicle cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
+panel_dome <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_dome.png")) +
+  draw_label("dome cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
+panel_intra_multi_ciliated <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_intra_multi_ciliated.png")) +
+  draw_label("intra-multiciliated cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
+panel_lamellate <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_lamellate.png")) +
+  draw_label("lamellate bodies", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
+panel_lithocyte <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_lithocyte.png")) +
+  draw_label("lithocytes", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
+panel_plumose <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_plumose.png")) +
+  draw_label("plumose cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
+panel_SSN <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_SSN.png")) +
+  draw_label("aboral nerve net neurons", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
+panel_epithelial_floor <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_epithelial_floor.png")) +
+  draw_label("epithelial floor cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
 
 layout <- "
-ABC
-DEF
+A#B#C
+#####
+D#E#F
+#####
+G#H#I
+#####
+J#K#L
 "
 
-Suppl_fig <- panel_all_assemble + panel_all_cells + 
-  panel_CAT_pic + panel_mono_vs_poly + panel_multi_nucleus +
-  panel_SNN_3d + panel_SNN_EM +
+Fig1_Sup1 <- panel_balancer + panel_bridge + panel_bristle +
+  panel_Cgroove + panel_dense_vesicle + panel_dome + 
+  panel_intra_multi_ciliated + panel_lamellate + panel_lithocyte + 
+  panel_plumose + panel_SSN + panel_epithelial_floor +
+  patchwork::plot_layout(design = layout, 
+                         heights = c(1,0.05,1,0.05,1,0.05,1,0.05,1), 
+                         widths = c(1,0.05,1,0.05,1)) + 
+  patchwork::plot_annotation(tag_levels = "A") &  
+  ggplot2::theme(plot.tag = element_text(size = 12, 
+                                         face='plain', color='black'))
+
+ggsave("manuscript/figures/Figure1_Supplement1.png", limitsize = FALSE, 
+       units = c("px"), Fig1_Sup1, width = 3800, height = 2000, bg='white') 
+
+ggsave("manuscript/figures/Figure1_Supplement1.pdf", limitsize = FALSE, 
+      units = c("px"), Fig1_Sup1, width = 3800, height = 2000) 
+
+
+
+#Figure1 Supplement2
+
+panel_all_cells <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/all_cells_3_views_alt.png")) +
+  draw_label("all cells", x = 0.5, y = 0.95, size = 8.5, fontface="bold", hjust = 0.5) +
+  draw_label("aboral view", x = 0.01, y = 0.86, color="black", size = 6, fontface="plain", hjust = 0) +
+  draw_label("sagittal plane", x = 0.33, y = 0.86, color="black", size = 6, fontface="plain", hjust = 0) +
+  draw_label("tentacular plane", x = 0.69, y = 0.86, color="black", size = 6, fontface="plain", hjust = 0) +
+  draw_line(x = c(0.85, 0.95), y = c(0.1, 0.1), color = "black", size = 0.5) +
+  draw_label(expression(paste("25 ", mu, "m")), x = 0.9, y = 0.14, color = "black", size = 7, hjust = 0.5) +
+  draw_label("TA", x = 0.325, y = 0.16, size = 6, color = "black", hjust = 0.5) +
+  geom_segment(aes(x = 0.25, y = 0.16, xend = 0.31, yend = 0.16), color = "black", 
+               arrow = arrow(ends = "both", type = "closed", length = unit(0.1,"cm")),
+               lineend = "butt",
+               linejoin = "mitre",
+               arrow.fill = "black", linewidth = 0.175) +
+  draw_label("SA", x = 0.28, y = 0.05, size = 6, color = "black", hjust = 0.5) +
+  geom_segment(aes(x = 0.28, y = 0.08, xend = 0.28, yend = 0.24), color = "black", 
+               arrow = arrow(ends = "both", type = "closed", length = unit(0.1,"cm")),
+               lineend = "butt",
+               linejoin = "mitre",
+               arrow.fill = "black", linewidth = 0.175) +
+  draw_label("A", x = 0.66, y = 0.25, size = 6, color = "black", hjust = 0.5) +
+  draw_label("O", x = 0.66, y = 0.05, size = 6, color = "black", hjust = 0.5) +
+  geom_segment(aes(x = 0.66, y = 0.09, xend = 0.66, yend = 0.21), color = "black", 
+               arrow = arrow(ends = "both", type = "closed", length = unit(0.1,"cm")),
+               lineend = "butt",
+               linejoin = "mitre",
+               arrow.fill = "black", linewidth = 0.175)
+
+layout <- "
+A
+"
+
+Fig1_Sup2 <- panel_all_cells +
   plot_layout(design = layout,
               heights = c(),
               widths = c()) + 
@@ -343,19 +283,12 @@ Suppl_fig <- panel_all_assemble + panel_all_cells +
   ggplot2::theme(plot.tag = element_text(size = 12, 
                                          face='plain', color='black'))
 
-ggsave("manuscript/figures/Supplemental_figure.png", limitsize = FALSE, 
-       units = c("px"), Suppl_fig, width = 2700, height = 1000, bg='white')  
+ggsave("manuscript/figures/Figure1_Supplement2.png", limitsize = FALSE, 
+       units = c("px"), Fig1_Sup2, width = 1200, height = 500, bg='white')  
 
 
-
-
-
-
-
-
-
-
-
+ggsave("manuscript/figures/Figure1_Supplement2.pdf", limitsize = FALSE, 
+       units = c("px"), Fig1_Sup2, width = 1200, height = 500) 
 
 
 

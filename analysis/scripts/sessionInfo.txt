@@ -6,8 +6,8 @@ Matrix products: default
 
 
 locale:
-[1] LC_COLLATE=Japanese_Japan.utf8  LC_CTYPE=Japanese_Japan.utf8    LC_MONETARY=Japanese_Japan.utf8 LC_NUMERIC=C                   
-[5] LC_TIME=Japanese_Japan.utf8    
+[1] LC_COLLATE=Japanese_Japan.utf8  LC_CTYPE=Japanese_Japan.utf8    LC_MONETARY=Japanese_Japan.utf8
+[4] LC_NUMERIC=C                    LC_TIME=Japanese_Japan.utf8    
 
 time zone: Asia/Tokyo
 tzcode source: internal
@@ -16,19 +16,21 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] data.table_1.16.2  rstatix_0.7.2      ggsignif_0.6.4     scales_1.3.0       ggbeeswarm_0.7.2   magick_2.8.5       jpeg_0.1-10       
- [8] av_0.9.3           tidygraph_1.3.1    RColorBrewer_1.1-3 patchwork_1.3.0    webshot2_0.1.1     visNetwork_2.1.2   networkD3_0.4     
-[15] igraph_2.1.1       png_0.1-8          cowplot_1.1.3      lubridate_1.9.3    forcats_1.0.0      stringr_1.5.1      dplyr_1.1.4       
-[22] purrr_1.0.2        readr_2.1.5        tidyr_1.3.1        tibble_3.2.1       ggplot2_3.5.1      tidyverse_2.0.0    plyr_1.8.9        
-[29] catmaid_0.10.1     nat_1.10.4         rgl_1.3.14         httr_1.4.7        
+ [1] data.table_1.16.2  rstatix_0.7.2      ggsignif_0.6.4     scales_1.3.0       ggbeeswarm_0.7.2   magick_2.8.5      
+ [7] jpeg_0.1-10        av_0.9.3           tidygraph_1.3.1    RColorBrewer_1.1-3 patchwork_1.3.0    webshot2_0.1.1    
+[13] visNetwork_2.1.2   networkD3_0.4      igraph_2.1.1       png_0.1-8          cowplot_1.1.3      lubridate_1.9.3   
+[19] forcats_1.0.0      stringr_1.5.1      dplyr_1.1.4        purrr_1.0.2        readr_2.1.5        tidyr_1.3.1       
+[25] tibble_3.2.1       ggplot2_3.5.1      tidyverse_2.0.0    plyr_1.8.9         catmaid_0.10.1     nat_1.10.4        
+[31] rgl_1.3.14         httr_1.4.7        
 
 loaded via a namespace (and not attached):
- [1] beeswarm_0.4.0    gtable_0.3.6      xfun_0.49         htmlwidgets_1.6.4 websocket_1.4.2   processx_3.8.4    tzdb_0.4.0       
- [8] vctrs_0.6.5       tools_4.4.1       ps_1.8.1          generics_0.1.3    curl_6.0.1        fansi_1.0.6       pkgconfig_2.0.3  
-[15] checkmate_2.3.2   filehash_2.4-6    lifecycle_1.0.4   compiler_4.4.1    farver_2.1.2      munsell_0.5.1     chromote_0.3.1   
-[22] codetools_0.2-20  carData_3.0-5     vipor_0.4.7       htmltools_0.5.8.1 nat.utils_0.6.1   yaml_2.3.10       Formula_1.2-5    
-[29] car_3.1-3         pillar_1.9.0      later_1.3.2       abind_1.4-8       nabor_0.5.0       tidyselect_1.2.1  digest_0.6.37    
-[36] stringi_1.8.4     fastmap_1.2.0     grid_4.4.1        colorspace_2.1-1  cli_3.6.3         magrittr_2.0.3    base64enc_0.1-3  
-[43] utf8_1.2.4        broom_1.0.7       withr_3.0.2       promises_1.3.2    backports_1.5.0   timechange_0.3.0  hms_1.1.3        
-[50] evaluate_1.0.1    knitr_1.49        rlang_1.1.4       Rcpp_1.0.13-1     glue_1.7.0        xml2_1.3.6        rstudioapi_0.17.1
-[57] jsonlite_1.8.8    R6_2.5.1         
+ [1] beeswarm_0.4.0    gtable_0.3.6      xfun_0.49         htmlwidgets_1.6.4 websocket_1.4.2   processx_3.8.4   
+ [7] tzdb_0.4.0        vctrs_0.6.5       tools_4.4.1       ps_1.8.1          generics_0.1.3    curl_6.0.1       
+[13] fansi_1.0.6       pkgconfig_2.0.3   checkmate_2.3.2   filehash_2.4-6    lifecycle_1.0.4   compiler_4.4.1   
+[19] farver_2.1.2      munsell_0.5.1     chromote_0.3.1    codetools_0.2-20  carData_3.0-5     vipor_0.4.7      
+[25] htmltools_0.5.8.1 nat.utils_0.6.1   yaml_2.3.10       Formula_1.2-5     car_3.1-3         pillar_1.9.0     
+[31] later_1.3.2       abind_1.4-8       nabor_0.5.0       tidyselect_1.2.1  digest_0.6.37     stringi_1.8.4    
+[37] fastmap_1.2.0     grid_4.4.1        colorspace_2.1-1  cli_3.6.3         magrittr_2.0.3    base64enc_0.1-3  
+[43] utf8_1.2.4        broom_1.0.7       withr_3.0.2       promises_1.3.2    backports_1.5.0   timechange_0.3.0 
+[49] hms_1.1.3         evaluate_1.0.1    knitr_1.49        rlang_1.1.4       Rcpp_1.0.13-1     glue_1.7.0       
+[55] xml2_1.3.6        rstudioapi_0.17.1 jsonlite_1.8.8    R6_2.5.1         
