@@ -258,7 +258,7 @@ This work was supported by the Japan Society for the Promotion of Science (JSPS)
 ## Supplementary material {.unnumbered}
 
 ![**Figure 1—figure supplement 1**\
-(A)...](figures/Supplemental_figure.png)
+(A)...](figures/Figure1_Supplement1.png)
 
 ![**Figure 2—figure supplement 1**\
-(A)...](figures/Supplemental_figure.png)
+(A)...](figures/Figure2_Supplement1.png)
