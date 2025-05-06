@@ -185,6 +185,14 @@ As revealed by our high-speed imaging, ciliary beat frequency (CBF) exhibited rh
 
 This architecture can be interpreted as a recurrent information loop, in which output from the ANN circuit modulates ciliary activity, and the resulting ciliary state is in turn relayed back to the ANN via bridge cells. Such a structure suggests a loop-based coordination mechanism, where the central circuit adapts its timing based on feedback from its target. Although the electrophysiological properties of bridge cells remain to be elucidated, their recursive integration into the ANN circuit indicates that they may play a central role in maintaining the robustness and flexibility of endogenous ciliary rhythms.
 
+### Conclusion
+
+How do differences in balancer cilia coordination across anatomical planes shape behavior? In *Mnemiopsis*, the animal swims upright with its mouth facing upward, and performs 90-degree rotational turns when hunting prey or responding to disturbances. Large rotational maneuvers may involve balancer cells in the tentacular plane, while sagittal-plane balancers may contribute to postural stabilization—but these remain hypotheses.
+
+Our findings reveal a circuit composed of ANN neurons and bridge cells that coordinates ciliary beating rhythms in space and time without sensory input, and features a recursive architecture in which ciliary outputs are relayed back into the circuit via bridge cells. Such a configuration suggests that even with a limited number of cells, the system is capable of flexible and robust rhythm control.
+
+As Jagar et al. (2010) once described, this organ evokes the metaphor of a “ciliary brain.” The network we describe here similarly orchestrates output through dynamic, self-regulating coordination. These dynamics, visualized through live imaging of the entire cell ensemble, offer a window into the core functions of a nervous system—not in complexity, but in principle.
+
 ## Materials and Methods
 
 ### Specimen Preparation, Volume Electron Microscopy, and Image Processing
