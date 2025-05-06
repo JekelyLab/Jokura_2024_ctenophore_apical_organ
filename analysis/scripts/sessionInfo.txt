@@ -16,11 +16,12 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] data.table_1.16.2  rstatix_0.7.2      ggsignif_0.6.4     scales_1.3.0       ggbeeswarm_0.7.2   magick_2.8.5      
- [7] jpeg_0.1-10        av_0.9.3           tidygraph_1.3.1    RColorBrewer_1.1-3 patchwork_1.3.0    webshot2_0.1.1    
-[13] visNetwork_2.1.2   networkD3_0.4      igraph_2.1.1       png_0.1-8          cowplot_1.1.3      lubridate_1.9.3   
-[19] forcats_1.0.0      stringr_1.5.1      dplyr_1.1.4        purrr_1.0.2        readr_2.1.5        tidyr_1.3.1       
-[25] tibble_3.2.1       ggplot2_3.5.1      tidyverse_2.0.0    plyr_1.8.9         catmaid_0.10.1     nat_1.10.4        
+ [1] data.table_1.16.2  rstatix_0.7.2      ggsignif_0.6.4     scales_1.3.0       ggbeeswarm_0.7.2  
+ [6] magick_2.8.5       jpeg_0.1-10        av_0.9.3           tidygraph_1.3.1    RColorBrewer_1.1-3
+[11] patchwork_1.3.0    webshot2_0.1.1     visNetwork_2.1.2   networkD3_0.4      igraph_2.1.1      
+[16] png_0.1-8          cowplot_1.1.3      lubridate_1.9.3    forcats_1.0.0      stringr_1.5.1     
+[21] dplyr_1.1.4        purrr_1.0.2        readr_2.1.5        tidyr_1.3.1        tibble_3.2.1      
+[26] ggplot2_3.5.1      tidyverse_2.0.0    plyr_1.8.9         catmaid_0.10.1     nat_1.10.4        
 [31] rgl_1.3.14         httr_1.4.7        
 
 loaded via a namespace (and not attached):
