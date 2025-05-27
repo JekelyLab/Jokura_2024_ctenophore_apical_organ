@@ -55,7 +55,13 @@ ggsave(
   bg = "white"
 )
 
-# CBF barplot sagittal vs tentacular -------------------------------------------
+# save to source data (plot arrest re-beat graph) -------------------------------------------------------
+
+df_time_dif %>%
+  write_csv("manuscript/source_data/Figure4_source_data1.csv")
+
+
+# CBF barplot sagittal(S) vs tentacular(T) -------------------------------------------
 
 # Lists files to be processed and Plane information
 files_info <- list(
@@ -128,6 +134,27 @@ ggsave("manuscript/pictures/panel_cbf_bars_combined.png",
        plot = panel_cbf_bars_combined,
        width = 8, height = 3, dpi = 300, bg = "white")
 
+# save to source data (CBF barplot) -------------------------------------------------------
+
+df_s <- read_csv("analysis/data/balancer_CBF_Pearson_correlation_analysis/csv/23_08_04_WT1_030_Rec_at_100.73fps_dark_f.csv", show_col_types = FALSE) %>%
+  filter(!is.na(left) & !is.na(right)) %>%
+  filter(left != 0 & right != 0) %>%
+  filter(is.finite(left) & is.finite(right)) %>%
+  mutate(frame = row_number())
+
+df_s %>%
+  write_csv("manuscript/source_data/Figure4_source_data2.csv")
+
+
+df_t <- read_csv("analysis/data/balancer_CBF_Pearson_correlation_analysis/csv/23_08_01_WT1_007_Rec_at_100.20fps_dark.csv", show_col_types = FALSE) %>%
+  filter(!is.na(left) & !is.na(right)) %>%
+  filter(left != 0 & right != 0) %>%
+  filter(is.finite(left) & is.finite(right)) %>%
+  mutate(frame = row_number())
+
+df_t %>%
+  write_csv("manuscript/source_data/Figure4_source_data3.csv")
+
 # boxplot of pearson comparison S vs T (windows = 20)---------------------------
 
 # file and output path
@@ -182,6 +209,10 @@ ggsave(filename = "manuscript/pictures/boxplot_correlation_angle_0-20_win_20.png
        dpi = 300, 
        bg = "white")
 
+# save to source data (boxplot of pearson comparison) -------------------------------------------------------
+
+df %>%
+  write_csv("manuscript/source_data/Figure4_source_data4.csv")
 
 
 # assemble figure -------------------------------------------------------------

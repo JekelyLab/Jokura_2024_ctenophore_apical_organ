@@ -192,6 +192,11 @@ ggsave(
   bg='white'
 )
 
+# save to source data (bar graph of outputs from SNN) -------------------------------------------------------
+
+SSN_downstream %>%
+  filter(!celltype %in% c("monociliated", "biciliated", "multiciliated", "nonciliated", NA)) %>%
+  write_csv("manuscript/source_data/Figure3_source_data1.csv")
 
 # plot balancer -------------------------------------------------------------
 
@@ -1173,10 +1178,6 @@ colnames(synapse_matrix) <- as.character(matrix_celltypes_names)
 
 syn_df <- as.data.frame(as.table(synapse_matrix))
 
-write.csv(syn_df, "manuscript/source_data/synapse_matrix_df.csv", row.names = FALSE)
-
-
-
 # matrix plot ------------------------------------------------------------------
 
 rename_map <- c("balancer_Q1" = "bal Q1", 
@@ -1238,6 +1239,10 @@ ggsave(
   bg='white'
 )
 
+# save to source data (connectivity for matrix plot) -------------------------------------------------------
+
+syn_df %>%
+  write_csv("manuscript/source_data/Figure3_source_data2.csv")
 
 
 # assemble figure -------------------------------------------------------------

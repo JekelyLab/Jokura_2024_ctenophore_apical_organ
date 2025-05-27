@@ -421,6 +421,13 @@ ggsave("manuscript/pictures/plot_mito_stats.png",
        units = "px",
        dpi = 300)
 
+# save to source data (plot Average number of mitochondria per cell) -------------------------------------------------------
+
+mean_summary %>%
+  write_csv("manuscript/source_data/Figure2_source_data1.csv")
+
+summary_df %>%
+  write_csv("manuscript/source_data/Figure2_source_data2.csv")
 
 # load of mitochondrial location information-------------------------------
 
