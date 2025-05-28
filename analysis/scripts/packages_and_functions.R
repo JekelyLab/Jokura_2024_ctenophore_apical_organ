@@ -1,28 +1,19 @@
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
-# load some packages
-library(catmaid)
-library(plyr)
-library(tidyverse)
-library(cowplot)
-library(png)
-library(igraph)
-library(networkD3)
-library(visNetwork)
-library(webshot2)
-library(patchwork)
-library(RColorBrewer)
-library(igraph)
-library(tidygraph)
-library(av)
-library(jpeg)
-library(magick)
-library(ggbeeswarm)
-library(scales)
-library(ggsignif)
-library(rstatix)
+#package list
+pkgs = c(
+  "catmaid", "plyr", "tidyverse",
+  "cowplot", "png", "igraph", 
+  "networkD3", "visNetwork","webshot2", 
+  "patchwork", "RColorBrewer", "tidygraph", 
+  "av", "jpeg", "magick",
+  "ggbeeswarm", "scales", "ggsignif", 
+  "rstatix", "purrr"
+  )
 
+# load packages
+inst = lapply(pkgs, library, character.only = TRUE) 
 
 # catmaid connection, needs username, password AND token - weird!
 {
