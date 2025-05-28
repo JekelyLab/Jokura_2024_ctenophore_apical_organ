@@ -65,7 +65,7 @@ close3d()
 # assemble figure -------------------------------------------------------------
 
 panel_SNN_3d <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_SNN.png"))
-panel_SNN_EM <- ggdraw() + draw_image(readPNG("manuscript/pictures/SNN_EM.png"))
+panel_ANN_SNN_EM <- ggdraw() + draw_image(readPNG("manuscript/pictures/compaarison_EM_ANN_SNN.png"))
 
 panel_CAT_pic <- ggdraw() + draw_image(readPNG("manuscript/pictures/figure_sup2_1.png"))
 
@@ -79,7 +79,7 @@ DE#
 "
 
 Fig2_Sup1 <- panel_CAT_pic + panel_mono_vs_poly + panel_multi_nucleus +
-  panel_SNN_3d + panel_SNN_EM +
+  panel_SNN_3d + panel_ANN_SNN_EM +
   plot_layout(design = layout,
               heights = c(),
               widths = c()) + 
