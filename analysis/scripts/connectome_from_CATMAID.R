@@ -187,10 +187,9 @@ find_annotation <- function(annots, term){
   }
 }
 
-#search the annotations with the function
-annot.tb <- map_dfc(annot_to_search, ~map_chr(annotations, find_annotation, .x))
-annot.tb
-#generate list wilag()#generate list with quadra...7#generate list with quadrant annotations
+
+
+#generate list with quadrant annotations
 quadrant_of_cell <- annot.tb |>
   mutate(cons = case_when(
     !is.na(...1) ~ ...1,
