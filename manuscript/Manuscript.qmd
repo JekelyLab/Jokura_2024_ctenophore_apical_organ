@@ -264,6 +264,8 @@ Morphological rendering of skeletonised cells with the balancer cells shown in o
 ![**Figure 2—figure supplement 1**\
 (A)...](figures/Figure2_Supplement1.png)
 
+![**Figure 4—figure supplement 1**\
+(A)...](figures/Figure4_Supplement1.png)
 
 ![**supplement video1**\
 (A)...]
