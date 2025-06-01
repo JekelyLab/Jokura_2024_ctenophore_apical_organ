@@ -34,7 +34,7 @@ balancer_conn <- connectors(balancer)
 presyn_balancer <- subset(balancer_conn, prepost == 0)
 postsyn_balancer <- subset(balancer_conn, prepost == 1)
 
-# plot cells ----------------
+# plot cells -------------------------------------------------------------------
 
 nopen3d() # opens a pannable 3d window
 mfrow3d(1, 2)  #defines the two scenes
@@ -260,12 +260,12 @@ for (l in 1:90){
 close3d()
 
 
-#read png files and write video
+#read png files and write video --------------------------------------------------
 av::av_encode_video(
   paste('videoframes/', list.files("videoframes/", '*.png'), 
         sep = ""),
   framerate = 10,
-  output = 'manuscript/videos/Video1.mp4'
+  output = 'manuscript/videos/supplemental video1.mp4'
   )
 
 unlink("videoframes", recursive = T)

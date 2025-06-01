@@ -175,7 +175,7 @@ av::av_encode_video(
   paste('videoframes/', list.files("videoframes/", '*.png'), 
         sep = ""),
   framerate = 10,
-  output = 'manuscript/videos/Video2.mp4'
+  output = 'manuscript/videos/supplemental video2.mp4'
 )
 
 # delete temp folder -----------------
