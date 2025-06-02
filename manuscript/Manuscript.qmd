@@ -258,29 +258,34 @@ This work was supported by the Japan Society for the Promotion of Science (JSPS)
 ![**Figure 1—figure supplement 1. Cell-type composition of the ctenophore aboral organ**\
 Morphological rendering of skeletonised cell types, (A) balancer cells (B) bridge cells, (C) bristle cells, (D) ciliated groove cells, (E) dense vesicle cells, (F) dome cells, (G) intra-multiciliated cells, (H) lamellate bodies, (I) lithocytes, (J) plumose cells, (K) aboral nerve-net neurons (L) epithelial floor cells.](figures/Figure1_Supplement1.png)
 
-![**Figure 1—figure supplement 2. Balancers with all other cells in the ctenophore aboral organ**\
-Morphological rendering of skeletonised cells with the balancer cells shown in orange.](figures/Figure1_Supplement2.png)
+![**Figure 1—figure supplement 2. 3D reconstruction of all cells comprising the aboral organ**\
+(A) Morphological rendering of skeletonised cells in the ctenophore aboral organ. Each color represents a distinct cell type. The balancer cells are shown in orange. Some cell groups lack distinguishing subcellular features required for identification and are shown in white.](figures/Figure1_Supplement2.png)
 
-![**Figure 2—figure supplement 1**\
-(A)...](figures/Figure2_Supplement1.png)
+![**Figure 2—figure supplement 1. Ultrastructural features and synaptic organization of the ANN, with comparison to the subepithelial nerve net (SNN)**\
+(A) Registration and annotation of synapses in the actual cellular traces. Pink dots indicate the approximate center of each individual cell, marked within its plasma membrane boundary. Mitochondria involved in synaptic contacts are labeled with orange dots. Red arrows point from these mitochondria to the presynaptic cell body, marking presynaptic structures. Cyan arrows point from the orange-labeled mitochondria to the corresponding postsynaptic cell.\
+(B) Electron microscopy (EM) images showing representative presynaptic structures. The left panel shows a monadic synapse, while the right panel shows a polyadic (byadic) synapse, in which a single presynaptic site contacts two postsynaptic cells.\
+(C) Nuclei within two different types of ANN cells are shown in purple in a single EM section. On the left, the ANN_Q1-4 cell extends widely across the aboral organ and appears as a continuous structure in 3D, despite having nuclei located distantly from each other. In contrast, ANN_Q1Q2 (right) contains two adjacent nuclei situated close together, suggesting a more localized distribution.\
+(D) Three-dimensional reconstruction of the subepithelial nerve net (SNN). The SNN extends broadly, enveloping the aboral organ. Some portions of the network remain as unconnected fragments due to incomplete reconstruction.\
+(E) Morphological comparison between the SNN (left) and ANN (right) in EM images. The SNN shows a "beads-on-a-string" morphology, with discrete bead-like swellings connected by faint electron-dense fibrous structures. In contrast, the ANN exhibits a more diffuse distribution, often appearing to interdigitate between surrounding cells. Relatively large mitochondria are frequently observed in the ANN processes.](figures/Figure2_Supplement1.png)
 
 ![**Figure 4—figure supplement 1**\
 (A)...](figures/Figure4_Supplement1.png)
 
+
 ![**supplement video1**\
-(A)...]
+A...]
 
 ![**supplement video2**\
-(A)...]
+A...]
 
 ![**supplement video3**\
-(A)...]
+A...]
 
 ![**supplement video4**\
-(A)...]
+A...]
 
 ![**supplement video5**\
-(A)...]
+A...]
 
 ![**supplement video6**\
-(A)...]
+A...]
