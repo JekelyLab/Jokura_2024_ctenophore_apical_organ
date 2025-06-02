@@ -268,24 +268,20 @@ Morphological rendering of skeletonised cell types, (A) balancer cells (B) bridg
 (D) Three-dimensional reconstruction of the subepithelial nerve net (SNN). The SNN extends broadly, enveloping the aboral organ. Some portions of the network remain as unconnected fragments due to incomplete reconstruction.\
 (E) Morphological comparison between the SNN (left) and ANN (right) in EM images. The SNN shows a "beads-on-a-string" morphology, with discrete bead-like swellings connected by faint electron-dense fibrous structures. In contrast, the ANN exhibits a more diffuse distribution, often appearing to interdigitate between surrounding cells. Relatively large mitochondria are frequently observed in the ANN processes.](figures/Figure2_Supplement1.png)
 
-![**Figure 4—figure supplement 1**\
-(A)...](figures/Figure4_Supplement1.png)
+![**Figure 4—figure supplement 1.Ciliary beat frequency (CBF) dynamics of balancer cells in additional samples**\
+Bar plots showing CBF dynamics of left and right balancers (top and bottom panels, respectively) recorded from the sagittal (A–C) and tentacular (D–F) planes. Positive and negative values indicate opposing sides within each imaging plane. These data correspond to additional samples not shown in the main figure and support the results presented in Figure 4E.](figures/Figure4_Supplement1.png)
 
 
-![**supplement video1**\
-A...]
+![**Video 1.** A...]
 
-![**supplement video2**\
-A...]
+![**Video 2.** A...]
 
-![**supplement video3**\
-A...]
+![**Video 3.** This video shows high-speed imaging of balancer ciliary beating along with kymographs from two individual balancer cilia. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary arrest event in the sagittal plane.]
 
-![**supplement video4**\
-A...]
+![**Video 4.**This video shows high-speed imaging of balancer ciliary beating along with kymographs from two individual balancer cilia. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary re-beat event in the sagittal plane.]
 
-![**supplement video5**\
-A...]
+![**Video 5.** This video shows high-speed imaging of balancer ciliary beating along with kymographs from two individual balancer cilia. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary arrest event in the tentacular plane.]
 
-![**supplement video6**\
-A...]
+![**Video 6.**This video shows high-speed imaging of balancer ciliary beating along with kymographs from two individual balancer cilia. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary re-beat event in the tentacular plane.]
+
+

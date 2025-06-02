@@ -196,6 +196,7 @@ plot3d(
 
 
 next3d(clear=FALSE)
+
 plot_multinucleated_cell(SSN_Q1Q2,
                          lwd = 2, alpha = 1, col = Okabe_Ito[6])
 plot_multinucleated_cell(SSN_Q3Q4,
