@@ -18,7 +18,7 @@ subtitle: |
   $^{7}$ Michael Sars Centre, University of Bergen, Norway
   <br><br>  
     **$^{*}$ Correspondence:**  ![](pictures/emails.png){width=30em}
-mainfont: Arial
+mainfont: Luciola-Math
 monofont: DejaVu Sans Mono #Times New Roman
 fontsize: 11pt
 linestretch: 1.2
@@ -27,7 +27,8 @@ documentclass: article
 max-width: 100%
 format:
   html:
-    embed-resources: true 
+    embed-resources: true
+    css: style.css 
   pdf:
     pdf-engine: xelatex
     number-sections: false
