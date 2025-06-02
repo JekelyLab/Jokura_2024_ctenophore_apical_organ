@@ -272,16 +272,14 @@ Morphological rendering of skeletonised cell types, (A) balancer cells (B) bridg
 Bar plots showing CBF dynamics of left and right balancers (top and bottom panels, respectively) recorded from the sagittal (A–C) and tentacular (D–F) planes. Positive and negative values indicate opposing sides within each imaging plane. These data correspond to additional samples not shown in the main figure and support the results presented in Figure 4E.](figures/Figure4_Supplement1.png)
 
 
-![**Video 1.** A...]
+![**Video 1.** This video shows a rotating 3D rendering of the aboral organ, featuring three distinct cell types—balancer cells, bridge cells, and components of the apical nerve net (ANN). Cells of each type are subdivided and color-coded according to their spatial regions. A lithocyte is shown in gray as a reference point, and the outline of the aboral organ is indicated in white.]
 
-![**Video 2.** A...]
+![**Video 2.** This video shows high-speed imaging of balancer ciliary beating along with kymographs from two individual balancer cilia. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary arrest event in the sagittal plane.]
 
-![**Video 3.** This video shows high-speed imaging of balancer ciliary beating along with kymographs from two individual balancer cilia. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary arrest event in the sagittal plane.]
+![**Video 3.** This video shows high-speed imaging of balancer ciliary beating along with kymographs from two individual balancer cilia. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary re-beat event in the sagittal plane.]
 
-![**Video 4.**This video shows high-speed imaging of balancer ciliary beating along with kymographs from two individual balancer cilia. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary re-beat event in the sagittal plane.]
+![**Video 4.** This video shows high-speed imaging of balancer ciliary beating along with kymographs from two individual balancer cilia. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary arrest event in the tentacular plane.]
 
-![**Video 5.** This video shows high-speed imaging of balancer ciliary beating along with kymographs from two individual balancer cilia. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary arrest event in the tentacular plane.]
-
-![**Video 6.**This video shows high-speed imaging of balancer ciliary beating along with kymographs from two individual balancer cilia. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary re-beat event in the tentacular plane.]
+![**Video 5.** This video shows high-speed imaging of balancer ciliary beating along with kymographs from two individual balancer cilia. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary re-beat event in the tentacular plane.]
 
 
