@@ -1,5 +1,5 @@
 # code to generate the ctenophore apical organ connectome graph based on the CATMAID database
-# Gaspar Jekely 2023-2025
+# Gaspar Jekely 2025
 
 # source packages and functions ------------------------------------------------
 source("analysis/scripts/packages_and_functions.R")
@@ -17,9 +17,6 @@ length(all_syn_connectors$connectors)
 
 connector_ids <- unlist(unname(sapply(all_syn_connectors$connectors, "[[", 1)))
 connectivity <- catmaid_get_connectors(connector_ids, pid = 35)
-length(connector_ids)
-dim(connectivity)[1]
-connectivity
 
 # create graph
 edges <- tibble(
@@ -32,13 +29,12 @@ edges <- tibble(
 )
 
 conn_tb <- tbl_graph(edges = edges, directed = TRUE)
-conn_tb
 
 # retrieve node names, simplify and filter the graph --------------------------------------------------------
 
 # add weighted degree to nodes
-add_node_wdegree <- function(graph.tb){
-  graph.tb|>
+add_node_wdegree <- function(graph.tb) {
+  graph.tb |>
     activate(nodes) |>
     mutate(strength = centrality_degree(
       weights = NULL,
@@ -47,7 +43,7 @@ add_node_wdegree <- function(graph.tb){
       normalized = FALSE
     ))
 }
-  
+
 conn_tb_str <- add_node_wdegree(conn_tb)
 
 # test if graph is simple (no multi-edges)
@@ -55,10 +51,8 @@ is_simple(as.igraph(conn_tb_str))
 
 # add edge weight of 1
 conn_tb_str <- set_edge_attr(conn_tb_str, "weight", value = 1)
-conn_tb_str
 
 # merge edges by converting to simple and summing edge weights
-
 conn_tb_str_sum <- conn_tb_str |>
   activate(edges) |>
   group_by(from, to) |>
@@ -66,16 +60,7 @@ conn_tb_str_sum <- conn_tb_str |>
   distinct() |>
   activate(nodes)
 
-# merge edges by converting to simple and summing edge weights
-#conn_tb_str_sum <- conn_tb_str %>%
-#  activate(edges) %>%
-#  convert(to_simple) %>%
-#  mutate(weight = map_dbl(.orig_data, ~ sum(.x$weight))) %>%
-#  select(-.orig_data, -.tidygraph_edge_index) %>%
-#  activate(nodes) %>%
-#  select(-.tidygraph_node_index)
-
-conn_tb_str_sum
+# check number of graph components
 is_simple(as.igraph(conn_tb_str_sum))
 components(conn_tb_str_sum)
 
@@ -83,14 +68,15 @@ components(conn_tb_str_sum)
 conn_tb_str_sum_filt <- conn_tb_str_sum %>%
   activate(nodes) %>%
   filter(strength > 0)
-#remove cells with 'fragment' annotation
 
+# remove cells with 'fragment' annotation --------------
 skids_to_filter <- conn_tb_str_sum_filt |>
-  select(name) |> pull()
+  select(name) |>
+  pull()
 fragments <- catmaid_skids("fragment", pid = 35)
 nodes_to_remove <- skids_to_filter[skids_to_filter %in% fragments]
 
-#return subgraph with fragments removed
+# return subgraph with fragments removed
 conn_tb_str_sum_filt <- conn_tb_str_sum_filt |>
   filter(!(name %in% nodes_to_remove))
 
@@ -98,21 +84,21 @@ conn_tb_str_sum_filt <- conn_tb_str_sum_filt |>
 
 # check connected components, the connectome should only have one component
 cl <- components(conn_tb_str_sum_filt)
+
 # size of the largest subnetwork
 length(which(cl$membership == 1))
 
 # generate subgraph
 conn_tb_str_sum_filt_cl <- subgraph(
-  conn_tb_str_sum_filt, 
+  conn_tb_str_sum_filt,
   which(cl$membership == 1)
-  )
+)
 
 # check if graph is directed
 igraph::is_directed(conn_tb_str_sum_filt_cl)
 
 # shorten name, convert to tbl
 conn_tb <- conn_tb_str_sum_filt_cl %>% as_tbl_graph()
-conn_tb
 
 # check names, search for annotations --------------------------------------------------
 
@@ -138,7 +124,6 @@ cell_names <- conn_tb_skids_names %>%
 
 # check duplicated names (there should be none)
 cell_names[duplicated(cell_names)]
-length(cell_names)
 cell_names
 
 # centrality measures --------------------------------------
@@ -167,18 +152,6 @@ conn_tb_skids_names <- conn_tb_skids_names %>%
   mutate("node_is_cut" = node_is_cut()) %>%
   mutate("local_triangles" = local_triangles())
 
-# truncate names for plot ---------------------
-
-conn_tb_skids_names <- conn_tb_skids_names |>
-  mutate(names_short = sub("_.*", "", names)) |>
-  mutate(names_short = sub("\\s.*", "", names_short))
-
-#rewrite full name for SSN cells
-conn_tb_skids_names <- conn_tb_skids_names |>
-  mutate(names_short = if_else(
-    grepl("SSN", names), names, names_short)
-    )
-
 # add annotations to nodes -------------------
 
 # annotations to search for
@@ -188,23 +161,21 @@ annot_to_search <- c(
   "Q1Q2Q3Q4"
 )
 
-#use purrr:map to get all annotations for all skids
+# use purrr:map to get all annotations for all skids
 annotations <- map(skids, pid = 35, catmaid_get_annotations_for_skeletons)
 
-#function to match terms to the annotations
-find_annotation <- function(annots, term){
-  if(sum(unlist(annots) %in% term) == 1){
+# function to match terms to the annotations
+find_annotation <- function(annots, term) {
+  if (sum(unlist(annots) %in% term) == 1) {
     return(term)
-  }
-  else {
+  } else {
     return(NA)
   }
 }
 
-annot_tb <- map_dfc(annot_to_search, ~map_chr(annotations, find_annotation, .x))
-annot_tb
+annot_tb <- map_dfc(annot_to_search, ~ map_chr(annotations, find_annotation, .x))
 
-#generate list with quadrant annotations
+# generate list with quadrant annotations
 quadrant_of_cell <- annot_tb |>
   mutate(cons = case_when(
     !is.na(...1) ~ ...1,
@@ -213,17 +184,17 @@ quadrant_of_cell <- annot_tb |>
     !is.na(...4) ~ ...4,
     !is.na(...5) ~ ...5,
     !is.na(...6) ~ ...6,
-    !is.na(...7) ~ ...7)
-  ) |>
+    !is.na(...7) ~ ...7
+  )) |>
   select(cons) |>
   pull()
 
-
+#assign quadrant to cells
 conn_tb_skids_names <- conn_tb_skids_names |>
   mutate(quadrant = quadrant_of_cell)
 
 # color nodes by quadrant, matching in the name
-conn_tb_skids_names.col <- conn_tb_skids_names |>
+conn_tb_skids_names_col <- conn_tb_skids_names |>
   mutate(color = case_when(
     quadrant == "Q1Q2Q3Q4" ~ "#DDDDDD",
     quadrant == "Q1Q2" ~ "#EEEEEE",
@@ -245,33 +216,39 @@ conn_tb_skids_names.col <- conn_tb_skids_names |>
     quadrant == "Q4" ~ "dot"
   ))
 
-conn_tb_skids_names.col |>
-  select(color) |>
-  pull()
+# save graph as source data
+#saveRDS(conn_tb_skids_names_col, "manuscript/source_data/connectome_graph_tibble.rds")
+rio::export(conn_tb_skids_names_col, "manuscript/source_data/Figure3_fig_suppl1_source_data1.rds.zip")
+conn_tb_skids_names_col <- rio::import("manuscript/source_data/Figure3_fig_suppl1_source_data1.rds.zip")
 
-conn_tb_skids_names.col |>
-  select(names_short) |>
-  pull()
 
-# save conn_tb
-saveRDS(conn_tb_skids_names.col, "manuscript/source_data/connectome_graph_tibble.rds")
-conn_tb_skids_names.col <- readRDS("manuscript/source_data/connectome_graph_tibble.rds")
+# truncate names for plot ---------------------
+
+conn_tb_skids_names_col_short <- conn_tb_skids_names_col |>
+  mutate(names_short = sub("_.*", "", names)) |>
+  mutate(names_short = sub("\\s.*", "", names_short))
+
+# rewrite full name for SSN cells
+conn_tb_skids_names_col_short <- conn_tb_skids_names_col_short |>
+  mutate(names_short = if_else(
+    grepl("SSN", names), names, names_short
+  ))
+
 
 # VisNetwork conversion ---------------------------------------------------
 
 # convert to visNetwork graph
-conn_graph.visn <- toVisNetworkData(conn_tb_skids_names.col)
+conn_graph_visn <- toVisNetworkData(conn_tb_skids_names_col_short)
 
 ## copy column "weight" to new column "value" in list "edges"
-conn_graph.visn$edges$value <- conn_graph.visn$edges$weight
-conn_graph.visn$nodes$value <- conn_graph.visn$nodes$strength
-
-conn_graph.visn$nodes$label <- conn_graph.visn$nodes$names_short
+conn_graph_visn$edges$value <- conn_graph_visn$edges$weight
+conn_graph_visn$nodes$value <- conn_graph_visn$nodes$strength
+conn_graph_visn$nodes$label <- conn_graph_visn$nodes$names_short
 
 # hierarchical layout
-visNet <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>%
+visNet <- visNetwork(conn_graph_visn$nodes, conn_graph_visn$edges) %>%
   visIgraphLayout(
-    layout = "layout_nicely", physics = FALSE
+    layout = "layout_nicely", physics = FALSE, randomSeed = 35
   ) %>%
   visEdges(
     smooth = list(type = "curvedCW", roundness = 0.2),
@@ -287,7 +264,7 @@ visNet <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>%
   ) %>%
   visNodes(
     borderWidth = 0.3,
-    color = list(background = conn_graph.visn$nodes$color, border = "black"),
+    color = list(background = conn_graph_visn$nodes$color, border = "black"),
     opacity = 0.9,
     #  shape='circle',
     font = list(color = "black", size = 32),
@@ -298,9 +275,9 @@ visNet <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>%
 visNet
 
 
-saveNetwork(visNet, "manuscript/pictures/cell_level_connectome.html")
+saveNetwork(visNet, "manuscript/pictures/Figure3_Supplement1.html")
 webshot2::webshot(
-  url = "manuscript/pictures/cell_level_connectome.html",
+  url = "manuscript/pictures/Figure3_Supplement1.html",
   file = "manuscript/figures/Figure3_Supplement1.png",
   vwidth = 1800, vheight = 1800, # define the size of the browser window
   cliprect = c(0, 0, 1800, 1800), zoom = 5, delay = 1
