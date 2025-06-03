@@ -31,8 +31,8 @@ edges <- tibble(
     pull())
 )
 
-conn.tb <- tbl_graph(edges = edges, directed = TRUE)
-conn.tb
+conn_tb <- tbl_graph(edges = edges, directed = TRUE)
+conn_tb
 
 # retrieve node names, simplify and filter the graph --------------------------------------------------------
 
@@ -48,18 +48,18 @@ add_node_wdegree <- function(graph.tb){
     ))
 }
   
-conn.tb.str <- add_node_wdegree(conn.tb)
+conn_tb_str <- add_node_wdegree(conn_tb)
 
 # test if graph is simple (no multi-edges)
-is_simple(as.igraph(conn.tb.str))
+is_simple(as.igraph(conn_tb_str))
 
 # add edge weight of 1
-conn.tb.str <- set_edge_attr(conn.tb.str, "weight", value = 1)
-conn.tb.str
+conn_tb_str <- set_edge_attr(conn_tb_str, "weight", value = 1)
+conn_tb_str
 
 # merge edges by converting to simple and summing edge weights
 
-conn.tb.str.sum <- conn.tb.str |>
+conn_tb_str_sum <- conn_tb_str |>
   activate(edges) |>
   group_by(from, to) |>
   mutate(weight = sum(weight)) |>
@@ -67,7 +67,7 @@ conn.tb.str.sum <- conn.tb.str |>
   activate(nodes)
 
 # merge edges by converting to simple and summing edge weights
-#conn.tb.str.sum <- conn.tb.str %>%
+#conn_tb_str_sum <- conn_tb_str %>%
 #  activate(edges) %>%
 #  convert(to_simple) %>%
 #  mutate(weight = map_dbl(.orig_data, ~ sum(.x$weight))) %>%
@@ -75,41 +75,49 @@ conn.tb.str.sum <- conn.tb.str |>
 #  activate(nodes) %>%
 #  select(-.tidygraph_node_index)
 
-conn.tb.str.sum
-is_simple(as.igraph(conn.tb.str.sum))
-components(conn.tb.str.sum)
+conn_tb_str_sum
+is_simple(as.igraph(conn_tb_str_sum))
+components(conn_tb_str_sum)
 
 # filter by node strength
-conn.tb.str.sum.filt <- conn.tb.str.sum %>%
+conn_tb_str_sum_filt <- conn_tb_str_sum %>%
   activate(nodes) %>%
   filter(strength > 0)
+#remove cells with 'fragment' annotation
 
-conn.tb.str.sum.filt
+skids_to_filter <- conn_tb_str_sum_filt |>
+  select(name) |> pull()
+fragments <- catmaid_skids("fragment", pid = 35)
+nodes_to_remove <- skids_to_filter[skids_to_filter %in% fragments]
+
+#return subgraph with fragments removed
+conn_tb_str_sum_filt <- conn_tb_str_sum_filt |>
+  filter(!(name %in% nodes_to_remove))
 
 # check connected components  ---------------------------
 
 # check connected components, the connectome should only have one component
-cl <- components(conn.tb.str.sum.filt)
+cl <- components(conn_tb_str_sum_filt)
 # size of the largest subnetwork
 length(which(cl$membership == 1))
 
 # generate subgraph
-conn.tb.str.sum.filt.cl <- subgraph(
-  conn.tb.str.sum.filt, 
+conn_tb_str_sum_filt_cl <- subgraph(
+  conn_tb_str_sum_filt, 
   which(cl$membership == 1)
   )
 
 # check if graph is directed
-igraph::is_directed(conn.tb.str.sum.filt.cl)
+igraph::is_directed(conn_tb_str_sum_filt_cl)
 
 # shorten name, convert to tbl
-conn.tb <- conn.tb.str.sum.filt.cl %>% as_tbl_graph()
-conn.tb
+conn_tb <- conn_tb_str_sum_filt_cl %>% as_tbl_graph()
+conn_tb
 
 # check names, search for annotations --------------------------------------------------
 
 # list skids
-skids <- conn.tb %>%
+skids <- conn_tb %>%
   activate(nodes) %>%
   select(name) %>%
   pull()
@@ -117,12 +125,12 @@ skids <- conn.tb %>%
 # get neuron names from CATMAID
 names <- catmaid_get_neuronnames(skids, pid = 35)
 
-conn.tb.skids.names <- conn.tb %>%
+conn_tb_skids_names <- conn_tb %>%
   mutate(names) %>%
   rename(skids = name)
 
 # list neuron names
-cell_names <- conn.tb.skids.names %>%
+cell_names <- conn_tb_skids_names %>%
   activate(nodes) %>%
   select(names) %>%
   pull() %>%
@@ -135,23 +143,23 @@ cell_names
 
 # centrality measures --------------------------------------
 
-conn.tb.skids.names <- conn.tb.skids.names %>%
+conn_tb_skids_names <- conn_tb_skids_names %>%
   activate(nodes) %>%
   mutate("betweenness" = centrality_betweenness(
-    weights = E(conn.tb.str.sum.filt.cl)$weight,
+    weights = E(conn_tb_str_sum_filt_cl)$weight,
     directed = TRUE
   )) %>%
-  mutate("authority" = centrality_authority(weights = E(conn.tb.str.sum.filt.cl)$weight)) %>%
+  mutate("authority" = centrality_authority(weights = E(conn_tb_str_sum_filt_cl)$weight)) %>%
   mutate("pagerank" = centrality_pagerank(
-    weights = E(conn.tb.str.sum.filt.cl)$weight,
+    weights = E(conn_tb_str_sum_filt_cl)$weight,
     directed = TRUE
   )) %>%
   mutate("closeness" = centrality_closeness(
-    weights = E(conn.tb.str.sum.filt.cl)$weight,
+    weights = E(conn_tb_str_sum_filt_cl)$weight,
     mode = "all"
   )) %>%
   mutate("eigen" = centrality_eigen(directed = TRUE)) %>%
-  mutate("hub" = centrality_hub(weights = E(conn.tb.str.sum.filt.cl)$weight)) %>%
+  mutate("hub" = centrality_hub(weights = E(conn_tb_str_sum_filt_cl)$weight)) %>%
   mutate("node_eccentricity_out" = node_eccentricity(mode = "out")) %>%
   mutate("node_eccentricity_in" = node_eccentricity(mode = "in")) %>%
   mutate("node_is_sink" = node_is_sink()) %>%
@@ -161,9 +169,15 @@ conn.tb.skids.names <- conn.tb.skids.names %>%
 
 # truncate names for plot ---------------------
 
-conn.tb.skids.names <- conn.tb.skids.names |>
+conn_tb_skids_names <- conn_tb_skids_names |>
   mutate(names_short = sub("_.*", "", names)) |>
   mutate(names_short = sub("\\s.*", "", names_short))
+
+#rewrite full name for SSN cells
+conn_tb_skids_names <- conn_tb_skids_names |>
+  mutate(names_short = if_else(
+    grepl("SSN", names), names, names_short)
+    )
 
 # add annotations to nodes -------------------
 
@@ -187,10 +201,11 @@ find_annotation <- function(annots, term){
   }
 }
 
-
+annot_tb <- map_dfc(annot_to_search, ~map_chr(annotations, find_annotation, .x))
+annot_tb
 
 #generate list with quadrant annotations
-quadrant_of_cell <- annot.tb |>
+quadrant_of_cell <- annot_tb |>
   mutate(cons = case_when(
     !is.na(...1) ~ ...1,
     !is.na(...2) ~ ...2,
@@ -204,11 +219,11 @@ quadrant_of_cell <- annot.tb |>
   pull()
 
 
-conn.tb.skids.names <- conn.tb.skids.names |>
+conn_tb_skids_names <- conn_tb_skids_names |>
   mutate(quadrant = quadrant_of_cell)
 
 # color nodes by quadrant, matching in the name
-conn.tb.skids.names.col <- conn.tb.skids.names |>
+conn_tb_skids_names.col <- conn_tb_skids_names |>
   mutate(color = case_when(
     quadrant == "Q1Q2Q3Q4" ~ "#DDDDDD",
     quadrant == "Q1Q2" ~ "#EEEEEE",
@@ -230,22 +245,22 @@ conn.tb.skids.names.col <- conn.tb.skids.names |>
     quadrant == "Q4" ~ "dot"
   ))
 
-conn.tb.skids.names.col |>
+conn_tb_skids_names.col |>
   select(color) |>
   pull()
 
-conn.tb.skids.names.col |>
+conn_tb_skids_names.col |>
   select(names_short) |>
   pull()
 
-# save conn.tb
-saveRDS(conn.tb.skids.names.col, "manuscript/source_data/connectome_graph_tibble.rds")
-conn.tb.skids.names.col <- readRDS("manuscript/source_data/connectome_graph_tibble.rds")
+# save conn_tb
+saveRDS(conn_tb_skids_names.col, "manuscript/source_data/connectome_graph_tibble.rds")
+conn_tb_skids_names.col <- readRDS("manuscript/source_data/connectome_graph_tibble.rds")
 
 # VisNetwork conversion ---------------------------------------------------
 
 # convert to visNetwork graph
-conn_graph.visn <- toVisNetworkData(conn.tb.skids.names.col)
+conn_graph.visn <- toVisNetworkData(conn_tb_skids_names.col)
 
 ## copy column "weight" to new column "value" in list "edges"
 conn_graph.visn$edges$value <- conn_graph.visn$edges$weight
@@ -276,7 +291,7 @@ visNet <- visNetwork(conn_graph.visn$nodes, conn_graph.visn$edges) %>%
     opacity = 0.9,
     #  shape='circle',
     font = list(color = "black", size = 32),
-    scaling = list(label = list(enabled = TRUE, min = 24, max = 50))
+    scaling = list(label = list(enabled = TRUE, min = 34, max = 60))
   ) %>%
   visOptions(highlightNearest = TRUE, width = 1800, height = 1800)
 
@@ -286,7 +301,7 @@ visNet
 saveNetwork(visNet, "manuscript/pictures/cell_level_connectome.html")
 webshot2::webshot(
   url = "manuscript/pictures/cell_level_connectome.html",
-  file = "manuscript/pictures/cell_level_connectome.png",
+  file = "manuscript/figures/Figure3_Supplement1.png",
   vwidth = 1800, vheight = 1800, # define the size of the browser window
-  cliprect = c(350, 400, 1400, 700), zoom = 5, delay = 1
+  cliprect = c(0, 0, 1800, 1800), zoom = 5, delay = 1
 )
