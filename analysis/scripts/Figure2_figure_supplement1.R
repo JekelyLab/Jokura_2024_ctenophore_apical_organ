@@ -7,57 +7,75 @@ source("analysis/scripts/packages_and_functions.R")
 # load Subepithelial nerve net -------------------------------------------------
 
 SNN <- read_smooth_neuron("celltype:SNN")
+ANN <- read_smooth_neuron("celltype:SSN")
 
 # 3d plot Subepithelial nerve net -----------------------------------------------
 
 close3d()
 # 3d plotting of cells
-nopen3d() 
-mfrow3d(1, 3)  
-#define the size of the rgl window, the view and zoom
-par3d(windowRect = c(0, 0, 1200, 350))
+nopen3d()
+mfrow3d(1, 3)
+# define the size of the rgl window, the view and zoom
+par3d(windowRect = c(0, 0, 2400, 700))
 
-#plot aboral view
-plot_multinucleated_cell(SNN, lwd = 1.25, alpha = 0.8, col = Okabe_Ito[5])
+# plot aboral view
+plot_multinucleated_cell(SNN, lwd = 1.5, alpha = 1, col = Okabe_Ito[2])
 plot3d(outline, add = TRUE, alpha = 0.025, col = Okabe_Ito[8])
 
-#aboral view
+# aboral view
 aboral()
 par3d(zoom = 0.7)
 
-#move to next panel in rgl window
-next3d(clear=F)
+# move to next panel in rgl window
+next3d(clear = F)
 
 
 
-#plot lateral view of Sagittal plane
-plot_multinucleated_cell(SNN, lwd = 1.25, alpha = 0.8, col = Okabe_Ito[5])
+# plot lateral view of Sagittal plane
+plot_multinucleated_cell(SNN, lwd = 1.5, alpha = 1, col = Okabe_Ito[2])
 plot3d(outline, add = TRUE, alpha = 0.025, col = Okabe_Ito[8])
 
-#lateral view of Sagittal plane
+# lateral view of Sagittal plane
 sagittal()
 par3d(zoom = 0.7)
 
-#move to next panel in rgl window
-next3d(clear=F)
+# move to next panel in rgl window
+next3d(clear = F)
 
 
 
-#plot lateral view of Tentacular plane
-plot_multinucleated_cell(SNN, lwd = 1.25, alpha = 0.8, col = Okabe_Ito[5])
+# plot lateral view of Tentacular plane
+plot_multinucleated_cell(SNN, lwd = 1.5, alpha = 1, col = Okabe_Ito[2])
 plot3d(outline, add = TRUE, alpha = 0.025, col = Okabe_Ito[8])
 
-#lateral view of Tentacular plane
+# lateral view of Tentacular plane
 tentacular()
 par3d(zoom = 0.7)
 
-#move to next panel in rgl window
-next3d(clear=F)
+# move to next panel in rgl window
+next3d(clear = F)
 
 
-#make a snapshot to the working directory
+# make a snapshot to the working directory
 rgl.snapshot("manuscript/pictures/3d_plot/plot_SNN.png")
 
+# add ANN cells to plot
+plot_multinucleated_cell(
+  ANN, lwd = 2, alpha = 1, 
+  col = c(Okabe_Ito[6], Okabe_Ito[7], Okabe_Ito[5])
+  )
+next3d(clear = F)
+plot_multinucleated_cell(
+  ANN, lwd = 2, alpha = 1, 
+  col = c(Okabe_Ito[6], Okabe_Ito[7], Okabe_Ito[5])
+)
+next3d(clear = F)
+plot_multinucleated_cell(
+  ANN, lwd = 2, alpha = 1, 
+  col = c(Okabe_Ito[6], Okabe_Ito[7], Okabe_Ito[5])
+)
+
+rgl.snapshot("manuscript/pictures/3d_plot/plot_SNN_ANN.png")
 
 close3d()
 
@@ -96,17 +114,23 @@ DDD#EEE
 
 Fig2_Sup1 <- panel_CAT_pic + panel_mono_vs_poly + panel_multi_nucleus +
   panel_SNN_3d + panel_ANN_SNN_EM +
-  plot_layout(design = layout,
-              heights = c(1.1, 0.25, 1),
-              widths = c(0.7, 0.1, 0.7, 0.1, 0.2, 0.1, 1)) + 
-  patchwork::plot_annotation(tag_levels = "A") &  
-  ggplot2::theme(plot.tag = element_text(size = 12, 
-                                         face='plain', color='black'))
+  plot_layout(
+    design = layout,
+    heights = c(1.1, 0.25, 1),
+    widths = c(0.7, 0.1, 0.7, 0.1, 0.2, 0.1, 1)
+  ) +
+  patchwork::plot_annotation(tag_levels = "A") &
+  ggplot2::theme(plot.tag = element_text(
+    size = 12,
+    face = "plain", color = "black"
+  ))
 
-ggsave("manuscript/figures/Figure2_Supplement1.png", limitsize = FALSE, 
-       units = c("px"), Fig2_Sup1, width = 2850, height = 1250, bg='white')  
+ggsave("manuscript/figures/Figure2_Supplement1.png",
+  limitsize = FALSE,
+  units = c("px"), Fig2_Sup1, width = 2850, height = 1250, bg = "white"
+)
 
-ggsave("manuscript/figures/Figure2_Supplement1.pdf", limitsize = FALSE, 
-      units = c("px"), Fig2_Sup1, width = 2850, height = 1250) 
-
-
+ggsave("manuscript/figures/Figure2_Supplement1.pdf",
+  limitsize = FALSE,
+  units = c("px"), Fig2_Sup1, width = 2850, height = 1250
+)
