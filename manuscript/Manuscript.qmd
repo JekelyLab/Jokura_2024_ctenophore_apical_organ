@@ -1,7 +1,7 @@
 ---
 title: "Neural Connectome of the Ctenophore Statocyst"
 subtitle: |
-  **Kei Jokura**$^{1,2,3,4,5*}$, **Sanja Jasek**$^{1,2,6}$, **Lara Kewalow**$^{6}$, **Pawel Burkhardt**$^{7}$, **Gáspár Jékely**$^{1,2,6,*}$  
+  **Kei Jokura**$^{1,2,3,4,5*}$, **Sanja Jasek**$^{1,2,6}$, **Lara Kewelow**$^{6}$, **Pawel Burkhardt**$^{7}$, **Gáspár Jékely**$^{1,2,6,*}$  
   <br><br>  
   $^{1}$ Living Systems Institute, University of Exeter, Exeter, EX4 4QD, United Kingdom  
   <br>
@@ -234,7 +234,7 @@ The EM image stacks, including all traces and annotations, are available at http
 
 ## Acknowledgements
 
-This work was supported by the Japan Society for the Promotion of Science (JSPS) Overseas Research Fellowships, the Grass Foundation, the Kavli Foundation, and the Marine Biological Laboratory (MBL). This project also received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement No. 101020792). We thank Dr. Réza Shahidi for sectioning and imaging, and Paulina Cherek for high-pressure freezing and sample preparation. We are also grateful to Dr. Chris Bjornsson, the MBL Central Microscopy Facility, Dr. Shoji A. Baba, and Dr. Kogiku Shiba (Shimoda Marine Research Center) for their assistance with microscopy.
+This work was supported by the Japan Society for the Promotion of Science (JSPS) Overseas Research Fellowships, the Grass Foundation, the Kavli Foundation, and the Marine Biological Laboratory (MBL). This project also received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement No. 101020792). We thank Dr. Réza Shahidi for sectioning and imaging, Paulina Cherek for high-pressure freezing and sample preparation, and Iva Verbanac for help with tracing. We are also grateful to Dr. Chris Bjornsson, the MBL Central Microscopy Facility, Dr. Shoji A. Baba, and Dr. Kogiku Shiba (Shimoda Marine Research Center) for their assistance with microscopy.
 
 ## References {.unnumbered}
 
