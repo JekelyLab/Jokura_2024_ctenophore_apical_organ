@@ -7,7 +7,7 @@ source("analysis/scripts/packages_and_functions.R")
 # load cell types to plot individually -------------------------------------
 
 balancer <- read_smooth_neuron("celltype:balancer")
-lithocyte <- read_smooth_neuron("celltype:lithocyte")
+lithocyte <- read_smooth_neuron("statolith")
 
 balancer_Q1 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q1")))
 balancer_Q2 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q2")))
@@ -82,12 +82,12 @@ plot_cells <- function(){
   
   plot3d(
     outline,
-    add = T, alpha = 0.05, col = "grey50"
+    add = T, alpha = 0.05, col = "grey80"
   )
   plot3d(
     lithocyte,
-    soma = T, lwd = 1, add = T,
-    alpha = 0.6, col = Okabe_Ito[8]
+    soma = T, lwd = 0, add = T,
+    alpha = 0.6, col = "grey50"
   )
   # input from SSN to balancer
   plot3d(
@@ -175,7 +175,7 @@ av::av_encode_video(
   paste('videoframes/', list.files("videoframes/", '*.png'), 
         sep = ""),
   framerate = 10,
-  output = 'manuscript/videos/supplemental video2.mp4'
+  output = 'manuscript/videos/Video2.mp4'
 )
 
 # delete temp folder -----------------

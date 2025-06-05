@@ -92,7 +92,7 @@ Furthermore, ANNs are also different from other neurons previously reported by E
 (B) Morphological rendering of the two smaller ANN neurons ANN_Q1Q2 (pink) and ANN_Q3Q4 (orange), each spanning two quadrants, in aboral view (left), sagittal view (middle panel) and tentacular view (right panel). Spheres indicate the positions of nuclei.\
 (C) Number of mitochondria per cell for each cell type. The number of synapse-associated mitochondria is shown in green, the number of mitochondia outside synapses is shown in grey. N \> 2 cells for each cell type except lithocytes. Abbreviations: bal, balancer; brg, bridge; bsl, bristle; cg, ciliated groove; dv, dense vesicle cells; imc, intra-multiciliated cells; la, lamellate bodies; li, lithocytes; pl, plumose; ef, epithelial floor cells.\
 (D) Position of mitochondria within ANN_Q1-4. Red indicates mitochondria associated with the presynaptic triad structures, yellow marks mitochondria containing synaptic vesicles but lacking a clearly defined presynaptic triad, blue represents mitochondria with unclear synaptic vesicles, and black denotes mitochondria where no synaptic vesicles were identified.\
-(E) Representative electron micrographs of presynaptic triad structures observed in the dataset and their schematic diagrams. The left diagram illustrates synaptic projections from the center ANN (ANN Q1-4) to the lateral ANN (ANN Q3Q4), while the right diagram shows synaptic projections from the lateral ANN (ANN Q1Q2) to the center ANN (ANN Q1-4). Abbreviations: mi, mitochondrion; er, endoplasmic reticulum; sv, synaptic vesicles.\
+(E) Representative electron micrographs of presynaptic triad structures observed in the dataset and their schematic diagrams. The left diagram illustrates synaptic projections from the center ANN (ANN Q1-4) to the lateral ANN (ANN Q3Q4), while the right diagram shows synaptic projections from the lateral ANN (ANN Q1Q2) to the center ANN (ANN Q1-4). Abbreviations: mi, mitochondrion; er, endoplasmic reticulum; sv, synaptic vesicles. Scale bar: 500 nm.\
 (F) Position of synapses. Synapses from the center ANN to the lateral ANN are shown in magenta, while synapses from the lateral ANN to the center ANN are shown in cyan. Blue dots indicate the locations of autapses within ANN_Q1-4.](figures/Figure2.png)
 
 ### Synaptic connectome of the gravisensory organ
@@ -145,7 +145,7 @@ Notably, bridge neurons associated with each quadrant region (Q1Q2 or Q3Q4) exte
 
 ![**Figure 4. Analysis of ciliary beating, arrests and re-beat across balancers in the four quadrants**\
 (A) Schematic diagram of the differential interference contrast (DIC) microscopy setup used to image the movement of balancer cilia. The microscope was tilted 90 degrees so that the stage was positioned vertically. We used a 40x objective lens and a monochrome CMOS camera sensitive to near-infrared (NIR) light that was synchronized with an 850 nm strobe light source.\
-(B) Representative DIC images of the aboral organ viewed along the sagittal (left) and tentacular (right) planes. Arrowheads indicate the balancer cilia selected for kymograph-based analysis in each orientation.\
+(B) Representative DIC images of the aboral organ viewed along the sagittal (left) and tentacular (right) planes. Arrowheads indicate the balancer cilia selected for kymograph-based analysis in each orientation. Scale bar: 25 µm.\
 (C) Representative kymographs showing arrest and re-beat events of balancer cilia. Left and right balancer cilia were simultaneously recorded in either the sagittal (left) or tentacular plane (right). Arrowheads mark the onset of arrest (open) and re-beat (filled); horizontal arrows represent 1-second intervals.\
 (D) Boxplots showing time differences in the onset of arrest (white boxes) and re-beat (grey boxes) between left and right balancer cilia. Colors of the box outlines indicate the imaging plane: sagittal (blue) or tentacular (orange). Each dot represents a single larva.\
 (E) Bar plots showing ciliary beat frequency (CBF) dynamics of left and right balancers (top and bottom, respectively) recorded from the sagittal (left) or the tentacular (right) planes. Positive and negative values represent opposite sides within each plane.\
@@ -267,13 +267,12 @@ Morphological rendering of skeletonised cell types, (A) balancer cells (B) bridg
 (B) Electron microscopy (EM) images showing representative presynaptic structures. The left panel shows a monadic synapse, while the right panel shows a polyadic (byadic) synapse, in which a single presynaptic site contacts two postsynaptic cells.\
 (C) Nuclei within two different types of ANN cells are shown in purple in a single EM section. On the left, the ANN_Q1-4 cell extends widely across the aboral organ and appears as a continuous structure in 3D, despite having nuclei located distantly from each other. In contrast, ANN_Q1Q2 (right) contains two adjacent nuclei situated close together, suggesting a more localized distribution.\
 (D) Three-dimensional reconstruction of the subepithelial nerve net (SNN). The SNN extends broadly, enveloping the aboral organ. Some portions of the network remain as unconnected fragments due to incomplete reconstruction.\
-(E) Morphological comparison between the SNN (left) and ANN (right) in EM images. The SNN shows a "beads-on-a-string" morphology, with discrete bead-like swellings connected by faint electron-dense fibrous structures. In contrast, the ANN exhibits a more diffuse distribution, often appearing to interdigitate between surrounding cells. Relatively large mitochondria are frequently observed in the ANN processes.](figures/Figure2_Supplement1.png)
-
-
+(E) Morphological comparison between the ANN in EM images. The SNN shows a "beads-on-a-string" morphology, with discrete bead-like swellings connected by faint electron-dense fibrous structures. \
+(F) Three-dimensional reconstruction of the SNN and ANNs.\
+(G) Morphological comparison between the SNN in EM images. The ANN exhibits a more diffuse distribution, often appearing to interdigitate between surrounding cells. Relatively large mitochondria are frequently observed in the ANN processes.](figures/Figure2_Supplement1.png)
 
 ![**Figure 3—figure supplement 1. Full synaptic connectome of the ctenophore apical organ**\
 Full synaptic graph showing individual cells as nodes connected by synaptic contacts. Arrows point from the presynaptic to the postsynaptic cell. Edge thickness is proportional to the number of synapses.](figures/Figure3_Supplement1.png)
-
 
 ![**Figure 4—figure supplement 1.Ciliary beat frequency (CBF) dynamics of balancer cells in additional samples**\
 Bar plots showing CBF dynamics of left and right balancers (top and bottom panels, respectively) recorded from the sagittal (A–C) and tentacular (D–F) planes. Positive and negative values indicate opposing sides within each imaging plane. These data correspond to additional samples not shown in the main figure and support the results presented in Figure 4E.](figures/Figure4_Supplement1.png)
@@ -281,10 +280,17 @@ Bar plots showing CBF dynamics of left and right balancers (top and bottom panel
 
 **Video 1.** Morphological rendering of the aboral organ, featuring three distinct cell types—balancer cells, bridge cells, and components of the apical nerve net (ANN). Cells of each type are subdivided and color-coded according to their spatial regions. A lithocyte is shown in gray as a reference point, and the outline of the aboral organ is indicated in white.
 
-**Video 2.** High-speed imaging of balancer ciliary beating along with kymographs from two individual balancer ciliary bundles. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary arrest event in the sagittal plane.
+**Video 2.** Visualization of balancer cilia extending from basal bodies, marked by red dots. Each red dot indicates the position of a basal body, from which the cilium projects distally. A lithocyte is shown in gray as a reference point, and the outline of the aboral organ is indicated in white.
 
-**Video 3.** High-speed imaging of balancer ciliary beating along with kymographs from two individual balancer ciliary bundles. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary re-beat event in the sagittal plane.
+**Video 3.** High-speed imaging of balancer ciliary beating along with kymographs from two individual balancer ciliary bundles. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary arrest event in the sagittal plane.
 
-**Video 4.** High-speed imaging of balancer ciliary beating along with kymographs from two individual balancer ciliary clusters. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary arrest event in the tentacular plane.
+**Video 4.** High-speed imaging of balancer ciliary beating along with kymographs from two individual balancer ciliary bundles. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary re-beat event in the sagittal plane.
 
-**Video 5.** High-speed imaging of balancer ciliary beating along with kymographs from two individual balancer ciliary clusters. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary re-beat event in the tentacular plane.
+**Video 5.** High-speed imaging of balancer ciliary beating along with kymographs from two individual balancer ciliary clusters. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary arrest event in the tentacular plane.
+
+**Video 6.** High-speed imaging of balancer ciliary beating along with kymographs from two individual balancer ciliary clusters. The recording was acquired at 100 frames per second and played back at 30 frames per second (0.3×). The white line overlaid on the kymographs indicates the current time point shown in the video. This example captures a ciliary re-beat event in the tentacular plane.
+
+
+
+
+

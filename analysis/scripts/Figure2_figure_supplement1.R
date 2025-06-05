@@ -95,10 +95,18 @@ panel_SNN_3d <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_
   draw_label("A", x = 0.67, y = 0.85, size = 7, color = "black", hjust = 0.5) +
   draw_label("O", x = 0.67, y = 0.65, size = 7, color = "black", hjust = 0.5) +
   draw_line(x = c(0.67, 0.67), y = c(0.69, 0.81), color = "black", linewidth = 0.65) +
-  draw_label(expression(paste("25 ", mu, "m")), x = 0.95, y = 0.1, color = "black", size = 7, hjust = 0.5) +
-  draw_line(x = c(0.91, 0.99), y = c(0.05, 0.05), color = "black", linewidth = 0.7)
+  draw_label(expression(paste("25 ", mu, "m")), x = 0.95, y = 0.1, color = "black", size = 7.5, hjust = 0.5) +
+  draw_line(x = c(0.91, 0.99), y = c(0.05, 0.05), color = "black", linewidth = 0.9)
 
-panel_ANN_SNN_EM <- ggdraw() + draw_image(readPNG("manuscript/pictures/comparison_ANN_SNN.png"))
+panel_SNN_ANN_3d <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_SNN_ANN.png")) +
+  draw_label("SNN", x = 0.25, y = 1, color = "skyblue", size = 10, hjust = 0.5) +
+  draw_label("ANN Q1-4", x = 0.35, y = 1, color = Okabe_Ito[5], size = 10, hjust = 0.5) +
+  draw_label("ANN Q1Q2", x = 0.5, y = 1, color = Okabe_Ito[6], size = 10, hjust = 0.5) +
+  draw_label("ANN Q3Q4", x = 0.65, y = 1, color = Okabe_Ito[7], size = 10, hjust = 0.5)
+
+panel_SNN_EM <- ggdraw() + draw_image(readPNG("manuscript/pictures/EM_SNN.png"))
+
+panel_ANN_EM <- ggdraw() + draw_image(readPNG("manuscript/pictures/EM_ANN.png"))
 
 panel_CAT_pic <- ggdraw() + draw_image(readPNG("manuscript/pictures/figure_sup2_1.png"))
 
@@ -107,17 +115,20 @@ panel_mono_vs_poly <- ggdraw() + draw_image(readPNG("manuscript/pictures/figure_
 panel_multi_nucleus <- ggdraw() + draw_image(readPNG("manuscript/pictures/multi_nucleus.png"))
 
 layout <- "
-A#BBB#C
-#######
-DDD#EEE
+ABCCC
+#####
+DDDEE
+#####
+FFFGG
 "
 
 Fig2_Sup1 <- panel_CAT_pic + panel_mono_vs_poly + panel_multi_nucleus +
-  panel_SNN_3d + panel_ANN_SNN_EM +
+  panel_SNN_3d + panel_SNN_EM +
+  panel_SNN_ANN_3d + panel_ANN_EM +
   plot_layout(
     design = layout,
-    heights = c(1.1, 0.25, 1),
-    widths = c(0.7, 0.1, 0.7, 0.1, 0.2, 0.1, 1)
+    heights = c(1, 0.1, 1, 0.1, 1),
+    widths = c(0.8, 1.4, 0.2, 0.1, 1)
   ) +
   patchwork::plot_annotation(tag_levels = "A") &
   ggplot2::theme(plot.tag = element_text(
@@ -127,10 +138,10 @@ Fig2_Sup1 <- panel_CAT_pic + panel_mono_vs_poly + panel_multi_nucleus +
 
 ggsave("manuscript/figures/Figure2_Supplement1.png",
   limitsize = FALSE,
-  units = c("px"), Fig2_Sup1, width = 2850, height = 1250, bg = "white"
+  units = c("px"), Fig2_Sup1, width = 2800, height = 2200, bg = "white"
 )
 
 ggsave("manuscript/figures/Figure2_Supplement1.pdf",
   limitsize = FALSE,
-  units = c("px"), Fig2_Sup1, width = 2850, height = 1250
+  units = c("px"), Fig2_Sup1, width = 2800, height = 2200
 )
