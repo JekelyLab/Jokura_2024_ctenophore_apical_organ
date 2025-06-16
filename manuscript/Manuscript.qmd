@@ -262,6 +262,7 @@ Morphological rendering of skeletonised cell types, (A) balancer cells (B) bridg
 ![**Figure 1—figure supplement 2. 3D reconstruction of all cells comprising the aboral organ**\
 (A) Morphological rendering of skeletonised cells in the ctenophore aboral organ. Each color represents a distinct cell type. The balancer cells are shown in orange. Some cell groups lack distinguishing subcellular features required for identification and are shown in white.](figures/Figure1_Supplement2.png)
 
+
 ![**Figure 2—figure supplement 1. Ultrastructural features and synaptic organization of the ANN, in comparison to the subepithelial nerve net (SNN)**\
 (A) Registration and annotation of synapses in the actual cellular traces. Pink dots indicate the approximate center of each individual cell, marked within its plasma membrane boundary. Mitochondria involved in synaptic contacts are labeled with orange dots. Red arrows point from these mitochondria to the presynaptic cell body, marking presynaptic structures. Cyan arrows point from the orange-labeled mitochondria to the corresponding postsynaptic cell.\
 (B) Electron microscopy (EM) images showing representative presynaptic structures. The left panel shows a monadic synapse, while the right panel shows a polyadic (byadic) synapse, in which a single presynaptic site contacts two postsynaptic cells.\
