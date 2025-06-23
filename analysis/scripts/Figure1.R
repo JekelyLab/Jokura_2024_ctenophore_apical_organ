@@ -46,10 +46,11 @@ close3d()
 
 panel_catmaid_overview <- ggdraw() + draw_image(readPNG("manuscript/pictures/overview.png")) +
   draw_label("serial EM volume", x = 0.5, y = 0.99, size = 10, fontface = "plain", hjust = 0.5) +
-  draw_label("619 sections", x = 0.025, y = 0.81, color = "black", size = 9, hjust = 0) +
-  draw_label("927 cells", x = 0.025, y = 0.75, color = "black", size = 9, hjust = 0) +
+  draw_label("619 sections", x = 0.025, y = 0.86, color = "black", size = 9, hjust = 0) +
+  draw_label("972 cells", x = 0.025, y = 0.8, color = "black", size = 9, hjust = 0) +
+  draw_label("898 AO cells", x = 0.025, y = 0.74, color = "black", size = 9, hjust = 0) +
   draw_line(x = c(0.75, 0.9), y = c(0.05, 0.05), color = "black", size = 1) +
-  draw_label(expression(paste("10 ", mu, "m")), x = 0.825, y = 0.09, color = "black", size = 8, hjust = 0.5)
+  draw_label(expression(paste("10 ", mu, " m")), x = 0.825, y = 0.09, color = "black", size = 8, hjust = 0.5)
 
 
 panel_quadrants <- ggdraw() + draw_image(readPNG("manuscript/pictures/quadrants.png")) +
@@ -61,7 +62,7 @@ panel_quadrants <- ggdraw() + draw_image(readPNG("manuscript/pictures/quadrants.
   draw_label("lateral view", x = 0.66, y = 0.99, color = "black", size = 10, hjust = 0.5) +
   draw_label("sagittal plane", x = 0.5, y = 0.95, color = "black", size = 10, hjust = 0.5) +
   draw_label("tentacular plane", x = 0.83, y = 0.95, color = "black", size = 10, hjust = 0.5)  +
-  draw_label(expression(paste("25 ", mu, "m")), x = 0.95, y = 0.1, color = "black", size = 10, hjust = 0.5) +
+  draw_label(expression(paste("25 ", mu, " m")), x = 0.95, y = 0.1, color = "black", size = 10, hjust = 0.5) +
   draw_line(x = c(0.91, 0.99), y = c(0.05, 0.05), color = "black", linewidth = 1) +
   draw_label("A", x = 0.66, y = 0.25, size = 10, color = "black", hjust = 0.5) +
   draw_label("O", x = 0.66, y = 0.05, size = 10, color = "black", hjust = 0.5) +

@@ -1,7 +1,7 @@
 ---
 title: "Neural Connectome of the Ctenophore Statocyst"
 subtitle: |
-  **Kei Jokura**$^{1,2,3,4,5*}$, **Sanja Jasek**$^{1,2,6}$, **Lara Niederhuas**$^{6}$, **Pawel Burkhardt**$^{7}$, **Gáspár Jékely**$^{1,2,6,*}$  
+  **Kei Jokura**$^{1,2,3,4,5*}$, **Sanja Jasek**$^{1,2,6}$, **Lara Niederhaus**$^{6}$, **Pawel Burkhardt**$^{7}$, **Gáspár Jékely**$^{1,2,6,*}$  
   <br><br>  
   $^{1}$ Living Systems Institute, University of Exeter, Exeter, EX4 4QD, United Kingdom  
   <br>
