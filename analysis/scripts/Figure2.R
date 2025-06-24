@@ -326,7 +326,7 @@ df <- df %>%
 rename_map <- c(
   "balancer" = "bal", 
   "bridge" = "brg", 
-  "bristle" = "bsl", 
+  "large_granular_cell" = "lgc", 
   "Cgroove" = "cg",
   "dense_vesicle" = "dv", 
   "dome" = "do", 
@@ -361,7 +361,7 @@ mean_summary <- summary_df %>%
 
 
 # Align the number of cells (n) of each celltype with celltype_order
-celltype_order <- c("bal", "brg", "bsl", "cg", "dv", "do", "imc", "la", "li", "pl", "ANN", "ef")
+celltype_order <- c("bal", "brg", "lgc", "cg", "dv", "do", "imc", "la", "li", "pl", "ANN", "ef")
 
 n_counts <- summary_df %>%
   group_by(celltype) %>%
