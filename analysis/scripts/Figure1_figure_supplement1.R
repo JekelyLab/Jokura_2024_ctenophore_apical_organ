@@ -193,7 +193,7 @@ panel_balancer <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plo
 panel_bridge <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_bridge.png")) +
   draw_label("bridge cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
 panel_bristle <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_bristle.png")) +
-  draw_label("bristle cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
+  draw_label("large granular cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
 panel_Cgroove <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_Cgroove.png")) +
   draw_label("ciliated groove cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
 panel_dense_vesicle <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_dense_vesicle.png")) +
