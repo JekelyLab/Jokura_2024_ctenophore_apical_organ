@@ -101,12 +101,12 @@ SSN_downstream <- SSN_downstream %>%
 
 
 # bar plot
-all_celltypes <- c("balancer", "bridge", "bristle", "Cgroove", "dense_vesicle", "dome", 
+all_celltypes <- c("balancer", "bridge", "large_glanular_cell", "Cgroove", "dense_vesicle", "dome", 
                    "intra-multi-ciliated", "lamellate", "lithocyte", "plumose", "SSN", 
                    "epithelial_floor")
 
 label_mapping <- c(
-  "balancer" = "bal", "bridge" = "brg", "bristle" = "bsl", 
+  "balancer" = "bal", "bridge" = "brg", "large_glanular_cell" = "lgc", 
   "Cgroove" = "cg", 
   "dense_vesicle" = "dv", "dome" = "do", 
   "intra-multi-ciliated" = "imc", "lamellate" = "la", "lithocyte" = "li", 
