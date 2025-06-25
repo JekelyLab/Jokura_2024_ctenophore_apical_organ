@@ -4,33 +4,65 @@
 source("analysis/scripts/packages_and_functions.R")
 
 
-# load all cell types to plot individually -------------------------------------
-#twelve celltypes
-balancer <- read_smooth_neuron("celltype:balancer")
-bridge <- read_smooth_neuron("celltype:bridge")
-bristle <- read_smooth_neuron("celltype:bristle")
-Cgroove <- read_smooth_neuron("celltype:Cgroove")
-dense_vesicle <- read_smooth_neuron("celltype:dense_vesicle")
-dome <- read_smooth_neuron("celltype:dome")
-intra_multi_ciliated <- read_smooth_neuron("celltype:intra-multi-ciliated")
-lamellate <- read_smooth_neuron("celltype:lamellate")
-lithocyte <- read_smooth_neuron("celltype:lithocyte")
-plumose <- read_smooth_neuron("celltype:plumose")
-SSN <- read_smooth_neuron("celltype:SSN")
-epithelial_floor <- read_smooth_neuron("celltype:epithelial_floor")
+# show just a subset of celltypes, just the interesting ones
 
-with_soma <- read_smooth_neuron("with_soma")
+celltype_map <- c(
+  "balancer" = "balancer cells",
+  "bridge" = "bridge cells",
+  "large_granular_cell" = "large granular cells",
+  "Cgroove" = "ciliated groove cells",
+  "dense_vesicle" = "dense vesicle cells",
+  "dome" = "dome cells",
+  "intra-multi-ciliated" = "intracellular multiciliated cells",
+  "lamellate" = "lamellate bodies",
+  "lithocyte" = "lithocytes",
+  "plumose" = "plumose cells",
+  "SSN" = "aboral nerve net neurons",
+  "epithelial_floor" = "epithelial floor cells"
+)
 
-# function individual plot process --------------------------------------------------------
+# celltypes short, because these are not all celltypes in the animal
+celltypes_short <- names(celltype_map)
 
-plot_neuron_views <- function(neuron_name, neuron_data) {
+
+skids_with_soma <- catmaid_get_label_stats(pid=35) %>%
+  filter(labelName == "soma") %>%
+  select(skeletonID) %>%
+  pull() %>%
+  unique()
+
+skids_outside <- catmaid_skids("outside", pid=35)
+
+skids_soma_AO <- setdiff(skids_with_soma, skids_outside)
+
+with_soma <- read_smooth_neuron(skids_soma_AO)
+
+celltype_cells <- list()
+for (celltype in celltypes_short) {
+  nneuron <- read_smooth_neuron(paste("celltype:", celltype, sep=""))
+  #assign(celltype, nneuron, envir = .GlobalEnv)
+  celltype_cells[[celltype]]=nneuron
+}
+
+
+# plot cells -----
+for (i in seq_along(celltype_cells)) {
+  celltype <- names(celltype_cells)[i]
+  cells <- celltype_cells[[i]]
   close3d()
   nopen3d()
   mfrow3d(1, 3)
   par3d(windowRect = c(0, 0, 2400, 700))
   
   for (view in c("aboral", "sagittal", "tentacular")) {
-    plot3d(neuron_data, soma = TRUE, lwd = 1, add = TRUE, alpha = 0.8, col = Okabe_Ito[5], WithConnectors = FALSE, WithNodes = FALSE)
+    # plot3d doesn't plot all nuclei in multinucleated cells
+    # we have to use plot_multinucleated cell instead
+    # but plot_multinucleated_cell is much slower, so we want to use it only on cells which are actually multinucleated
+    if (celltype == "SSN") {
+      plot_multinucleated_cell(cells, lwd = 1, alpha = 0.8, col = Okabe_Ito[5])
+    } else {
+      plot3d(cells, soma = TRUE, lwd = 1, add = TRUE, alpha = 0.8, col = Okabe_Ito[5], WithConnectors = FALSE, WithNodes = FALSE)
+    }
     plot3d(with_soma, soma = TRUE, lwd = 1, add = TRUE, alpha = 0.05, col = Okabe_Ito[8])
     plot3d(outline, add = TRUE, alpha = 0.025, col = Okabe_Ito[8])
     
@@ -43,53 +75,9 @@ plot_neuron_views <- function(neuron_name, neuron_data) {
     if (view != "tentacular") next3d(clear = FALSE)
   }
   
-  rgl.snapshot(paste0("manuscript/pictures/3d_plot/plot_", neuron_name, ".png"))
+  rgl.snapshot(paste0("manuscript/pictures/3d_plot/plot_", celltype, ".png"))
   close3d()
 }
-
-# individual plot each cells except SSNs---------------------------------------------------
-
-plot_neuron_views("balancer", balancer)
-plot_neuron_views("bridge", bridge)
-plot_neuron_views("bristle", bristle)
-plot_neuron_views("Cgroove", Cgroove)
-plot_neuron_views("dense_vesicle", dense_vesicle)
-plot_neuron_views("dome", dome)
-plot_neuron_views("intra_multi_ciliated", intra_multi_ciliated)
-plot_neuron_views("lamellate", lamellate)
-plot_neuron_views("lithocyte", lithocyte)
-plot_neuron_views("plumose", plumose)
-plot_neuron_views("epithelial_floor", epithelial_floor)
-
-# plot SSNs --------------------------------------------------------------------
-plot_multinucleated_views <- function(neuron_name, neuron_data) {
-  close3d()
-  nopen3d()
-  mfrow3d(1, 3)
-  par3d(windowRect = c(0, 0, 2400, 700))
-  
-  views <- c("aboral", "sagittal", "tentacular")
-  
-  for (view in views) {
-    plot_multinucleated_cell(neuron_data, lwd = 1, alpha = 0.8, col = Okabe_Ito[5])
-    plot3d(with_soma, soma = TRUE, lwd = 1, add = TRUE, alpha = 0.05, col = Okabe_Ito[8])
-    plot3d(outline, add = TRUE, alpha = 0.025, col = Okabe_Ito[8])
-    
-    switch(view,
-           "aboral" = aboral(),
-           "sagittal" = sagittal(),
-           "tentacular" = tentacular())
-    
-    par3d(zoom = 0.61)
-    
-    if (view != "tentacular") next3d(clear = FALSE)
-  }
-  
-  rgl.snapshot(paste0("manuscript/pictures/3d_plot/plot_", neuron_name, ".png"))
-  close3d()
-}
-
-plot_multinucleated_views("SSN", SSN)
 
 
 # Display all cell types together in one 3d plot--------------------------------
@@ -190,28 +178,14 @@ panel_balancer <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plo
                linejoin = "mitre",
                arrow.fill = "black", linewidth = 0.175)
 
-panel_bridge <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_bridge.png")) +
-  draw_label("bridge cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_bristle <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_bristle.png")) +
-  draw_label("large granular cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_Cgroove <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_Cgroove.png")) +
-  draw_label("ciliated groove cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_dense_vesicle <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_dense_vesicle.png")) +
-  draw_label("dense vesicle cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_dome <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_dome.png")) +
-  draw_label("dome cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_intra_multi_ciliated <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_intra_multi_ciliated.png")) +
-  draw_label("intra-multiciliated cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_lamellate <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_lamellate.png")) +
-  draw_label("lamellate bodies", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_lithocyte <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_lithocyte.png")) +
-  draw_label("lithocytes", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_plumose <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_plumose.png")) +
-  draw_label("plumose cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_SSN <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_SSN.png")) +
-  draw_label("aboral nerve net neurons", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
-panel_epithelial_floor <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plot_epithelial_floor.png")) +
-  draw_label("epithelial floor cells", x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
+panel_celltype <- list()
+for (celltype in names(celltype_cells)) {
+  name_text <- rename_map[celltype]
+  panel_celltype[[celltype]] <- ggdraw() +
+    draw_image(readPNG(paste("manuscript/pictures/3d_plot/plot_", celltype, ".png", sep = ""))) +
+    draw_label(name_text, x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
+}
+
 
 layout <- "
 A#B#C
@@ -222,11 +196,11 @@ G#H#I
 #####
 J#K#L
 "
-
-Fig1_Sup1 <- panel_balancer + panel_bridge + panel_bristle +
-  panel_Cgroove + panel_dense_vesicle + panel_dome + 
-  panel_intra_multi_ciliated + panel_lamellate + panel_lithocyte + 
-  panel_plumose + panel_SSN + panel_epithelial_floor +
+# panel_balancer is different, because we draw coodrinates and scale bar above
+Fig1_Sup1 <- panel_balancer + panel_celltype[["bridge"]] + panel_celltype[["large_granular_cell"]] +
+  panel_celltype[["Cgroove"]] + panel_celltype[["dense_vesicle"]] + panel_celltype[["dome"]] +
+  panel_celltype[["intra-multi-ciliated"]] + panel_celltype[["lamellate"]] + panel_celltype[["lithocyte"]] +
+  panel_celltype[["plumose"]] + panel_celltype[["SSN"]] + panel_celltype[["epithelial_floor"]] +
   patchwork::plot_layout(design = layout, 
                          heights = c(1,0.05,1,0.05,1,0.05,1,0.05,1), 
                          widths = c(1,0.05,1,0.05,1)) + 
