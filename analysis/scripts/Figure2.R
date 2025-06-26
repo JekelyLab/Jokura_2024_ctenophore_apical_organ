@@ -4,138 +4,77 @@
 source("analysis/scripts/packages_and_functions.R")
 
 
-# load cell type ---------------------------------------------------------------
+# load cells ---------------------------------------------------------------
 
-#balancer <- read_smooth_neuron("celltype:balancer")
-#bridge <- read_smooth_neuron("celltype:bridge")
-#bristle <- read_smooth_neuron("celltype:bristle")
-#Cgroove <- read_smooth_neuron("celltype:Cgroove")
-#dense_vesicle <- read_smooth_neuron("celltype:dense_vesicle")
-#dome <- read_smooth_neuron("celltype:dome")
-#epithelial_floor <- read_smooth_neuron("celltype:epithelial_floor")
-#intra_multi_ciliated <- read_smooth_neuron("celltype:intra-multi-ciliated")
-#lamellate <- read_smooth_neuron("celltype:lamellate")
-#lithocyte <- read_smooth_neuron("celltype:lithocyte")
-#plumose <- read_smooth_neuron("celltype:plumose")
-#SSN <- read_smooth_neuron("celltype:SSN")
 
-#monociliated <- read_smooth_neuron("celltype:monociliated")
-#biciliated <- read_smooth_neuron("celltype:biciliated")
-#multiciliated <- read_smooth_neuron("celltype:multiciliated")
-#nonciliated <- read_smooth_neuron("celltype:nonciliated")
+ANN_Q1Q2 <- read_smooth_neuron("SSN_Q1Q2")[[1]]
+ANN_Q3Q4 <- read_smooth_neuron("SSN_Q3Q4")[[1]]
+ANN_Q1Q2Q3Q4 <- read_smooth_neuron("SSN_Q1Q2Q3Q4")[[1]]
 
-#Q1 <- read_smooth_neuron("Q1")
-#Q2 <- read_smooth_neuron("Q2")
-#Q3 <- read_smooth_neuron("Q3")
-#Q4 <- read_smooth_neuron("Q4")
-
-SSN_Q1Q2 <- read_smooth_neuron("SSN_Q1Q2")[[1]]
-SSN_Q3Q4 <- read_smooth_neuron("SSN_Q3Q4")[[1]]
-SSN_Q1Q2Q3Q4 <- read_smooth_neuron("SSN_Q1Q2Q3Q4")[[1]]
-
-with_soma <- read_smooth_neuron("with_soma")
-
-#all_celltypes <- list(balancer,bridge,bristle,Cgroove,
-#                      dense_vesicle,dome,epithelial_floor,
-#                      intra_multi_ciliated,
-#                      lamellate,lithocyte,plumose,SSN,
-#                      monociliated,biciliated,multiciliated,nonciliated)
-
+#with_soma <- read_smooth_neuron("with_soma")
 
 
 # 3d plot SSN Q1Q2 & Q3Q4 neuron -----------------------------------------------
 
+plot_ANNQ1Q2_ANN3Q4 <- function() {
+  plot_multinucleated_cell(ANN_Q1Q2,
+                           lwd = 1, alpha = 1, col = Okabe_Ito[6])
+  
+  plot_multinucleated_cell(ANN_Q3Q4,
+                           lwd = 1, alpha = 1, col = Okabe_Ito[7])
+  
+  plot3d(outline,
+         add = T, alpha = 0.05, col = "grey50"
+  )
+}
+
 close3d()
 # 3d plotting of cells
 nopen3d() 
 mfrow3d(1, 3)  
 #define the size of the rgl window, the view and zoom
 par3d(windowRect = c(0, 0, 1200, 350))
-#par3d(windowRect = c(0, 0, 2400, 700))
+
 
 #plot aboral view
-plot_multinucleated_cell(SSN_Q1Q2,
-                         lwd = 1, alpha = 1, col = Okabe_Ito[6])
-
-plot_multinucleated_cell(SSN_Q3Q4,
-                         lwd = 1, alpha = 1, col = Okabe_Ito[7])
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-#texts3d(58000,51000,5000, "INRGW", cex = 3, col = "#56B4E9")
-
-#aboral view
-nview3d("anterior", extramat = rotationMatrix(1.05, 250, -200, 1000))
-#rgl.snapshot("manuscript/pictures/SSN_aboral_view.png")
+plot_ANNQ1Q2_ANN3Q4()
+aboral()
 par3d(zoom=0.61)
+
 
 #move to next panel in rgl window
 next3d(clear=F)
-
-
-
 #plot lateral view of Sagittal plane
-plot_multinucleated_cell(SSN_Q1Q2,
-                         lwd = 1, alpha = 1, col = Okabe_Ito[6])
+plot_ANNQ1Q2_ANN3Q4()
+sagittal()
 
-plot_multinucleated_cell(SSN_Q3Q4,
-                         lwd = 1, alpha = 1, col = Okabe_Ito[7])
-
-plot3d(with_soma,
-       soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-#texts3d(58000,51000,5000, "INRGW", cex = 3, col = "#56B4E9")
-
-#lateral view of Sagittal plane
-nview3d("left", extramat = rotationMatrix(300, 4200, 1800, 800))
 #rgl.snapshot("manuscript/pictures/SSN_sagittal_plane.png")
 par3d(zoom=0.61)
 
 #move to next panel in rgl window
 next3d(clear=F)
-
-
-
 #plot lateral view of Tentacular plane
-plot_multinucleated_cell(SSN_Q1Q2,
-                         lwd = 1, alpha = 1, col = Okabe_Ito[6])
+plot_ANNQ1Q2_ANN3Q4()
+tentacular()
 
-plot_multinucleated_cell(SSN_Q3Q4,
-                         lwd = 1, alpha = 1, col = Okabe_Ito[7])
-
-plot3d(with_soma,
-       soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-
-#lateral view of Tentacular plane
-nview3d("left", extramat = rotationMatrix(-1.7, 190, -120, -140))
-#rgl.snapshot("manuscript/pictures/SSN_tentacular_plane.png")
 par3d(zoom=0.61)
 
 #move to next panel in rgl window
 next3d(clear=F)
-
-
 #make a snapshot to the working directory
 rgl.snapshot("manuscript/pictures/SSN_Q12_Q34.png")
 
-
 close3d()
 
-# 3d plot SSN Q1Q2Q3Q4 neuron -----------------------------------------------
+# 3d plot ANN Q1Q2Q3Q4 neuron -----------------------------------------------
+plot_ANNQ1Q2Q3Q4 <- function() {
+  plot_multinucleated_cell(ANN_Q1Q2Q3Q4,
+                           lwd = 1, alpha = 1, col = Okabe_Ito[5])
+  
+  plot3d(outline,
+         add = T, alpha = 0.05, col = "grey50")
 
+}
 
 close3d()
 # 3d plotting of cells
@@ -143,71 +82,29 @@ nopen3d()
 mfrow3d(1, 3)  
 #define the size of the rgl window, the view and zoom
 par3d(windowRect = c(0, 0, 1200, 350))
-#par3d(windowRect = c(0, 0, 2400, 700))
 
 #plot aboral view
-plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
-       lwd = 1, alpha = 1, col = Okabe_Ito[5])
-
-plot3d(with_soma,
-       soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-#texts3d(58000,51000,5000, "INRGW", cex = 3, col = "#56B4E9")
-
-#aboral view
-nview3d("anterior", extramat = rotationMatrix(1.05, 250, -200, 1000))
+plot_ANNQ1Q2Q3Q4()
+aboral()
 #rgl.snapshot("manuscript/pictures/SSN_aboral_view.png")
 par3d(zoom=0.61)
+
 
 #move to next panel in rgl window
 next3d(clear=F)
 
-
-
 #plot lateral view of Sagittal plane
-plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
-                         lwd = 1, alpha = 1, col = Okabe_Ito[5])
-
-plot3d(with_soma,
-       soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-#texts3d(58000,51000,5000, "INRGW", cex = 3, col = "#56B4E9")
-
-#lateral view of Sagittal plane
-nview3d("left", extramat = rotationMatrix(300, 4200, 1800, 800))
+plot_ANNQ1Q2Q3Q4()
+sagittal()
 #rgl.snapshot("manuscript/pictures/SSN_sagittal_plane.png")
 par3d(zoom=0.61)
 
 #move to next panel in rgl window
 next3d(clear=F)
 
-
-
 #plot lateral view of Tentacular plane
-plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
-                         lwd = 1, alpha = 1, col = Okabe_Ito[5])
-
-plot3d(with_soma,
-       soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-
-#lateral view of Tentacular plane
-nview3d("left", extramat = rotationMatrix(-1.7, 190, -120, -140))
+plot_ANNQ1Q2Q3Q4()
+tentacular()
 #rgl.snapshot("manuscript/pictures/SSN_tentacular_plane.png")
 par3d(zoom=0.61)
 
@@ -217,11 +114,7 @@ next3d(clear=F)
 
 #make a snapshot to the working directory
 rgl.snapshot("manuscript/pictures/SSN_Q1234.png")
-
-
 close3d()
-
-
 
 
 # calculate percentage of mitochondria which have vesicles or synapses associated with them -----
@@ -434,7 +327,55 @@ summary_df %>%
 #mito_done <- read.neurons.catmaid("mitochondria done", pid = 35)
 mito_vesicle_info <- read.csv("analysis/data/mito_vesicle_info.csv")
 
-# 3d plot mitochondria positions in SSN ----------------------------------------
+# 3d plot mitochondria positions in ANN ----------------------------------------
+
+pos_ves_syn <- mito_vesicle_info |>
+  filter(celltype == "SSN") |>
+  filter(mito_type == "vesicles_syn") |>
+  select(x, y, z)
+
+pos_ves_no_syn <- mito_vesicle_info |>
+  filter(celltype == "SSN") |>
+  filter(mito_type != "vesicles_syn") |>
+  select(x, y, z)
+
+
+plot_mito_ANN <- function() {
+  plot3d(ANN_Q1Q2,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[6],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(ANN_Q3Q4,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[7],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(ANN_Q1Q2Q3Q4,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[5],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(outline,
+         add = T, alpha = 0.05, col = "grey50"
+  )
+  
+  # plot mitochondria
+  plot3d(pos_ves_syn, 
+         add = TRUE,
+         col = "green3",
+         size = 0.6, 
+         alpha = 0.5,
+         point_antialias = TRUE,
+         type = "s"
+  )
+  
+  plot3d(pos_ves_no_syn, 
+         add = TRUE,
+         col = "black",
+         size = 0.6, 
+         alpha = 0.5,
+         point_antialias = TRUE,
+         type = "s"
+  )
+}
 
 close3d()
 # 3d plotting of cells
@@ -445,175 +386,32 @@ par3d(windowRect = c(0, 0, 1200, 350))
 #par3d(windowRect = c(0, 0, 2400, 700))
 
 #plot aboral view
-plot3d(SSN_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[6],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-# plot mitochondria
-
-pos_ves_syn <- mito_vesicle_info |>
-  filter(celltype == "SSN") |>
-  filter(mito_type == "vesicles_syn") |>
-  select(x, y, z)
-
-plot3d(pos_ves_syn, 
-       add = TRUE,
-       col = "green3",
-       size = 0.6, 
-       alpha = 0.5,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-pos_ves_no_syn <- mito_vesicle_info |>
-  filter(celltype == "SSN") |>
-  filter(mito_type != "vesicles_syn") |>
-  select(x, y, z)
-
-plot3d(pos_ves_no_syn, 
-       add = TRUE,
-       col = "black",
-       size = 0.6, 
-       alpha = 0.5,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-#aboral view
+plot_mito_ANN()
 aboral()
 
 par3d(zoom=0.61)
-
 
 #move to next panel in rgl window
 next3d(clear=F)
 
 #plot sagittal view
-plot3d(SSN_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[6],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-# plot mitochondria
-
-pos_ves_syn <- mito_vesicle_info |>
-  filter(celltype == "SSN") |>
-  filter(mito_type == "vesicles_syn") |>
-  select(x, y, z)
-
-plot3d(pos_ves_syn, 
-       add = TRUE,
-       col = "green3",
-       size = 0.6, 
-       alpha = 0.5,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-pos_ves_no_syn <- mito_vesicle_info |>
-  filter(celltype == "SSN") |>
-  filter(mito_type != "vesicles_syn") |>
-  select(x, y, z)
-
-plot3d(pos_ves_no_syn, 
-       add = TRUE,
-       col = "black",
-       size = 0.6, 
-       alpha = 0.5,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-#sagittal view
+plot_mito_ANN()
 sagittal()
 
 par3d(zoom=0.61)
-
-
 #move to next panel in rgl window
 next3d(clear=F)
 
 #plot tentacular view
-plot3d(SSN_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[6],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-# plot mitochondria
-
-pos_ves_syn <- mito_vesicle_info |>
-  filter(celltype == "SSN") |>
-  filter(mito_type == "vesicles_syn") |>
-  select(x, y, z)
-
-plot3d(pos_ves_syn, 
-       add = TRUE,
-       col = "green3",
-       size = 0.6, 
-       alpha = 0.5,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-pos_ves_no_syn <- mito_vesicle_info |>
-  filter(celltype == "SSN") |>
-  filter(mito_type != "vesicles_syn") |>
-  select(x, y, z)
-
-plot3d(pos_ves_no_syn, 
-       add = TRUE,
-       col = "black",
-       size = 0.6, 
-       alpha = 0.5,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-#tentacular view
+plot_mito_ANN()
 tentacular()
 
 par3d(zoom=0.61)
-
 
 #make a snapshot to the working directory
 rgl.snapshot("manuscript/pictures/mito_pos_SSN.png")
 
 close3d()
-
 
 
 # retrieve connectors ----------------------------------------------------------
@@ -678,8 +476,55 @@ syn_small_to_small <- stats_synapse %>%
   filter(prepost==1)
 
 
-# 3d plot SSN synapses ---------------------------------------------------------
+# 3d plot ANN synapses ---------------------------------------------------------
 
+plot_ANN <- function() {
+  plot3d(ANN_Q1Q2,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[6],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(ANN_Q3Q4,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(ANN_Q1Q2Q3Q4,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(outline,
+         add = T, alpha = 0.05, col = "grey50"
+  )
+  
+  # plot synapses
+  
+  pos_big_to_small <- syn_big_to_small %>%
+    select(x, y, z)
+  plot3d(pos_big_to_small,
+         size = 1, alpha = 0.75, col = "magenta2", 
+         add = TRUE,
+         point_antialias = TRUE,
+         type = "s"
+  )
+  
+  pos_small_to_big <- syn_small_to_big %>%
+    select(x, y, z)
+  plot3d(pos_small_to_big,
+         size = 1, alpha = 0.75, col = "cyan2", 
+         add = TRUE,
+         point_antialias = TRUE,
+         type = "s"
+  )
+  
+  
+  pos_big_to_big <- syn_big_to_big %>%
+    select(x, y, z)
+  plot3d(pos_big_to_big,
+         size = 1, alpha = 0.75, col = "#4477AA", 
+         add = TRUE,
+         point_antialias = TRUE,
+         type = "s"
+  )
+}
 
 close3d()
 # 3d plotting of cells
@@ -691,181 +536,26 @@ par3d(windowRect = c(0, 0, 1200, 350))
 
 
 #plot aboral view
-plot3d(SSN_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[6],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-
-# plot synapses
-
-pos_big_to_small <- syn_big_to_small %>%
-  select(x, y, z)
-plot3d(pos_big_to_small,
-       size = 1, alpha = 0.75, col = "magenta2", 
-       add = TRUE,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-pos_small_to_big <- syn_small_to_big %>%
-  select(x, y, z)
-plot3d(pos_small_to_big,
-       size = 1, alpha = 0.75, col = "cyan2", 
-       add = TRUE,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-
-pos_big_to_big <- syn_big_to_big %>%
-  select(x, y, z)
-plot3d(pos_big_to_big,
-       size = 1, alpha = 0.75, col = "#4477AA", 
-       add = TRUE,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-#pos_small_to_small <- syn_small_to_small %>%
-#  select(x, y, z)
-#plot3d(pos_small_to_small,
-#       size = 0.6, alpha = 0.5, col = "#4477AA", 
-#       add = TRUE,
-#       point_antialias = TRUE,
-#       type = "s"
-#)
-
-
-#aboral view
-nview3d("anterior", extramat = rotationMatrix(1.05, 250, -200, 1000))
+plot_ANN()
+aboral()
 #rgl.snapshot("manuscript/pictures/balancer_aboral_view.png")
 par3d(zoom=0.61)
 
 #move to next panel in rgl window
 next3d(clear=F)
 
-
-
-
 #plot lateral view of Sagittal plane
-plot3d(SSN_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[6],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-# plot synapses
-
-pos_big_to_small <- syn_big_to_small %>%
-  select(x, y, z)
-plot3d(pos_big_to_small,
-       size = 1, alpha = 0.75, col = "magenta2", 
-       add = TRUE,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-pos_small_to_big <- syn_small_to_big %>%
-  select(x, y, z)
-plot3d(pos_small_to_big,
-       size = 1, alpha = 0.75, col = "cyan2", 
-       add = TRUE,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-
-pos_big_to_big <- syn_big_to_big %>%
-  select(x, y, z)
-plot3d(pos_big_to_big,
-       size = 1, alpha = 0.75, col = "#4477AA", 
-       add = TRUE,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-
-
-nview3d("left", extramat = rotationMatrix(300, 4200, 1800, 800))
+plot_ANN()
+sagittal()
 #rgl.snapshot("manuscript/pictures/balancer_sagittal_plane.png")
 par3d(zoom=0.61)
 
 #move to next panel in rgl window
 next3d(clear=F)
 
-
-
 #plot lateral view of Tentacular plane
-plot3d(SSN_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[6],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-# plot synapses
-
-pos_big_to_small <- syn_big_to_small %>%
-  select(x, y, z)
-plot3d(pos_big_to_small,
-       size = 1, alpha = 0.75, col = "magenta2", 
-       add = TRUE,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-pos_small_to_big <- syn_small_to_big %>%
-  select(x, y, z)
-plot3d(pos_small_to_big,
-       size = 1, alpha = 0.75, col = "cyan2", 
-       add = TRUE,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-
-pos_big_to_big <- syn_big_to_big %>%
-  select(x, y, z)
-plot3d(pos_big_to_big,
-       size = 1, alpha = 0.75, col = "#4477AA", 
-       add = TRUE,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-
-nview3d("left", extramat = rotationMatrix(-1.7, 190, -120, -140))
+plot_ANN()
+tentacular()
 #rgl.snapshot("manuscript/pictures/balancer_tentacular_plane.png")
 par3d(zoom=0.61)
 
@@ -976,10 +666,3 @@ ggsave("manuscript/figures/Figure2.png", limitsize = FALSE,
 
 ggsave("manuscript/figures/Figure2.pdf", limitsize = FALSE, 
        units = c("px"), Figure2, width = 3000, height = 1800) 
-
-
-
-
-
-
-
