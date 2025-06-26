@@ -11,7 +11,19 @@ ANN_Q1Q2 <- read_smooth_neuron("SSN_Q1Q2")[[1]]
 ANN_Q3Q4 <- read_smooth_neuron("SSN_Q3Q4")[[1]]
 ANN_Q1Q2Q3Q4 <- read_smooth_neuron("SSN_Q1Q2Q3Q4")[[1]]
 
-#with_soma <- read_smooth_neuron("with_soma")
+
+# get all cells with soma, but only those in the apical organ
+skids_with_soma <- catmaid_get_label_stats(pid=35) %>%
+  filter(labelName == "soma") %>%
+  select(skeletonID) %>%
+  pull() %>%
+  unique()
+
+skids_outside <- catmaid_skids("outside", pid=35)
+
+skids_soma_AO <- setdiff(skids_with_soma, skids_outside)
+
+with_soma <- read_smooth_neuron(skids_soma_AO)
 
 
 # 3d plot SSN Q1Q2 & Q3Q4 neuron -----------------------------------------------
@@ -26,6 +38,7 @@ plot_ANNQ1Q2_ANN3Q4 <- function() {
   plot3d(outline,
          add = T, alpha = 0.05, col = "grey50"
   )
+  par3d(zoom=0.61)
 }
 
 close3d()
@@ -35,29 +48,31 @@ mfrow3d(1, 3)
 #define the size of the rgl window, the view and zoom
 par3d(windowRect = c(0, 0, 1200, 350))
 
-
 #plot aboral view
 plot_ANNQ1Q2_ANN3Q4()
 aboral()
-par3d(zoom=0.61)
-
 
 #move to next panel in rgl window
 next3d(clear=F)
 #plot lateral view of Sagittal plane
+# also plot with_soma in this view, because it look better
+plot3d(with_soma,
+       soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
+       WithConnectors = F, WithNodes = F)
 plot_ANNQ1Q2_ANN3Q4()
 sagittal()
 
 #rgl.snapshot("manuscript/pictures/SSN_sagittal_plane.png")
-par3d(zoom=0.61)
 
 #move to next panel in rgl window
 next3d(clear=F)
 #plot lateral view of Tentacular plane
+# also plot with_soma in this view, because it look better
+plot3d(with_soma,
+       soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
+       WithConnectors = F, WithNodes = F)
 plot_ANNQ1Q2_ANN3Q4()
 tentacular()
-
-par3d(zoom=0.61)
 
 #move to next panel in rgl window
 next3d(clear=F)
@@ -70,10 +85,12 @@ close3d()
 plot_ANNQ1Q2Q3Q4 <- function() {
   plot_multinucleated_cell(ANN_Q1Q2Q3Q4,
                            lwd = 1, alpha = 1, col = Okabe_Ito[5])
-  
+  plot3d(with_soma,
+         soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
+         WithConnectors = F, WithNodes = F)
   plot3d(outline,
          add = T, alpha = 0.05, col = "grey50")
-
+  par3d(zoom=0.61)
 }
 
 close3d()
@@ -87,8 +104,6 @@ par3d(windowRect = c(0, 0, 1200, 350))
 plot_ANNQ1Q2Q3Q4()
 aboral()
 #rgl.snapshot("manuscript/pictures/SSN_aboral_view.png")
-par3d(zoom=0.61)
-
 
 #move to next panel in rgl window
 next3d(clear=F)
@@ -97,7 +112,6 @@ next3d(clear=F)
 plot_ANNQ1Q2Q3Q4()
 sagittal()
 #rgl.snapshot("manuscript/pictures/SSN_sagittal_plane.png")
-par3d(zoom=0.61)
 
 #move to next panel in rgl window
 next3d(clear=F)
@@ -106,7 +120,6 @@ next3d(clear=F)
 plot_ANNQ1Q2Q3Q4()
 tentacular()
 #rgl.snapshot("manuscript/pictures/SSN_tentacular_plane.png")
-par3d(zoom=0.61)
 
 #move to next panel in rgl window
 next3d(clear=F)
