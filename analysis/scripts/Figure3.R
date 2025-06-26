@@ -200,6 +200,43 @@ SSN_downstream %>%
 
 # plot balancer -------------------------------------------------------------
 
+
+plot_balancer <- function() {
+  plot3d(
+    balancer_Q1,
+    soma = T, lwd = 1.5, add = T,
+    alpha = 0.5, col = Okabe_Ito[1]
+  )
+  plot3d(
+    balancer_Q2,
+    soma = T, lwd = 1.5, add = T,
+    alpha = 0.5, col = Okabe_Ito[2]
+  )
+  plot3d(
+    balancer_Q3,
+    soma = T, lwd = 1.5, add = T,
+    alpha = 0.5, col = Okabe_Ito[6]
+  )
+  plot3d(
+    balancer_Q4,
+    soma = T, lwd = 1.5, add = T,
+    alpha = 0.5, col = Okabe_Ito[7]
+  )
+  
+  plot3d(
+    with_soma,
+    soma = T, lwd = 1, add = T,
+    alpha = 0.01, col = Okabe_Ito[8]
+  )
+  
+  plot3d(
+    outline,
+    add = T, alpha = 0.05, col = "grey50"
+  )
+  par3d(zoom = 0.61)
+}
+
+
 close3d()
 
 # 3d plotting of cells
@@ -210,138 +247,24 @@ par3d(windowRect = c(0, 0, 1200, 350))
 #par3d(windowRect = c(0, 0, 2400, 700))
 
 # plot aboral view
-
-plot3d(
-  balancer_Q1,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.5, col = Okabe_Ito[1]
-)
-plot3d(
-  balancer_Q2,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.5, col = Okabe_Ito[2]
-)
-plot3d(
-  balancer_Q3,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.5, col = Okabe_Ito[6]
-)
-plot3d(
-  balancer_Q4,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.5, col = Okabe_Ito[7]
-)
-
-plot3d(
-  with_soma,
-  soma = T, lwd = 1, add = T,
-  alpha = 0.01, col = Okabe_Ito[8]
-)
-
-plot3d(
-  outline,
-  add = T, alpha = 0.05, col = "grey50"
-)
-
-#aboral view
+plot_balancer()
 aboral()
-par3d(zoom = 0.61)
-
-## y-axis clip
-#clipplanes3d(1, 0, 0, -11500)
-## x-axis clip
-#clipplanes3d(0, 1, 0, -24000)
 
 
 # move to next panel in rgl window
 next3d(clear = F)
 
 # plot lateral view of Sagittal plane
-
-plot3d(
-  balancer_Q1,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.5, col = Okabe_Ito[1]
-)
-plot3d(
-  balancer_Q2,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.5, col = Okabe_Ito[2]
-)
-plot3d(
-  balancer_Q3,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.5, col = Okabe_Ito[6]
-)
-plot3d(
-  balancer_Q4,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.5, col = Okabe_Ito[7]
-)
-
-plot3d(
-  with_soma,
-  soma = T, lwd = 1, add = T,
-  alpha = 0.01, col = Okabe_Ito[8]
-)
-
-plot3d(
-  outline,
-  add = T, alpha = 0.05, col = "grey50"
-)
-
+plot_balancer()
 sagittal()
-par3d(zoom = 0.61)
 
-# y-axis clip
-#clipplanes3d(1, 0, 0, -11500)
-# x-axis clip
-#clipplanes3d(0, 1, 0, -24000)
 
 # move to next panel in rgl window
 next3d(clear = F)
 
 # plot lateral view of Tentacular plane
-
-plot3d(
-  balancer_Q1,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.5, col = Okabe_Ito[1]
-)
-plot3d(
-  balancer_Q2,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.5, col = Okabe_Ito[2]
-)
-plot3d(
-  balancer_Q3,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.5, col = Okabe_Ito[6]
-)
-plot3d(
-  balancer_Q4,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.5, col = Okabe_Ito[7]
-)
-
-plot3d(
-  with_soma,
-  soma = T, lwd = 1, add = T,
-  alpha = 0.01, col = Okabe_Ito[8]
-)
-
-plot3d(
-  outline,
-  add = T, alpha = 0.05, col = "grey50"
-)
-
+plot_balancer()
 tentacular()
-par3d(zoom = 0.61)
-
-# y-axis clip
-#clipplanes3d(1, 0, 0, -11500)
-# x-axis clip
-#clipplanes3d(0, 1, 0, -24000)
 
 # make a snapshot to the working directory
 rgl.snapshot("manuscript/pictures/balancer.png")
@@ -353,6 +276,31 @@ close3d()
 
 # plot bridge -----------------------------------------------
 
+plot_bridge <- function() {
+  plot3d(
+    bridge_Q1Q2,
+    soma = T, lwd = 1.5, add = T,
+    alpha = 0.75, col = Okabe_Ito[2]
+  )
+  plot3d(
+    bridge_Q3Q4,
+    soma = T, lwd = 1.5, add = T,
+    alpha = 0.75, col = Okabe_Ito[7]
+  )
+  
+  plot3d(
+    with_soma,
+    soma = T, lwd = 1, add = T,
+    alpha = 0.01, col = Okabe_Ito[8]
+  )
+  
+  plot3d(
+    outline,
+    add = T, alpha = 0.05, col = "grey50"
+  )
+  par3d(zoom = 0.61)
+}
+
 close3d()
 
 # 3d plotting of cells
@@ -363,109 +311,22 @@ par3d(windowRect = c(0, 0, 1200, 350))
 #par3d(windowRect = c(0, 0, 2400, 700))
 
 # plot aboral view
-
-plot3d(
-  bridge_Q1Q2,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.75, col = Okabe_Ito[2]
-)
-plot3d(
-  bridge_Q3Q4,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.75, col = Okabe_Ito[7]
-)
-
-plot3d(
-  with_soma,
-  soma = T, lwd = 1, add = T,
-  alpha = 0.01, col = Okabe_Ito[8]
-)
-
-plot3d(
-  outline,
-  add = T, alpha = 0.05, col = "grey50"
-)
-
-#aboral view
+plot_bridge()
 aboral()
-par3d(zoom = 0.61)
-
-## y-axis clip
-#clipplanes3d(1, 0, 0, -11500)
-## x-axis clip
-#clipplanes3d(0, 1, 0, -24000)
-
 
 # move to next panel in rgl window
 next3d(clear = F)
 
 # plot lateral view of Sagittal plane
-
-plot3d(
-  bridge_Q1Q2,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.75, col = Okabe_Ito[2]
-)
-plot3d(
-  bridge_Q3Q4,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.75, col = Okabe_Ito[7]
-)
-
-plot3d(
-  with_soma,
-  soma = T, lwd = 1, add = T,
-  alpha = 0.01, col = Okabe_Ito[8]
-)
-
-plot3d(
-  outline,
-  add = T, alpha = 0.05, col = "grey50"
-)
-
+plot_bridge()
 sagittal()
-par3d(zoom = 0.61)
-
-# y-axis clip
-#clipplanes3d(1, 0, 0, -11500)
-# x-axis clip
-#clipplanes3d(0, 1, 0, -24000)
 
 # move to next panel in rgl window
 next3d(clear = F)
 
 # plot lateral view of Tentacular plane
-
-plot3d(
-  bridge_Q1Q2,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.75, col = Okabe_Ito[2]
-)
-plot3d(
-  bridge_Q3Q4,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.75, col = Okabe_Ito[7]
-)
-
-plot3d(
-  with_soma,
-  soma = T, lwd = 1, add = T,
-  alpha = 0.01, col = Okabe_Ito[8]
-)
-
-plot3d(
-  outline,
-  add = T, alpha = 0.05, col = "grey50"
-)
-
+plot_bridge()
 tentacular()
-par3d(zoom = 0.61)
-
-# y-axis clip
-#clipplanes3d(1, 0, 0, -11500)
-# x-axis clip
-#clipplanes3d(0, 1, 0, -24000)
-
 
 #make a snapshot to the working directory
 rgl.snapshot("manuscript/pictures/bridge.png")
@@ -476,6 +337,37 @@ close3d()
 
 # plot bridge and balancer -----------------------------------------------------
 
+plot_bridge_and_balancer <- function() {
+  plot3d(balancer,
+         soma = T, lwd = 1, add = T, 
+         alpha = 0.1, col = Okabe_Ito[8],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(
+    bridge_Q1Q2,
+    soma = T, lwd = 1.5, add = T,
+    alpha = 0.75, col = Okabe_Ito[2]
+  )
+  plot3d(
+    bridge_Q3Q4,
+    soma = T, lwd = 1.5, add = T,
+    alpha = 0.75, col = Okabe_Ito[7]
+  )
+  
+  plot3d(
+    with_soma,
+    soma = T, lwd = 1, add = T,
+    alpha = 0.01, col = Okabe_Ito[8]
+  )
+  
+  plot3d(
+    outline,
+    add = T, alpha = 0.05, col = "grey50"
+  )
+  par3d(zoom = 0.61)
+}
+
+
 close3d()
 
 # 3d plotting of cells
@@ -483,131 +375,27 @@ nopen3d()
 mfrow3d(1, 3) 
 # define the size of the rgl window, the view and zoom
 par3d(windowRect = c(0, 0, 1200, 350))
-#par3d(windowRect = c(0, 0, 2400, 700))
 
 # plot aboral view
-
-plot3d(balancer,
-       soma = T, lwd = 1, add = T, 
-       alpha = 0.1, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(
-  bridge_Q1Q2,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.75, col = Okabe_Ito[2]
-)
-plot3d(
-  bridge_Q3Q4,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.75, col = Okabe_Ito[7]
-)
-
-plot3d(
-  with_soma,
-  soma = T, lwd = 1, add = T,
-  alpha = 0.01, col = Okabe_Ito[8]
-)
-
-plot3d(
-  outline,
-  add = T, alpha = 0.05, col = "grey50"
-)
-
-#aboral view
+plot_bridge_and_balancer()
 aboral()
-par3d(zoom = 0.61)
-
-## y-axis clip
-#clipplanes3d(1, 0, 0, -11500)
-## x-axis clip
-#clipplanes3d(0, 1, 0, -24000)
-
 
 # move to next panel in rgl window
 next3d(clear = F)
 
 # plot lateral view of Sagittal plane
-
-plot3d(balancer,
-       soma = T, lwd = 1, add = T, 
-       alpha = 0.1, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(
-  bridge_Q1Q2,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.75, col = Okabe_Ito[2]
-)
-plot3d(
-  bridge_Q3Q4,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.75, col = Okabe_Ito[7]
-)
-
-plot3d(
-  with_soma,
-  soma = T, lwd = 1, add = T,
-  alpha = 0.01, col = Okabe_Ito[8]
-)
-
-plot3d(
-  outline,
-  add = T, alpha = 0.05, col = "grey50"
-)
-
+plot_bridge_and_balancer()
 sagittal()
-par3d(zoom = 0.61)
-
-# y-axis clip
-#clipplanes3d(1, 0, 0, -11500)
-# x-axis clip
-#clipplanes3d(0, 1, 0, -24000)
 
 # move to next panel in rgl window
 next3d(clear = F)
 
 # plot lateral view of Tentacular plane
-
-plot3d(balancer,
-       soma = T, lwd = 1, add = T, 
-       alpha = 0.1, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(
-  bridge_Q1Q2,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.75, col = Okabe_Ito[2]
-)
-plot3d(
-  bridge_Q3Q4,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.75, col = Okabe_Ito[7]
-)
-
-plot3d(
-  with_soma,
-  soma = T, lwd = 1, add = T,
-  alpha = 0.01, col = Okabe_Ito[8]
-)
-
-plot3d(
-  outline,
-  add = T, alpha = 0.05, col = "grey50"
-)
-
+plot_bridge_and_balancer()
 tentacular()
-par3d(zoom = 0.61)
-
-# y-axis clip
-#clipplanes3d(1, 0, 0, -11500)
-# x-axis clip
-#clipplanes3d(0, 1, 0, -24000)
-
 
 #make a snapshot to the working directory
 rgl.snapshot("manuscript/pictures/bridge_and_balancer.png")
-
 
 close3d()
 
@@ -619,6 +407,51 @@ mito_vesicle_info <- read.csv("analysis/data/mito_vesicle_info.csv")
 
 # 3D plot mitochondria positions in bridge ----------------------------------------
 
+pos_ves_syn <- mito_vesicle_info |>
+  filter(celltype == "bridge") |>
+  filter(mito_type == "vesicles_syn") |>
+  select(x, y, z)
+
+pos_ves_no_syn <- mito_vesicle_info |>
+  filter(celltype == "bridge") |>
+  filter(mito_type != "vesicles_syn") |>
+  select(x, y, z)
+
+
+plot_mito_bridge <- function() {
+  plot3d(bridge_Q1Q2,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[2],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(bridge_Q3Q4,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(outline,
+         add = T, alpha = 0.05, col = "grey50"
+  )
+  
+  # plot mitochondria
+  plot3d(pos_ves_syn, 
+         add = TRUE,
+         col = "green3",
+         size = 1.1, 
+         alpha = 1,
+         point_antialias = TRUE,
+         type = "s"
+  )
+  
+  plot3d(pos_ves_no_syn, 
+         add = TRUE,
+         col = "black",
+         size = 0.9, 
+         alpha = 0.37,
+         point_antialias = TRUE,
+         type = "s"
+  )
+  par3d(zoom=0.61)
+}
+
 close3d()
 # 3d plotting of cells
 nopen3d() 
@@ -628,166 +461,27 @@ par3d(windowRect = c(0, 0, 1200, 350))
 #par3d(windowRect = c(0, 0, 2400, 700))
 
 #plot aboral view
-
-plot3d(bridge_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[2],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(bridge_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-# plot mitochondria
-
-pos_ves_syn <- mito_vesicle_info |>
-  filter(celltype == "bridge") |>
-  filter(mito_type == "vesicles_syn") |>
-  select(x, y, z)
-
-plot3d(pos_ves_syn, 
-       add = TRUE,
-       col = "green3",
-       size = 1.1, 
-       alpha = 1,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-pos_ves_no_syn <- mito_vesicle_info |>
-  filter(celltype == "bridge") |>
-  filter(mito_type != "vesicles_syn") |>
-  select(x, y, z)
-
-plot3d(pos_ves_no_syn, 
-       add = TRUE,
-       col = "black",
-       size = 0.9, 
-       alpha = 0.37,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-#aboral view
+plot_mito_bridge()
 aboral()
-
-par3d(zoom=0.61)
-
 
 #move to next panel in rgl window
 next3d(clear=F)
 
 #plot sagittal view
-
-plot3d(bridge_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[2],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(bridge_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-# plot mitochondria
-
-pos_ves_syn <- mito_vesicle_info |>
-  filter(celltype == "bridge") |>
-  filter(mito_type == "vesicles_syn") |>
-  select(x, y, z)
-
-plot3d(pos_ves_syn, 
-       add = TRUE,
-       col = "green3",
-       size = 1.1, 
-       alpha = 1,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-pos_ves_no_syn <- mito_vesicle_info |>
-  filter(celltype == "bridge") |>
-  filter(mito_type != "vesicles_syn") |>
-  select(x, y, z)
-
-plot3d(pos_ves_no_syn, 
-       add = TRUE,
-       col = "black",
-       size = 0.9, 
-       alpha = 0.37,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-#sagittal view
+plot_mito_bridge()
 sagittal()
-
-par3d(zoom=0.61)
-
 
 #move to next panel in rgl window
 next3d(clear=F)
 
 #plot tentacular view
-
-plot3d(bridge_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[2],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(bridge_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-# plot mitochondria
-
-pos_ves_syn <- mito_vesicle_info |>
-  filter(celltype == "bridge") |>
-  filter(mito_type == "vesicles_syn") |>
-  select(x, y, z)
-
-plot3d(pos_ves_syn, 
-       add = TRUE,
-       col = "green3",
-       size = 1.1, 
-       alpha = 1,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-pos_ves_no_syn <- mito_vesicle_info |>
-  filter(celltype == "bridge") |>
-  filter(mito_type != "vesicles_syn") |>
-  select(x, y, z)
-
-plot3d(pos_ves_no_syn, 
-       add = TRUE,
-       col = "black",
-       size = 0.9, 
-       alpha = 0.37,
-       point_antialias = TRUE,
-       type = "s"
-)
-
-#tentacular view
+plot_mito_bridge()
 tentacular()
-
-par3d(zoom=0.61)
-
 
 #make a snapshot to the working directory
 rgl.snapshot("manuscript/pictures/mito_pos_bridge.png")
 
 close3d()
-
 
 
 
@@ -837,7 +531,6 @@ postsyn_bridge <- subset(bridge_conn, prepost == 1)
 # 3D plot of synaptic input from SSN to balancer -------------------------------
 
 plot_SNN_to_balancer <- function() {
-  
   plot3d(balancer_Q1,
          soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
          WithConnectors = F, WithNodes = F)
@@ -865,8 +558,6 @@ plot_SNN_to_balancer <- function() {
   plot3d(SSN_Q3Q4,
          soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
          WithConnectors = F, WithNodes = F)
-  
-  
   
   plot3d(outline,
          add = T, alpha = 0.05, col = "grey50"
@@ -902,6 +593,7 @@ plot_SNN_to_balancer <- function() {
     point_antialias = TRUE,
     type = "s"
   )
+  par3d(zoom=0.61)
 }
 
 
@@ -916,7 +608,6 @@ par3d(windowRect = c(0, 0, 1200, 350))
 #plot aboral view
 plot_SNN_to_balancer()
 aboral()
-par3d(zoom=0.61)
 
 #move to next panel in rgl window
 next3d(clear=F)
@@ -924,13 +615,12 @@ next3d(clear=F)
 #plot lateral view of Sagittal plane
 plot_SNN_to_balancer()
 sagittal()
-par3d(zoom=0.61)
+
 next3d(clear=F)
 
 #plot lateral view of Tentacular plane
 plot_SNN_to_balancer()
 tentacular()
-par3d(zoom=0.61)
 
 #make a snapshot to the working directory
 rgl.snapshot("manuscript/pictures/SSN_prepost_synapse_balancer.png")
@@ -941,6 +631,55 @@ close3d()
 
 # 3D plot of reciprocal synaptic inputs between SSN and bridge-----------------------------
 
+plot_reciprocal_SSN_syn <- function() {
+  plot3d(bridge_Q1Q2,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.2, col = Okabe_Ito[8],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(bridge_Q3Q4,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.2, col = Okabe_Ito[8],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(SSN_Q1Q2Q3Q4,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(SSN_Q1Q2,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[6],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(SSN_Q3Q4,
+         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
+         WithConnectors = F, WithNodes = F)
+  
+  plot3d(outline,
+         add = T, alpha = 0.05, col = "grey50"
+  )
+  
+  # inputs from SSN to bridge
+  plot3d(
+    postsyn_bridge$x, 
+    postsyn_bridge$y, 
+    postsyn_bridge$z, 
+    size = 0.8, alpha = 0.7, col = "magenta2", 
+    add = TRUE,
+    point_antialias = TRUE,
+    type = "s"
+  )
+  
+  # inputs from bridge to SNN
+  plot3d(
+    presyn_bridge$x, 
+    presyn_bridge$y, 
+    presyn_bridge$z, 
+    size = 0.8, alpha = 1, col = "cyan2", 
+    add = TRUE,
+    point_antialias = TRUE,
+    type = "s"
+  )
+  par3d(zoom=0.61)
+}
+
 close3d()
 # 3d plotting of cells
 nopen3d() 
@@ -950,162 +689,20 @@ par3d(windowRect = c(0, 0, 1200, 350))
 #par3d(windowRect = c(0, 0, 2400, 700))
 
 #plot aboral view
-plot3d(bridge_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.2, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(bridge_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.2, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[6],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-# inputs from SSN to bridge
-plot3d(
-  postsyn_bridge$x, 
-  postsyn_bridge$y, 
-  postsyn_bridge$z, 
-  size = 0.8, alpha = 0.7, col = "magenta2", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
-)
-
-# inputs from bridge to SNN
-plot3d(
-  presyn_bridge$x, 
-  presyn_bridge$y, 
-  presyn_bridge$z, 
-  size = 0.8, alpha = 1, col = "cyan2", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
-)
-
+plot_reciprocal_SSN_syn()
 aboral()
-par3d(zoom=0.61)
+
 next3d(clear=F)
-
-
-
 
 #plot lateral view of Sagittal plane
-plot3d(bridge_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.2, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(bridge_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.2, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[6],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-# inputs from SSN to bridge
-plot3d(
-  postsyn_bridge$x, 
-  postsyn_bridge$y, 
-  postsyn_bridge$z, 
-  size = 0.8, alpha = 0.7, col = "magenta2", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
-)
-
-# inputs from bridge to SNN
-plot3d(
-  presyn_bridge$x, 
-  presyn_bridge$y, 
-  presyn_bridge$z, 
-  size = 0.8, alpha = 1, col = "cyan2", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
-)
-
+plot_reciprocal_SSN_syn()
 sagittal()
-par3d(zoom=0.61)
 next3d(clear=F)
-
-
 
 
 #plot lateral view of Tentacular plane
-plot3d(bridge_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.2, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(bridge_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.2, col = Okabe_Ito[8],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q1Q2,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[6],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(SSN_Q3Q4,
-       soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
-       WithConnectors = F, WithNodes = F)
-
-plot3d(outline,
-       add = T, alpha = 0.05, col = "grey50"
-)
-
-# inputs from SSN to bridge
-plot3d(
-  postsyn_bridge$x, 
-  postsyn_bridge$y, 
-  postsyn_bridge$z, 
-  size = 0.8, alpha = 0.7, col = "magenta2", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
-)
-
-# inputs from bridge to SNN
-plot3d(
-  presyn_bridge$x, 
-  presyn_bridge$y, 
-  presyn_bridge$z, 
-  size = 0.8, alpha = 1, col = "cyan2", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
-)
-
+plot_reciprocal_SSN_syn()
 tentacular()
-par3d(zoom=0.61)
 next3d(clear=F)
 
 
