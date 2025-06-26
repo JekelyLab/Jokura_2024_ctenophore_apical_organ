@@ -388,6 +388,7 @@ plot_mito_ANN <- function() {
          point_antialias = TRUE,
          type = "s"
   )
+  par3d(zoom=0.61)
 }
 
 close3d()
@@ -402,8 +403,6 @@ par3d(windowRect = c(0, 0, 1200, 350))
 plot_mito_ANN()
 aboral()
 
-par3d(zoom=0.61)
-
 #move to next panel in rgl window
 next3d(clear=F)
 
@@ -411,15 +410,12 @@ next3d(clear=F)
 plot_mito_ANN()
 sagittal()
 
-par3d(zoom=0.61)
 #move to next panel in rgl window
 next3d(clear=F)
 
 #plot tentacular view
 plot_mito_ANN()
 tentacular()
-
-par3d(zoom=0.61)
 
 #make a snapshot to the working directory
 rgl.snapshot("manuscript/pictures/mito_pos_SSN.png")
@@ -537,6 +533,7 @@ plot_ANN <- function() {
          point_antialias = TRUE,
          type = "s"
   )
+  par3d(zoom=0.61)
 }
 
 close3d()
@@ -552,7 +549,6 @@ par3d(windowRect = c(0, 0, 1200, 350))
 plot_ANN()
 aboral()
 #rgl.snapshot("manuscript/pictures/balancer_aboral_view.png")
-par3d(zoom=0.61)
 
 #move to next panel in rgl window
 next3d(clear=F)
@@ -561,7 +557,6 @@ next3d(clear=F)
 plot_ANN()
 sagittal()
 #rgl.snapshot("manuscript/pictures/balancer_sagittal_plane.png")
-par3d(zoom=0.61)
 
 #move to next panel in rgl window
 next3d(clear=F)
@@ -570,8 +565,6 @@ next3d(clear=F)
 plot_ANN()
 tentacular()
 #rgl.snapshot("manuscript/pictures/balancer_tentacular_plane.png")
-par3d(zoom=0.61)
-
 
 #make a snapshot to the working directory
 rgl.snapshot("manuscript/pictures/SSN_prepost_synapse.png")
