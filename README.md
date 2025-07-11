@@ -4,49 +4,45 @@
 # About the project:
 
 - this is a repository of an R project containing code and source data
-  for the ctenophore apical organ connectome paper. Contributed by
-  [Jékely
+  for the paper **Neural Connectome of the Ctenophore Statocyst**.
+  Contributed by [Jékely
   lab](https://www.cos.uni-heidelberg.de/en/research-groups/gaspar-jekely).
 
 This repository contains the data and code for our paper:
 
-> Authors, (YYYY). *An R project compendium for the Jokura et al 2024
-> ctenophore apical organ paper*. Name of journal/book
-> <https://doi.org/xxx/xxx>
-
-Our pre-print is online here:
-
-> Authors, (YYYY). *An R project compendium for the Jokura et al 2024
-> ctenophore apical organ paper*. Name of journal/book, Accessed 22 Feb
-> 2024. Online at <https://doi.org/xxx/xxx>
+*Neural Connectome of the Ctenophore Statocyst*  
+Kei Jokura, Sanja Jasek, Lara Niederhaus, Pawel Burkhardt, Gáspár
+Jékely  
+bioRxiv 2025.06.26.661250; doi:
+<https://doi.org/10.1101/2025.06.26.661250>
 
 ### How to cite
 
-Please cite this compendium as:
+Please cite the permanend Zenodo record for this compendium as:
 
-> Authors, (2024). *Compendium of R code and data for An R project
-> compendium for the Jokura et al 2024 ctenophore apical organ paper*.
-> Accessed 22 Feb 2024. Online at <https://doi.org/xxx/xxx>
+Jokura, K., Jasek, S., & Jékely, G. (2025).  
+Code documentation for Neural Connectome of the Ctenophore Statocyst
+(v1.0). Zenodo.  
+<https://doi.org/10.5281/zenodo.15861953>
 
 ## Contents
 
 The project directory contains:
 
-- [:file_folder: text](/text/Manuscript.qmd): Quarto source document for
-  manuscript. Includes text, references and inserts the latest version
-  of the figures from the /figures folder. There is also a rendered html
-  version, `Manuscript.html`, suitable for reading.
+- [:file_folder: manuscript](/manuscript/Manuscript.qmd): Quarto source
+  document for manuscript. Includes text, references and inserts the
+  latest version of the figures from the /figures folder. There is also
+  a rendered html version, `Manuscript.html`, suitable for reading.
 
 - [:file_folder: data](analysis/data): Data used in the analysis.
 
-- [:file_folder: data](analysis/scripts): scripts used in the analysis.
+- [:file_folder: scripts](analysis/scripts): scripts used in the
+  analysis.
 
 - [:file_folder: figures](manuscript/figures): Plots and other
   illustrations
 
-- [:file_folder: supplements](manuscript/supplements): Supplementary
-  materials including notes and other documents prepared and collected
-  during the analysis.
+- [:file_folder: videos](manuscript/videos): Videos.
 
 - [:file_folder: source_data](/manuscript/source_data): Source data
   files associated with each figure containing all data points that have

@@ -16,28 +16,28 @@ Title <- "An R project compendium for the Jokura et al 2024 ctenophore apical or
 
 
 # About the project: 
-- this is a repository of an R project containing code and source data for the ctenophore apical organ connectome paper. Contributed by [Jékely lab](https://www.cos.uni-heidelberg.de/en/research-groups/gaspar-jekely).
+- this is a repository of an R project containing code and source data for the paper **Neural Connectome of the Ctenophore Statocyst**. Contributed by [Jékely lab](https://www.cos.uni-heidelberg.de/en/research-groups/gaspar-jekely).
 
 This repository contains the data and code for our paper:
 
-> Authors, (YYYY). _`r Title`_. Name of journal/book <https://doi.org/xxx/xxx>
-
-Our pre-print is online here:
-
-> Authors, (YYYY). _`r Title`_. Name of journal/book, Accessed `r format(Sys.Date(), "%d %b %Y")`. Online at <https://doi.org/xxx/xxx>
+*Neural Connectome of the Ctenophore Statocyst*\
+Kei Jokura, Sanja Jasek, Lara Niederhaus, Pawel Burkhardt, Gáspár Jékely\
+bioRxiv 2025.06.26.661250; doi: <https://doi.org/10.1101/2025.06.26.661250>
 
 
 ### How to cite
 
-Please cite this compendium as:
+Please cite the permanend Zenodo record for this compendium as:
 
-> Authors, (`r format(Sys.Date(), "%Y")`). _Compendium of R code and data for `r Title`_. Accessed `r format(Sys.Date(), "%d %b %Y")`. Online at <https://doi.org/xxx/xxx>
+Jokura, K., Jasek, S., & Jékely, G. (2025). \
+Code documentation for Neural Connectome of the Ctenophore Statocyst (v1.0). Zenodo.\
+https://doi.org/10.5281/zenodo.15861953
 
 ## Contents
 
 The project directory contains:
 
-  - [:file\_folder: text](/text/Manuscript.qmd): Quarto source document
+  - [:file\_folder: manuscript](/manuscript/Manuscript.qmd): Quarto source document
     for manuscript. Includes text, references and inserts the latest version of the figures from the /figures folder. 
 There is also a rendered html version,
     `Manuscript.html`, suitable for reading.
@@ -47,9 +47,8 @@ There is also a rendered html version,
   - [:file\_folder: figures](manuscript/figures): Plots and other
     illustrations
   - [:file\_folder:
-    supplements](manuscript/supplements):
-    Supplementary materials including notes and other documents
-    prepared and collected during the analysis.
+    videos](manuscript/videos):
+    Videos.
   - [:file\_folder:
     source_data](/manuscript/source_data):
     Source data files associated with each figure containing all data points that have been plotted in the figure.
