@@ -70,24 +70,15 @@ panel_quadrants <- ggdraw() + draw_image(readPNG("manuscript/pictures/quadrants.
   draw_label("li", x = 0.5, y = 0.88, color = "black", size = 10, hjust = 0) +
   draw_label("bal", x = 0.56, y = 0.88, color = "black", size = 10, hjust = 0) 
 
-panel_larva_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/Mnemiopsis_larva_24hpf.png"))
+panel_larva_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/Mnemiopsis_larva_5d.png"))
 
 panel_AO_aov <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_mag_pics_schem_aboral_view.png"))
 
-panel_AO_pic <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_mag_pics.png"))
-panel_AO_pic_lv <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_mag_pics_lateral_view.png")) +
-  draw_label("lateral view", x = 0.5, y = 0.99, color = "black", size = 10, hjust = 0.5) +
-  draw_label("sagittal plane", x = 0.25, y = 0.95, color = "black", size = 10, hjust = 0.5) +
-  draw_label("tentacular plane", x = 0.75, y = 0.95, color = "black", size = 10, hjust = 0.5) 
-  
+panel_AO_pic_lv <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_mag_pics_lateral_view.png"))
 
 panel_larva_schematic <- ggdraw() + draw_image(image_read("manuscript/pictures/larva_aboral_view_schematic.png"))
 
-panel_AO_schem <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_schematic.png"))
-panel_AO_schem_lv <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_schematic_lateral_view.png")) +
-  draw_label("lateral view", x = 0.5, y = 0.99, color = "black", size = 10, hjust = 0.5) +
-  draw_label("sagittal plane", x = 0.25, y = 0.95, color = "black", size = 10, hjust = 0.5) +
-  draw_label("tentacular plane", x = 0.75, y = 0.95, color = "black", size = 10, hjust = 0.5) 
+panel_AO_schem_lv <- ggdraw() + draw_image(image_read("manuscript/pictures/AO_schematic_lateral_view.png"))
 
 
 layout <- "
@@ -103,7 +94,7 @@ Figure1 <- panel_larva_pic + panel_larva_schematic + panel_AO_aov +
   panel_catmaid_overview + panel_quadrants +
   plot_layout(
     design = layout,
-    heights = c(1, 0.05, 1.2, 0.01, 1),
+    heights = c(1, 0.05, 1.2, 0.05, 1),
     widths = c(1, 1, 1, 1)
   ) + 
   patchwork::plot_annotation(tag_levels = "A") &  
@@ -113,10 +104,10 @@ Figure1 <- panel_larva_pic + panel_larva_schematic + panel_AO_aov +
 
 ggsave("manuscript/figures/Figure1.png",
   limitsize = FALSE,
-  units = c("px"), Figure1, width = 3200, height = 2500, bg = "white"
+  units = c("px"), Figure1, width = 3200, height = 2600, bg = "white"
 )
 
 ggsave("manuscript/figures/Figure1.pdf",
   limitsize = FALSE,
-  units = c("px"), Figure1, width = 3200, height = 2500
+  units = c("px"), Figure1, width = 3200, height = 2600
 )
