@@ -122,7 +122,6 @@ ANN neurons are described in great detail, though SNN neurons are described more
 - "Near the perifery of the aboral organ, we identified four further anastomosing nerve-net neurons. These resembled the previously reported syncytial subepithelial nerve net (SNN) neurons in the body wall of *Mnemiopsis* (Figure 2--figure supplement 1C–G) and were clearly distinct from the ANN neurons (both in location and morphology).
 SNN neurons show a blebbed morphology and contain dense core vesicles [@Burkhardt2023](Figure 2--figure supplement 1C–G) but no synapses."
 
-
 Minor corrections to the text and figures:\
 
 (1) Figure 2 C): "mitochondia" instead of "mitochondria".\
