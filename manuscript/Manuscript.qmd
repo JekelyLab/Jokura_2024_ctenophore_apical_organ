@@ -124,9 +124,9 @@ Synapses were either monoadic (one postsynaptic target) or polyadic (multiple po
 
 We identified and reconstructed three aboral nerve-net (ANN) neurons, each exhibiting a syncytial morphology characterized by anastomosing membranes and multiple nuclei (ranging from two to five) (Figure 2A and B, Figure 2--figure supplement 1C). No further ANN neurons were found in the aboral organ.
 
-Near the perifery of the aboral organ, we identified two further multinucleate nerve-net neurons. These resembled the previously reported syncytial subepithelial nerve net (SNN) neurons in the body wall of *Mnemiopsis* (Figure 2--figure supplement 1C–G) and were clearly distinct from the ANN neurons.
+Near the perifery of the aboral organ, we identified four further anastomosing nerve-net neurons. These resembled the previously reported syncytial subepithelial nerve net (SNN) neurons in the body wall of *Mnemiopsis* (Figure 2--figure supplement 1C–G) and were clearly distinct from the ANN neurons (both in location and morphology).
 
-SNN neurons show a blebbed morphology and contain abundant dense core vesicles [@Burkhardt2023]. 
+SNN neurons show a blebbed morphology and contain dense core vesicles [@Burkhardt2023](Figure 2--figure supplement 1C–G) but no synapses. 
 In contrast, ANN neurons are smooth-surfaced and lack dense vesicles and are located centrally within the aboral organ. Furthermore, ANNs are also different from other neurons previously reported by EM, including mesogleal neurons and ciliated sensory cells that synapse on the SNN (types 1-4)[@Burkhardt2023]. 
 Our results thus identify a second type of syncytial neuron in *Mnemiopsis*. 
 
@@ -258,7 +258,7 @@ The ANN has a morphology distinct from that of the subepithelial nerve net (SNN)
 A parallel vEM study of a one-day-old cydippid also identified a distinct subtype of SNN neurons in the aboral region, termed “condensed” SNN, which display a more compact morphology compared to body wall SNNs [@ferraioli2025]. 
 However, the ANN neurons described here are morphologically and anatomically distinct from both the body wall SNN and the condensed SNN in the earlier stage. 
 Instead of forming discrete nodal swellings or a “beads-on-a-string” organization typical for the SNN, ANNs extend through intercellular spaces, weaving between neighboring cells in a smooth, interdigitating fashion. 
-The presence of two SNN-type neurons more laterally in the aboral organ in our dataset (Figure 2--figure supplement1) further underline the distinct identity of ANNs.
+The presence of four SNN-type anastomosing neurons more laterally in the aboral organ in our dataset (Figure 2--figure supplement1) further underline the distinct identity of ANNs.
 
 ANNs form no synaptic output to classical effector organs such as muscles or comb plates. 
 All observed output synapses were directed to balancer ciliary cells, bridge cells or other sensory cells. 
@@ -439,7 +439,7 @@ Morphological rendering of skeletonised cell types, (A) balancer cells (B) bridg
 (A) Registration and annotation of synapses in the actual cellular traces. Pink dots indicate the approximate center of each individual cell, marked within its plasma membrane boundary. Mitochondria involved in synaptic contacts are labeled with orange dots. Red arrows point from these mitochondria to the presynaptic cell body, marking presynaptic structures. Cyan arrows point from the orange-labeled mitochondria to the corresponding postsynaptic cell.\
 (B) Electron microscopy (EM) images showing representative presynaptic structures. The left panel shows a monadic synapse, while the right panel shows a polyadic (byadic) synapse, in which a single presynaptic site contacts two postsynaptic cells.\
 (C) Nuclei within two different types of ANN cells are shown in purple in a single EM section. On the left, the ANN_Q1-4 cell extends widely across the aboral organ and appears as a continuous structure in 3D, despite having nuclei located distantly from each other. In contrast, ANN_Q1Q2 (right) has two adjacent nuclei.\
-(D) Three-dimensional reconstruction of the subepithelial nerve net (SNN). The SNN extends broadly, enveloping the aboral organ. Some portions of the network remain as unconnected fragments due to incomplete reconstruction.\
+(D) Three-dimensional reconstruction of the subepithelial nerve net (SNN). The SNN neurons extend broadly, enveloping the aboral organ. Some portions of the network remain as unconnected fragments due to incomplete reconstruction.\
 (E) Morphological comparison between the ANN in EM images. The SNN shows a "beads-on-a-string" morphology, with discrete bead-like swellings connected by faint electron-dense fibrous structures.\
 (F) Three-dimensional reconstruction of the SNN and ANNs.\
 (G) Morphological comparison between the SNN in EM images. The ANN exhibits a more diffuse distribution, often appearing to interdigitate between surrounding cells. Relatively large mitochondria are frequently observed in the ANN processes.](figures/Figure2_Supplement1.png)
