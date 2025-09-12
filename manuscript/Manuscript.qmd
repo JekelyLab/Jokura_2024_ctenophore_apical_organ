@@ -93,9 +93,15 @@ In our volume EM dataset, we identified 428 synapses based on the canonical pres
 
 We identified and reconstructed three aboral nerve-net (ANN) neurons, each exhibiting a syncytial morphology characterized by anastomosing membranes and multiple nuclei (ranging from two to five) (Figure 2A and B, Figure 2--figure supplement 1C, Video 3). No further ANN neurons were found in the aboral organ.
 
-Near the perifery of the aboral organ, we identified two further multinucleate nerve-net neurons. These resembled the previously reported syncytial subepithelial nerve net (SNN) neurons in the body wall of *Mnemiopsis* (Figure 2--figure supplement 1C–G) and were clearly distinct from the ANN neurons.
+Near the perifery of the aboral organ, we identified four further anastomosing nerve-net neurons. These resembled the previously reported syncytial subepithelial nerve net (SNN) neurons in the body wall of *Mnemiopsis* (Figure 2--figure supplement 1C–G) and were clearly distinct from the ANN neurons (both in location and morphology).
 
+<<<<<<< HEAD
 SNN neurons show a blebbed morphology and contain abundant dense core vesicles [@Burkhardt2023]. In contrast, ANN neurons are smooth-surfaced and lack dense vesicles and are located centrally within the aboral organ. Furthermore, ANNs are also different from other neurons previously reported by EM, including mesogleal neurons and ciliated sensory cells that synapse on the SNN (types 1-4)[@Burkhardt2023]. Our results thus identify a second type of syncytial neuron in *Mnemiopsis*.
+=======
+SNN neurons show a blebbed morphology and contain dense core vesicles [@Burkhardt2023](Figure 2--figure supplement 1C–G) but no synapses. 
+In contrast, ANN neurons are smooth-surfaced and lack dense vesicles and are located centrally within the aboral organ. Furthermore, ANNs are also different from other neurons previously reported by EM, including mesogleal neurons and ciliated sensory cells that synapse on the SNN (types 1-4)[@Burkhardt2023]. 
+Our results thus identify a second type of syncytial neuron in *Mnemiopsis*. 
+>>>>>>> 958086fd52672c9d8341f9d10e9f42c3d1d07baa
 
 \
 Based on soma size and spatial distribution, we classified ANN neurons into two types. The first is a single large neuron, ANN_Q1-4, spanning all four quadrants and containing four (possibly five) nuclei. This neuron formed 150 presynaptic sites. The second type includes two smaller neurons, ANN_Q1Q2 and ANN_Q3Q4, each confined to two adjacent quadrants and containing two nuclei. ANN_Q1Q2 had 119 presynapses, while ANN_Q3Q4 had 68 (Figure 2C–F). In contrast, SNN neurons exhibited either no synaptic contacts or only a few.
@@ -173,7 +179,17 @@ Notably, bridge neurons associated with each quadrant region (Q1Q2 or Q3Q4) exte
 
 ### An Aboral Nerve Net for Ciliary Coordination
 
+<<<<<<< HEAD
 In this study, we generated the first high-resolution connectome of the ctenophore nervous system by reconstructing approximately 900 cells from the aboral organ of a 5-day-old *Mnemiopsis leidyi* cydippid by volumetric electron microscopy. Among the reconstructed cells, we identified a previously undescribed type of syncytial neuron---here referred to as aboral nerve net (ANNs)---with multiple nuclei. The ANN has a morphology distinct from that of the subepithelial nerve net (SNN) reported for one-day-old cydippids [@Burkhardt2023; @Sachkova2021]. A parallel vEM study of a one-day-old cydippid also identified a distinct subtype of SNN neurons in the aboral region, termed “condensed” SNN, which display a more compact morphology compared to body wall SNNs [@ferraioli2025]. However, the ANN neurons described here are morphologically and anatomically distinct from both the body wall SNN and the condensed SNN in the earlier stage. Instead of forming discrete nodal swellings or a “beads-on-a-string” organization typical for the SNN, ANNs extend through intercellular spaces, weaving between neighboring cells in a smooth, interdigitating fashion. The presence of two SNN-type neurons more laterally in the aboral organ in our dataset (Figure 2--figure supplement1) further underline the distinct identity of ANNs.
+=======
+In this study, we generated the first high-resolution connectome of the ctenophore nervous system by reconstructing approximately 900 cells from the aboral organ of a 5-day-old *Mnemiopsis leidyi* cydippid by volumetric electron microscopy. 
+Among the reconstructed cells, we identified a previously undescribed type of syncytial neuron---here referred to as aboral nerve net (ANNs)---with multiple nuclei. 
+The ANN has a morphology distinct from that of the subepithelial nerve net (SNN) reported for one-day-old cydippids [@Burkhardt2023; @Sachkova2021]. 
+A parallel vEM study of a one-day-old cydippid also identified a distinct subtype of SNN neurons in the aboral region, termed “condensed” SNN, which display a more compact morphology compared to body wall SNNs [@ferraioli2025]. 
+However, the ANN neurons described here are morphologically and anatomically distinct from both the body wall SNN and the condensed SNN in the earlier stage. 
+Instead of forming discrete nodal swellings or a “beads-on-a-string” organization typical for the SNN, ANNs extend through intercellular spaces, weaving between neighboring cells in a smooth, interdigitating fashion. 
+The presence of four SNN-type anastomosing neurons more laterally in the aboral organ in our dataset (Figure 2--figure supplement1) further underline the distinct identity of ANNs.
+>>>>>>> 958086fd52672c9d8341f9d10e9f42c3d1d07baa
 
 ANNs form no synaptic output to classical effector organs such as muscles or comb plates. All observed output synapses were directed to balancer ciliary cells, bridge cells or other sensory cells. This suggests that ANNs are unlikely to serve as motor drivers (premotor neurons or motoneurons) in the conventional sense. Rather, they may be involved in coordinating or modulating the timing and dynamics of the activity of the sensory-motile balancer cilia, possibly modulating their responsiveness to statocyst load [@keijzer2013; @dewiljes2015; @Veraszto2017].
 
@@ -317,7 +333,7 @@ Morphological rendering of skeletonised cell types, (A) balancer cells (B) bridg
 (A) Registration and annotation of synapses in the actual cellular traces. Pink dots indicate the approximate center of each individual cell, marked within its plasma membrane boundary. Mitochondria involved in synaptic contacts are labeled with orange dots. Red arrows point from these mitochondria to the presynaptic cell body, marking presynaptic structures. Cyan arrows point from the orange-labeled mitochondria to the corresponding postsynaptic cell.\
 (B) Electron microscopy (EM) images showing representative presynaptic structures. The left panel shows a monadic synapse, while the right panel shows a polyadic (byadic) synapse, in which a single presynaptic site contacts two postsynaptic cells.\
 (C) Nuclei within two different types of ANN cells are shown in purple in a single EM section. On the left, the ANN_Q1-4 cell extends widely across the aboral organ and appears as a continuous structure in 3D, despite having nuclei located distantly from each other. In contrast, ANN_Q1Q2 (right) has two adjacent nuclei.\
-(D) Three-dimensional reconstruction of the subepithelial nerve net (SNN). The SNN extends broadly, enveloping the aboral organ. Some portions of the network remain as unconnected fragments due to incomplete reconstruction.\
+(D) Three-dimensional reconstruction of the subepithelial nerve net (SNN). The SNN neurons extend broadly, enveloping the aboral organ. Some portions of the network remain as unconnected fragments due to incomplete reconstruction.\
 (E) Morphological comparison between the ANN in EM images. The SNN shows a "beads-on-a-string" morphology, with discrete bead-like swellings connected by faint electron-dense fibrous structures.\
 (F) Three-dimensional reconstruction of the SNN and ANNs.\
 (G) Morphological comparison between the SNN in EM images. The ANN exhibits a more diffuse distribution, often appearing to interdigitate between surrounding cells. Relatively large mitochondria are frequently observed in the ANN processes.](figures/Figure2_Supplement1.png)

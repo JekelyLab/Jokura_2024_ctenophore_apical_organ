@@ -117,7 +117,9 @@ Recommendations for improving the writing and presentation:\
 
 ANN neurons are described in great detail, though SNN neurons are described more loosely. Perhaps a more detailed description of SNN neurons would be helpful.\
 
--   We added the information on SNNs to show that these cells are distinct from the ANN neurons. Since our focus is on the aboral organ, we did not aim for a comprehensive reconstruction of SNNs. Several of the processes of the SNNs are also truncated and outside our EM volume. We have nevertheless added additional details about the morphology and connectivity of SNN neurons. **add more info**
+-   We added the information on SNNs to show that these cells are distinct from the ANN neurons. Since our focus is on the aboral organ, we did not aim for a comprehensive reconstruction of SNNs. Several of the processes of the SNNs are also truncated and outside our EM volume. We have nevertheless added additional details about the morphology and connectivity of SNN neurons.
+
+-   "Near the perifery of the aboral organ, we identified four further anastomosing nerve-net neurons. These resembled the previously reported syncytial subepithelial nerve net (SNN) neurons in the body wall of *Mnemiopsis* (Figure 2--figure supplement 1C–G) and were clearly distinct from the ANN neurons (both in location and morphology). SNN neurons show a blebbed morphology and contain dense core vesicles [\@Burkhardt2023](Figure%202--figure%20supplement%201C–G) but no synapses."
 
 Minor corrections to the text and figures:\
 
