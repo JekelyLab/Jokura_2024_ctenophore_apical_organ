@@ -54,8 +54,8 @@ The explanation of the relevance of this work could be improved. The conclusion 
 
 Since the fact that the ANN neurons form a syncytium is an important finding of this study, it would be useful to have additional illustrations of it. For instance, pictures showing anastomosing membranes could typically be added in Figure 2.\
 
--   We have now added a movie showing a volumetric reconstruction of a segment of an ANN neuron to highlight the anastomosing morphology. **add to Fig 2**
--   Kei has some volumetric reconstructions, add new movie
+-   **We have now included a movie (Video 3) showing a volumetric reconstruction of a segment of an ANN neuron, which highlights the anastomosing morphology in greater detail than static images.**
+-   **"Video 3. Volumetric reconstruction of a single** **ANN Q1-4 neuron showing syncytial soma (cyan) and nuclei (magenta). The rotating view highlights the anastomosing morphology, although not all fine details could be reconstructed due to data limitations."**
 
 Also, to better establish the importance of the study, it could be useful to explain why the balancers' cilia spontaneously beat in the first place (instead of being static and just acting as stretch sensors).\
 
@@ -137,7 +137,8 @@ Reviewer #2 (Recommendations for the authors):\
 
 Clearer usage of the terms statocyst, aboral organ, aboral nerve net, statolith, dome, and lithocytes would be helpful. For readers not familiar with ctenophore anatomy, things can get a bit confusing. A single schematic with all of these terms would be helpful. In Figure 1E, there is a label "dc". Should this be "do"?\
 
--   We have added an annotated schematic to Figure 1. explaining these terms. **add annotations**
+-   We have added an annotated schematic to Figure 1. explaining these terms.
+-   **Figure 1C** **"The statocyst is a cavity-like organ enclosed by the dome cilia (do), which contains the statolith formed by lithocytes (li) and supported by the balancer cilia (bal)."**
 
 Reviewer #3 (Recommendations for the authors):\
 
@@ -152,6 +153,7 @@ My comments are numerous, but mostly minor suggestions for improving the clarity
 (2) The terms statolith, statocyst, and lithocytes can be confusing, so it would be nice to have an up-front definition of how they relate to each other.\
 
 -   We have now explain these terms in the Introduction and also have improved the annotation of Figure 1.
+-   **Figure1C. "The statocyst is a cavity-like organ enclosed by the dome cilia (do), which contains the statolith formed by lithocytes (li) and supported by the balancer cilia (bal)."**
 
 (3) Statolith is spelled as statolyth in the early pages, but statolith in the later pages. I think -lith is more common, but in any case, these should be standardized.\
 
@@ -245,7 +247,9 @@ FIGURE 2:\
 
 (2) Panel D: Is this the wrong caption? I can only see green and black circles, not red, yellow, or blue. Make them larger or "flat" (circled, not shaded spheres) if they are supposed to be visible\
 
--   **change figure**
+-   **We appreciate the reviewer’s careful reading. There was indeed an error in the original figure legend. Thank you for pointing this out. The legend has now been corrected as follows:**
+
+-   **Figure2(D) Positions of mitochondria within the ANN neurons. Green marks mitochondria associated with presynaptic triad structures. Black marks mitochondria categorized as "Not forming synapses," which includes cases where synaptic vesicles were present but without a clear triad, vesicle identification was uncertain, or vesicles were absent.**
 
 (3) Panel E: Amazing to see the cross-network connections!\
 
@@ -279,9 +283,11 @@ Figure 3:\
 
 -   changed to "extending across tentacular-axis-symmetric quadrant regions" for clarity
 
-(4) As with Figure 2, I do not see any circles/spheres that are yellow, red, or blue! There are some traces of what appear to be other neurons that have these colors, but nothing that would suggest the localization of mitochondria.\
+(4) As with Figure 2, I do not see any circles/spheres that are yellow, red, or blue! There are some traces of what appear to be other neurons that have these colors, but nothing that would suggest the localization of mitochondria.
 
--   the spheres depict the position of the synapses and these figure panels (Figure 3 E and F) also show the skeletons of the three ANN neurons shown in three different colours (blue, orange and magenta). We have clarified this in the figure legens. "The positions of synapses from ANNs to balancers (coloured spheres) are indicated. The three ANN cells and their respective synapses are coloured differently (ANN Q1-4, blue; ANN Q1Q2, orange; ANN Q3Q4, magenta)."
+-   Thank you for pointing this out. There was indeed an error in the original figure legend. We appreciate the reviewer’s careful reading. The legend has now been corrected to reflect the actual categories shown in the figure:
+
+-   **Figure3D. "Positions of mitochondria within bridge cells. Green marks mitochondria associated with presynaptic triad structures; black marks mitochondria categorized as "Not forming synapses" (including cases with vesicles but no clear triad, uncertain vesicles, or no vesicles). Left: dorsal view of the aboral organ; middle: sagittal plane; right: tentacular plane."**
 
 (5) The connectivity map is very cool, but the caption does not seem to correspond to the version included in the manuscript. I don't see any hexagons; all arrows seem to have the same thickness.\
 
