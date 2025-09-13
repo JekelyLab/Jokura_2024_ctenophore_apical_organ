@@ -99,13 +99,9 @@ Reviewing Editor Comments:\
 
 In consultation, the reviewers recommend that improving the evidence to "exceptional" would require additional perturbation experiments (e.g., ablation of specific neurons), as Reviewer 1 suggests. They also recommend adding a "Future Directions" section to the manuscript, because it opens up so many new experimental directions.\
 
-\
-
 -   We have added a new "Future Directions" section at the end of the Discussion. To carry out the proposed perturbation or calcium imaging experiments would require significant additional work and method development. We are actively working in establishing mRNA and DNA injection into ctenophore zygotes to enable live imaging, cell labeling or ablations in the future.
 
 Reviewer #1 (Recommendations for the authors):\
-
-\
 
 Suggestions for improved or additional experiments, data, or analyses:\
 
@@ -123,15 +119,15 @@ ANN neurons are described in great detail, though SNN neurons are described more
 
 Minor corrections to the text and figures:\
 
-(1) Figure 2 C): "mitochondia" instead of "mitochondria".\
+(1) Figure 2 C): "mitochondia" instead of "mitochondria".
 
 -   corrected
 
-(2) Figure 3. Title: "balancer and and bridge".\
+(2) Figure 3. Title: "balancer and and bridge".
 
 -   corrected
 
-(3) Figure 3.C) "shown in xxx color".\
+(3) Figure 3.C) "shown in xxx color".
 
 -   corrected
 
@@ -217,7 +213,7 @@ FIGURE 1:\
 
 (1) It is not worth redrawing and renumbering everything, but I wish the lateral view in A matched the rotated aboral view in B, instead of having to do two rotations to get the alignment to coincide. (Rotating panel B 90{degree sign} clockwise would make them match, but then it wouldn't coincide with all the subsequent figures.)\
 
--   unfortunately, we don't have a nice picture of a larva in the sagittal plane to match the view in B. We prefer to keep B as is, to match the subsequent panels.
+-   Thank you for the suggestion. We have replaced panel A with a lateral view that now matches panel B.
 
 (2) The labels on Figure 1 are a mix of two typefaces (Helvetica and Myriad?). They should be standardized to all use one typeface (preferably Helvetica).\
 
