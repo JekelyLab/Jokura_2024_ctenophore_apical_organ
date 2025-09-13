@@ -40,7 +40,7 @@ Weaknesses:\
 
 The evidence supporting the claim that the neural circuitry presented here controls the cilia beating is more correlational because it only relies on the fact that the location of the two types of ANN neurons coincides with the quadrants that are affected in the behavioral recordings. Discussing ways by which causality could be established might be helpful.\
 
--   We have now added additional discussions in a new "Future Directions" section explaining that for example calcium imaging or targeted neuron ablations could be used in future work to establish causality. This would require the development of genetic delivery techniques to e.g. introduce GCaMP calcium sensor or transgenic reporters. **add to discussion**
+-   We have now added additional discussions in a new "**Future Directions**" section explaining that for example calcium imaging or targeted neuron ablations could be used in future work to establish causality. This would require the development of genetic delivery techniques to e.g. introduce GCaMP calcium sensor or transgenic reporters. **add to discussion**
 
 The explanation of the relevance of this work could be improved. The conclusion that the work hints at coordination instead of feedforward sensory-motor control is explained over only a few lines. The authors could provide a more detailed explanation of how the two models compete (coordination vs feedforward sensory-motor control), and why choosing one option over the other could provide advantages in this context.\
 
@@ -108,7 +108,7 @@ Reviewing Editor Comments:\
 
 In consultation, the reviewers recommend that improving the evidence to "exceptional" would require additional perturbation experiments (e.g., ablation of specific neurons), as Reviewer 1 suggests. They also recommend adding a "Future Directions" section to the manuscript, because it opens up so many new experimental directions.\
 
--   We have added a new "Future Directions" section at the end of the Discussion. To carry out the proposed perturbation or calcium imaging experiments would require significant additional work and method development. We are actively working in establishing mRNA and DNA injection into ctenophore zygotes to enable live imaging, cell labeling or ablations in the future.
+-   We have added a new "**Future Directions**" section at the end of the Discussion. To carry out the proposed perturbation or calcium imaging experiments would require significant additional work and method development. We are actively working in establishing mRNA and DNA injection into ctenophore zygotes to enable live imaging, cell labeling or ablations in the future.
 
 Reviewer #1 (Recommendations for the authors):\
 
@@ -116,7 +116,7 @@ Suggestions for improved or additional experiments, data, or analyses:\
 
 To establish causality (neurons control balancer cilia), an important experiment would be to manipulate each of these neuronal populations (e.g., by ablating them) and measure the effect of these ablations on the beating frequency of the balancer cilia of the four quadrants. Moreover, direct observation of neuronal activity (e.g., by using calcium imaging) would also provide more compelling evidence for neuronal control.\
 
--   We agree with the reviewer that such perturbation experiments would be needed to establish causality. Such experiments are currently still not possible in ctenophoes and would require significant technology development. We discuss such experiments in the "Future directions" section and also place this in the context of the currently available techniques in ctenophores. We are actively working on this but waiting for such technological breakthroughs and new experiments would significantly delay the publication of a version of record of the paper.
+-   We agree with the reviewer that such perturbation experiments would be needed to establish causality. Such experiments are currently still not possible in ctenophoes and would require significant technology development. We discuss such experiments in the "**Future directions**" section and also place this in the context of the currently available techniques in ctenophores. We are actively working on this but waiting for such technological breakthroughs and new experiments would significantly delay the publication of a version of record of the paper.
 
 Recommendations for improving the writing and presentation:\
 
@@ -193,7 +193,7 @@ INTRODUCTION:\
 (3) after "matches the setup used in high-speed imagine experiments", it might be nice to add a statement like "Future studies could potentially investigate activity in the inverted orientation, when the statolith is suspended below the cilia, to see if the response differs."\
 
 -   In this sentence we referred to the orientation of the animals in our figures. There is a consensus among ctenophore researchers that when depicting ctenophores, the aboral organ should face downwards. However, for this paper we chose the opposite orientation to better match our experiments and help interpreting the results. We changed the text to: "In this study, we represent ctenophores with their aboral organ facing upwards ("balancer-up" posture), as this configuration facilitates intuitive interpretation of balance-like functions and matches the setup used in high-speed imaging experiments. "
--   We added the sentence "Future studies could potentially investigate activity in the inverted orientation, when the statolith is suspended below the cilia, to see if the response differs." to the section "Future Directions".
+-   We added the sentence "Future studies could potentially investigate activity in the inverted orientation, when the statolith is suspended below the cilia, to see if the response differs." to the section "**Future Directions**".
 
 (4) "abolished by calcium\[-\]channel inhibitors"\
 
@@ -314,7 +314,7 @@ DISCUSSION:\
 
 This section is quite clean. Maybe mention some future directions:\
 
--   We have added a "Future Directions" section
+-   We have added a "**Future Directions**" section
 
 (1) Do these networks change during development? Five-days-old is still quite undeveloped - what would it look like in an adult specimen? Would you expect a larger version of the same or more diverse connections?\
 

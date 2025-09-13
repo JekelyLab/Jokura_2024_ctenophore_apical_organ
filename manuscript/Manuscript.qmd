@@ -201,16 +201,9 @@ This architecture can be interpreted as a recurrent information loop, in which o
 
 ### Future Directions
 
--   calcium imaging
--   targeted cell ablation
--   behavioural analysis in ablated specimens
--   activity imaging in different orientations
--   multi-sensory integration (e.g. light)
--   transmitters, channels, modulators
+Our connectomic reconstruction of the ctenophore aboral organ provides a first framework for understanding how the ANN neurons may coordinate balancer cilia activity. Establishing causality, however, will require new experimental approaches. Perturbation of specific neuronal populations (e.g., targeted ablations) combined with physiological readouts of balancer cilia beating would provide a direct test of neuronal control. Complementary calcium imaging experiments could reveal activity dynamics in real time and strengthen the causal link between neural activity and ciliary movement. Developing such approaches will require technical advances, including genetic delivery methods for introducing calcium indicators, transgenic reporters, or molecular tools enabling precise cell ablations. We are actively pursuing methods for mRNA and DNA injection into ctenophore zygotes to enable these future applications.
 
-"To establish causality (neurons control balancer cilia), an important experiment would be to manipulate each of these neuronal populations (e.g., by ablating them) and measure the effect of these ablations on the beating frequency of the balancer cilia of the four quadrants. Moreover, direct observation of neuronal activity (e.g., by using calcium imaging) would also provide more compelling evidence for neuronal control. "
-
-add sentence: Future studies could potentially investigate activity in the inverted orientation, when the statolith is suspended below the cilia, to see if the response differs.
+In addition, experiments could explore how orientation affects responsiveness. For example, when the statolith is suspended below the cilia (the "balancer-down" posture), activity patterns might differ from the "balancer-up" configuration we used here. Orientation-dependent analyses, together with multi-sensory paradigms (e.g., light and tilt stimuli), will help determine how the ANN combines multiple inputs to generate motor output. Finally, future work will need to address the molecular toolkit of these neurons, including their transmitters, ion channels, and modulators, to better understand the mechanisms by which they influence ciliary coordination.
 
 ### Conclusion
 
