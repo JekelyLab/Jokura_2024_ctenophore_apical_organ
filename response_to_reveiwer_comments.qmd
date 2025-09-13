@@ -51,11 +51,12 @@ The explanation of the relevance of this work could be improved. The conclusion 
 -   Sidney Tamm ideas
 -   make sure that the activation state of the individual balancer cells is the same
 -   connexin expression is quite strong, maybe there is cluster-intrinsic coordination of ionic state via gap junctions (not visible in our data but suggested by expression)
+-   "An alternative interpretation would be a feedforward sensory–motor model, in which each balancer directly conveys mechanosensory input to motor effectors. However, several observations argue against such a simple reflex architecture and instead support a coordination framework. First, even without changes in tilt, balancer cilia exhibit ongoing dynamic modulations of beat frequency, consistent with sustained activity and endogenous oscillations in the ANN circuit. Second, these dynamics span multiple temporal scales from rapid arrests and re-beats to slower drifts in frequency, indicating hierarchical tuning of sensitivity that is hard to reconcile with a direct feedforward pathway. Third, during local tilt of individual balancers, responses become phase-aligned across the sagittal plane and global re-beats occur nearly synchronously across quadrants, implying a higher-order synchronizer. Finally, the strong connexin expression within balancer clusters suggests rapid electrical coupling via gap junctions, even if unresolved in our EM volume, which would equalize phase within a quadrant. Taken together, the coordination model parsimoniously explains both the ANN topology and the observed dynamics, whereas a simple feedforward reflex does not."
 
 Since the fact that the ANN neurons form a syncytium is an important finding of this study, it would be useful to have additional illustrations of it. For instance, pictures showing anastomosing membranes could typically be added in Figure 2.\
 
--   **We have now included a movie (Video 3) showing a volumetric reconstruction of a segment of an ANN neuron, which highlights the anastomosing morphology in greater detail than static images.**
--   **"Video 3. Volumetric reconstruction of a single** **ANN Q1-4 neuron showing syncytial soma (cyan) and nuclei (magenta). The rotating view highlights the anastomosing morphology, although not all fine details could be reconstructed due to data limitations."**
+-   We have now included a movie (Video 3) showing a volumetric reconstruction of a segment of an ANN neuron, which highlights the anastomosing morphology in greater detail than static images.
+-   "Video 3. Volumetric reconstruction of a single ANN Q1-4 neuron showing syncytial soma (cyan) and nuclei (magenta). The rotating view highlights the anastomosing morphology, although not all fine details could be reconstructed due to data limitations."
 
 Also, to better establish the importance of the study, it could be useful to explain why the balancers' cilia spontaneously beat in the first place (instead of being static and just acting as stretch sensors).\
 
@@ -136,7 +137,7 @@ Reviewer #2 (Recommendations for the authors):\
 Clearer usage of the terms statocyst, aboral organ, aboral nerve net, statolith, dome, and lithocytes would be helpful. For readers not familiar with ctenophore anatomy, things can get a bit confusing. A single schematic with all of these terms would be helpful. In Figure 1E, there is a label "dc". Should this be "do"?\
 
 -   We have added an annotated schematic to Figure 1. explaining these terms.
--   **Figure 1C** **"The statocyst is a cavity-like organ enclosed by the dome cilia (do), which contains the statolith formed by lithocytes (li) and supported by the balancer cilia (bal)."**
+-   Figure 1C "The statocyst is a cavity-like organ enclosed by the dome cilia (do), which contains the statolith formed by lithocytes (li) and supported by the balancer cilia (bal)."
 
 Reviewer #3 (Recommendations for the authors):\
 
@@ -151,7 +152,7 @@ My comments are numerous, but mostly minor suggestions for improving the clarity
 (2) The terms statolith, statocyst, and lithocytes can be confusing, so it would be nice to have an up-front definition of how they relate to each other.\
 
 -   We have now explain these terms in the Introduction and also have improved the annotation of Figure 1.
--   **Figure1C. "The statocyst is a cavity-like organ enclosed by the dome cilia (do), which contains the statolith formed by lithocytes (li) and supported by the balancer cilia (bal)."**
+-   Figure1C. "The statocyst is a cavity-like organ enclosed by the dome cilia (do), which contains the statolith formed by lithocytes (li) and supported by the balancer cilia (bal)."
 
 (3) Statolith is spelled as statolyth in the early pages, but statolith in the later pages. I think -lith is more common, but in any case, these should be standardized.\
 
@@ -184,8 +185,7 @@ INTRODUCTION:\
 (3) after "matches the setup used in high-speed imagine experiments", it might be nice to add a statement like "Future studies could potentially investigate activity in the inverted orientation, when the statolith is suspended below the cilia, to see if the response differs."\
 
 -   In this sentence we referred to the orientation of the animals in our figures. There is a consensus among ctenophore researchers that when depicting ctenophores, the aboral organ should face downwards. However, for this paper we chose the opposite orientation to better match our experiments and help interpreting the results. We changed the text to: "In this study, we represent ctenophores with their aboral organ facing upwards ("balancer-up" posture), as this configuration facilitates intuitive interpretation of balance-like functions and matches the setup used in high-speed imaging experiments. "
-
-We added the sentence "Future studies could potentially investigate activity in the inverted orientation, when the statolith is suspended below the cilia, to see if the response differs." to the section "Future Directions".
+-   We added the sentence "Future studies could potentially investigate activity in the inverted orientation, when the statolith is suspended below the cilia, to see if the response differs." to the section "Future Directions".
 
 (4) "abolished by calcium\[-\]channel inhibitors"\
 
@@ -245,9 +245,7 @@ FIGURE 2:\
 
 (2) Panel D: Is this the wrong caption? I can only see green and black circles, not red, yellow, or blue. Make them larger or "flat" (circled, not shaded spheres) if they are supposed to be visible\
 
--   **We appreciate the reviewer’s careful reading. There was indeed an error in the original figure legend. Thank you for pointing this out. The legend has now been corrected as follows:**
-
--   **Figure2(D) Positions of mitochondria within the ANN neurons. Green marks mitochondria associated with presynaptic triad structures. Black marks mitochondria categorized as "Not forming synapses," which includes cases where synaptic vesicles were present but without a clear triad, vesicle identification was uncertain, or vesicles were absent.**
+-   Thank you for pointing this out. The caption was incorrect and has been corrected to match the figure.
 
 (3) Panel E: Amazing to see the cross-network connections!\
 
@@ -265,17 +263,18 @@ RESULTS: Synaptic connectome\
 
 (2) "Surprisingly" - this \*was\* really surprising. There have to be some afferent neurons connecting from the balancers, don't there? I can't remember the connections to the SNN, but is there a tertiary set of ANNs that connect between the balancers and the top 3 ANNs? I would like a little more discussion about this.\
 
--   Indeed, this is why this is so surprising. Most people would have expected some output connections from the balancer to the nerve net or elsewhere. There are none. We have the complete balancer network and all balancer cells are 'sink nodes' (inputs only)(Figure3--figure supplement 1). **add more discussion**
+-   Indeed, this is why this is so surprising. Most people would have expected some output connections from the balancer to the nerve net or elsewhere. There are none. We have the complete balancer network and all balancer cells are 'sink nodes' (inputs only)(Figure3--figure supplement 1).
+-   we added a short statement in the beginning of the *Bridge Cells as Feedback Regulators of Ciliary Rhythms* section noting that no direct connections from the balancers to the ANN were found and that all balancer cells act as sink nodes (inputs only; Figure 3--figure supplement 1). This highlights that bridge cells are indeed the sole neuronal input to the ANN circuit.
 
 Figure 3:\
 
 (1) As you know, during development, the diagonally opposite cells have a shared heritage and shared functionality. Are there neuronal signatures that correspond to the rotational symmetry that we see, for example, in the position of the anal pores?\
 
--   We did not find any evidence in neuronal complement for a diagonal symmetry.
+-   We did not find any evidence in neuronal complement for a diagonal symmetry, suggesting that neuronal organization does not simply mirror the organism’s rotational body symmetry.
 
 (2) Do you have the information to say whether there are any diagonal or asymmetric connections? Can't tell if those would have shown up in the mapping efforts or if you focused on the major ones only.\
 
--   We have mapped all connections and we did not find evidence for a diagonal pattern. Everything seems biradial.
+-   Based on our complete mapping, we did not find evidence for a diagonal pattern. The connectivity instead shows a biradial organization.
 
 (3) "extending across opposite quadrant regions" - to me, opposite would be diagonally opposite, but this looks like a set of cells between Q1 and Q2 is connecting to a sister-set in Q3+Q4. I wonder if, in a more detailed view, you could see whether this is a rotational correspondence, rather than a reflection. There are some subtle hints of this in the aboral view, with some cells on the right of the blue cluster and the left of the magenta cluster.\
 
@@ -283,9 +282,7 @@ Figure 3:\
 
 (4) As with Figure 2, I do not see any circles/spheres that are yellow, red, or blue! There are some traces of what appear to be other neurons that have these colors, but nothing that would suggest the localization of mitochondria.
 
--   Thank you for pointing this out. There was indeed an error in the original figure legend. We appreciate the reviewer’s careful reading. The legend has now been corrected to reflect the actual categories shown in the figure:
-
--   **Figure3D. "Positions of mitochondria within bridge cells. Green marks mitochondria associated with presynaptic triad structures; black marks mitochondria categorized as "Not forming synapses" (including cases with vesicles but no clear triad, uncertain vesicles, or no vesicles). Left: dorsal view of the aboral organ; middle: sagittal plane; right: tentacular plane."**
+-   Thank you for pointing this out. We have corrected the caption to match the figure, as in the previous item.
 
 (5) The connectivity map is very cool, but the caption does not seem to correspond to the version included in the manuscript. I don't see any hexagons; all arrows seem to have the same thickness.\
 
