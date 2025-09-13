@@ -95,15 +95,8 @@ We identified and reconstructed three aboral nerve-net (ANN) neurons, each exhib
 
 Near the perifery of the aboral organ, we identified four further anastomosing nerve-net neurons. These resembled the previously reported syncytial subepithelial nerve net (SNN) neurons in the body wall of *Mnemiopsis* (Figure 2--figure supplement 1C–G) and were clearly distinct from the ANN neurons (both in location and morphology).
 
-<<<<<<< HEAD
-SNN neurons show a blebbed morphology and contain abundant dense core vesicles [@Burkhardt2023]. In contrast, ANN neurons are smooth-surfaced and lack dense vesicles and are located centrally within the aboral organ. Furthermore, ANNs are also different from other neurons previously reported by EM, including mesogleal neurons and ciliated sensory cells that synapse on the SNN (types 1-4)[@Burkhardt2023]. Our results thus identify a second type of syncytial neuron in *Mnemiopsis*.
-=======
-SNN neurons show a blebbed morphology and contain dense core vesicles [@Burkhardt2023](Figure 2--figure supplement 1C–G) but no synapses. 
-In contrast, ANN neurons are smooth-surfaced and lack dense vesicles and are located centrally within the aboral organ. Furthermore, ANNs are also different from other neurons previously reported by EM, including mesogleal neurons and ciliated sensory cells that synapse on the SNN (types 1-4)[@Burkhardt2023]. 
-Our results thus identify a second type of syncytial neuron in *Mnemiopsis*. 
->>>>>>> 958086fd52672c9d8341f9d10e9f42c3d1d07baa
+SNN neurons show a blebbed morphology and contain dense core vesicles [\@Burkhardt2023](Figure%202--figure%20supplement%201C–G) but no synapses. In contrast, ANN neurons are smooth-surfaced and lack dense vesicles and are located centrally within the aboral organ. Furthermore, ANNs are also different from other neurons previously reported by EM, including mesogleal neurons and ciliated sensory cells that synapse on the SNN (types 1-4)[@Burkhardt2023]. Our results thus identify a second type of syncytial neuron in *Mnemiopsis*.
 
-\
 Based on soma size and spatial distribution, we classified ANN neurons into two types. The first is a single large neuron, ANN_Q1-4, spanning all four quadrants and containing four (possibly five) nuclei. This neuron formed 150 presynaptic sites. The second type includes two smaller neurons, ANN_Q1Q2 and ANN_Q3Q4, each confined to two adjacent quadrants and containing two nuclei. ANN_Q1Q2 had 119 presynapses, while ANN_Q3Q4 had 68 (Figure 2C–F). In contrast, SNN neurons exhibited either no synaptic contacts or only a few.
 
 ![**Figure 2. Organisation of the aboral synaptic nerve net**\
@@ -179,17 +172,7 @@ Notably, bridge neurons associated with each quadrant region (Q1Q2 or Q3Q4) exte
 
 ### An Aboral Nerve Net for Ciliary Coordination
 
-<<<<<<< HEAD
-In this study, we generated the first high-resolution connectome of the ctenophore nervous system by reconstructing approximately 900 cells from the aboral organ of a 5-day-old *Mnemiopsis leidyi* cydippid by volumetric electron microscopy. Among the reconstructed cells, we identified a previously undescribed type of syncytial neuron---here referred to as aboral nerve net (ANNs)---with multiple nuclei. The ANN has a morphology distinct from that of the subepithelial nerve net (SNN) reported for one-day-old cydippids [@Burkhardt2023; @Sachkova2021]. A parallel vEM study of a one-day-old cydippid also identified a distinct subtype of SNN neurons in the aboral region, termed “condensed” SNN, which display a more compact morphology compared to body wall SNNs [@ferraioli2025]. However, the ANN neurons described here are morphologically and anatomically distinct from both the body wall SNN and the condensed SNN in the earlier stage. Instead of forming discrete nodal swellings or a “beads-on-a-string” organization typical for the SNN, ANNs extend through intercellular spaces, weaving between neighboring cells in a smooth, interdigitating fashion. The presence of two SNN-type neurons more laterally in the aboral organ in our dataset (Figure 2--figure supplement1) further underline the distinct identity of ANNs.
-=======
-In this study, we generated the first high-resolution connectome of the ctenophore nervous system by reconstructing approximately 900 cells from the aboral organ of a 5-day-old *Mnemiopsis leidyi* cydippid by volumetric electron microscopy. 
-Among the reconstructed cells, we identified a previously undescribed type of syncytial neuron---here referred to as aboral nerve net (ANNs)---with multiple nuclei. 
-The ANN has a morphology distinct from that of the subepithelial nerve net (SNN) reported for one-day-old cydippids [@Burkhardt2023; @Sachkova2021]. 
-A parallel vEM study of a one-day-old cydippid also identified a distinct subtype of SNN neurons in the aboral region, termed “condensed” SNN, which display a more compact morphology compared to body wall SNNs [@ferraioli2025]. 
-However, the ANN neurons described here are morphologically and anatomically distinct from both the body wall SNN and the condensed SNN in the earlier stage. 
-Instead of forming discrete nodal swellings or a “beads-on-a-string” organization typical for the SNN, ANNs extend through intercellular spaces, weaving between neighboring cells in a smooth, interdigitating fashion. 
-The presence of four SNN-type anastomosing neurons more laterally in the aboral organ in our dataset (Figure 2--figure supplement1) further underline the distinct identity of ANNs.
->>>>>>> 958086fd52672c9d8341f9d10e9f42c3d1d07baa
+In this study, we generated the first high-resolution connectome of the ctenophore nervous system by reconstructing approximately 900 cells from the aboral organ of a 5-day-old *Mnemiopsis leidyi* cydippid by volumetric electron microscopy. Among the reconstructed cells, we identified a previously undescribed type of syncytial neuron---here referred to as aboral nerve net (ANNs)---with multiple nuclei. The ANN has a morphology distinct from that of the subepithelial nerve net (SNN) reported for one-day-old cydippids [@Burkhardt2023; @Sachkova2021]. A parallel vEM study of a one-day-old cydippid also identified a distinct subtype of SNN neurons in the aboral region, termed “condensed” SNN, which display a more compact morphology compared to body wall SNNs [@ferraioli2025]. However, the ANN neurons described here are morphologically and anatomically distinct from both the body wall SNN and the condensed SNN in the earlier stage. Instead of forming discrete nodal swellings or a “beads-on-a-string” organization typical for the SNN, ANNs extend through intercellular spaces, weaving between neighboring cells in a smooth, interdigitating fashion. The presence of four SNN-type anastomosing neurons more laterally in the aboral organ in our dataset (Figure 2--figure supplement1) further underline the distinct identity of ANNs.
 
 ANNs form no synaptic output to classical effector organs such as muscles or comb plates. All observed output synapses were directed to balancer ciliary cells, bridge cells or other sensory cells. This suggests that ANNs are unlikely to serve as motor drivers (premotor neurons or motoneurons) in the conventional sense. Rather, they may be involved in coordinating or modulating the timing and dynamics of the activity of the sensory-motile balancer cilia, possibly modulating their responsiveness to statocyst load [@keijzer2013; @dewiljes2015; @Veraszto2017].
 
@@ -279,7 +262,7 @@ We further distinguished cells of the same type within the same region by serial
 
 ### Imaging the Activity of Balancer Cilia
 
-For ciliary imaging, we used the cydippid stage of *M. leidyi* at  5-day-old. A coverslip with a thin layer of Vaseline applied to its two edges was gently placed over a glass slide. Filtered natural seawater and cydippids were placed beneath the coverslip. The orientation of the larvae was adjusted by carefully sliding the coverslip, and the larvae were gently immobilized by applying slight pressure.
+For ciliary imaging, we used the cydippid stage of *M. leidyi* at 5-day-old. A coverslip with a thin layer of Vaseline applied to its two edges was gently placed over a glass slide. Filtered natural seawater and cydippids were placed beneath the coverslip. The orientation of the larvae was adjusted by carefully sliding the coverslip, and the larvae were gently immobilized by applying slight pressure.
 
 To ensure consistency in gravitational input, we selected only larvae whose aboral–oral axis was oriented nearly parallel to the gravitational vector (within 20° tilt). This minimized the potential influence of larval tilt on left–right differences in balancer cilia activity, as all balancers received comparable stimulation from the statolith.
 
