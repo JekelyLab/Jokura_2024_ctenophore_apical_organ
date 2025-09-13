@@ -201,9 +201,9 @@ We added the sentence "Future studies could potentially investigate activity in 
 
 RESULTS:\
 
-(1) "five-day-old" - is it worth saying post-fertilization here?\
+(1) "five-day-old" - is it worth saying post-fertilization here?
 
--   Thank you for pointing this out. We refer to post-hatching. We changed the text to "5-day-old (5 days post-hatching)"
+-   Thank you for pointing this out. In accordance with Presnell et al. (2022), we use post-hatching as the reference. We have revised the text in the Materials and Methods section to read: "5-day-old (5 days post-hatching)"
 
 (2) "We classified these cells into cell types \[based on ...\]" - specify a bit about how you classified them based on morphology, the presence of organelles, etc.\
 
