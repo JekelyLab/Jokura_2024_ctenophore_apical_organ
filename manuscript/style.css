@@ -29,4 +29,5 @@
 /* Apply font globally */
 body {
   font-family: 'Luciole-Math', sans-serif;
+  line-height: 2em;
 }

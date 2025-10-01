@@ -155,7 +155,7 @@ My comments are numerous, but mostly minor suggestions for improving the clarity
 
 (1) \[It would be much easier to review this if there were line numbers, or with a double-spaced manuscript that was more accommodating for markup.\]\
 
--   Thank you for this comment. We have increased the line spacing in the revised version. **add double spacing**
+-   Thank you for this comment. We have increased the line spacing in the revised version. (We set the CSS line-height property on the html 'body' element to 2em).
 
 (2) The terms statolith, statocyst, and lithocytes can be confusing, so it would be nice to have an up-front definition of how they relate to each other.\
 
