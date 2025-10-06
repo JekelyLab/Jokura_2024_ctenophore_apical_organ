@@ -6,7 +6,7 @@ source("analysis/scripts/packages_and_functions.R")
 
 # get all synapses from CATMAID
 all_syn_connectors <- catmaid_fetch(
-  path = "35/connectors/",
+  path = paste(pid, "/connectors/", sep=""),
   body = list(
     relation_type = "presynaptic_to",
     relation_type = "postsynaptic_to",
@@ -16,7 +16,7 @@ all_syn_connectors <- catmaid_fetch(
 length(all_syn_connectors$connectors)
 
 connector_ids <- unlist(unname(sapply(all_syn_connectors$connectors, "[[", 1)))
-connectivity <- catmaid_get_connectors(connector_ids, pid = 35)
+connectivity <- catmaid_get_connectors(connector_ids, pid = pid)
 
 # create graph
 edges <- tibble(
@@ -73,7 +73,7 @@ conn_tb_str_sum_filt <- conn_tb_str_sum %>%
 skids_to_filter <- conn_tb_str_sum_filt |>
   select(name) |>
   pull()
-fragments <- catmaid_skids("fragment", pid = 35)
+fragments <- catmaid_skids("fragment", pid = pid)
 nodes_to_remove <- skids_to_filter[skids_to_filter %in% fragments]
 
 # return subgraph with fragments removed
@@ -109,7 +109,7 @@ skids <- conn_tb %>%
   pull()
 
 # get neuron names from CATMAID
-names <- catmaid_get_neuronnames(skids, pid = 35)
+names <- catmaid_get_neuronnames(skids, pid = pid)
 
 conn_tb_skids_names <- conn_tb %>%
   mutate(names) %>%
@@ -162,7 +162,7 @@ annot_to_search <- c(
 )
 
 # use purrr:map to get all annotations for all skids
-annotations <- map(skids, pid = 35, catmaid_get_annotations_for_skeletons)
+annotations <- map(skids, pid = pid, catmaid_get_annotations_for_skeletons)
 
 # function to match terms to the annotations
 find_annotation <- function(annots, term) {

@@ -4,9 +4,9 @@ skid_Q1234 <- 2496955
 skid_Q12 <- 2436172
 skid_Q34 <- 2436531
 
-neuron_Q1234 <- read.neuron.catmaid(skid_Q1234, pid = 35)
-neuron_Q12 <- read.neuron.catmaid(skid_Q12, pid = 35)
-neuron_Q34 <- read.neuron.catmaid(skid_Q34, pid = 35)
+neuron_Q1234 <- read.neuron.catmaid(skid_Q1234, pid = pid)
+neuron_Q12 <- read.neuron.catmaid(skid_Q12, pid = pid)
+neuron_Q34 <- read.neuron.catmaid(skid_Q34, pid = pid)
 
 cablelength_Q1234 <- summary(neuron_Q1234) %>%
   select(cable.length) %>%
@@ -83,7 +83,7 @@ for (neu in neuronlist(neuron_Q1234, neuron_Q12, neuron_Q34)) {
     y <- connectors_info %>% filter(connector_id == cid) %>% select(y) %>% pull()
     z <- connectors_info %>% filter(connector_id == cid) %>% select(z) %>% pull()
     catmaid_fetch(
-      path = "35/crop/",
+      path = paste(pid, "/crop/", sep = "")
       body = list(
         stack_ids=28,
         min_x=x-half_bb_size_xy,

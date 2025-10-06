@@ -25,13 +25,13 @@ celltype_map <- c(
 celltypes_short <- names(celltype_map)
 
 
-skids_with_soma <- catmaid_get_label_stats(pid=35) %>%
+skids_with_soma <- catmaid_get_label_stats(pid=pid) %>%
   filter(labelName == "soma") %>%
   select(skeletonID) %>%
   pull() %>%
   unique()
 
-skids_outside <- catmaid_skids("outside", pid=35)
+skids_outside <- catmaid_skids("outside", pid=pid)
 
 skids_soma_AO <- setdiff(skids_with_soma, skids_outside)
 
@@ -83,11 +83,11 @@ for (i in seq_along(celltype_cells)) {
 # Display all cell types together in one 3d plot--------------------------------
 # get all cell types 
 
-celltypes <- get_celltypes(35)
+celltypes <- get_celltypes(pid)
 celltypes_list <- list()
 
 for (celltype in celltypes) {
-  celltypes_list[[celltype]] <- read.neurons.catmaid(paste("celltype:", celltype, sep = ""), pid = 35)
+  celltypes_list[[celltype]] <- read.neurons.catmaid(paste("celltype:", celltype, sep = ""), pid = pid)
 }
 
 print(celltypes)

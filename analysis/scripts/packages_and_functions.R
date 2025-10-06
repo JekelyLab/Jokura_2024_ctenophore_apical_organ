@@ -18,10 +18,11 @@ inst = lapply(pkgs, library, character.only = TRUE)
 # catmaid connection, needs username, password AND token - weird!
 {
   # can run this separate file using source function
-  conn <- source("~/R/conn.R")
+  conn <- catmaid_login(server="https://catmaid.jekelylab.ex.ac.uk/", authname="AnonymousUser")
   #for larger calls we need to use http/1, see https://www.gitmemory.com/issue/natverse/rcatmaid/158/641537466
   #for this we configure to http/1.1
   conn_http1 = catmaid_login(conn=conn, config=httr::config(ssl_verifypeer=0, http_version=1))
+  pid = 33
 }
 
 system("git submodule init")
@@ -70,19 +71,19 @@ plot_background_oral <- function(x){
 read_smooth_neuron <- function(annotation){
   nlapply(
   read.neurons.catmaid(
-    annotation, pid = 35
+    annotation, pid = pid
   ),
   function(x) smooth_neuron(x, sigma = 1000)
   )
 }
 
 outline <- catmaid_get_volume(
-  60, rval = c("mesh3d", "catmaidmesh", "raw"),
-  invertFaces = T, conn = NULL, pid = 35
+  41, rval = c("mesh3d", "catmaidmesh", "raw"),
+  invertFaces = T, conn = NULL, pid = pid
   )
 dome_cavity <- catmaid_get_volume(
-  54, rval = c("mesh3d", "catmaidmesh", "raw"),
-  invertFaces = T, conn = NULL, pid = 35
+  42, rval = c("mesh3d", "catmaidmesh", "raw"),
+  invertFaces = T, conn = NULL, pid = pid
   )
 
 # define views --------------

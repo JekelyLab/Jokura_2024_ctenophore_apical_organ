@@ -63,7 +63,7 @@ celltype_flashcard(celltype) {
   
   ### location by quadrant
   # read, smooth and plot skeletons
-  cells <- read.neurons.catmaid(paste("celltype:", celltype, sep=""), pid=35)
+  cells <- read.neurons.catmaid(paste("celltype:", celltype, sep=""), pid=pid)
   skids <- names(cells)
   
   sigma = 2000
@@ -144,7 +144,7 @@ celltype_flashcard(celltype) {
   z <- cells[[as.character(flashcard_distal_skid)]]$d$Z[pos]
   crop_substack_point(x, y, z, bbox_xy, bbox_xy, 0, 0,
                       paste("manuscript/pictures/flashcards_EM/", celltype, "_flashcard_distal.tif", sep = ""),
-                      35, 28)
+                      pid, 28)
   
   # crop proximal
   pos <- which(cells[[as.character(flashcard_proximal_skid)]]$d$PointNo == flashcard_proximal_treenode)
@@ -153,7 +153,7 @@ celltype_flashcard(celltype) {
   z <- cells[[as.character(flashcard_proximal_skid)]]$d$Z[pos]
   crop_substack_point(x, y, z, bbox_xy, bbox_xy, 0, 0,
                       paste("manuscript/pictures/flashcards_EM/", celltype, "_flashcard_proximal.tif", sep = ""),
-                      35, 28)
+                      pid, 28)
   # crop soma
   pos <- which(cells[[as.character(flashcard_soma_skid)]]$d$PointNo == flashcard_soma_treenode)
   x <- cells[[as.character(flashcard_soma_skid)]]$d$X[pos]
@@ -161,7 +161,7 @@ celltype_flashcard(celltype) {
   z <- cells[[as.character(flashcard_soma_skid)]]$d$Z[pos]
   crop_substack_point(x, y, z, bbox_xy, bbox_xy, 0, 0,
                       paste("manuscript/pictures/flashcards_EM/", celltype, "_flashcard_soma.tif", sep = ""),
-                      35, 28)
+                      pid, 28)
   
   
   n_cilia <- organelle_stats %>%

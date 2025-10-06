@@ -9,25 +9,25 @@ source("analysis/scripts/packages_and_functions.R")
 balancer <- read_smooth_neuron("celltype:balancer")
 lithocyte <- read_smooth_neuron("statolith")
 
-balancer_Q1 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q1")))
-balancer_Q2 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q2")))
-balancer_Q3 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q3")))
-balancer_Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q4")))
+balancer_Q1 <- read_smooth_neuron(get_skids_with_annot(pid = pid, c("celltype:balancer", "Q1")))
+balancer_Q2 <- read_smooth_neuron(get_skids_with_annot(pid = pid, c("celltype:balancer", "Q2")))
+balancer_Q3 <- read_smooth_neuron(get_skids_with_annot(pid = pid, c("celltype:balancer", "Q3")))
+balancer_Q4 <- read_smooth_neuron(get_skids_with_annot(pid = pid, c("celltype:balancer", "Q4")))
 
 # read basal bodies -------------------------------------------------------
 
 #get skids
-balancer_skids <- catmaid_skids("celltype:balancer", pid=35)
+balancer_skids <- catmaid_skids("celltype:balancer", pid=pid)
 
 #read all nodes
 nodes <- lapply(
   balancer_skids, 
-  function(x) catmaid_get_treenode_table(x, pid = 35)
+  function(x) catmaid_get_treenode_table(x, pid = pid)
 )
 
 #get tags
 tags_with_id <- lapply(nodes, function(x) 
-  catmaid_get_labels(treenodes = x$id, pid = 35))
+  catmaid_get_labels(treenodes = x$id, pid = pid))
 
 #select basal body tags
 bb_nodes_id <- lapply(tags_with_id, function(x) x %>%

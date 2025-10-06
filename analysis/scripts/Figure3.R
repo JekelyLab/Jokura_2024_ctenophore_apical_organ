@@ -11,13 +11,13 @@ with_soma <- read_smooth_neuron("with_soma")
 balancer <- read_smooth_neuron("celltype:balancer")
 bridge <- read_smooth_neuron("celltype:bridge")
 
-balancer_Q1 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q1")))
-balancer_Q2 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q2")))
-balancer_Q3 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q3")))
-balancer_Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q4")))
+balancer_Q1 <- read_smooth_neuron(get_skids_with_annot(pid = pid, c("celltype:balancer", "Q1")))
+balancer_Q2 <- read_smooth_neuron(get_skids_with_annot(pid = pid, c("celltype:balancer", "Q2")))
+balancer_Q3 <- read_smooth_neuron(get_skids_with_annot(pid = pid, c("celltype:balancer", "Q3")))
+balancer_Q4 <- read_smooth_neuron(get_skids_with_annot(pid = pid, c("celltype:balancer", "Q4")))
 
-bridge_Q1Q2 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:bridge", "Q1Q2")))
-bridge_Q3Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:bridge", "Q3Q4")))
+bridge_Q1Q2 <- read_smooth_neuron(get_skids_with_annot(pid = pid, c("celltype:bridge", "Q1Q2")))
+bridge_Q3Q4 <- read_smooth_neuron(get_skids_with_annot(pid = pid, c("celltype:bridge", "Q3Q4")))
 
 
 balancer_skids <- names(balancer)
@@ -752,7 +752,7 @@ for (i in 1:length(matrix_celltypes)) {
     postsyn_skids <- attr(matrix_celltypes[j][[1]], "df")$skid
     connectivity <- catmaid_get_connectors_between(
       pre = presyn_skids,
-      post = postsyn_skids, pid = 35
+      post = postsyn_skids, pid = pid
     )
     # check the number of synapses from group1 -> group2
     N_synapses <- dim(connectivity)[1]

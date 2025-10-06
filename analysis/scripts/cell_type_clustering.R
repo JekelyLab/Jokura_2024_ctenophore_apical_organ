@@ -6,7 +6,7 @@ library(factoextra) # clustering algorithms & visualization
 conn <- source("~/R/conn.R")
 
 skids <- unlist(
-  catmaid_fetch(path = "/35/skeletons/"))
+  catmaid_fetch(path = "/pid/skeletons/"))
 
 characters <- list("soma",
                    "mitochondrion",
@@ -38,7 +38,7 @@ tag_count <- function(tagl, character) {
 
 tag_stats <- function(skid) {
   # if skeleton has only one node read.neuron.catmaid gives an error
-  try(neuron_info <- read.neuron.catmaid(skid, pid = 35), silent=TRUE)
+  try(neuron_info <- read.neuron.catmaid(skid, pid = pid), silent=TRUE)
   if("try-error" %in% class(t)) return(NULL)
   tags <- neuron_info$tags
   
@@ -56,7 +56,7 @@ tag_stats <- function(skid) {
 }
 
 for (skid in skids) {
-  neuron_name <- catmaid_get_neuronnames(skid, pid = 35)
+  neuron_name <- catmaid_get_neuronnames(skid, pid = pid)
   tag_counts <- tag_stats(skid)
   if (!is.null(tag_counts)) {
     tag_stats_per_skid[nrow(tag_stats_per_skid) + 1,] = c(skid, neuron_name, tag_counts)
@@ -91,7 +91,7 @@ celltypes <- data.frame()
 for (i in seq(1:length(tag_stats_per_skid$skid))) {
   skid <- tag_stats_per_skid$skid[[i]]
   nname <- unlist(
-    catmaid_fetch(path = "/35/skeleton/neuronnames",
+    catmaid_fetch(path = "/pid/skeleton/neuronnames",
                   body = list(skids = skid)))
   new_row <- c(
     skid,
@@ -113,7 +113,7 @@ tag_stats_per_skid <-  tag_stats_per_skid |> mutate_at(c(3:21), as.integer)
 centriolerich_skids <- tag_stats_per_skid |> filter(centriole > 9) |> 
   select(skid) |> pull()
 
-centriolerich <- nlapply(read.neurons.catmaid(centriolerich_skids, pid = 35),
+centriolerich <- nlapply(read.neurons.catmaid(centriolerich_skids, pid = pid),
           function(x) smooth_neuron(x, sigma = 1000))
 
 balancer <- read_smooth_neuron("celltype:balancer")
@@ -131,7 +131,7 @@ plot3d(
 
 # get cells where all centrioles are annotated and color them by number of centrioles
 
-centriole_skels <- read.neurons.catmaid("centrioles done", pid = 35)
+centriole_skels <- read.neurons.catmaid("centrioles done", pid = pid)
 Reds <- brewer.pal(9, 'Reds')
 for (centriole_skel in centriole_skels) {
   skel <- smooth_neuron(centriole_skel, sigma=6000)
@@ -151,7 +151,7 @@ for (centriole_skel in centriole_skels) {
 
 # mitochondria stats -----------------------------------------------------------
 
-mito_done_cells <- read.neurons.catmaid("mitochondria done", pid=35, fetch.annotations = TRUE)
+mito_done_cells <- read.neurons.catmaid("mitochondria done", pid=pid, fetch.annotations = TRUE)
 annotations <- attr(mito_done_cells, 'anndf') |> as.tibble()
 
 mito_counts_tb <- tibble(skid=integer(),
@@ -171,7 +171,7 @@ for (mito_done_cell in mito_done_cells) {
   if (length(celltype)==0) {
     celltype <- "NA"
   }
-  neuron_name <- catmaid_get_neuronnames(sskid, pid = 35)
+  neuron_name <- catmaid_get_neuronnames(sskid, pid = pid)
   print(paste(sskid, neuron_name, celltype, n_mito))
   mito_counts_tb <- mito_counts_tb |> add_row(skid=sskid, neuron_name=neuron_name, celltype=celltype, n_mito=n_mito)
 }
@@ -180,7 +180,7 @@ write.csv(mito_counts_tb, "analysis/data/mito_per_celltype.csv")
 
 
 # bridge cells --------------------------------------------------------
-bridge_cells <- read.neurons.catmaid("celltype:bridge", pid=35, fetch.annotations = TRUE)
+bridge_cells <- read.neurons.catmaid("celltype:bridge", pid=pid, fetch.annotations = TRUE)
 annotations <- attr(bridge_cells, 'anndf') |> as.tibble()
 
 bridge_stats_tb <- tibble(skid=integer(),
@@ -194,7 +194,7 @@ bridge_stats_tb <- tibble(skid=integer(),
 for (bridge_cell in bridge_cells) {
   # var named sskid because otherwise filter doesn't work
   sskid <- bridge_cell$skid
-  neuron_name <- catmaid_get_neuronnames(sskid, pid = 35)
+  neuron_name <- catmaid_get_neuronnames(sskid, pid = pid)
   n_centrioles <- length(bridge_cell$tags$centriole)
   n_mito <- length(bridge_cell$tags$mitochondrion)
   centrioles_done <- annotations |> 

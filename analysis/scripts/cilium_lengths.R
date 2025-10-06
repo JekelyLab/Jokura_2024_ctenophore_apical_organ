@@ -5,10 +5,10 @@
 
 source("analysis/scripts/packages_and_functions.R")
 
-tags <- catmaid_get_label_stats(pid = 35)
+tags <- catmaid_get_label_stats(pid = pid)
 
 ctip_skids <- tags[tags$labelName == "cilium tip", "skeletonID"] %>% unique()
-cil_neurons <- read.neurons.catmaid(ctip_skids, pid = 35, fetch.annotations = TRUE)
+cil_neurons <- read.neurons.catmaid(ctip_skids, pid = pid, fetch.annotations = TRUE)
 annotations <- attr(cil_neurons, 'anndf') |> as.tibble()
 
 cilium_lengths <- tibble(celltype=character(),
@@ -73,7 +73,7 @@ write.csv(cilium_lengths, "analysis/data/cilium_lengths.csv")
 
 
 # visualize lamellate body cells -----------------------------------------------
-lamellate_intra <- read.neurons.catmaid("celltype:lamellate", pid = 35)
+lamellate_intra <- read.neurons.catmaid("celltype:lamellate", pid = pid)
 for (cell in lamellate_intra) {
   cilia <- segments_between_tags(cell, "cilium tip", "basal body")
   # visualize part of cilium in ciliary pocket
@@ -105,7 +105,7 @@ for (cell in lamellate_intra) {
   plot3d(lamellae_smooth, soma = TRUE, lwd = 10, color = "purple")
 }
 
-lamellate_extra <- read.neurons.catmaid("celltype:lamellate-extra", pid = 35)
+lamellate_extra <- read.neurons.catmaid("celltype:lamellate-extra", pid = pid)
 for (cell in lamellate_extra) {
   cilia <- segments_between_tags(cell, "cilium tip", "basal body")
   # visualize part of cilium in ciliary pocket

@@ -2,9 +2,9 @@ source("analysis/scripts/packages_and_functions.R")
 
 # find skeletons without annotations -------------------------------------------
 skids <- unlist(
-  catmaid_fetch(path = "/35/skeletons/"))
+  catmaid_fetch(path = "/pid/skeletons/"))
 
-annot <- catmaid_get_annotations_for_skeletons(skids, pid = 35)
+annot <- catmaid_get_annotations_for_skeletons(skids, pid = pid)
 
 # no annotations at all
 skids_with_annot <- annot$skid |> unique()
@@ -17,7 +17,7 @@ no_Q_annot <- annot |> filter(annotation != "Q1" & annotation != "Q2" & annotati
 
 # centrioles -------------------------------------------------------------------
 read_smooth_neuron <- function(annotation){
-  nlapply(read.neurons.catmaid(annotation, pid = 35),
+  nlapply(read.neurons.catmaid(annotation, pid = pid),
           function(x)
             smooth_neuron(x, sigma = 1000))
 }
@@ -54,7 +54,7 @@ plot_tag <- function(tagname, pid, color) {
     unlist() |>
     unique()
   
-  pos <- lapply(treenodes_with_tags_all, get_treenode_pos, 35) |>
+  pos <- lapply(treenodes_with_tags_all, get_treenode_pos, pid) |>
     bind_rows()
   
   plot3d(pos,
@@ -64,19 +64,19 @@ plot_tag <- function(tagname, pid, color) {
          alpha=0.9)
 }
 
-plot_tag("centriole", 35, "magenta")
-plot_tag("basal body", 35, "cyan")
+plot_tag("centriole", pid, "magenta")
+plot_tag("basal body", pid, "cyan")
 
 
 
 
 # find cilium tips which are not tagged ----------------------------------------
-tags <- catmaid_get_label_stats(pid = 35)
+tags <- catmaid_get_label_stats(pid = pid)
 
 skids <- tags[tags$labelName == "basal body", "skeletonID"] |> unique()
 
 cilium_annot_mistake <- function(skid) {
-  neurons_info <- read.neurons.catmaid(skid, pid = 35)
+  neurons_info <- read.neurons.catmaid(skid, pid = pid)
   neuron_info <- neurons_info[[1]]
   annotations <- neurons_info %>% attr("anndf")
   if (length(annotations) == 0) {
@@ -85,7 +85,7 @@ cilium_annot_mistake <- function(skid) {
     c_pocket <- annotations %>% select(annotation) %>% 
       filter(annotation == "ciliary_pocket_yes") %>% pull() %>% length()
   }
-  neuron_name <- catmaid_fetch(path = "/35/skeleton/neuronnames",
+  neuron_name <- catmaid_fetch(path = "/pid/skeleton/neuronnames",
                                body = list(skids=skid))[[1]]
   n_bb <- neuron_info$tags$`basal body` |> length()
   n_ctip <- neuron_info$tags$`cilium tip` |> length()
@@ -108,7 +108,7 @@ c_annot_mistakes <- lapply(skids, cilium_annot_mistake) %>% bind_rows()
 
 # find cilia which don't have basal body annotated -----------------------------
 
-tags <- catmaid_get_label_stats(pid = 35)
+tags <- catmaid_get_label_stats(pid = pid)
 
 skids <- tags %>% select(skeletonID) %>% pull() %>% unique()
 
@@ -129,7 +129,7 @@ for (skid in skids) {
     bbs <- tags %>% filter(skeletonID == skid) %>% 
       filter(labelName == "basal body") %>%
       select(treenodeID) %>% pull()
-    neuron_info <- read.neuron.catmaid(skid, pid = 35)
+    neuron_info <- read.neuron.catmaid(skid, pid = pid)
     for (ctip_id in ctips) {
       treenode_id <- ctip_id
       while (!(treenode_id %in% bbs)) {

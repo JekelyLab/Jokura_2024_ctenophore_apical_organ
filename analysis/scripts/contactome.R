@@ -3,7 +3,7 @@ source("analysis/scripts/packages_and_functions.R")
 # get all abutting contacts from CATMAID ------------
 
 contacts <- catmaid_fetch(
-  path = "35/connectors/",
+  path = paste(pid, "/connectors/", sep=""),
   body = list(
     relation_type = "abutting",
     with_partners = "true"
@@ -18,7 +18,7 @@ authtoken <- conn$value$token
 has_enter_cil_nocil_tag <- function(treenode_id) {
   # catmaid fetch doesn't work here for some reason?
   tags_of_node <- GET(paste(
-    "https://catmaid.ex.ac.uk/35/labels/treenode/", treenode_id, sep = ""
+    "https://catmaid.ex.ac.uk/pid/labels/treenode/", treenode_id, sep = ""
     ), 
     add_headers(Authorization = paste("Token", authtoken))) |>
     content()
@@ -29,7 +29,7 @@ has_enter_cil_nocil_tag <- function(treenode_id) {
 
 enter_cell_info <- function(connector_id) {
   connector_info <- GET(paste(
-     "https://catmaid.ex.ac.uk/35/connectors/", connector_id, sep = ""
+     "https://catmaid.ex.ac.uk/pid/connectors/", connector_id, sep = ""
   ), 
   add_headers(Authorization = paste("Token", authtoken))) |>
     content()
@@ -105,7 +105,7 @@ node_id_of_contact_partner2
 partner1_pre_cil <- c()
 partner1_pre_nocil <- c()
 for(i in 1:length(contacts$connectors)){
-  neuron <- read.neuron.catmaid(partner1_skid[i], pid = 35)
+  neuron <- read.neuron.catmaid(partner1_skid[i], pid = pid)
   partner1_pre_cil[i] <- node_id_of_contact_partner1[i] %in% neuron$tags$enter_cil
   partner1_pre_nocil[i] <- node_id_of_contact_partner1[i] %in% neuron$tags$enter_nocil
 }
@@ -115,7 +115,7 @@ partner1_pre_nocil
 partner2_pre_cil <- c()
 partner2_pre_nocil <- c()
 for(i in 1:length(contacts$connectors)){
-  neuron <- read.neuron.catmaid(partner2_skid[i], pid = 35)
+  neuron <- read.neuron.catmaid(partner2_skid[i], pid = pid)
   partner2_pre_cil[i] <- node_id_of_contact_partner2[i] %in% neuron$tags$enter_cil
   partner2_pre_nocil[i] <- node_id_of_contact_partner2[i] %in% neuron$tags$enter_nocil
 }
@@ -242,7 +242,7 @@ nodes2 <- connector_prepost_info_table |>
   pull(partner2_skid)
 all_nodes <- unique(c(nodes1, nodes2))
 
-neuron_names <- catmaid_get_neuronnames(all_nodes, pid = 35)
+neuron_names <- catmaid_get_neuronnames(all_nodes, pid = pid)
 
 #edge lists
 edges1_to_2_from <- connector_prepost_info_table |>

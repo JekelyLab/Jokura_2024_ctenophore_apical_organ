@@ -3,7 +3,7 @@ source("analysis/scripts/packages_and_functions.R")
 # calculate average number of post-synaptic sites per synapse  -----------------
 
 pre_connectors <- catmaid_fetch(
-  path = "35/connectors/",
+  path = paste(pid, "/connectors/", sep = ""),
   body = list(
     relation_type = "presynaptic_to",
     with_partners = "false"
@@ -11,7 +11,7 @@ pre_connectors <- catmaid_fetch(
 )
 
 n_pre_post <- function(connector_id) {
-  connector_info <- catmaid_fetch(path = paste("35/connectors/", connector_id, sep = ""))
+  connector_info <- catmaid_fetch(path = paste(pid, "/connectors/", connector_id, sep = ""))
   # pre should always be 1, but maybe it's good to check if there is any weird stuff going on
   pre <- connector_info$partners %like% "presynaptic_to"
   n_pre <- table(pre)["TRUE"][[1]]
@@ -28,7 +28,7 @@ summary(as.numeric(n_post))
 
 # calculate percentage of mitochondria which have vesicles or synapses associated with them -----
 
-mito_done <- read.neurons.catmaid("mitochondria done", pid = 35)
+mito_done <- read.neurons.catmaid("mitochondria done", pid = pid)
 
 get_pos_of_tags_in_neuron <- function(neur, tagname) {
   # argument is neuron (data type), not skid
@@ -55,7 +55,7 @@ get_pos_of_tags_in_neuron <- function(neur, tagname) {
 get_mito_pos <- function(neur) {
   # accepts neuron as input
   sskid <- neur$NeuronName
-  celltype <- catmaid_get_annotations_for_skeletons(sskid, pid = 35) |>
+  celltype <- catmaid_get_annotations_for_skeletons(sskid, pid = pid) |>
     select(annotation) |>
     filter(grepl("celltype:", annotation)) |>
     pull()
@@ -281,16 +281,16 @@ for (cell_type in c("SSN", "bridge")) {
 # crop substack TODO: automate renaming. Mybe make the crop funtion return a filename?------------------------
 
 if (!file.exists("manuscript/pictures/Figure_mito/Figure_mito_syn_ves_syn.tiff")) {
-  crop_substack("Figure_mito_syn_ves_syn", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", 35, 28)
+  crop_substack("Figure_mito_syn_ves_syn", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", pid, 28)
 }
 if (!file.exists("manuscript/pictures/Figure_mito/Figure_mito_syn_ves_no_syn.tiff")) {
-  crop_substack("Figure_mito_syn_ves_no_syn", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", 35, 28)
+  crop_substack("Figure_mito_syn_ves_no_syn", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", pid, 28)
 }
 if (!file.exists("manuscript/pictures/Figure_mito/Figure_mito_syn_ves_unc.tiff")) {
-  crop_substack("Figure_mito_syn_ves_unc", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", 35, 28)
+  crop_substack("Figure_mito_syn_ves_unc", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", pid, 28)
 }
 if (!file.exists("manuscript/pictures/Figure_mito/Figure_mito_syn_ves_none.tiff")) {
-  crop_substack("Figure_mito_syn_ves_none", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", 35, 28)
+  crop_substack("Figure_mito_syn_ves_none", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", pid, 28)
 }
 
 # assembles--------------------------------------------------

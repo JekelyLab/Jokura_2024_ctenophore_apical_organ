@@ -13,13 +13,13 @@ ANN_Q1Q2Q3Q4 <- read_smooth_neuron("SSN_Q1Q2Q3Q4")[[1]]
 
 
 # get all cells with soma, but only those in the apical organ
-skids_with_soma <- catmaid_get_label_stats(pid=35) %>%
+skids_with_soma <- catmaid_get_label_stats(pid=pid) %>%
   filter(labelName == "soma") %>%
   select(skeletonID) %>%
   pull() %>%
   unique()
 
-skids_outside <- catmaid_skids("outside", pid=35)
+skids_outside <- catmaid_skids("outside", pid=pid)
 
 skids_soma_AO <- setdiff(skids_with_soma, skids_outside)
 
@@ -132,7 +132,7 @@ close3d()
 
 # calculate percentage of mitochondria which have vesicles or synapses associated with them -----
 
-mito_done <- read.neurons.catmaid("mitochondria done", pid = 35)
+mito_done <- read.neurons.catmaid("mitochondria done", pid = pid)
 
 get_pos_of_tags_in_neuron <- function(neur, tagname) {
   # argument is neuron (data type), not skid
@@ -159,7 +159,7 @@ get_pos_of_tags_in_neuron <- function(neur, tagname) {
 get_mito_pos <- function(neur) {
   # accepts neuron as input
   sskid <- neur$NeuronName
-  celltype <- catmaid_get_annotations_for_skeletons(sskid, pid = 35) |>
+  celltype <- catmaid_get_annotations_for_skeletons(sskid, pid = pid) |>
     select(annotation) |>
     filter(grepl("celltype:", annotation)) |>
     pull()
@@ -337,7 +337,7 @@ summary_df %>%
 
 # load of mitochondrial location information-------------------------------
 
-#mito_done <- read.neurons.catmaid("mitochondria done", pid = 35)
+#mito_done <- read.neurons.catmaid("mitochondria done", pid = pid)
 mito_vesicle_info <- read.csv("analysis/data/mito_vesicle_info.csv")
 
 # 3d plot mitochondria positions in ANN ----------------------------------------
@@ -431,11 +431,11 @@ close3d()
 
 
 # don't use many_to_many connectors, because getting cords looks a bit complicated
-#syn_Q1Q2Q3Q4_to_Q1Q2 <- catmaid_fetch(path = "/35/connector/list/many_to_many",
+#syn_Q1Q2Q3Q4_to_Q1Q2 <- catmaid_fetch(path = "/pid/connector/list/many_to_many",
 #                                      body = list(skids1=SSN_Q1Q2Q3Q4_skid,
 #                                                  skids2=SSN_Q1Q2_skid,
 #                                                  relation="presynaptic_to"))
-#syn_Q1Q2Q3Q4_to_Q3Q4 <- catmaid_fetch(path = "/35/connector/list/many_to_many",
+#syn_Q1Q2Q3Q4_to_Q3Q4 <- catmaid_fetch(path = "/pid/connector/list/many_to_many",
 #                                      body = list(skids1=SSN_Q1Q2Q3Q4_skid,
 #                                                  skids2=SSN_Q3Q4_skid,
 #                                                  relation="presynaptic_to"))

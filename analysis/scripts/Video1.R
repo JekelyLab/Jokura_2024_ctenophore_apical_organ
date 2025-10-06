@@ -11,19 +11,19 @@ dir.create(file.path(mainDir, "videoframes"), showWarnings = FALSE)
 # load cell types from CATMAID ---------
 
 #with_soma <- read_smooth_neuron("with_soma")
-bounding_dots <- read.neurons.catmaid("bounding dot", pid = 35)
+bounding_dots <- read.neurons.catmaid("bounding dot", pid = pid)
 balancer <- read_smooth_neuron("celltype:balancer")
 lithocyte <- read_smooth_neuron("celltype:lithocyte")
 bridge <- read_smooth_neuron("celltype:bridge")
 dome <- read_smooth_neuron("celltype:dome")
 
-balancer_Q1 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q1")))
-balancer_Q2 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q2")))
-balancer_Q3 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q3")))
-balancer_Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:balancer", "Q4")))
+balancer_Q1 <- read_smooth_neuron(get_skids_with_annot(pid = pid, c("celltype:balancer", "Q1")))
+balancer_Q2 <- read_smooth_neuron(get_skids_with_annot(pid = pid, c("celltype:balancer", "Q2")))
+balancer_Q3 <- read_smooth_neuron(get_skids_with_annot(pid = pid, c("celltype:balancer", "Q3")))
+balancer_Q4 <- read_smooth_neuron(get_skids_with_annot(pid = pid, c("celltype:balancer", "Q4")))
 
-bridge_Q1Q2 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:bridge", "Q1Q2")))
-bridge_Q3Q4 <- read_smooth_neuron(get_skids_with_annot(pid = 35, c("celltype:bridge", "Q3Q4")))
+bridge_Q1Q2 <- read_smooth_neuron(get_skids_with_annot(pid = pid, c("celltype:bridge", "Q1Q2")))
+bridge_Q3Q4 <- read_smooth_neuron(get_skids_with_annot(pid = pid, c("celltype:bridge", "Q3Q4")))
 
 SSN_Q1Q2 <- read_smooth_neuron("SSN_Q1Q2")[[1]]
 SSN_Q3Q4 <- read_smooth_neuron("SSN_Q3Q4")[[1]]

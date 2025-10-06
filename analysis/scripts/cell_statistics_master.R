@@ -17,7 +17,7 @@ stats_cilia <- read.csv("analysis/data/cilium_lengths.csv")
 stats_organelles <- read.csv("analysis/data/organelle_stats.csv")
 
 # process only cells with somas:
-tags <- catmaid_get_label_stats(pid = 35)
+tags <- catmaid_get_label_stats(pid = pid)
 skids <- tags %>% filter(labelName == "soma") %>% 
   select(skeletonID) %>% 
   unique %>% 
@@ -26,7 +26,7 @@ skids <- tags %>% filter(labelName == "soma") %>%
 
 # get synapse info, but only process pre connectors so we don't duplicate things
 get_syn_stats <- function(skid) {
-  nneuron <- read.neuron.catmaid(skid, pid = 35)
+  nneuron <- read.neuron.catmaid(skid, pid = pid)
   connectors_info <- nneuron$connectors
   if (length(connectors_info) == 0) {
     connectors_info <- NULL
@@ -49,7 +49,7 @@ stats_synapse <- read.csv("analysis/data/stats_synapse.csv")
 
 # compile stats ------------------------------
 get_celltype_annot_for_skid <- function(skid) {
-  annot <- catmaid_fetch(path = "/35/annotations/forskeletons",
+  annot <- catmaid_fetch(path = "/pid/annotations/forskeletons",
                          body = list(skeleton_ids=skid))
   
   result <- annot$annotations %>%
@@ -70,7 +70,7 @@ get_celltype_annot_for_skid <- function(skid) {
 
 get_stats <- function(skid) {
   sskid=skid
-  annot <- catmaid_fetch(path = "/35/annotations/forskeletons",
+  annot <- catmaid_fetch(path = "/pid/annotations/forskeletons",
                          body = list(skeleton_ids=sskid))
   # get celltype from server because none of the current tables have annotations for all cells
   celltype <- get_celltype_annot_for_skid(sskid)
