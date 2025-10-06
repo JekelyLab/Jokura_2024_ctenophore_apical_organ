@@ -83,9 +83,9 @@ for (neu in neuronlist(neuron_Q1234, neuron_Q12, neuron_Q34)) {
     y <- connectors_info %>% filter(connector_id == cid) %>% select(y) %>% pull()
     z <- connectors_info %>% filter(connector_id == cid) %>% select(z) %>% pull()
     catmaid_fetch(
-      path = paste(pid, "/crop/", sep = "")
+      path = paste(pid, "/crop/", sep = ""),
       body = list(
-        stack_ids=28,
+        stack_ids=stack_id,
         min_x=x-half_bb_size_xy,
         min_y=y-half_bb_size_xy,
         min_z=z-half_bb_size_z,

@@ -23,6 +23,7 @@ inst = lapply(pkgs, library, character.only = TRUE)
   #for this we configure to http/1.1
   conn_http1 = catmaid_login(conn=conn, config=httr::config(ssl_verifypeer=0, http_version=1))
   pid = 33
+  stack_id=24
 }
 
 system("git submodule init")

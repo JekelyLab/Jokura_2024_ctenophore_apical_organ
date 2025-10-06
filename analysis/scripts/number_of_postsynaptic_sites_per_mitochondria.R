@@ -278,19 +278,19 @@ for (cell_type in c("SSN", "bridge")) {
 
 
 
-# crop substack TODO: automate renaming. Mybe make the crop funtion return a filename?------------------------
+# crop substack TODO: automate renaming. Maybe make the crop function return a filename?------------------------
 
 if (!file.exists("manuscript/pictures/Figure_mito/Figure_mito_syn_ves_syn.tiff")) {
-  crop_substack("Figure_mito_syn_ves_syn", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", pid, 28)
+  crop_substack("Figure_mito_syn_ves_syn", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", pid, stack_id)
 }
 if (!file.exists("manuscript/pictures/Figure_mito/Figure_mito_syn_ves_no_syn.tiff")) {
-  crop_substack("Figure_mito_syn_ves_no_syn", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", pid, 28)
+  crop_substack("Figure_mito_syn_ves_no_syn", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", pid, stack_id)
 }
 if (!file.exists("manuscript/pictures/Figure_mito/Figure_mito_syn_ves_unc.tiff")) {
-  crop_substack("Figure_mito_syn_ves_unc", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", pid, 28)
+  crop_substack("Figure_mito_syn_ves_unc", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", pid, stack_id)
 }
 if (!file.exists("manuscript/pictures/Figure_mito/Figure_mito_syn_ves_none.tiff")) {
-  crop_substack("Figure_mito_syn_ves_none", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", pid, 28)
+  crop_substack("Figure_mito_syn_ves_none", 700, 700, 0, 0, "manuscript/pictures/Figure_mito", pid, stack_id)
 }
 
 # assembles--------------------------------------------------

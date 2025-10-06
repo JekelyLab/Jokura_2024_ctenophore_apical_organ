@@ -144,7 +144,7 @@ celltype_flashcard(celltype) {
   z <- cells[[as.character(flashcard_distal_skid)]]$d$Z[pos]
   crop_substack_point(x, y, z, bbox_xy, bbox_xy, 0, 0,
                       paste("manuscript/pictures/flashcards_EM/", celltype, "_flashcard_distal.tif", sep = ""),
-                      pid, 28)
+                      pid, stack_id)
   
   # crop proximal
   pos <- which(cells[[as.character(flashcard_proximal_skid)]]$d$PointNo == flashcard_proximal_treenode)
@@ -153,7 +153,7 @@ celltype_flashcard(celltype) {
   z <- cells[[as.character(flashcard_proximal_skid)]]$d$Z[pos]
   crop_substack_point(x, y, z, bbox_xy, bbox_xy, 0, 0,
                       paste("manuscript/pictures/flashcards_EM/", celltype, "_flashcard_proximal.tif", sep = ""),
-                      pid, 28)
+                      pid, stack_id)
   # crop soma
   pos <- which(cells[[as.character(flashcard_soma_skid)]]$d$PointNo == flashcard_soma_treenode)
   x <- cells[[as.character(flashcard_soma_skid)]]$d$X[pos]
@@ -161,7 +161,7 @@ celltype_flashcard(celltype) {
   z <- cells[[as.character(flashcard_soma_skid)]]$d$Z[pos]
   crop_substack_point(x, y, z, bbox_xy, bbox_xy, 0, 0,
                       paste("manuscript/pictures/flashcards_EM/", celltype, "_flashcard_soma.tif", sep = ""),
-                      pid, 28)
+                      pid, stack_id)
   
   
   n_cilia <- organelle_stats %>%
