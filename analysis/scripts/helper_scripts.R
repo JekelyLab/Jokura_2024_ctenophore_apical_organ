@@ -2,7 +2,7 @@ source("analysis/scripts/packages_and_functions.R")
 
 # find skeletons without annotations -------------------------------------------
 skids <- unlist(
-  catmaid_fetch(path = "/pid/skeletons/"))
+  catmaid_fetch(path = paste(pid, "/skeletons/", sep = "")))
 
 annot <- catmaid_get_annotations_for_skeletons(skids, pid = pid)
 
@@ -25,7 +25,7 @@ read_smooth_neuron <- function(annotation){
 balancer <- read_smooth_neuron("celltype:balancer")
 bridge <- read_smooth_neuron("celltype:bridge")
 
-plot_background()
+plot_background_oral()
 plot3d(
   bridge, soma = TRUE, color = Okabe_Ito[c(1,5,8)], 
   alpha = 0.3, lwd = c(4,3,3)
@@ -85,7 +85,7 @@ cilium_annot_mistake <- function(skid) {
     c_pocket <- annotations %>% select(annotation) %>% 
       filter(annotation == "ciliary_pocket_yes") %>% pull() %>% length()
   }
-  neuron_name <- catmaid_fetch(path = "/pid/skeleton/neuronnames",
+  neuron_name <- catmaid_fetch(path = paste(pid, "/skeleton/neuronnames", sep = ""),
                                body = list(skids=skid))[[1]]
   n_bb <- neuron_info$tags$`basal body` |> length()
   n_ctip <- neuron_info$tags$`cilium tip` |> length()
