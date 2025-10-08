@@ -39,11 +39,11 @@ bal Q1,brg Q1Q2,0
 bal Q2,brg Q1Q2,0
 bal Q3,brg Q1Q2,0
 bal Q4,brg Q1Q2,0
-brg Q1Q2,brg Q1Q2,4
+brg Q1Q2,brg Q1Q2,3
 brg Q3Q4,brg Q1Q2,0
 ANN Q1Q2,brg Q1Q2,57
 ANN Q3Q4,brg Q1Q2,0
-ANN Q1-4,brg Q1Q2,6
+ANN Q1-4,brg Q1Q2,2
 bal Q1,brg Q3Q4,0
 bal Q2,brg Q3Q4,0
 bal Q3,brg Q3Q4,0

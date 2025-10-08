@@ -16,7 +16,7 @@ close3d()
 nopen3d()
 mfrow3d(1, 3)
 # define the size of the rgl window, the view and zoom
-par3d(windowRect = c(0, 0, 2400, 700))
+par3d(windowRect = c(0, 0, 2400, 550))
 
 # plot aboral view
 plot_multinucleated_cell(SNN, lwd = 1.5, alpha = 1, col = Okabe_Ito[2])
@@ -145,3 +145,4 @@ ggsave("manuscript/figures/Figure2_Supplement1.pdf",
   limitsize = FALSE,
   units = c("px"), Fig2_Sup1, width = 2800, height = 2200
 )
+

@@ -3,13 +3,13 @@
 # source packages and functions ------------------------------------------------
 source("analysis/scripts/packages_and_functions.R")
 
+# note: SSN were renamed to ANN, but a lot tof the code still uses SSN
 
 # load cells ---------------------------------------------------------------
 
-
-ANN_Q1Q2 <- read_smooth_neuron("SSN_Q1Q2")[[1]]
-ANN_Q3Q4 <- read_smooth_neuron("SSN_Q3Q4")[[1]]
-ANN_Q1Q2Q3Q4 <- read_smooth_neuron("SSN_Q1Q2Q3Q4")[[1]]
+SSN_Q1Q2 <- read_smooth_neuron("SSN_Q1Q2")[[1]]
+SSN_Q3Q4 <- read_smooth_neuron("SSN_Q3Q4")[[1]]
+SSN_Q1Q2Q3Q4 <- read_smooth_neuron("SSN_Q1Q2Q3Q4")[[1]]
 
 
 # get all cells with soma, but only those in the apical organ
@@ -28,11 +28,11 @@ with_soma <- read_smooth_neuron(skids_soma_AO)
 
 # 3d plot SSN Q1Q2 & Q3Q4 neuron -----------------------------------------------
 
-plot_ANNQ1Q2_ANN3Q4 <- function() {
-  plot_multinucleated_cell(ANN_Q1Q2,
+plot_SSNQ1Q2_SSN3Q4 <- function() {
+  plot_multinucleated_cell(SSN_Q1Q2,
                            lwd = 1, alpha = 1, col = Okabe_Ito[6])
   
-  plot_multinucleated_cell(ANN_Q3Q4,
+  plot_multinucleated_cell(SSN_Q3Q4,
                            lwd = 1, alpha = 1, col = Okabe_Ito[7])
   
   plot3d(outline,
@@ -49,7 +49,7 @@ mfrow3d(1, 3)
 par3d(windowRect = c(0, 0, 1200, 350))
 
 #plot aboral view
-plot_ANNQ1Q2_ANN3Q4()
+plot_SSNQ1Q2_SSN3Q4()
 aboral()
 
 #move to next panel in rgl window
@@ -59,7 +59,7 @@ next3d(clear=F)
 plot3d(with_soma,
        soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
        WithConnectors = F, WithNodes = F)
-plot_ANNQ1Q2_ANN3Q4()
+plot_SSNQ1Q2_SSN3Q4()
 sagittal()
 
 #rgl.snapshot("manuscript/pictures/SSN_sagittal_plane.png")
@@ -71,7 +71,7 @@ next3d(clear=F)
 plot3d(with_soma,
        soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
        WithConnectors = F, WithNodes = F)
-plot_ANNQ1Q2_ANN3Q4()
+plot_SSNQ1Q2_SSN3Q4()
 tentacular()
 
 #move to next panel in rgl window
@@ -81,9 +81,9 @@ rgl.snapshot("manuscript/pictures/SSN_Q12_Q34.png")
 
 close3d()
 
-# 3d plot ANN Q1Q2Q3Q4 neuron -----------------------------------------------
-plot_ANNQ1Q2Q3Q4 <- function() {
-  plot_multinucleated_cell(ANN_Q1Q2Q3Q4,
+# 3d plot SSN Q1Q2Q3Q4 neuron -----------------------------------------------
+plot_SSNQ1Q2Q3Q4 <- function() {
+  plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
                            lwd = 1, alpha = 1, col = Okabe_Ito[5])
   plot3d(with_soma,
          soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
@@ -101,7 +101,7 @@ mfrow3d(1, 3)
 par3d(windowRect = c(0, 0, 1200, 350))
 
 #plot aboral view
-plot_ANNQ1Q2Q3Q4()
+plot_SSNQ1Q2Q3Q4()
 aboral()
 #rgl.snapshot("manuscript/pictures/SSN_aboral_view.png")
 
@@ -109,7 +109,7 @@ aboral()
 next3d(clear=F)
 
 #plot lateral view of Sagittal plane
-plot_ANNQ1Q2Q3Q4()
+plot_SSNQ1Q2Q3Q4()
 sagittal()
 #rgl.snapshot("manuscript/pictures/SSN_sagittal_plane.png")
 
@@ -117,7 +117,7 @@ sagittal()
 next3d(clear=F)
 
 #plot lateral view of Tentacular plane
-plot_ANNQ1Q2Q3Q4()
+plot_SSNQ1Q2Q3Q4()
 tentacular()
 #rgl.snapshot("manuscript/pictures/SSN_tentacular_plane.png")
 
@@ -353,16 +353,16 @@ pos_ves_no_syn <- mito_vesicle_info |>
   select(x, y, z)
 
 
-plot_mito_ANN <- function() {
-  plot3d(ANN_Q1Q2,
+plot_mito_SSN <- function() {
+  plot3d(SSN_Q1Q2,
          soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[6],
          WithConnectors = F, WithNodes = F)
   
-  plot3d(ANN_Q3Q4,
+  plot3d(SSN_Q3Q4,
          soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[7],
          WithConnectors = F, WithNodes = F)
   
-  plot3d(ANN_Q1Q2Q3Q4,
+  plot3d(SSN_Q1Q2Q3Q4,
          soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[5],
          WithConnectors = F, WithNodes = F)
   
@@ -400,21 +400,21 @@ par3d(windowRect = c(0, 0, 1200, 350))
 #par3d(windowRect = c(0, 0, 2400, 700))
 
 #plot aboral view
-plot_mito_ANN()
+plot_mito_SSN()
 aboral()
 
 #move to next panel in rgl window
 next3d(clear=F)
 
 #plot sagittal view
-plot_mito_ANN()
+plot_mito_SSN()
 sagittal()
 
 #move to next panel in rgl window
 next3d(clear=F)
 
 #plot tentacular view
-plot_mito_ANN()
+plot_mito_SSN()
 tentacular()
 
 #make a snapshot to the working directory
@@ -485,18 +485,18 @@ syn_small_to_small <- stats_synapse %>%
   filter(prepost==1)
 
 
-# 3d plot ANN synapses ---------------------------------------------------------
+# 3d plot SSN synapses ---------------------------------------------------------
 
-plot_ANN <- function() {
-  plot3d(ANN_Q1Q2,
+plot_SSN <- function() {
+  plot3d(SSN_Q1Q2,
          soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[6],
          WithConnectors = F, WithNodes = F)
   
-  plot3d(ANN_Q3Q4,
+  plot3d(SSN_Q3Q4,
          soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
          WithConnectors = F, WithNodes = F)
   
-  plot3d(ANN_Q1Q2Q3Q4,
+  plot3d(SSN_Q1Q2Q3Q4,
          soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
          WithConnectors = F, WithNodes = F)
   
@@ -546,7 +546,7 @@ par3d(windowRect = c(0, 0, 1200, 350))
 
 
 #plot aboral view
-plot_ANN()
+plot_SSN()
 aboral()
 #rgl.snapshot("manuscript/pictures/balancer_aboral_view.png")
 
@@ -554,7 +554,7 @@ aboral()
 next3d(clear=F)
 
 #plot lateral view of Sagittal plane
-plot_ANN()
+plot_SSN()
 sagittal()
 #rgl.snapshot("manuscript/pictures/balancer_sagittal_plane.png")
 
@@ -562,7 +562,7 @@ sagittal()
 next3d(clear=F)
 
 #plot lateral view of Tentacular plane
-plot_ANN()
+plot_SSN()
 tentacular()
 #rgl.snapshot("manuscript/pictures/balancer_tentacular_plane.png")
 

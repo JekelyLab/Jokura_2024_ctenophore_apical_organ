@@ -32,7 +32,7 @@ plot_views <- function(view_func) {
 close3d()
 nopen3d()
 mfrow3d(1, 3)
-par3d(windowRect = c(0, 0, 2400, 700))
+par3d(windowRect = c(0, 0, 1200, 350))
 
 plot_views(aboral)
 plot_views(sagittal)

@@ -18,7 +18,7 @@ authtoken <- conn$value$token
 has_enter_cil_nocil_tag <- function(treenode_id) {
   # catmaid fetch doesn't work here for some reason?
   tags_of_node <- GET(paste(
-    "https://catmaid.ex.ac.uk/pid/labels/treenode/", treenode_id, sep = ""
+    catmaid_url, pid, "/labels/treenode/", treenode_id, sep = ""
     ), 
     add_headers(Authorization = paste("Token", authtoken))) |>
     content()
@@ -29,7 +29,7 @@ has_enter_cil_nocil_tag <- function(treenode_id) {
 
 enter_cell_info <- function(connector_id) {
   connector_info <- GET(paste(
-     "https://catmaid.ex.ac.uk/pid/connectors/", connector_id, sep = ""
+    catmaid_url, pid, "/connectors/", connector_id, sep = ""
   ), 
   add_headers(Authorization = paste("Token", authtoken))) |>
     content()
