@@ -3,10 +3,10 @@ library(tidyverse)  # data manipulation
 library(cluster)    # clustering algorithms
 library(factoextra) # clustering algorithms & visualization
 
-conn <- source("~/R/conn.R")
+source("analysis/scripts/packages_and_functions.R")
 
 skids <- unlist(
-  catmaid_fetch(path = "/pid/skeletons/"))
+  catmaid_fetch(path = paste(pid, "/skeletons/", sep = "")))
 
 characters <- list("soma",
                    "mitochondrion",
@@ -91,7 +91,7 @@ celltypes <- data.frame()
 for (i in seq(1:length(tag_stats_per_skid$skid))) {
   skid <- tag_stats_per_skid$skid[[i]]
   nname <- unlist(
-    catmaid_fetch(path = "/pid/skeleton/neuronnames",
+    catmaid_fetch(path = paste(pid, "/skeleton/neuronnames", sep =""),
                   body = list(skids = skid)))
   new_row <- c(
     skid,
@@ -119,7 +119,7 @@ centriolerich <- nlapply(read.neurons.catmaid(centriolerich_skids, pid = pid),
 balancer <- read_smooth_neuron("celltype:balancer")
 bridge <- read_smooth_neuron("celltype:bridge")
 
-plot_background()
+plot_background_oral()
 plot3d(
   centriolerich, soma = TRUE, color = "blue", 
   alpha = 0.3, lwd = c(4,3,3)

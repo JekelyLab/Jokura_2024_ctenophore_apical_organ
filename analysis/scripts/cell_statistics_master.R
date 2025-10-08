@@ -49,7 +49,7 @@ stats_synapse <- read.csv("analysis/data/stats_synapse.csv")
 
 # compile stats ------------------------------
 get_celltype_annot_for_skid <- function(skid) {
-  annot <- catmaid_fetch(path = "/pid/annotations/forskeletons",
+  annot <- catmaid_fetch(path = paste(pid, "/annotations/forskeletons", sep = ""),
                          body = list(skeleton_ids=skid))
   
   result <- annot$annotations %>%
@@ -70,7 +70,7 @@ get_celltype_annot_for_skid <- function(skid) {
 
 get_stats <- function(skid) {
   sskid=skid
-  annot <- catmaid_fetch(path = "/pid/annotations/forskeletons",
+  annot <- catmaid_fetch(path = paste(pid, "/annotations/forskeletons", sep = ""),
                          body = list(skeleton_ids=sskid))
   # get celltype from server because none of the current tables have annotations for all cells
   celltype <- get_celltype_annot_for_skid(sskid)

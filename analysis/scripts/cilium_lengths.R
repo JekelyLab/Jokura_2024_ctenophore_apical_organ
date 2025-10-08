@@ -105,7 +105,7 @@ for (cell in lamellate_intra) {
   plot3d(lamellae_smooth, soma = TRUE, lwd = 10, color = "purple")
 }
 
-lamellate_extra <- read.neurons.catmaid("celltype:lamellate-extra", pid = pid)
+lamellate_extra <- read.neurons.catmaid("celltype-subtype:lamellate-extra", pid = pid)
 for (cell in lamellate_extra) {
   cilia <- segments_between_tags(cell, "cilium tip", "basal body")
   # visualize part of cilium in ciliary pocket
