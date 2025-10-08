@@ -231,7 +231,7 @@ conn_tb_skids_names_col_short <- conn_tb_skids_names_col |>
 # rewrite full name for SSN cells
 conn_tb_skids_names_col_short <- conn_tb_skids_names_col_short |>
   mutate(names_short = if_else(
-    grepl("SSN", names), names, names_short
+    grepl("ANN", names), names, names_short
   ))
 
 
