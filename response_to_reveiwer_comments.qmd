@@ -243,7 +243,7 @@ RESULTS: Aboral synaptic nerve net\
 
 (1) "We reconstructed three aboral nerve-net (ANN) neurons" - out of how many total? Were these three just the first ones traced, or are they likely to be all of the multi-domain neurons? One can't tell if these are the top 3 (out of X), or if there are other multi-quad neurons that were not traced. Are there any Q1Q4 or Q2Q3 neurona? Specify overall composition.\
 
--   There are only three ANN neurons in the aboral organ. These are all completely reconstructed and contained within the volume. We have clarified this in the text. "We identified and reconstructed three aboral nerve-net (ANN) neurons, each exhibiting a syncytial morphology characterized by anastomosing membranes and multiple nuclei (ranging from two to five) (Figure 2A and B, Figure 2--figure supplement 1C). No further ANN neurons were found in the aboral organ."
+-   There are only three ANN neurons in the aboral organ. These are all completely reconstructed and contained within the volume. We have clarified this in the text. "We identified and reconstructed three aboral nerve-net (ANN) neurons, each exhibiting a syncytial morphology characterized by anastomosing membranes and multiple nuclei (ranging from two to five) (Figure 2A and B, Figure 2--figure supplement 1C). These three neurons are the only fully reconstructed ANN neurons contained within the volume. Several small ANN-like fragments were also observed at the periphery of the aboral organ, but their connectivity to the main ANN remains uncertain."
 
 FIGURE 2:\
 
@@ -318,7 +318,7 @@ This section is quite clean. Maybe mention some future directions:\
 
 (1) Do these networks change during development? Five-days-old is still quite undeveloped - what would it look like in an adult specimen? Would you expect a larger version of the same or more diverse connections?\
 
--   As far as we know from work on aboral organs in adult ctenophores, the same structures and cells can be found. We do not know how the network will develop. We know that at 5 days the balancer is fully functional and the animals can orient and their behaviour is coordinated. So the wiring may not change extensively later in development. In the 1-day-old larva, Ferraioli et al have not found the ANN neurons, which suggests that there is significant cell and circuit maturation between 1 and 5 days.
+-   As far as we know from work on aboral organs in adult ctenophores, the same structures and cells can be found. We do not know how the network will develop. We know that at 5 days the balancer is fully functional and the animals can orient and their behaviour is coordinated. So the wiring may not change extensively later in development. In the 1-day-old larva, Ferraioli et al. did not distinguish ANN neurons as a separate population, as these were merged with SNNs in their dataset. This suggests that significant cellular and circuit maturation likely occurs between 1 and 5 days.
 
 METHODS: Imaging the Activity of Balancer Cilia\
 
