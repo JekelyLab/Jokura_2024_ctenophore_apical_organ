@@ -277,7 +277,7 @@ To assess coordination between left and right cilia, we computed rolling Pearson
 
 ### Data and Code Availability
 
-The EM image stacks, including all traces and annotations, are available at https://catmaid.jekelylab.ex.ac.uk. The dataset encompasses all EM images (in JPG format), skeletons, meshes, node tags, connectors, and annotations. Additionally, we provide all R scripts used for data acquisition and figure generation [@jokura_2025_15861953]. All plots, figures (including anatomical renderings), and figure layouts can be fully reproduced using the provided R scripts. While the scripts are mostly organized by figure, some general-purpose scripts—for tasks such as loading libraries, accessing CATMAID data, and defining common functions—are shared across multiple figures.
+The EM image stacks, including all traces and annotations, cann be viewed at https://catmaid.jekelylab.ex.ac.uk. The dataset encompasses all EM images (in JPG format), skeletons, meshes, node tags, connectors, and annotations. The raw images, TrakEM2 alignemnt file, catmaid tiles and reconstruction have also been deposited in the Electron Microscopy Public Image Archive (EMPIAR) with the accession code EMPIAR-13030. Additionally, we provide all R scripts used for data acquisition and figure generation [@jokura_2025_15861953]. All plots, figures (including anatomical renderings), and figure layouts can be fully reproduced using the provided R scripts. While the scripts are mostly organized by figure, some general-purpose scripts—for tasks such as loading libraries, accessing CATMAID data, and defining common functions—are shared across multiple figures.
 
 ## Acknowledgements
 
