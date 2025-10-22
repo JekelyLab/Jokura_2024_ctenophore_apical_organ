@@ -87,6 +87,8 @@ close3d()
 
 # 3d plot SSN Q1Q2Q3Q4 neuron -----------------------------------------------
 
+bridge <- read_smooth_neuron("celltype:bridge")
+
 # 3d plotting of cells
 nopen3d() 
 mfrow3d(1, 3)  
@@ -141,13 +143,13 @@ par3d(zoom=0.61)
 next3d(clear=F)
 
 #make a snapshot to the working directory
-rgl.snapshot("mnuscript/pictures/synapses_ANN_big.png")
+rgl.snapshot("manuscript/pictures/synapses_ANN_big.png")
 close3d()
 
 
 ##### plot bridge cells
 
-bridge <- read_smooth_neuron("celltype:bridge")
+
 skids_bridge <- names(bridge)
 
 bridge_outgoing_syn <- stats_synapse %>% filter(skid %in% skids_bridge) %>% filter(prepost == 0) %>% select(x, y, z)
