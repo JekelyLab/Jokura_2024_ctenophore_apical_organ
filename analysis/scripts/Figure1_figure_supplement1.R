@@ -180,7 +180,7 @@ panel_balancer <- ggdraw() + draw_image(readPNG("manuscript/pictures/3d_plot/plo
 
 panel_celltype <- list()
 for (celltype in names(celltype_cells)) {
-  name_text <- rename_map[celltype]
+  name_text <- celltype_map[celltype]
   panel_celltype[[celltype]] <- ggdraw() +
     draw_image(readPNG(paste("manuscript/pictures/3d_plot/plot_", celltype, ".png", sep = ""))) +
     draw_label(name_text, x = 0.5, y = 0.95, size = 8, fontface="bold", hjust = 0.5)
