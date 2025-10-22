@@ -7,7 +7,7 @@ brg Q1Q2,bal Q1,1
 brg Q3Q4,bal Q1,0
 ANN Q1Q2,bal Q1,14
 ANN Q3Q4,bal Q1,0
-ANN Q1-4,bal Q1,8
+ANN Q1-4,bal Q1,10
 bal Q1,bal Q2,0
 bal Q2,bal Q2,0
 bal Q3,bal Q2,0
@@ -25,7 +25,7 @@ brg Q1Q2,bal Q3,0
 brg Q3Q4,bal Q3,0
 ANN Q1Q2,bal Q3,0
 ANN Q3Q4,bal Q3,2
-ANN Q1-4,bal Q3,7
+ANN Q1-4,bal Q3,9
 bal Q1,bal Q4,0
 bal Q2,bal Q4,0
 bal Q3,bal Q4,0
@@ -39,11 +39,11 @@ bal Q1,brg Q1Q2,0
 bal Q2,brg Q1Q2,0
 bal Q3,brg Q1Q2,0
 bal Q4,brg Q1Q2,0
-brg Q1Q2,brg Q1Q2,3
+brg Q1Q2,brg Q1Q2,4
 brg Q3Q4,brg Q1Q2,0
 ANN Q1Q2,brg Q1Q2,57
 ANN Q3Q4,brg Q1Q2,0
-ANN Q1-4,brg Q1Q2,2
+ANN Q1-4,brg Q1Q2,6
 bal Q1,brg Q3Q4,0
 bal Q2,brg Q3Q4,0
 bal Q3,brg Q3Q4,0
@@ -70,7 +70,7 @@ brg Q1Q2,ANN Q3Q4,0
 brg Q3Q4,ANN Q3Q4,6
 ANN Q1Q2,ANN Q3Q4,0
 ANN Q3Q4,ANN Q3Q4,0
-ANN Q1-4,ANN Q3Q4,6
+ANN Q1-4,ANN Q3Q4,7
 bal Q1,ANN Q1-4,0
 bal Q2,ANN Q1-4,0
 bal Q3,ANN Q1-4,0
@@ -79,4 +79,4 @@ brg Q1Q2,ANN Q1-4,2
 brg Q3Q4,ANN Q1-4,19
 ANN Q1Q2,ANN Q1-4,9
 ANN Q3Q4,ANN Q1-4,9
-ANN Q1-4,ANN Q1-4,6
+ANN Q1-4,ANN Q1-4,11

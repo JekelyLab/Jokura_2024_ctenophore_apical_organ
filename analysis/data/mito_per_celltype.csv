@@ -1,82 +1,82 @@
 "","skid","neuron_name","celltype","n_mito"
-"1",3885795,"bridge cell Q3Q4 2437073","bridge",20
-"2",3885513,"balancer_Q2 2436803","balancer",8
-"3",3885533,"biC_middle 2457193","biciliated",9
-"4",3885549,"biciliated long projection cell_Q2Q3 2475367","biciliated",8
-"5",3885614,"multiciliated (6 cilia) cell Q2 2474825","multiciliated",7
-"6",3885625,"bridge cell Q1Q2 2438601","bridge",7
-"7",3885630,"non-C_vesicle_Q1_2473251","nonciliated",9
-"8",3885661,"SNN 2559177","SNN",9
-"9",3885676,"dome_2473441","dome",5
-"10",3885713,"multiciliated (3 cilia) cell Q1 2438927","multiciliated",4
-"11",3885781,"bridge cell Q1Q2 2437048","bridge",38
-"12",3885798,"EF_Q3 2473955","epithelial_floor",4
-"13",3885804,"bridge cell Q1Q2 2437084","bridge",11
-"14",3885808,"bridge cell Q3Q4 2437090","bridge",14
-"15",3885821,"bridge cell Q3Q4 2437101","bridge",8
-"16",3885827,"balancer_Q4 2437107","balancer",7
-"17",3885605,"ANN_Q1-2","SSN",138
-"18",3885878,"dense vesicle cell 2457946","dense_vesicle",4
-"19",3885894,"non-C_vesicle_Q3_2457797","nonciliated",13
-"20",3885918,"bridge cell Q3Q4 2458238","bridge",5
-"21",3885921,"dense vesicle cell 2458343","dense_vesicle",4
-"22",3885938,"dense vesicle cell 2458351","dense_vesicle",5
-"23",3885942,"plumose cell_Q1Q4 2474067","plumose",6
-"24",3885955,"SNN 2539408","SNN",18
-"25",3885790,"non-C_Q1-4_2436506","nonciliated",7
-"26",3886062,"EF_Q4 2477785","epithelial_floor",8
-"27",3886129,"multiciliated (5 cilia) cell Q4 2478545","multiciliated",7
-"28",3885648,"IcMC_Q1 2438654","intra-multi-ciliated",17
-"29",3886170,"multiciliated (4 cilia) cell Q1 2479028","multiciliated",7
-"30",3886147,"EF_Q1 2478825","epithelial_floor",3
-"31",3886184,"SNN 2544895","SNN",20
-"32",3886234,"stCG_Q1 2479867","Cgroove",7
-"33",3886267,"bridge cell Q1Q2 2480240","bridge",6
-"34",3886268,"bridge cell Q1Q2 2480249","bridge",10
-"35",3886269,"bridge cell Q1Q2 2480255","bridge",4
-"36",3886254,"lithocyte_Q2 2480143","lithocyte",43
-"37",3886271,"non-C_Q1_2480303","NA",5
-"38",3886272,"non-C_Q1_2480314","NA",4
-"39",3886263,"bridge? cell Q1Q2 2480206","bridge",8
-"40",3885967,"biC_Q3_(CG?)_2476065","biciliated",4
-"41",3885801,"ANN_Q3-4","SSN",90
-"42",3885472,"ssCG_Q3 2474483","Cgroove",6
-"43",3885481,"ssCG_Q2 2474530","Cgroove",9
-"44",3885667,"monociliated vesicle cell middle 2473364","monociliated",11
-"45",3885686,"balancer_Q3 2437298","balancer",3
-"46",3885436,"monoC_Q2Q3 2475270","monociliated",6
-"47",3885812,"IcMC_Q2 2436551","intra-multi-ciliated",18
-"48",3886329,"outside cell 2497203","NA",4
-"49",3886305,"biC_Q4 2480944","biciliated",3
-"50",3885590,"monoC_middle_Q2_2436143","monociliated",6
-"51",3885516,"balancer_Q1 2437664","balancer",5
-"52",3886336,"ANN_Q1-4","SSN",232
-"53",3885449,"monoC_Q4 2487644","monociliated",4
-"54",3885794,"bridge cell Q3Q4 2436517","bridge",22
-"55",3885802,"bridge cell Q3Q4 2437078","bridge",11
-"56",3885653,"bridge cell Q1Q2 2473307","bridge",20
-"57",3885464,"LB_Q1 2436676","lamellate",28
-"58",3885657,"LB_Q1 2438674","lamellate",12
-"59",3885656,"LB_Q2 2474906","lamellate",11
-"60",3885692,"IcMC_Q3 2438811","intra-multi-ciliated",14
-"61",3885679,"dome_2473472","dome",5
-"62",3885558,"dense vesicle cell 2472608","NA",6
-"63",3885782,"dome_2473904","dome",5
-"64",3885555,"lithocyte_Q4 2475940","lithocyte",29
-"65",3886265,"bridge? cell Q1Q2 2480222","bridge",7
-"66",3885910,"biC_Q3 2457896","biciliated",7
-"67",3885475,"biC_middle 2436699","biciliated",7
-"68",3885853,"biC_Q1Q4 2462188","biciliated",6
-"69",3886135,"biC_Q1 2478702","biciliated",3
-"70",3886072,"biC_Q1Q4 2477885","biciliated",5
-"71",3886008,"biC_Q3 2477132","biciliated",4
-"72",3885612,"monoC_middle_Q1-2_2438568","monociliated",5
-"73",3885706,"dome_2473600","dome",5
-"74",3885471,"lgc_Q4 2436685","large_granular_cell",6
-"75",3885700,"lgc_Q1 2438854","large_granular_cell",4
-"76",3885939,"EF_Q3Q4 2458402","epithelial_floor",3
-"77",3885434,"EF_Q2 2475262","epithelial_floor",9
-"78",3886408,"outside 2549376","NA",3
-"79",3885957,"lgc_Q2 2474123","large_granular_cell",2
-"80",3885403,"plumose cell_Q1 2436591","plumose",8
-"81",3885402,"plumose cell_Q2Q3 2474197","plumose",10
+"1",3938727,"bridge cell Q3Q4 2437073","bridge",20
+"2",3938445,"balancer_Q2 2436803","balancer",8
+"3",3938465,"biC_middle 2457193","biciliated",9
+"4",3938481,"biciliated long projection cell_Q2Q3 2475367","biciliated",8
+"5",3938546,"multiciliated (6 cilia) cell Q2 2474825","multiciliated",7
+"6",3938557,"bridge cell Q1Q2 2438601","bridge",7
+"7",3938562,"non-C_vesicle_Q1_2473251","nonciliated",9
+"8",3938593,"SNN 2559177","SNN",9
+"9",3938608,"dome_2473441","dome",5
+"10",3938645,"multiciliated (3 cilia) cell Q1 2438927","multiciliated",4
+"11",3938713,"bridge cell Q1Q2 2437048","bridge",38
+"12",3938730,"EF_Q3 2473955","epithelial_floor",4
+"13",3938736,"bridge cell Q1Q2 2437084","bridge",11
+"14",3938740,"bridge cell Q3Q4 2437090","bridge",14
+"15",3938753,"bridge cell Q3Q4 2437101","bridge",8
+"16",3938759,"balancer_Q4 2437107","balancer",7
+"17",3938537,"ANN_Q1-2","SSN",138
+"18",3938809,"dense vesicle cell 2457946","dense_vesicle",4
+"19",3938825,"non-C_vesicle_Q3_2457797","nonciliated",13
+"20",3938849,"bridge cell Q3Q4 2458238","bridge",5
+"21",3938852,"dense vesicle cell 2458343","dense_vesicle",4
+"22",3938869,"dense vesicle cell 2458351","dense_vesicle",5
+"23",3938873,"plumose cell_Q1Q4 2474067","plumose",6
+"24",3938886,"SNN 2539408","SNN",18
+"25",3938722,"non-C_Q1-4_2436506","nonciliated",7
+"26",3938993,"EF_Q4 2477785","epithelial_floor",8
+"27",3939060,"multiciliated (5 cilia) cell Q4 2478545","multiciliated",7
+"28",3938580,"IcMC_Q1 2438654","intra-multi-ciliated",17
+"29",3939101,"multiciliated (4 cilia) cell Q1 2479028","multiciliated",7
+"30",3939078,"EF_Q1 2478825","epithelial_floor",3
+"31",3939115,"SNN peripheral 2544895","SNN",20
+"32",3939165,"stCG_Q1 2479867","Cgroove",7
+"33",3939197,"bridge cell Q1Q2 2480240","bridge",6
+"34",3939198,"bridge cell Q1Q2 2480249","bridge",10
+"35",3939199,"bridge cell Q1Q2 2480255","bridge",4
+"36",3939184,"lithocyte_Q2 2480143","lithocyte",43
+"37",3939201,"non-C_Q1_2480303","NA",5
+"38",3939202,"non-C_Q1_2480314","NA",4
+"39",3939193,"bridge cell Q1Q2 2480206","bridge",8
+"40",3938898,"biC_Q3 2476065","biciliated",4
+"41",3938733,"ANN_Q3-4","SSN",90
+"42",3938404,"ssCG_Q3 2474483","Cgroove",6
+"43",3938413,"ssCG_Q2 2474530","Cgroove",9
+"44",3938599,"monociliated vesicle cell middle 2473364","monociliated",11
+"45",3938618,"balancer_Q3 2437298","balancer",3
+"46",3938368,"monoC_Q2Q3 2475270","monociliated",6
+"47",3938744,"IcMC_Q2 2436551","intra-multi-ciliated",18
+"48",3939259,"outside cell 2497203","NA",4
+"49",3939235,"biC_Q4 2480944","biciliated",3
+"50",3938522,"monoC_middle_Q2_2436143","monociliated",6
+"51",3938448,"balancer_Q1 2437664","balancer",5
+"52",3939266,"ANN_Q1-4","SSN",249
+"53",3938381,"monoC_Q4 2487644","monociliated",4
+"54",3938726,"bridge cell Q3Q4 2436517","bridge",22
+"55",3938734,"bridge cell Q3Q4 2437078","bridge",11
+"56",3938585,"bridge cell Q1Q2 2473307","bridge",20
+"57",3938396,"LB_Q1 2436676","lamellate",28
+"58",3938589,"LB_Q1 2438674","lamellate",12
+"59",3938588,"LB_Q2 2474906","lamellate",11
+"60",3938624,"IcMC_Q3 2438811","intra-multi-ciliated",14
+"61",3938611,"dome_2473472","dome",5
+"62",3938490,"dense vesicle cell 2472608","NA",6
+"63",3938714,"dome_2473904","dome",5
+"64",3938487,"lithocyte_Q4 2475940","lithocyte",29
+"65",3939195,"bridge cell Q1Q2 2480222","bridge",7
+"66",3938841,"biC_Q3 2457896","biciliated",7
+"67",3938407,"biC_middle 2436699","biciliated",7
+"68",3938785,"biC_Q1Q4 2462188","biciliated",6
+"69",3939066,"biC_Q1 2478702","biciliated",3
+"70",3939003,"biC_Q1Q4 2477885","biciliated",5
+"71",3938939,"biC_Q3 2477132","biciliated",4
+"72",3938544,"monoC_middle_Q1-2_2438568","monociliated",5
+"73",3938638,"dome_2473600","dome",5
+"74",3938403,"lgc_Q4 2436685","large_granular_cell",6
+"75",3938632,"lgc_Q1 2438854","large_granular_cell",4
+"76",3938870,"EF_Q3Q4 2458402","epithelial_floor",3
+"77",3938366,"EF_Q2 2475262","epithelial_floor",9
+"78",3939335,"outside 2549376","NA",3
+"79",3938888,"lgc_Q2 2474123","large_granular_cell",2
+"80",3938335,"plumose cell_Q1 2436591","plumose",8
+"81",3938334,"plumose cell_Q2Q3 2474197","plumose",10

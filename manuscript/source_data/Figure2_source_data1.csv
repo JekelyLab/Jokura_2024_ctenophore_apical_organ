@@ -1,6 +1,6 @@
 celltype,characteristic,value
-ANN,mean_vesicles_syn,112.33333333333333
-ANN,mean_vesicles_no_syn,41.333333333333336
+ANN,mean_vesicles_syn,116.66666666666667
+ANN,mean_vesicles_no_syn,42.333333333333336
 bal,mean_vesicles_syn,0
 bal,mean_vesicles_no_syn,5.75
 brg,mean_vesicles_syn,2.466666666666667
