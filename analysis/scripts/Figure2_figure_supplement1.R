@@ -11,53 +11,40 @@ ANN <- read_smooth_neuron("celltype:SSN")
 
 # 3d plot Subepithelial nerve net -----------------------------------------------
 
+plot_SNN <- function() {
+  plot_multinucleated_cell(SNN, lwd = 1.5, alpha = 1, col = Okabe_Ito[2])
+  plot3d(outline, add = TRUE, alpha = 0.025, col = Okabe_Ito[8])
+  par3d(zoom = 0.7)
+}
+
 close3d()
 # 3d plotting of cells
 nopen3d()
 mfrow3d(1, 3)
 # define the size of the rgl window, the view and zoom
-par3d(windowRect = c(0, 0, 2400, 550))
+par3d(windowRect = c(0, 0, 2400, 800))
 
 # plot aboral view
-plot_multinucleated_cell(SNN, lwd = 1.5, alpha = 1, col = Okabe_Ito[2])
-plot3d(outline, add = TRUE, alpha = 0.025, col = Okabe_Ito[8])
-
-# aboral view
+plot_SNN()
 aboral()
-par3d(zoom = 0.7)
-
 # move to next panel in rgl window
 next3d(clear = F)
-
-
-
-# plot lateral view of Sagittal plane
-plot_multinucleated_cell(SNN, lwd = 1.5, alpha = 1, col = Okabe_Ito[2])
-plot3d(outline, add = TRUE, alpha = 0.025, col = Okabe_Ito[8])
 
 # lateral view of Sagittal plane
+plot_SNN()
 sagittal()
-par3d(zoom = 0.7)
-
 # move to next panel in rgl window
 next3d(clear = F)
-
-
 
 # plot lateral view of Tentacular plane
-plot_multinucleated_cell(SNN, lwd = 1.5, alpha = 1, col = Okabe_Ito[2])
-plot3d(outline, add = TRUE, alpha = 0.025, col = Okabe_Ito[8])
-
-# lateral view of Tentacular plane
+plot_SNN()
 tentacular()
-par3d(zoom = 0.7)
-
 # move to next panel in rgl window
 next3d(clear = F)
-
 
 # make a snapshot to the working directory
 rgl.snapshot("manuscript/pictures/3d_plot/plot_SNN.png")
+
 
 # add ANN cells to plot
 plot_multinucleated_cell(
