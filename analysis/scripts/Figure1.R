@@ -9,10 +9,20 @@ balancer <- read_smooth_neuron("celltype:balancer")
 cgroove <- read_smooth_neuron("celltype:Cgroove")
 statolith <- read_smooth_neuron("statolith")
 
-Q1 <- read_smooth_neuron("Q1")
-Q2 <- read_smooth_neuron("Q2")
-Q3 <- read_smooth_neuron("Q3")
-Q4 <- read_smooth_neuron("Q4")
+skids_outside <- catmaid_skids("outside", pid = pid)
+
+skids_Q1_inAO <- setdiff(catmaid_skids("Q1", pid = pid), skids_outside)
+Q1 <- if (length(skids_Q1_inAO)) read_smooth_neuron(skids_Q1_inAO) else NULL
+
+skids_Q2_inAO <- setdiff(catmaid_skids("Q2", pid = pid), skids_outside)
+Q2 <- if (length(skids_Q2_inAO)) read_smooth_neuron(skids_Q2_inAO) else NULL
+
+skids_Q3_inAO <- setdiff(catmaid_skids("Q3", pid = pid), skids_outside)
+Q3 <- if (length(skids_Q3_inAO)) read_smooth_neuron(skids_Q3_inAO) else NULL
+
+skids_Q4_inAO <- setdiff(catmaid_skids("Q4", pid = pid), skids_outside)
+Q4 <- if (length(skids_Q4_inAO)) read_smooth_neuron(skids_Q4_inAO) else NULL
+
 
 # plot quadrants ----------------------------------------------------------------
 

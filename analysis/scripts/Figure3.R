@@ -6,7 +6,15 @@ source("analysis/scripts/packages_and_functions.R")
 
 # load cell type ---------------------------------------------------------------
 
-with_soma <- read_smooth_neuron("with_soma")
+# get all cells with soma, but only those in the apical organ
+skids_with_soma <- catmaid_get_label_stats(pid=pid) %>%
+  filter(labelName == "soma") %>%
+  select(skeletonID) %>%
+  pull() %>%
+  unique()
+skids_outside <- catmaid_skids("outside", pid=pid)
+skids_soma_AO <- setdiff(skids_with_soma, skids_outside)
+with_soma <- read_smooth_neuron(skids_soma_AO)
 
 balancer <- read_smooth_neuron("celltype:balancer")
 bridge <- read_smooth_neuron("celltype:bridge")
