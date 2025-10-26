@@ -169,7 +169,7 @@ plot_output_number <-
   theme(
     axis.text.x = element_text(size = 17, angle = -70, vjust = 0.5, hjust = 0, margin = margin(t = -7)),
     axis.text.y = element_text(size = 17),
-    axis.title = element_text(size = 18),
+    axis.title = element_text(size = 17),
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
     legend.text = element_text(size = 13)
