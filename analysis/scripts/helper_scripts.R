@@ -1,3 +1,6 @@
+# script for finding mistakes in the catmaid database, such as skeletons without
+# annotations, cilia which don't have both tip and centriole tagged, etc.
+
 source("analysis/scripts/packages_and_functions.R")
 
 # find skeletons without annotations -------------------------------------------

@@ -1,3 +1,7 @@
+# script to check if synapse morphology looks different in the big ANN vs small
+# generates a series of two panel images, where the left panel is from ANNQ1Q2Q3Q4
+# and the left panel is ANNQ1Q2 or Q3Q4
+
 source("analysis/scripts/packages_and_functions.R")
 
 skid_Q1234 <- 2496955

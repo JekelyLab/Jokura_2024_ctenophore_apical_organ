@@ -2,6 +2,7 @@
 # WARNING: It is absolutely essential that the root node is proximal to the basal body 
 # i.e., the order of nodes needs to be:
 # "root"  -> (optional "exit_ciliary_pocket") -> "basal body" -> "cilium tip"
+# this can be checked with functions in helper_scripts.R
 
 source("analysis/scripts/packages_and_functions.R")
 
