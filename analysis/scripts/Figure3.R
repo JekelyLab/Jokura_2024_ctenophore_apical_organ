@@ -107,18 +107,21 @@ SSN_downstream <- SSN_downstream %>%
   left_join(stats_master %>% select(skid, celltype), by = "skid")
 
 
-
 # bar plot
 all_celltypes <- c("balancer", "bridge", "large_glanular_cell", "Cgroove", "dense_vesicle", "dome", 
                    "intra-multi-ciliated", "lamellate", "lithocyte", "plumose", "SSN", 
-                   "epithelial_floor")
+                   "epithelial_floor", "monociliated", "biciliated", "multiciliated", "nonciliated")
 
 label_mapping <- c(
   "balancer" = "bal", "bridge" = "brg", "large_glanular_cell" = "lgc", 
   "Cgroove" = "cg", 
   "dense_vesicle" = "dv", "dome" = "do", 
   "intra-multi-ciliated" = "imc", "lamellate" = "la", "lithocyte" = "li", 
-  "plumose" = "pl", "SSN" = "ANN", "epithelial_floor" = "ef"
+  "plumose" = "pl", "SSN" = "ANN", "epithelial_floor" = "ef",
+  "monociliated" = "1c",
+  "biciliated" = "2c",
+  "multiciliated" = "muc",
+  "nonciliated" = "noc"
 )
 
 
@@ -156,7 +159,8 @@ SSN_downstream <- stats_synapse %>%
 # plot
 plot_output_number <- 
   SSN_downstream %>%
-  filter(!celltype %in% c("monociliated", "biciliated", "multiciliated", "nonciliated", NA)) %>%
+  #filter(!celltype %in% c("monociliated", "biciliated", "multiciliated", "nonciliated", NA)) %>%
+  filter(!celltype %in% c(NA)) %>%
   ggplot(aes(x = factor(celltype, levels = all_celltypes), 
              fill = factor(SSN_source, levels = c("SSN_Q1Q2Q3Q4", "SSN_Q1Q2", "SSN_Q3Q4")))) +
   geom_bar(position = "stack", alpha = 0.75) +
@@ -202,8 +206,12 @@ ggsave(
 
 # save to source data (bar graph of outputs from SNN) -------------------------------------------------------
 
+#SSN_downstream %>%
+#  filter(!celltype %in% c("monociliated", "biciliated", "multiciliated", "nonciliated", NA)) %>%
+#  write_csv("manuscript/source_data/Figure3_source_data1.csv")
+
 SSN_downstream %>%
-  filter(!celltype %in% c("monociliated", "biciliated", "multiciliated", "nonciliated", NA)) %>%
+  filter(!celltype %in% c(NA)) %>%
   write_csv("manuscript/source_data/Figure3_source_data1.csv")
 
 # plot balancer -------------------------------------------------------------
