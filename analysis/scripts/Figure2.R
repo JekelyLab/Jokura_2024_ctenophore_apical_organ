@@ -103,27 +103,18 @@ par3d(windowRect = c(0, 0, 1200, 350))
 #plot aboral view
 plot_SSNQ1Q2Q3Q4()
 aboral()
-#rgl.snapshot("manuscript/pictures/SSN_aboral_view.png")
-
 #move to next panel in rgl window
 next3d(clear=F)
 
 #plot lateral view of Sagittal plane
 plot_SSNQ1Q2Q3Q4()
 sagittal()
-#rgl.snapshot("manuscript/pictures/SSN_sagittal_plane.png")
-
-#move to next panel in rgl window
 next3d(clear=F)
 
 #plot lateral view of Tentacular plane
 plot_SSNQ1Q2Q3Q4()
 tentacular()
-#rgl.snapshot("manuscript/pictures/SSN_tentacular_plane.png")
-
-#move to next panel in rgl window
 next3d(clear=F)
-
 
 #make a snapshot to the working directory
 rgl.snapshot("manuscript/pictures/SSN_Q1234.png")
