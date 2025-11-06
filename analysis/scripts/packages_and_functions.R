@@ -27,9 +27,9 @@ inst = lapply(pkgs, library, character.only = TRUE)
   conn_http1 = catmaid_login(conn=conn, config=httr::config(ssl_verifypeer=0, http_version=1))
 }
 
-system("git submodule init")
-system("git submodule update")
-system("cd rcatmaid_functions_library && git pull origin main && git checkout 7d228b0019b96c5031dd6f0611d6647a52d5159f")
+#system("git submodule init")
+#system("git submodule update")
+#system("cd rcatmaid_functions_library && git pull origin main && git checkout 7d228b0019b96c5031dd6f0611d6647a52d5159f")
 source("rcatmaid_functions_library/functions.R")
 
 #define some colors
