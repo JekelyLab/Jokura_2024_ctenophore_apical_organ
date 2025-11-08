@@ -157,6 +157,7 @@ label_mapping <- c(
   "gap1" = "", "gap2" = ""
 )
 
+
 # sum up categories before plotting
 SSN_downstream_counts <- SSN_downstream %>%
   filter(!is.na(celltype)) %>%
@@ -184,7 +185,7 @@ plot_output_number <- SSN_downstream_counts_gaps %>%
                   levels = c("SSN_Q1Q2Q3Q4", "SSN_Q1Q2", "SSN_Q3Q4"))
   )) +
   geom_col(position = "stack", alpha = 0.75, na.rm = TRUE) +
-  scale_x_discrete(labels = label_mapping_combined) +
+  scale_x_discrete(labels = label_mapping) +
   scale_fill_manual(
     values = c(
       "SSN_Q1Q2Q3Q4" = Okabe_Ito[5],
