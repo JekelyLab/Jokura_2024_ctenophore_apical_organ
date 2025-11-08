@@ -207,7 +207,6 @@ mito_vesicle_info <- lapply(mito_done, get_mito_pos) |>
 write.csv(mito_vesicle_info, "analysis/data/mito_vesicle_info.csv")
 
 # load of mitochondrial data csv file ------------------------------------------
-
 df <- read_csv("analysis/data/mito_vesicle_info.csv")
 
 # mitochondrial data csv file ------------------------------------------
@@ -215,24 +214,31 @@ df <- read_csv("analysis/data/mito_vesicle_info.csv")
 df <- df %>%
   mutate(synapse_related = ifelse(mito_type == "vesicles_syn", "mean_vesicles_syn", "mean_vesicles_no_syn"))
 
-exclude_types <- c("biciliated", "monociliated", "multiciliated", "nonciliated", "SNN", NA)
+all_celltypes <- c("balancer", "bridge", "large_glanular_cell", "Cgroove", "dense_vesicle", "dome", 
+                   "intra-multi-ciliated", "lamellate", "lithocyte", "plumose", "SSN", 
+                   "epithelial_floor")
 
-df <- df %>%
-  filter(!(celltype %in% exclude_types))
+cellgroups <- c("monociliated", "biciliated", "multiciliated", "nonciliated")
 
 rename_map <- c(
-  "balancer" = "bal", 
-  "bridge" = "brg", 
-  "large_granular_cell" = "lgc", 
+  "balancer" = "bal",
+  "bridge" = "brg",
+  "large_glanular_cell" = "lgc", 
   "Cgroove" = "cg",
-  "dense_vesicle" = "dv", 
+  "dense_vesicle" = "dv",
   "dome" = "do", 
-  "intra-multi-ciliated" = "imc", 
-  "lamellate" = "la", 
+  "intra-multi-ciliated" = "imc",
+  "lamellate" = "la",
   "lithocyte" = "li", 
-  "plumose" = "pl", 
-  "SSN" = "ANN", 
-  "epithelial_floor" = "ef"
+  "plumose" = "pl",
+  "SSN" = "ANN",
+  "epithelial_floor" = "ef",
+  "gap1" = "",
+  "gap2" = "",
+  "nonciliated" = "noc",
+  "monociliated" = "1c",
+  "biciliated" = "2c",
+  "multiciliated" = "muc"
 )
 
 df <- df %>%
@@ -257,26 +263,35 @@ mean_summary <- summary_df %>%
   pivot_longer(cols = c(mean_vesicles_syn, mean_vesicles_no_syn), names_to = "characteristic", values_to = "value")
 
 
-# Align the number of cells (n) of each celltype with celltype_order
-celltype_order <- c("bal", "brg", "lgc", "cg", "dv", "do", "imc", "la", "li", "pl", "ANN", "ef")
+#celltype_order <- c(all_celltypes, "gap1", "gap2", cellgroups)
+celltype_order <- c("bal", "brg", "lgc", "cg", "dv", "do", "imc", "la", "li", "pl", "ANN", "ef", "gap1", "gap2", "noc", "1c", "2c", "muc")
 
 n_counts <- summary_df %>%
-  group_by(celltype) %>%
+  filter(!is.na(celltype)) %>%  group_by(celltype) %>%
   summarise(n = n()) %>%
   arrange(factor(celltype, levels = celltype_order))
 
 n_labels <- paste0(n_counts$celltype, " (", n_counts$n, ")")
 
 mean_summary$celltype <- factor(mean_summary$celltype, levels = celltype_order)
+mean_summary <- mean_summary %>% filter(!is.na(celltype))
 summary_df$celltype <- factor(summary_df$celltype, levels = celltype_order)
+summary_df <- summary_df %>% filter(!is.na(celltype))
 
+
+mean_summary_gaps <- mean_summary %>%
+  complete(
+    celltype = factor(celltype_order, levels = celltype_order),
+    characteristic = c("mean_vesicles_syn", "mean_vesicles_no_syn"),
+    fill = list(n = 0)
+  )
 
 # plot Average number of mitochondria per cell -----------------------------------------------------------
 
 plot_mito_stats <- 
   ggplot() +
-  geom_bar(data = mean_summary, aes(
-    x = celltype, 
+  geom_bar(data = mean_summary_gaps, aes(
+    x = factor(celltype, celltype_order),
     y = value, 
     fill = factor(characteristic, 
                   levels = c("mean_vesicles_syn", "mean_vesicles_no_syn"))), 
@@ -292,7 +307,7 @@ plot_mito_stats <-
     labels = c("mean_vesicles_syn" = "mitochondria with synapses", 
                "mean_vesicles_no_syn" = "mitochondria not forming synapses")) +
   theme_bw() +
-#  scale_x_discrete(labels = n_labels) +
+  scale_x_discrete(labels = rename_map) +
   theme(
     axis.line = element_blank(),
     panel.grid.major = element_blank(),
@@ -309,7 +324,10 @@ plot_mito_stats <-
     text = element_text(size = 15)
   ) +
   ylab("Mean mitochondria count per cell") +
-  xlab("Cell types")
+  xlab("Cell types") +
+  geom_vline(xintercept = length(all_celltypes) + 1.5, linetype = "dashed", color = "gray50")
+
+plot_mito_stats
 
 ggsave("manuscript/pictures/plot_mito_stats.png", 
        plot = plot_mito_stats,
