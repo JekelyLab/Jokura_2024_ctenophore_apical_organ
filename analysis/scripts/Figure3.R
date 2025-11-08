@@ -110,20 +110,9 @@ SSN_downstream <- SSN_downstream %>%
 # bar plot
 all_celltypes <- c("balancer", "bridge", "large_glanular_cell", "Cgroove", "dense_vesicle", "dome", 
                    "intra-multi-ciliated", "lamellate", "lithocyte", "plumose", "SSN", 
-                   "epithelial_floor", "monociliated", "biciliated", "multiciliated", "nonciliated")
+                   "epithelial_floor")
 
-label_mapping <- c(
-  "balancer" = "bal", "bridge" = "brg", "large_glanular_cell" = "lgc", 
-  "Cgroove" = "cg", 
-  "dense_vesicle" = "dv", "dome" = "do", 
-  "intra-multi-ciliated" = "imc", "lamellate" = "la", "lithocyte" = "li", 
-  "plumose" = "pl", "SSN" = "ANN", "epithelial_floor" = "ef",
-  "monociliated" = "1c",
-  "biciliated" = "2c",
-  "multiciliated" = "muc",
-  "nonciliated" = "noc"
-)
-
+cellgroups <- c("monociliated", "biciliated", "multiciliated", "nonciliated")
 
 # pre-synapse (take output-side connector)
 syn_out_SSN_Q1Q2 <- stats_synapse %>%
@@ -155,49 +144,83 @@ SSN_downstream <- stats_synapse %>%
   left_join(stats_master %>% select(skid, celltype), by = "skid")
 
 
+# define combined x-axis with explicit gap placeholder(s)
+x_levels <- c(all_celltypes, "gap1", "gap2", cellgroups)
 
-# plot
-plot_output_number <- 
-  SSN_downstream %>%
-  #filter(!celltype %in% c("monociliated", "biciliated", "multiciliated", "nonciliated", NA)) %>%
-  filter(!celltype %in% c(NA)) %>%
-  ggplot(aes(x = factor(celltype, levels = all_celltypes), 
-             fill = factor(SSN_source, levels = c("SSN_Q1Q2Q3Q4", "SSN_Q1Q2", "SSN_Q3Q4")))) +
-  geom_bar(position = "stack", alpha = 0.75) +
-  theme_minimal() +
-  labs(
-    x = "Postsynaptic cell types",
-    y = "# of synapses from ANNs",
-    fill = NULL  
-  ) +
-  theme(
-    axis.text.x = element_text(size = 17, angle = -70, vjust = 0.5, hjust = 0, margin = margin(t = -7)),
-    axis.text.y = element_text(size = 17),
-    axis.title = element_text(size = 17),
-    panel.grid.major = element_blank(),
-    panel.grid.minor = element_blank(),
-    legend.text = element_text(size = 13)
-  ) +
-  scale_x_discrete(limits = all_celltypes, labels = label_mapping) +
+# label mapping (including gaps)
+label_mapping <- c(
+  "balancer" = "bal", "bridge" = "brg", "large_glanular_cell" = "lgc", 
+  "Cgroove" = "cg", "dense_vesicle" = "dv", "dome" = "do", 
+  "intra-multi-ciliated" = "imc", "lamellate" = "la", "lithocyte" = "li", 
+  "plumose" = "pl", "SSN" = "ANN", "epithelial_floor" = "ef",
+  "nonciliated" = "noc", "monociliated" = "1c", "biciliated" = "2c", "multiciliated" = "muc",
+  "gap1" = "", "gap2" = ""
+)
+
+# sum up categories before plotting
+SSN_downstream_counts <- SSN_downstream %>%
+  filter(!is.na(celltype)) %>%
+  mutate(
+    # assign to ordered factor *before* summarizing
+    celltype = factor(celltype, levels = x_levels)
+  ) %>%
+  group_by(celltype, SSN_source) %>%
+  summarise(n = n(), .groups = "drop")
+
+# add stuff with zero count and gaps
+SSN_downstream_counts_gaps <- SSN_downstream_counts %>%
+  complete(
+    celltype = factor(x_levels, levels = x_levels),
+    SSN_source = c("SSN_Q1Q2Q3Q4", "SSN_Q1Q2", "SSN_Q3Q4"),
+    fill = list(n = 0)
+  )
+
+
+plot_output_number <- SSN_downstream_counts_gaps %>%
+  ggplot(aes(
+    x = celltype,
+    y = n,
+    fill = factor(SSN_source,
+                  levels = c("SSN_Q1Q2Q3Q4", "SSN_Q1Q2", "SSN_Q3Q4"))
+  )) +
+  geom_col(position = "stack", alpha = 0.75, na.rm = TRUE) +
+  scale_x_discrete(labels = label_mapping_combined) +
   scale_fill_manual(
     values = c(
-      "SSN_Q1Q2Q3Q4" = Okabe_Ito[5],   
+      "SSN_Q1Q2Q3Q4" = Okabe_Ito[5],
       "SSN_Q1Q2" = Okabe_Ito[6],
       "SSN_Q3Q4" = Okabe_Ito[7]
     ),
     labels = c(
-      "SSN_Q1Q2Q3Q4" = "ANN Q1-4",
-      "SSN_Q1Q2" = "ANN Q1Q2",
-      "SSN_Q3Q4" = "ANN Q3Q4"
-    )
-  )
+      "SSN_Q1Q2Q3Q4" = "ANN Q1–4",
+      "SSN_Q1Q2" = "ANN Q1–2",
+      "SSN_Q3Q4" = "ANN Q3–4"
+    ),
+    na.translate = FALSE
+  ) +
+  theme_minimal() +
+  labs(
+    x = "Postsynaptic cell types / groups",
+    y = "# of synapses from ANNs",
+    fill = NULL
+  ) +
+  theme(
+    axis.text.x = element_text(size = 16, angle = -70, vjust = 0.5, hjust = 0),
+    axis.text.y = element_text(size = 16),
+    axis.title = element_text(size = 17),
+    legend.text = element_text(size = 13),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()
+  ) +
+  # dashed line marking separation
+  geom_vline(xintercept = length(all_celltypes) + 1.5, linetype = "dashed", color = "gray50")
 
 plot_output_number
 
 ggsave(
   filename = "manuscript/pictures/output_from_SSNs.png",
   plot = plot_output_number,
-  width = 2585,
+  width = 2700,
   height = 1100,
   units = "px",
   dpi = 300,
