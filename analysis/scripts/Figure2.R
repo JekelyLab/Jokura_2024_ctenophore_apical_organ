@@ -218,7 +218,7 @@ all_celltypes <- c("balancer", "bridge", "large_glanular_cell", "Cgroove", "dens
                    "intra-multi-ciliated", "lamellate", "lithocyte", "plumose", "SSN", 
                    "epithelial_floor")
 
-cellgroups <- c("monociliated", "biciliated", "multiciliated", "nonciliated")
+cellgroups <- c("nonciliated", "monociliated", "biciliated", "multiciliated")
 
 rename_map <- c(
   "balancer" = "bal",
@@ -324,7 +324,7 @@ plot_mito_stats <-
     text = element_text(size = 15)
   ) +
   ylab("Mean mitochondria count per cell") +
-  xlab("Cell types") +
+  xlab("Cell types / groups") +
   geom_vline(xintercept = length(all_celltypes) + 1.5, linetype = "dashed", color = "gray50")
 
 plot_mito_stats
@@ -411,14 +411,12 @@ par3d(windowRect = c(0, 0, 1200, 350))
 #plot aboral view
 plot_mito_SSN()
 aboral()
-
 #move to next panel in rgl window
 next3d(clear=F)
 
 #plot sagittal view
 plot_mito_SSN()
 sagittal()
-
 #move to next panel in rgl window
 next3d(clear=F)
 
@@ -515,6 +513,7 @@ plot_SSN <- function() {
   
   # plot synapses
   
+  
   pos_big_to_small <- syn_big_to_small %>%
     select(x, y, z)
   plot3d(pos_big_to_small,
@@ -558,7 +557,6 @@ par3d(windowRect = c(0, 0, 1200, 350))
 plot_SSN()
 aboral()
 #rgl.snapshot("manuscript/pictures/balancer_aboral_view.png")
-
 #move to next panel in rgl window
 next3d(clear=F)
 
@@ -566,7 +564,6 @@ next3d(clear=F)
 plot_SSN()
 sagittal()
 #rgl.snapshot("manuscript/pictures/balancer_sagittal_plane.png")
-
 #move to next panel in rgl window
 next3d(clear=F)
 

@@ -1,4 +1,8 @@
 celltype,characteristic,value
+1c,mean_vesicles_syn,0
+1c,mean_vesicles_no_syn,6.4
+2c,mean_vesicles_syn,0.1
+2c,mean_vesicles_no_syn,5.5
 ANN,mean_vesicles_syn,116.66666666666667
 ANN,mean_vesicles_no_syn,42.333333333333336
 bal,mean_vesicles_syn,0
@@ -17,9 +21,11 @@ imc,mean_vesicles_syn,0
 imc,mean_vesicles_no_syn,16.333333333333332
 la,mean_vesicles_syn,0
 la,mean_vesicles_no_syn,17
-lgc,mean_vesicles_syn,0
-lgc,mean_vesicles_no_syn,4
 li,mean_vesicles_syn,0
 li,mean_vesicles_no_syn,36
+muc,mean_vesicles_syn,0
+muc,mean_vesicles_no_syn,6.25
+noc,mean_vesicles_syn,0
+noc,mean_vesicles_no_syn,9.666666666666666
 pl,mean_vesicles_syn,0
 pl,mean_vesicles_no_syn,8

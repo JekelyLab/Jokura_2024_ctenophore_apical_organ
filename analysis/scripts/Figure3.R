@@ -112,7 +112,7 @@ all_celltypes <- c("balancer", "bridge", "large_glanular_cell", "Cgroove", "dens
                    "intra-multi-ciliated", "lamellate", "lithocyte", "plumose", "SSN", 
                    "epithelial_floor")
 
-cellgroups <- c("monociliated", "biciliated", "multiciliated", "nonciliated")
+cellgroups <- c("nonciliated", "monociliated", "biciliated", "multiciliated")
 
 # pre-synapse (take output-side connector)
 syn_out_SSN_Q1Q2 <- stats_synapse %>%
@@ -289,16 +289,12 @@ par3d(windowRect = c(0, 0, 1200, 350))
 # plot aboral view
 plot_balancer()
 aboral()
-
-
 # move to next panel in rgl window
 next3d(clear = F)
 
 # plot lateral view of Sagittal plane
 plot_balancer()
 sagittal()
-
-
 # move to next panel in rgl window
 next3d(clear = F)
 
@@ -353,14 +349,12 @@ par3d(windowRect = c(0, 0, 1200, 350))
 # plot aboral view
 plot_bridge()
 aboral()
-
 # move to next panel in rgl window
 next3d(clear = F)
 
 # plot lateral view of Sagittal plane
 plot_bridge()
 sagittal()
-
 # move to next panel in rgl window
 next3d(clear = F)
 
@@ -407,7 +401,6 @@ plot_bridge_and_balancer <- function() {
   par3d(zoom = 0.61)
 }
 
-
 close3d()
 
 # 3d plotting of cells
@@ -419,14 +412,12 @@ par3d(windowRect = c(0, 0, 1200, 350))
 # plot aboral view
 plot_bridge_and_balancer()
 aboral()
-
 # move to next panel in rgl window
 next3d(clear = F)
 
 # plot lateral view of Sagittal plane
 plot_bridge_and_balancer()
 sagittal()
-
 # move to next panel in rgl window
 next3d(clear = F)
 
@@ -456,7 +447,6 @@ pos_ves_no_syn <- mito_vesicle_info |>
   filter(celltype == "bridge") |>
   filter(mito_type != "vesicles_syn") |>
   select(x, y, z)
-
 
 plot_mito_bridge <- function() {
   plot3d(bridge_Q1Q2,
@@ -503,14 +493,12 @@ par3d(windowRect = c(0, 0, 1200, 350))
 #plot aboral view
 plot_mito_bridge()
 aboral()
-
 #move to next panel in rgl window
 next3d(clear=F)
 
 #plot sagittal view
 plot_mito_bridge()
 sagittal()
-
 #move to next panel in rgl window
 next3d(clear=F)
 
@@ -648,14 +636,12 @@ par3d(windowRect = c(0, 0, 1200, 350))
 #plot aboral view
 plot_SNN_to_balancer()
 aboral()
-
 #move to next panel in rgl window
 next3d(clear=F)
 
 #plot lateral view of Sagittal plane
 plot_SNN_to_balancer()
 sagittal()
-
 next3d(clear=F)
 
 #plot lateral view of Tentacular plane
@@ -731,7 +717,6 @@ par3d(windowRect = c(0, 0, 1200, 350))
 #plot aboral view
 plot_reciprocal_SSN_syn()
 aboral()
-
 next3d(clear=F)
 
 #plot lateral view of Sagittal plane
@@ -739,12 +724,10 @@ plot_reciprocal_SSN_syn()
 sagittal()
 next3d(clear=F)
 
-
 #plot lateral view of Tentacular plane
 plot_reciprocal_SSN_syn()
 tentacular()
 next3d(clear=F)
-
 
 #make a snapshot to the working directory
 rgl.snapshot("manuscript/pictures/SSN_prepost_synapse_bridge.png")
@@ -976,5 +959,3 @@ ggsave("manuscript/figures/Figure3.png", limitsize = FALSE,
 
 ggsave("manuscript/figures/Figure3.pdf", limitsize = FALSE, 
        units = c("px"), Figure3, width = 3000, height = 2100) 
-
-
