@@ -37,7 +37,10 @@ with_soma <- read_smooth_neuron(skids_soma_AO)
 
 celltype_cells <- list()
 for (celltype in celltypes_short) {
-  nneuron <- read_smooth_neuron(paste("celltype:", celltype, sep=""))
+  celltype_skids <- intersect(catmaid_skids(paste("celltype:", celltype, sep = ""), pid = pid), skids_soma_AO)
+  nneuron <- read.neurons.catmaid(celltype_skids, pid = pid)
+  nneuron <- lapply(nneuron, smooth_neuron, sigma=1000)
+  nneuron <- as.neuronlist(nneuron)
   #assign(celltype, nneuron, envir = .GlobalEnv)
   celltype_cells[[celltype]]=nneuron
 }
@@ -261,6 +264,3 @@ ggsave("manuscript/figures/Figure1_Supplement2.png", limitsize = FALSE,
 
 ggsave("manuscript/figures/Figure1_Supplement2.pdf", limitsize = FALSE, 
        units = c("px"), Fig1_Sup2, width = 1200, height = 500) 
-
-
-
