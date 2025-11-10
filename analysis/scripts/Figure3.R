@@ -108,7 +108,7 @@ SSN_downstream <- SSN_downstream %>%
 
 
 # bar plot
-all_celltypes <- c("balancer", "bridge", "large_glanular_cell", "Cgroove", "dense_vesicle", "dome", 
+all_celltypes <- c("balancer", "bridge", "large_granular_cell", "Cgroove", "dense_vesicle", "dome", 
                    "intra-multi-ciliated", "lamellate", "lithocyte", "plumose", "SSN", 
                    "epithelial_floor")
 
@@ -149,7 +149,7 @@ x_levels <- c(all_celltypes, "gap1", "gap2", cellgroups)
 
 # label mapping (including gaps)
 label_mapping <- c(
-  "balancer" = "bal", "bridge" = "brg", "large_glanular_cell" = "lgc", 
+  "balancer" = "bal", "bridge" = "brg", "large_granular_cell" = "lgc", 
   "Cgroove" = "cg", "dense_vesicle" = "dv", "dome" = "do", 
   "intra-multi-ciliated" = "imc", "lamellate" = "la", "lithocyte" = "li", 
   "plumose" = "pl", "SSN" = "ANN", "epithelial_floor" = "ef",

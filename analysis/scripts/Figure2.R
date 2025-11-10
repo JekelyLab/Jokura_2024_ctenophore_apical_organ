@@ -214,7 +214,7 @@ df <- read_csv("analysis/data/mito_vesicle_info.csv")
 df <- df %>%
   mutate(synapse_related = ifelse(mito_type == "vesicles_syn", "mean_vesicles_syn", "mean_vesicles_no_syn"))
 
-all_celltypes <- c("balancer", "bridge", "large_glanular_cell", "Cgroove", "dense_vesicle", "dome", 
+all_celltypes <- c("balancer", "bridge", "large_granular_cell", "Cgroove", "dense_vesicle", "dome", 
                    "intra-multi-ciliated", "lamellate", "lithocyte", "plumose", "SSN", 
                    "epithelial_floor")
 
@@ -223,7 +223,7 @@ cellgroups <- c("nonciliated", "monociliated", "biciliated", "multiciliated")
 rename_map <- c(
   "balancer" = "bal",
   "bridge" = "brg",
-  "large_glanular_cell" = "lgc", 
+  "large_granular_cell" = "lgc", 
   "Cgroove" = "cg",
   "dense_vesicle" = "dv",
   "dome" = "do", 
