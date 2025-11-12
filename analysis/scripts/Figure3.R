@@ -161,26 +161,22 @@ label_mapping <- c(
 # sum up categories before plotting
 SSN_downstream_counts <- SSN_downstream %>%
   filter(!is.na(celltype)) %>%
-  mutate(
-    # assign to ordered factor *before* summarizing
-    celltype = factor(celltype, levels = x_levels)
-  ) %>%
-  group_by(celltype, SSN_source) %>%
-  summarise(n = n(), .groups = "drop")
+  mutate(celltype = factor(celltype, levels = x_levels)) %>%
+  group_by(celltype, SSN_source, skid) %>% 
+  summarise(n_synapses = n(), .groups = "drop_last") %>%  # number of synapses per neuron
+  summarise(mean_synapses = mean(n_synapses), n_skids = n(), .groups = "drop")
 
-# add stuff with zero count and gaps
 SSN_downstream_counts_gaps <- SSN_downstream_counts %>%
   complete(
     celltype = factor(x_levels, levels = x_levels),
     SSN_source = c("SSN_Q1Q2Q3Q4", "SSN_Q1Q2", "SSN_Q3Q4"),
-    fill = list(n = 0)
+    fill = list(mean_synapses = 0)
   )
 
-
-plot_output_number <- SSN_downstream_counts_gaps %>%
+plot_output_mean <- SSN_downstream_counts_gaps %>%
   ggplot(aes(
     x = celltype,
-    y = n,
+    y = mean_synapses,
     fill = factor(SSN_source,
                   levels = c("SSN_Q1Q2Q3Q4", "SSN_Q1Q2", "SSN_Q3Q4"))
   )) +
@@ -202,7 +198,7 @@ plot_output_number <- SSN_downstream_counts_gaps %>%
   theme_minimal() +
   labs(
     x = "Postsynaptic cell types / groups",
-    y = "# of synapses from ANNs",
+    y = "Mean # of syn per cell",
     fill = NULL
   ) +
   theme(
@@ -213,14 +209,14 @@ plot_output_number <- SSN_downstream_counts_gaps %>%
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank()
   ) +
-  # dashed line marking separation
   geom_vline(xintercept = length(all_celltypes) + 1.5, linetype = "dashed", color = "gray50")
 
-plot_output_number
+plot_output_mean
+
 
 ggsave(
   filename = "manuscript/pictures/output_from_SSNs.png",
-  plot = plot_output_number,
+  plot = plot_output_mean,
   width = 2700,
   height = 1100,
   units = "px",
