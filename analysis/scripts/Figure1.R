@@ -11,6 +11,13 @@ statolith <- read_smooth_neuron("statolith")
 
 skids_outside <- catmaid_skids("outside", pid = pid)
 
+skids_soma <- catmaid_skids("with_soma", pid = pid)
+
+skids_AO <- setdiff(skids_soma, skids_outside)
+
+n_skids <- length(skids_soma)
+n_skids_AO <- length(skids_AO)
+
 skids_Q1_inAO <- setdiff(catmaid_skids("Q1", pid = pid), skids_outside)
 Q1 <- if (length(skids_Q1_inAO)) read_smooth_neuron(skids_Q1_inAO) else NULL
 
@@ -56,9 +63,9 @@ close3d()
 
 panel_catmaid_overview <- ggdraw() + draw_image(readPNG("manuscript/pictures/overview.png")) +
   draw_label("serial EM volume", x = 0.5, y = 0.99, size = 10, fontface = "plain", hjust = 0.5) +
-  draw_label("619 sections", x = 0.025, y = 0.86, color = "black", size = 9, hjust = 0) +
-  draw_label("972 cells", x = 0.025, y = 0.8, color = "black", size = 9, hjust = 0) +
-  draw_label("898 AO cells", x = 0.025, y = 0.74, color = "black", size = 9, hjust = 0) +
+  draw_label("620 sections", x = 0.025, y = 0.86, color = "black", size = 9, hjust = 0) +
+  draw_label(paste(n_skids, "cells"), x = 0.025, y = 0.8, color = "black", size = 9, hjust = 0) +
+  draw_label(paste(n_skids_AO, "AO cells"), x = 0.025, y = 0.74, color = "black", size = 9, hjust = 0) +
   draw_line(x = c(0.75, 0.9), y = c(0.05, 0.05), color = "black", size = 1) +
   draw_label(expression(paste("10 ", mu, " m")), x = 0.825, y = 0.09, color = "black", size = 8, hjust = 0.5)
 
