@@ -13,7 +13,7 @@ dir.create(file.path(mainDir, "videoframes"), showWarnings = FALSE)
 #with_soma <- read_smooth_neuron("with_soma")
 bounding_dots <- read.neurons.catmaid("bounding dot", pid = pid)
 balancer <- read_smooth_neuron("celltype:balancer")
-lithocyte <- read_smooth_neuron("celltype:lithocyte")
+statolith <- read_smooth_neuron("statolith") # these are only the lithocytes on the balancer
 bridge <- read_smooth_neuron("celltype:bridge")
 dome <- read_smooth_neuron("celltype:dome")
 
@@ -67,257 +67,229 @@ remove_text <- function(){
   rgl.pop(id = as_tibble(ids3d()) |> filter(type =="text") |> pull(id))
 }
 
-plot_balancer <- function(){
-  plot3d(
-    balancer_Q1,
-    soma = T, lwd = 1.5, add = T,
-    alpha = 0.6, col = Okabe_Ito[1]
-  )
-  plot3d(
-    balancer_Q2,
-    soma = T, lwd = 1.5, add = T,
-    alpha = 0.6, col = Okabe_Ito[2]
-  )
-  plot3d(
-    balancer_Q3,
-    soma = T, lwd = 1.5, add = T,
-    alpha = 0.6, col = Okabe_Ito[6]
-  )
-  plot3d(
-    balancer_Q4,
-    soma = T, lwd = 1.5, add = T,
-    alpha = 0.6, col = Okabe_Ito[7]
-  )
-  plot3d(
-    bounding_dots,
-    soma = F, lwd = 0, add = T,
-    alpha = 0, col = "white"
-  )
-}
 
-plot_lithocyte <- function(){
-  plot3d(
-    lithocyte,
-    soma = T, lwd = 1.5, add = T,
-    alpha = 0.9, col = Okabe_Ito[8]
-  )
-}
-
-plot_bridge <- function(){
-  plot3d(
-    bridge_Q1Q2,
-    soma = T, lwd = 3, add = T,
-    alpha = 0.8, col = Okabe_Ito[2]
-  )
-  plot3d(
-    bridge_Q3Q4,
-    soma = T, lwd = 3, add = T,
-    alpha = 0.8, col = Okabe_Ito[7]
-  )
-}
 
 # plot cells -------------------------------------------------------------------
 
 nopen3d() # opens a pannable 3d window
-mfrow3d(1, 2)  #defines the two scenes
-par3d(windowRect = c(0, 0, 1600, 800)) #to define the size of the rgl window
-par3d(zoom=0.9)
-#nview3d("left", extramat = rotationMatrix(300, 4200, 1800, 800))
-#nview3d("ventral", extramat=rotationMatrix(1.2, 0, 0, 1))
-nview3d("left", extramat = rotationMatrix(-1.7, 190, -120, -140))
-
-
-plot_balancer()
-add_outline()
-plot3d(
-    lithocyte,
-    soma = T, lwd = 1, add = T,
-    alpha = 0, col = "white"
-  )
-par3d(zoom=0.6)
-texts3d(
-  14000, 32000, 1000, text = "balancer", col='black', cex = 2
-  )
-
-
-#go to next scene
-next3d(clear=FALSE)
-nview3d("posterior", 
-        extramat = rotationMatrix(2.54, 0.1, 0, 1)
-        )
-
-plot_balancer()
-add_outline()
-#add
-plot3d(
-    lithocyte,
-    soma = T, lwd = 1, add = T,
-    alpha = 0, col = "white"
-  )
-
+par3d(windowRect = c(0, 0, 800, 800)) #to define the size of the rgl window
 par3d(zoom=0.7)
+
+# get views we want for later
+nview3d("anterior", extramat = rotationMatrix(2.54, 0.1, 0, 1))
+um1 <- par3d("userMatrix")
+
+nview3d("left", extramat = rotationMatrix(-1.7, 190, -120, -140))
+um2 <- par3d("userMatrix")
+
+
+# start actual video
+
+#nview3d("posterior", extramat = rotationMatrix(2.54, 0.1, 0, 1)
+nview3d("anterior", extramat = rotationMatrix(2.54, 0.1, 0, 1))
+
+add_outline()
+
+plot3d(
+  bounding_dots,
+  soma = F, lwd = 0, add = T,
+  alpha = 0, col = "white"
+)
+
+plot3d(
+  balancer_Q1,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.6, col = Okabe_Ito[1]
+)
+plot3d(
+  balancer_Q2,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.6, col = Okabe_Ito[2]
+)
+plot3d(
+  balancer_Q3,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.6, col = Okabe_Ito[6]
+)
+plot3d(
+  balancer_Q4,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.6, col = Okabe_Ito[7]
+)
+
+
+#texts3d(
+#  14000, 32000, 1000, text = "balancer", col='black', cex = 2
+#  )
+
+#texts3d(
+#  7000, 55000, 30000, text = "balancer", col='black', cex = 2
+#)
+
+texts3d(
+  5000, 58000, 1000, text = "balancer", col='black', cex = 2
+)
+
 texts3d(11000, 52000, 23000, text = "Q1", cex = 2)
 texts3d(22000, 30000, 23000, text = "Q2", cex = 2)
-texts3d(30000, 68000, 23000, text = "Q3", cex = 2)
-texts3d(42000, 43000, 23000, text = "Q4", cex = 2)
+texts3d(31000, 67000, 23000, text = "Q3", cex = 2)
+texts3d(44000, 45000, 23000, text = "Q4", cex = 2)
+
+# plot invisible lithocyte so that the view doesn't move from this frame to the next
+plot3d(
+  statolith,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0, col = "grey"
+)
 
 for(i in 101:120){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
-#remove lithocytes
-id_litho = tail(as_tibble(ids3d()) |> filter(type =="spheres") |> pull(id), 8) 
-rgl.pop(id = id_litho)
 
-next3d(clear=FALSE)
-#remove text
-remove_text()
-#remove lithocytes
-id_litho = tail(as_tibble(ids3d()) |> filter(type =="spheres") |> pull(id), 8) 
-rgl.pop(id = id_litho)
+# remove all to recolor
+clear3d()
 
-#plot lithocytes ---------
+add_outline()
 
-plot_lithocyte()
-texts3d(14000, 32000, 1000, text = "lithocytes", cex = 2)
-next3d(clear=FALSE)
-plot_lithocyte()
 
-for(i in 121:140){
+plot3d(
+  bounding_dots,
+  soma = F, lwd = 0, add = T,
+  alpha = 0, col = "white"
+)
+
+
+plot3d(
+  balancer,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.2, col = Okabe_Ito[1]
+)
+
+plot3d(
+  statolith,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0, col = "grey"
+)
+
+
+for(i in 121:125){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
-next3d(clear=FALSE)
+n_stat= length(statolith)
+id_stat = tail(as_tibble(ids3d()) |> filter(type =="spheres" | type == "linestrip") |> pull(id), n_stat*2) 
+rgl.pop(id = id_stat)
+
+plot3d(
+  statolith,
+  soma = T, lwd = 1.5, add = T,
+  alpha = 0.9, col = "grey"
+)
+texts3d(5000, 58000, 1000, text = "statoliths", cex = 2)
+
+for(i in 126:140){
+  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
+}
+
 #remove text
 remove_text()
 
 #plot bridge -----------
 
-plot_bridge()
-
 texts3d(
-  15000, 32000, 1000, text = "bridge", col='black', cex = 2
+  5000, 58000, 1000, text = "bridge", col='black', cex = 2
 )
-next3d(clear=FALSE)
-plot_bridge()
+
+plot3d(
+  bridge_Q1Q2,
+  soma = T, lwd = 3, add = T,
+  alpha = 0.8, col = Okabe_Ito[2]
+)
+plot3d(
+  bridge_Q3Q4,
+  soma = T, lwd = 3, add = T,
+  alpha = 0.8, col = Okabe_Ito[3]
+)
 
 for(i in 141:160){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
-next3d(clear=FALSE)
-#remove text
-remove_text()
 
-#plot dome -------------------
-
+n_bridge= length(bridge)
+id_bridge = tail(as_tibble(ids3d()) |> filter(type =="spheres" | type == "linestrip") |> pull(id), n_bridge*2) 
+rgl.pop(id = id_bridge)
 
 plot3d(
-  dome, soma = T, lwd = 1, add = T,
-  alpha = 1, col = "grey90"
-)
-texts3d(
-  14000, 32000, 1000, text = "dome cells", col='black', cex = 2
+  bridge,
+  soma = T, lwd = 3, add = T,
+  alpha = 0.2, col = Okabe_Ito[2]
 )
 
-next3d(clear=FALSE)
-plot3d(
-  dome, soma = T, lwd = 1, add = T,
-  alpha = 1, col = "grey90"
-)
-
-for(i in 161:180){
-  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
-}
-
-next3d(clear=FALSE)
 #remove text
 remove_text()
 
 
 #plot nerve net ---------------
 
-remove_outline()
 
 plot_multinucleated_cell(
-  SSN_Q1Q2, lwd = 2, alpha = 1, col = Okabe_Ito[6]
+  SSN_Q1Q2, lwd = 2, alpha = 1, col = Okabe_Ito[3]
   )
 plot_multinucleated_cell(
-  SSN_Q3Q4, lwd = 2, alpha = 1, col = Okabe_Ito[7]
+  SSN_Q3Q4, lwd = 2, alpha = 1, col = Okabe_Ito[5]
   )
 
-add_outline()
 
-next3d(clear=FALSE)
-
-plot_multinucleated_cell(
-  SSN_Q1Q2, lwd = 2, alpha = 1, col = Okabe_Ito[6]
-)
-plot_multinucleated_cell(
-  SSN_Q3Q4, lwd = 2, alpha = 1, col = Okabe_Ito[7]
-)
-
-add_outline()
+#texts3d(
+#  15000, 32000, 1000, text = "nerve net Q1Q2, Q3Q4", col='black', cex = 2
+#)
 texts3d(
-  15000, 32000, 1000, text = "nerve net Q1Q2, Q3Q4", col='black', cex = 2
+  5000, 58000, 1000, text = "nerve net Q1Q2, Q3Q4", col='black', cex = 2
 )
-for(i in 181:200){
+
+for(i in 161:180){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
 #plot large nerve net -----------
-remove_outline()
-next3d(clear=FALSE)
-plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
-                         lwd = 3, alpha = 0.6, col = Okabe_Ito[5])
-remove_text()
-texts3d(
-  15000, 32000, 1000, text = "nerve net Q1-4", col='black', cex = 2
-)
-add_outline()
-next3d(clear=FALSE)
-plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
-                         lwd = 4, alpha = 0.6, col = Okabe_Ito[5])
-add_outline()
 
-for(i in 201:220){
+plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
+                         lwd = 3, alpha = 0.6, col = Okabe_Ito[7])
+remove_text()
+#texts3d(
+#  15000, 32000, 1000, text = "nerve net Q1-4", col='black', cex = 2
+#)
+texts3d(
+  5000, 58000, 1000, text = "nerve net Q1-4", col='black', cex = 2
+)
+
+for(i in 181:200){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
-# input from SSN to balancer -----------------
-next3d(clear=FALSE)
-
-plot3d(
-  postsyn_balancer$x, 
-  postsyn_balancer$y, 
-  postsyn_balancer$z, 
-  size = 0.6, alpha = 1, col = "red", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
-)
-
-
-next3d(clear=FALSE)
-
-# input from SSN to balancer
-plot3d(
-  postsyn_balancer$x, 
-  postsyn_balancer$y, 
-  postsyn_balancer$z, 
-  size = 0.6, alpha = 1, col = "red", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
-)
-
-next3d(clear=FALSE)
 remove_text()
 
-texts3d(
-  15000, 32000, 1000, text = "synapses to balancer", col='black', cex = 2
+# input from SSN to balancer -----------------
+
+plot3d(
+  postsyn_balancer$x, 
+  postsyn_balancer$y, 
+  postsyn_balancer$z, 
+  size = 0.6, alpha = 1, col = "red", 
+  add = TRUE,
+  point_antialias = TRUE,
+  type = "s"
 )
 
-for(i in 221:240){
+#texts3d(
+#  15000, 32000, 1000, text = "synapses to balancer", col='black', cex = 2
+#)
+texts3d(
+  5000, 58000, 1000, text = "synapses to balancer", col='black', cex = 2
+)
+
+for(i in 201:220){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
@@ -347,70 +319,59 @@ plot3d(
 )
 
 texts3d(
-  15000, 32000, -1000, text = "synapses to bridge", col='#A52A2A', cex = 2
+  4500, 60000, 1000, text = "synapses to bridge", col='#A52A2A', cex = 2
 )
 texts3d(
-  15000, 32000, 1000, text = "synapses from bridge", col='black', cex = 2
+  5000, 58000, 1000, text = "synapses from bridge", col='black', cex = 2
 )
 
-next3d(clear=F)
 
-plot3d(
-  postsyn_bridge$x, 
-  postsyn_bridge$y, 
-  postsyn_bridge$z, 
-  size = 0.7, alpha = 1, col = "#A52A2A", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
-)
-
-plot3d(
-  presyn_bridge$x, 
-  presyn_bridge$y, 
-  presyn_bridge$z, 
-  size = 0.8, alpha = 1, col = "black", 
-  add = TRUE,
-  point_antialias = TRUE,
-  type = "s"
-)
-
-for(i in 241:260){
+for(i in 221:240){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
 remove_text()
 
-# get rotation matrix
-next3d(clear=F)
-remove_text()
+for(i in 241:230){
+  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
+}
 
-nview3d("left", extramat = rotationMatrix(-1.7, 190, -120, -140))
 
-um1 <- par3d()$userMatrix
-next3d(clear=F)
-#nview3d("left", extramat = rotationMatrix(300, 4200, 1800, 800))
-nview3d("posterior", 
-        extramat = rotationMatrix(2.54, 0.1, 0, 1)
-)
 
-um2 <- par3d()$userMatrix
-next3d(clear=F)
+# capture full current view
+p1 <- par3d()
+
+# insert your starting and ending matrices
+p1$userMatrix <- um1
+p2 <- p1
+p2$userMatrix <- um2
+
+# interpolate ONLY userMatrix
+ip <- par3dinterp(times=c(0,1), userMatrix=list(um1, um2))
+
+for (l in 1:90) {
+  t <- (l-1)/89
+  
+  # start from p1, but replace userMatrix with interpolated one
+  p <- p1
+  p$userMatrix <- ip(t)$userMatrix
+  
+  par3d(p)
+  
+  filename <- sprintf("./videoframes/Video1_%03d.png", l)
+  rgl.snapshot(filename)
+}
+
+
 
 rotation=300
 
 for (l in 1:90){
   #rotate in a loop (with l e.g. 1:90 for a 180 turn)
-  nview3d(userMatrix = um1 %*%rotationMatrix(pi*l/90, 0, 0, 1)
-          %*%rotationMatrix(-0.3*l/90, 0, 1, 0)
-          %*%rotationMatrix(0.2*l/90, 1, 0, 0)
-          )
-  next3d(clear=F)
   nview3d(userMatrix = um2 %*%rotationMatrix(pi*l/90, 0, 0, 1)
           %*%rotationMatrix(-0.3*l/90, 0, 1, 0)
           %*%rotationMatrix(0.2*l/90, 1, 0, 0)
-  )
-  next3d(clear=F)
+          )
   print (l)
   #save a snapshot
   filename <- paste("./videoframes/Video1_",
@@ -424,8 +385,6 @@ for (l in 1:90){
 
 #get coordinates of the actual state of the rotation --------------
 um3 <- par3d()$userMatrix
-next3d(clear=F)
-um4 <- par3d()$userMatrix
 
 # remove outline ----------
 
@@ -470,6 +429,12 @@ for (l in 1:90){
 }
 
 
+
+
+
+
+
+
 close3d()
 
 
@@ -478,7 +443,7 @@ av::av_encode_video(
   paste('videoframes/', list.files("videoframes/", '*.png'), 
         sep = ""),
   framerate = 10,
-  output = 'manuscript/videos/Video1.mp4'
+  output = 'manuscript/videos/Video1.1.mp4'
   )
 
 unlink("videoframes", recursive = T)
