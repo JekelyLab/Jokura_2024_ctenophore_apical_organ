@@ -358,7 +358,10 @@ for (l in 1:90) {
   
   par3d(p)
   
-  filename <- sprintf("./videoframes/Video1_%03d.png", l)
+  filename <- paste("./videoframes/Video1_",
+                    rotation,
+                    formatC(l, digits = 2, flag = "0"),
+                    ".png", sep = "")
   rgl.snapshot(filename)
 }
 
