@@ -67,6 +67,75 @@ remove_text <- function(){
   rgl.pop(id = as_tibble(ids3d()) |> filter(type =="text") |> pull(id))
 }
 
+draw_everything <- function() {
+  add_outline()
+  
+  plot3d(
+    bounding_dots,
+    soma = F, lwd = 0, add = T,
+    alpha = 0, col = "white"
+  )
+  
+  plot3d(
+    statolith,
+    soma = T, lwd = 1.5, add = T,
+    alpha = 1, col = "grey"
+  )
+  
+  plot3d(
+    balancer,
+    soma = T, lwd = 1.5, add = T,
+    alpha = 0.2, col = Okabe_Ito[1]
+  )
+  
+  plot3d(
+    bridge,
+    soma = T, lwd = 3, add = T,
+    alpha = 0.2, col = Okabe_Ito[2]
+  )
+  
+  plot_multinucleated_cell(
+    SSN_Q1Q2, lwd = 2, alpha = 1, col = Okabe_Ito[3]
+  )
+  plot_multinucleated_cell(
+    SSN_Q3Q4, lwd = 2, alpha = 1, col = Okabe_Ito[5]
+  )
+  
+  plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
+                           lwd = 3, alpha = 1, col = Okabe_Ito[7])
+  
+  plot3d(
+    postsyn_balancer$x, 
+    postsyn_balancer$y, 
+    postsyn_balancer$z, 
+    size = 0.6, alpha = 1, col = "red", 
+    add = TRUE,
+    point_antialias = TRUE,
+    type = "s"
+  )
+  
+  plot3d(
+    postsyn_bridge$x, 
+    postsyn_bridge$y, 
+    postsyn_bridge$z, 
+    size = 0.7, alpha = 1, col = "#A52A2A", 
+    add = TRUE,
+    point_antialias = TRUE,
+    type = "s"
+  )
+  
+  plot3d(
+    presyn_bridge$x, 
+    presyn_bridge$y, 
+    presyn_bridge$z, 
+    size = 0.8, alpha = 1, col = "black", 
+    add = TRUE,
+    point_antialias = TRUE,
+    type = "s"
+  )
+
+  
+}
 
 
 # plot cells -------------------------------------------------------------------
@@ -76,17 +145,17 @@ par3d(windowRect = c(0, 0, 800, 800)) #to define the size of the rgl window
 par3d(zoom=0.7)
 
 # get views we want for later
-nview3d("anterior", extramat = rotationMatrix(2.54, 0.1, 0, 1))
+nview3d("posterior", extramat = rotationMatrix(2.54, 0.1, 0, 1))
 um1 <- par3d("userMatrix")
 
-nview3d("left", extramat = rotationMatrix(-1.7, 190, -120, -140))
+nview3d("right", extramat = rotationMatrix(-1.7, 190, -120, -140))
 um2 <- par3d("userMatrix")
 
 
 # start actual video
 
-#nview3d("posterior", extramat = rotationMatrix(2.54, 0.1, 0, 1)
-nview3d("anterior", extramat = rotationMatrix(2.54, 0.1, 0, 1))
+nview3d("posterior", extramat = rotationMatrix(2.54, 0.1, 0, 1))
+#nview3d("anterior", extramat = rotationMatrix(2.54, 0.1, 0, 1))
 
 add_outline()
 
@@ -255,7 +324,7 @@ for(i in 161:180){
 #plot large nerve net -----------
 
 plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
-                         lwd = 3, alpha = 0.6, col = Okabe_Ito[7])
+                         lwd = 3, alpha = 1, col = Okabe_Ito[7])
 remove_text()
 #texts3d(
 #  15000, 32000, 1000, text = "nerve net Q1-4", col='black', cex = 2
@@ -346,28 +415,45 @@ p1$userMatrix <- um1
 p2 <- p1
 p2$userMatrix <- um2
 
-# interpolate ONLY userMatrix
-ip <- par3dinterp(times=c(0,1), userMatrix=list(um1, um2))
 
+ip <- par3dinterp(times = c(0, 1),
+                  userMatrix = list(um1, um2))
+
+
+rotation=300
+# redraw everything in every frame, because it flickers less
 for (l in 1:90) {
-  t <- (l-1)/89
+  nopen3d() 
+  par3d(windowRect = c(0, 0, 800, 800)) 
+  par3d(zoom=0.7)
+  draw_everything()
   
-  # start from p1, but replace userMatrix with interpolated one
-  p <- p1
-  p$userMatrix <- ip(t)$userMatrix
+  t <- l / 90
+  par3d(userMatrix = ip(t)$userMatrix)
+
+  material3d(depth_mask = FALSE)
   
-  par3d(p)
   
   filename <- paste("./videoframes/Video1_",
                     rotation,
                     formatC(l, digits = 2, flag = "0"),
                     ".png", sep = "")
+  
   rgl.snapshot(filename)
+  
+  print(l)
+  
+  close3d()
 }
 
 
+nopen3d() 
+par3d(windowRect = c(0, 0, 800, 800)) 
+par3d(userMatrix = um2)
+par3d(zoom=0.7)
+draw_everything()
 
-rotation=300
+rotation = 400
 
 for (l in 1:90){
   #rotate in a loop (with l e.g. 1:90 for a 180 turn)
@@ -399,15 +485,7 @@ plot3d(Q3, soma = TRUE, lwd = 1, add = TRUE, alpha = 0.1, col = Okabe_Ito[6])
 plot3d(Q4, soma = TRUE, lwd = 1, add = TRUE, alpha = 0.1, col = Okabe_Ito[7])
 add_outline()
 
-next3d(clear=F)
-plot3d(Q1, soma = TRUE, lwd = 1, add = TRUE, alpha = 0.1, col = Okabe_Ito[1])
-plot3d(Q2, soma = TRUE, lwd = 1, add = TRUE, alpha = 0.1, col = Okabe_Ito[2])
-plot3d(Q3, soma = TRUE, lwd = 1, add = TRUE, alpha = 0.1, col = Okabe_Ito[6])
-plot3d(Q4, soma = TRUE, lwd = 1, add = TRUE, alpha = 0.1, col = Okabe_Ito[7])
-add_outline()
-
-next3d(clear=F)
-rotation=400
+rotation=500
 
 for (l in 1:90){
   #rotate in a loop (with l e.g. 1:90 for a 180 turn)
@@ -415,12 +493,6 @@ for (l in 1:90){
           %*%rotationMatrix(-0.3*l/90, 0, 1, 0)
           %*%rotationMatrix(0.2*l/90, 1, 0, 0)
   )
-  next3d(clear=F)
-  nview3d(userMatrix = um4 %*%rotationMatrix(pi*l/90, 0, 0, 1)
-          %*%rotationMatrix(-0.3*l/90, 0, 1, 0)
-          %*%rotationMatrix(0.2*l/90, 1, 0, 0)
-  )
-  next3d(clear=F)
   print (l)
   #save a snapshot
   filename <- paste("./videoframes/Video1_",
@@ -432,12 +504,6 @@ for (l in 1:90){
 }
 
 
-
-
-
-
-
-
 close3d()
 
 
@@ -446,7 +512,7 @@ av::av_encode_video(
   paste('videoframes/', list.files("videoframes/", '*.png'), 
         sep = ""),
   framerate = 10,
-  output = 'manuscript/videos/Video1.1.mp4'
+  output = 'manuscript/videos/Video1.3.mp4'
   )
 
 unlink("videoframes", recursive = T)
