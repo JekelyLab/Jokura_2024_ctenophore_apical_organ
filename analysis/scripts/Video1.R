@@ -157,6 +157,8 @@ um2 <- par3d("userMatrix")
 nview3d("posterior", extramat = rotationMatrix(2.54, 0.1, 0, 1))
 #nview3d("anterior", extramat = rotationMatrix(2.54, 0.1, 0, 1))
 
+
+# balancers colored by quadrants -----------------------------------------------
 add_outline()
 
 plot3d(
@@ -215,18 +217,19 @@ for(i in 101:120){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
+
+# make balancers transparent ---------------------------------------------------
+
 # remove all to recolor
 clear3d()
 
 add_outline()
-
 
 plot3d(
   bounding_dots,
   soma = F, lwd = 0, add = T,
   alpha = 0, col = "white"
 )
-
 
 plot3d(
   balancer,
@@ -244,6 +247,8 @@ plot3d(
 for(i in 121:125){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
+
+# plot statolith ---------------------------------------------------------------
 
 n_stat= length(statolith)
 id_stat = tail(as_tibble(ids3d()) |> filter(type =="spheres" | type == "linestrip") |> pull(id), n_stat*2) 
@@ -263,7 +268,7 @@ for(i in 126:140){
 #remove text
 remove_text()
 
-#plot bridge -----------
+# plot bridge ------------------------------------------------------------------
 
 texts3d(
   5000, 58000, 1000, text = "bridge", col='black', cex = 2
@@ -285,9 +290,14 @@ for(i in 141:160){
 }
 
 
+# make bridge transparent ------------------------------------------------------
+# remove everything to recolor
+
 n_bridge= length(bridge)
 id_bridge = tail(as_tibble(ids3d()) |> filter(type =="spheres" | type == "linestrip") |> pull(id), n_bridge*2) 
 rgl.pop(id = id_bridge)
+
+remove_text()
 
 plot3d(
   bridge,
@@ -295,12 +305,13 @@ plot3d(
   alpha = 0.2, col = Okabe_Ito[2]
 )
 
-#remove text
-remove_text()
+
+for(i in 161:165){
+  rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
+}
 
 
-#plot nerve net ---------------
-
+# plot nerve net ---------------------------------------------------------------
 
 plot_multinucleated_cell(
   SSN_Q1Q2, lwd = 2, alpha = 1, col = Okabe_Ito[3]
@@ -309,7 +320,6 @@ plot_multinucleated_cell(
   SSN_Q3Q4, lwd = 2, alpha = 1, col = Okabe_Ito[5]
   )
 
-
 #texts3d(
 #  15000, 32000, 1000, text = "nerve net Q1Q2, Q3Q4", col='black', cex = 2
 #)
@@ -317,11 +327,11 @@ texts3d(
   5000, 58000, 1000, text = "nerve net Q1Q2, Q3Q4", col='black', cex = 2
 )
 
-for(i in 161:180){
+for(i in 166:185){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
-#plot large nerve net -----------
+# plot large nerve net -----------
 
 plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
                          lwd = 3, alpha = 1, col = Okabe_Ito[7])
@@ -333,7 +343,7 @@ texts3d(
   5000, 58000, 1000, text = "nerve net Q1-4", col='black', cex = 2
 )
 
-for(i in 181:200){
+for(i in 186:205){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
@@ -358,13 +368,13 @@ texts3d(
   5000, 58000, 1000, text = "synapses to balancer", col='black', cex = 2
 )
 
-for(i in 201:220){
+for(i in 206:225){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
 remove_text()
 
-#plot bridge synapses --------------
+# plot bridge synapses --------------
 
 # input from SSN to balancer
 plot3d(
@@ -395,13 +405,13 @@ texts3d(
 )
 
 
-for(i in 221:240){
+for(i in 226:245){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
 remove_text()
 
-for(i in 241:230){
+for(i in 245:235){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
@@ -419,6 +429,7 @@ p2$userMatrix <- um2
 ip <- par3dinterp(times = c(0, 1),
                   userMatrix = list(um1, um2))
 
+close3d()
 
 rotation=300
 # redraw everything in every frame, because it flickers less
@@ -447,15 +458,19 @@ for (l in 1:90) {
 }
 
 
-nopen3d() 
-par3d(windowRect = c(0, 0, 800, 800)) 
-par3d(userMatrix = um2)
-par3d(zoom=0.7)
-draw_everything()
+#nopen3d() 
+#par3d(windowRect = c(0, 0, 800, 800)) 
+#par3d(userMatrix = um2)
+#par3d(zoom=0.7)
+#draw_everything()
 
 rotation = 400
 
 for (l in 1:90){
+  nopen3d() 
+  par3d(windowRect = c(0, 0, 800, 800)) 
+  par3d(zoom=0.7)
+  draw_everything()
   #rotate in a loop (with l e.g. 1:90 for a 180 turn)
   nview3d(userMatrix = um2 %*%rotationMatrix(pi*l/90, 0, 0, 1)
           %*%rotationMatrix(-0.3*l/90, 0, 1, 0)
@@ -469,40 +484,8 @@ for (l in 1:90){
                     ".png", sep = "")
   rgl.snapshot(filename)
   rotation = rotation + 1 
+  close3d()
 }
-
-
-#get coordinates of the actual state of the rotation --------------
-um3 <- par3d()$userMatrix
-
-# remove outline ----------
-
-remove_outline()
-
-plot3d(Q1, soma = TRUE, lwd = 1, add = TRUE, alpha = 0.1, col = Okabe_Ito[1])
-plot3d(Q2, soma = TRUE, lwd = 1, add = TRUE, alpha = 0.1, col = Okabe_Ito[2])
-plot3d(Q3, soma = TRUE, lwd = 1, add = TRUE, alpha = 0.1, col = Okabe_Ito[6])
-plot3d(Q4, soma = TRUE, lwd = 1, add = TRUE, alpha = 0.1, col = Okabe_Ito[7])
-add_outline()
-
-rotation=500
-
-for (l in 1:90){
-  #rotate in a loop (with l e.g. 1:90 for a 180 turn)
-  nview3d(userMatrix = um3 %*%rotationMatrix(pi*l/90, 0, 0, 1)
-          %*%rotationMatrix(-0.3*l/90, 0, 1, 0)
-          %*%rotationMatrix(0.2*l/90, 1, 0, 0)
-  )
-  print (l)
-  #save a snapshot
-  filename <- paste("./videoframes/Video1_",
-                    rotation,
-                    formatC(l, digits = 2, flag = "0"),
-                    ".png", sep = "")
-  rgl.snapshot(filename)
-  rotation = rotation + 1 
-}
-
 
 close3d()
 
@@ -512,7 +495,7 @@ av::av_encode_video(
   paste('videoframes/', list.files("videoframes/", '*.png'), 
         sep = ""),
   framerate = 10,
-  output = 'manuscript/videos/Video1.3.mp4'
+  output = 'manuscript/videos/Video1.1.mp4'
   )
 
 unlink("videoframes", recursive = T)
