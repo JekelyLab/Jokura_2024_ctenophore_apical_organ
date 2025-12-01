@@ -78,31 +78,35 @@ draw_everything <- function() {
   
   plot3d(
     statolith,
-    soma = T, lwd = 1.5, add = T,
-    alpha = 1, col = "grey"
+    soma = T, lwd = 1, add = T,
+    alpha = 0.6, col = "grey"
   )
   
-  plot3d(
-    balancer,
-    soma = T, lwd = 1.5, add = T,
-    alpha = 0.2, col = Okabe_Ito[1]
-  )
+  for (bal in balancer) {
+    plot3d(
+      bal,
+      soma = T, lwd = 1, add = T,
+      alpha = 0.2, col = Okabe_Ito[4]
+    )
+  }
   
-  plot3d(
-    bridge,
-    soma = T, lwd = 3, add = T,
-    alpha = 0.2, col = Okabe_Ito[2]
-  )
+  for (br in bridge) {
+    plot3d(
+      br,
+      soma = T, lwd = 1, add = T,
+      alpha = 0.2, col = Okabe_Ito[3]
+    )
+  }
   
   plot_multinucleated_cell(
-    SSN_Q1Q2, lwd = 2, alpha = 1, col = Okabe_Ito[3]
+    SSN_Q1Q2, lwd = 2, alpha = 1, col = Okabe_Ito[5]
   )
   plot_multinucleated_cell(
-    SSN_Q3Q4, lwd = 2, alpha = 1, col = Okabe_Ito[5]
+    SSN_Q3Q4, lwd = 2, alpha = 1, col = Okabe_Ito[6]
   )
   
   plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
-                           lwd = 3, alpha = 1, col = Okabe_Ito[7])
+                           lwd = 2, alpha = 1, col = Okabe_Ito[7])
   
   plot3d(
     postsyn_balancer$x, 
@@ -118,7 +122,7 @@ draw_everything <- function() {
     postsyn_bridge$x, 
     postsyn_bridge$y, 
     postsyn_bridge$z, 
-    size = 0.7, alpha = 1, col = "#A52A2A", 
+    size = 0.7, alpha = 1, col = "#C60EE6", 
     add = TRUE,
     point_antialias = TRUE,
     type = "s"
@@ -145,16 +149,16 @@ par3d(windowRect = c(0, 0, 800, 800)) #to define the size of the rgl window
 par3d(zoom=0.7)
 
 # get views we want for later
-nview3d("posterior", extramat = rotationMatrix(2.54, 0.1, 0, 1))
+aboral()
 um1 <- par3d("userMatrix")
 
-nview3d("right", extramat = rotationMatrix(-1.7, 190, -120, -140))
+sagittal()
 um2 <- par3d("userMatrix")
 
 
 # start actual video
 
-nview3d("posterior", extramat = rotationMatrix(2.54, 0.1, 0, 1))
+aboral()
 #nview3d("anterior", extramat = rotationMatrix(2.54, 0.1, 0, 1))
 
 
@@ -198,18 +202,18 @@ plot3d(
 #)
 
 texts3d(
-  5000, 58000, 1000, text = "balancer", col='black', cex = 2
+  5000, 58000, 1000, text = "balancer cells", col='black', cex = 2
 )
 
-texts3d(11000, 52000, 23000, text = "Q1", cex = 2)
-texts3d(22000, 30000, 23000, text = "Q2", cex = 2)
-texts3d(31000, 67000, 23000, text = "Q3", cex = 2)
-texts3d(44000, 45000, 23000, text = "Q4", cex = 2)
+texts3d(11000, 52000, 23000, text = "Q2", cex = 2)
+texts3d(22000, 30000, 23000, text = "Q1", cex = 2)
+texts3d(31000, 67000, 23000, text = "Q4", cex = 2)
+texts3d(44000, 45000, 23000, text = "Q3", cex = 2)
 
 # plot invisible lithocyte so that the view doesn't move from this frame to the next
 plot3d(
   statolith,
-  soma = T, lwd = 1.5, add = T,
+  soma = T, lwd = 1, add = T,
   alpha = 0, col = "grey"
 )
 
@@ -233,13 +237,13 @@ plot3d(
 
 plot3d(
   balancer,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.2, col = Okabe_Ito[1]
+  soma = T, lwd = 1, add = T,
+  alpha = 0.2, col = Okabe_Ito[4]
 )
 
 plot3d(
   statolith,
-  soma = T, lwd = 1.5, add = T,
+  soma = T, lwd = 1, add = T,
   alpha = 0, col = "grey"
 )
 
@@ -256,10 +260,10 @@ rgl.pop(id = id_stat)
 
 plot3d(
   statolith,
-  soma = T, lwd = 1.5, add = T,
-  alpha = 0.9, col = "grey"
+  soma = T, lwd = 1, add = T,
+  alpha = 0.6, col = "grey"
 )
-texts3d(5000, 58000, 1000, text = "statoliths", cex = 2)
+texts3d(5000, 58000, 1000, text = "statolith", cex = 2)
 
 for(i in 126:140){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
@@ -282,7 +286,7 @@ plot3d(
 plot3d(
   bridge_Q3Q4,
   soma = T, lwd = 3, add = T,
-  alpha = 0.8, col = Okabe_Ito[3]
+  alpha = 0.8, col = Okabe_Ito[7]
 )
 
 for(i in 141:160){
@@ -301,8 +305,8 @@ remove_text()
 
 plot3d(
   bridge,
-  soma = T, lwd = 3, add = T,
-  alpha = 0.2, col = Okabe_Ito[2]
+  soma = T, lwd = 1, add = T,
+  alpha = 0.2, col = Okabe_Ito[3]
 )
 
 
@@ -314,17 +318,17 @@ for(i in 161:165){
 # plot nerve net ---------------------------------------------------------------
 
 plot_multinucleated_cell(
-  SSN_Q1Q2, lwd = 2, alpha = 1, col = Okabe_Ito[3]
+  SSN_Q1Q2, lwd = 2, alpha = 1, col = Okabe_Ito[5]
   )
 plot_multinucleated_cell(
-  SSN_Q3Q4, lwd = 2, alpha = 1, col = Okabe_Ito[5]
+  SSN_Q3Q4, lwd = 2, alpha = 1, col = Okabe_Ito[6]
   )
 
 #texts3d(
-#  15000, 32000, 1000, text = "nerve net Q1Q2, Q3Q4", col='black', cex = 2
+#  15000, 32000, 1000, text = "ANN Q1Q2, Q3Q4", col='black', cex = 2
 #)
 texts3d(
-  5000, 58000, 1000, text = "nerve net Q1Q2, Q3Q4", col='black', cex = 2
+  5000, 58000, 1000, text = "ANN Q1Q2, Q3Q4", col='black', cex = 2
 )
 
 for(i in 166:185){
@@ -334,13 +338,13 @@ for(i in 166:185){
 # plot large nerve net -----------
 
 plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
-                         lwd = 3, alpha = 1, col = Okabe_Ito[7])
+                         lwd = 2, alpha = 1, col = Okabe_Ito[7])
 remove_text()
 #texts3d(
-#  15000, 32000, 1000, text = "nerve net Q1-4", col='black', cex = 2
+#  15000, 32000, 1000, text = "ANN Q1-4", col='black', cex = 2
 #)
 texts3d(
-  5000, 58000, 1000, text = "nerve net Q1-4", col='black', cex = 2
+  5000, 58000, 1000, text = "ANN Q1-4", col='black', cex = 2
 )
 
 for(i in 186:205){
@@ -362,10 +366,10 @@ plot3d(
 )
 
 #texts3d(
-#  15000, 32000, 1000, text = "synapses to balancer", col='black', cex = 2
+#  15000, 32000, 1000, text = "synapses to balancer cells", col='black', cex = 2
 #)
 texts3d(
-  5000, 58000, 1000, text = "synapses to balancer", col='black', cex = 2
+  5000, 58000, 1000, text = "synapses to balancer cells", col='black', cex = 2
 )
 
 for(i in 206:225){
@@ -381,7 +385,7 @@ plot3d(
   postsyn_bridge$x, 
   postsyn_bridge$y, 
   postsyn_bridge$z, 
-  size = 0.7, alpha = 1, col = "#A52A2A", 
+  size = 0.7, alpha = 1, col = "#C60EE6", 
   add = TRUE,
   point_antialias = TRUE,
   type = "s"
@@ -398,10 +402,10 @@ plot3d(
 )
 
 texts3d(
-  4500, 60000, 1000, text = "synapses to bridge", col='#A52A2A', cex = 2
+  4500, 60000, 1000, text = "synapses to bridge cells", col='#C60EE6', cex = 2
 )
 texts3d(
-  5000, 58000, 1000, text = "synapses from bridge", col='black', cex = 2
+  5000, 58000, 1000, text = "synapses from bridge cells", col='black', cex = 2
 )
 
 
