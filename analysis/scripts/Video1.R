@@ -82,21 +82,18 @@ draw_everything <- function() {
     alpha = 0.6, col = "grey"
   )
   
-  for (bal in balancer) {
-    plot3d(
-      bal,
-      soma = T, lwd = 1, add = T,
-      alpha = 0.2, col = Okabe_Ito[4]
-    )
-  }
+  plot3d(
+    balancer,
+    soma = T, lwd = 1, add = T,
+    alpha = 0.2, col = Okabe_Ito[4]
+  )
   
-  for (br in bridge) {
-    plot3d(
-      br,
-      soma = T, lwd = 1, add = T,
-      alpha = 0.2, col = Okabe_Ito[3]
-    )
-  }
+  plot3d(
+    bridge,
+    soma = T, lwd = 1, add = T,
+    alpha = 0.2, col = Okabe_Ito[3]
+  )
+  
   
   plot_multinucleated_cell(
     SSN_Q1Q2, lwd = 2, alpha = 1, col = Okabe_Ito[5]
@@ -159,7 +156,6 @@ um2 <- par3d("userMatrix")
 # start actual video
 
 aboral()
-#nview3d("anterior", extramat = rotationMatrix(2.54, 0.1, 0, 1))
 
 
 # balancers colored by quadrants -----------------------------------------------
@@ -248,7 +244,7 @@ plot3d(
 )
 
 
-for(i in 121:125){
+for(i in 121:130){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
@@ -265,7 +261,7 @@ plot3d(
 )
 texts3d(5000, 58000, 1000, text = "statolith", cex = 2)
 
-for(i in 126:140){
+for(i in 131:145){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
@@ -289,7 +285,7 @@ plot3d(
   alpha = 0.8, col = Okabe_Ito[7]
 )
 
-for(i in 141:160){
+for(i in 146:165){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
@@ -310,7 +306,7 @@ plot3d(
 )
 
 
-for(i in 161:165){
+for(i in 166:175){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
@@ -328,18 +324,22 @@ plot_multinucleated_cell(
 #  15000, 32000, 1000, text = "ANN Q1Q2, Q3Q4", col='black', cex = 2
 #)
 texts3d(
-  5000, 58000, 1000, text = "ANN Q1Q2, Q3Q4", col='black', cex = 2
+  5000, 58000, 1000, text = "ANN Q1Q2", col='black', cex = 2
+)
+texts3d(
+  20000, 68000, 1000, text = "ANN Q3Q4", col='black', cex = 2
 )
 
-for(i in 166:185){
+for(i in 176:195){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
+remove_text()
 # plot large nerve net -----------
 
 plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
                          lwd = 2, alpha = 1, col = Okabe_Ito[7])
-remove_text()
+
 #texts3d(
 #  15000, 32000, 1000, text = "ANN Q1-4", col='black', cex = 2
 #)
@@ -347,7 +347,7 @@ texts3d(
   5000, 58000, 1000, text = "ANN Q1-4", col='black', cex = 2
 )
 
-for(i in 186:205){
+for(i in 196:215){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
@@ -372,7 +372,7 @@ texts3d(
   5000, 58000, 1000, text = "synapses to balancer cells", col='black', cex = 2
 )
 
-for(i in 206:225){
+for(i in 216:235){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
@@ -409,13 +409,13 @@ texts3d(
 )
 
 
-for(i in 226:245){
+for(i in 236:255){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
 remove_text()
 
-for(i in 245:235){
+for(i in 255:265){
   rgl.snapshot(paste("videoframes/Video1_", i, ".png", sep = ""))
 }
 
@@ -499,7 +499,7 @@ av::av_encode_video(
   paste('videoframes/', list.files("videoframes/", '*.png'), 
         sep = ""),
   framerate = 10,
-  output = 'manuscript/videos/Video1.1.mp4'
+  output = 'manuscript/videos/Video1.mp4'
   )
 
 unlink("videoframes", recursive = T)
