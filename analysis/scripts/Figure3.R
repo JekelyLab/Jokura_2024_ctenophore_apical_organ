@@ -240,22 +240,22 @@ SSN_downstream %>%
 plot_balancer <- function() {
   plot3d(
     balancer_Q1,
-    soma = T, lwd = 1.5, add = T,
+    soma = T, lwd = 2.5, add = T,
     alpha = 0.5, col = Okabe_Ito[1]
   )
   plot3d(
     balancer_Q2,
-    soma = T, lwd = 1.5, add = T,
+    soma = T, lwd = 2.5, add = T,
     alpha = 0.5, col = Okabe_Ito[2]
   )
   plot3d(
     balancer_Q3,
-    soma = T, lwd = 1.5, add = T,
+    soma = T, lwd = 2.5, add = T,
     alpha = 0.5, col = Okabe_Ito[6]
   )
   plot3d(
     balancer_Q4,
-    soma = T, lwd = 1.5, add = T,
+    soma = T, lwd = 2.5, add = T,
     alpha = 0.5, col = Okabe_Ito[7]
   )
   
@@ -279,7 +279,7 @@ close3d()
 nopen3d()
 mfrow3d(1, 3) 
 # define the size of the rgl window, the view and zoom
-par3d(windowRect = c(0, 0, 1200, 350))
+par3d(windowRect = c(0, 0, 4800, 1400))
 #par3d(windowRect = c(0, 0, 2400, 700))
 
 # plot aboral view
@@ -311,12 +311,12 @@ close3d()
 plot_bridge <- function() {
   plot3d(
     bridge_Q1Q2,
-    soma = T, lwd = 1.5, add = T,
+    soma = T, lwd = 2.5, add = T,
     alpha = 0.75, col = Okabe_Ito[2]
   )
   plot3d(
     bridge_Q3Q4,
-    soma = T, lwd = 1.5, add = T,
+    soma = T, lwd = 2.5, add = T,
     alpha = 0.75, col = Okabe_Ito[7]
   )
   
@@ -339,7 +339,7 @@ close3d()
 nopen3d()
 mfrow3d(1, 3) 
 # define the size of the rgl window, the view and zoom
-par3d(windowRect = c(0, 0, 1200, 350))
+par3d(windowRect = c(0, 0, 4800, 1400))
 #par3d(windowRect = c(0, 0, 2400, 700))
 
 # plot aboral view
@@ -369,18 +369,18 @@ close3d()
 
 plot_bridge_and_balancer <- function() {
   plot3d(balancer,
-         soma = T, lwd = 1, add = T, 
+         soma = T, lwd = 2, add = T, 
          alpha = 0.1, col = Okabe_Ito[8],
          WithConnectors = F, WithNodes = F)
   
   plot3d(
     bridge_Q1Q2,
-    soma = T, lwd = 1.5, add = T,
+    soma = T, lwd = 2.5, add = T,
     alpha = 0.75, col = Okabe_Ito[2]
   )
   plot3d(
     bridge_Q3Q4,
-    soma = T, lwd = 1.5, add = T,
+    soma = T, lwd = 2.5, add = T,
     alpha = 0.75, col = Okabe_Ito[7]
   )
   
@@ -403,7 +403,7 @@ close3d()
 nopen3d()
 mfrow3d(1, 3) 
 # define the size of the rgl window, the view and zoom
-par3d(windowRect = c(0, 0, 1200, 350))
+par3d(windowRect = c(0, 0, 4800, 1400))
 
 # plot aboral view
 plot_bridge_and_balancer()
@@ -446,11 +446,11 @@ pos_ves_no_syn <- mito_vesicle_info |>
 
 plot_mito_bridge <- function() {
   plot3d(bridge_Q1Q2,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[2],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.5, col = Okabe_Ito[2],
          WithConnectors = F, WithNodes = F)
   
   plot3d(bridge_Q3Q4,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.5, col = Okabe_Ito[7],
          WithConnectors = F, WithNodes = F)
   
   plot3d(outline,
@@ -483,7 +483,7 @@ close3d()
 nopen3d() 
 mfrow3d(1, 3)  #defines the two scenes
 #define the size of the rgl window, the view and zoom
-par3d(windowRect = c(0, 0, 1200, 350))
+par3d(windowRect = c(0, 0, 4800, 1400))
 #par3d(windowRect = c(0, 0, 2400, 700))
 
 #plot aboral view
@@ -556,31 +556,31 @@ postsyn_bridge <- subset(bridge_conn, prepost == 1)
 
 plot_SNN_to_balancer <- function() {
   plot3d(balancer_Q1,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.1, col = Okabe_Ito[8],
          WithConnectors = F, WithNodes = F)
   
   plot3d(balancer_Q2,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.1, col = Okabe_Ito[8],
          WithConnectors = F, WithNodes = F)
   
   plot3d(balancer_Q3,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.1, col = Okabe_Ito[8],
          WithConnectors = F, WithNodes = F)
   
   plot3d(balancer_Q4,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.1, col = Okabe_Ito[8],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.1, col = Okabe_Ito[8],
          WithConnectors = F, WithNodes = F)
   
   plot3d(SSN_Q1Q2Q3Q4,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.5, col = Okabe_Ito[5],
          WithConnectors = F, WithNodes = F)
   
   plot3d(SSN_Q1Q2,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[6],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.5, col = Okabe_Ito[6],
          WithConnectors = F, WithNodes = F)
   
   plot3d(SSN_Q3Q4,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.5, col = Okabe_Ito[7],
          WithConnectors = F, WithNodes = F)
   
   plot3d(outline,
@@ -626,7 +626,7 @@ close3d()
 nopen3d() 
 mfrow3d(1, 3)  
 #define the size of the rgl window, the view and zoom
-par3d(windowRect = c(0, 0, 1200, 350))
+par3d(windowRect = c(0, 0, 4800, 1400))
 #par3d(windowRect = c(0, 0, 2400, 700))
 
 #plot aboral view
@@ -655,23 +655,23 @@ close3d()
 
 plot_reciprocal_SSN_syn <- function() {
   plot3d(bridge_Q1Q2,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.2, col = Okabe_Ito[8],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.2, col = Okabe_Ito[8],
          WithConnectors = F, WithNodes = F)
   
   plot3d(bridge_Q3Q4,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.2, col = Okabe_Ito[8],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.2, col = Okabe_Ito[8],
          WithConnectors = F, WithNodes = F)
   
   plot3d(SSN_Q1Q2Q3Q4,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.5, col = Okabe_Ito[5],
          WithConnectors = F, WithNodes = F)
   
   plot3d(SSN_Q1Q2,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[6],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.5, col = Okabe_Ito[6],
          WithConnectors = F, WithNodes = F)
   
   plot3d(SSN_Q3Q4,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.5, col = Okabe_Ito[7],
          WithConnectors = F, WithNodes = F)
   
   plot3d(outline,
@@ -707,7 +707,7 @@ close3d()
 nopen3d() 
 mfrow3d(1, 3)  #defines the two scenes
 #define the size of the rgl window, the view and zoom
-par3d(windowRect = c(0, 0, 1200, 350))
+par3d(windowRect = c(0, 0, 4800, 1400))
 #par3d(windowRect = c(0, 0, 2400, 700))
 
 #plot aboral view

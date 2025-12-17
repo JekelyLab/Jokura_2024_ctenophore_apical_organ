@@ -30,10 +30,10 @@ with_soma <- read_smooth_neuron(skids_soma_AO)
 
 plot_SSNQ1Q2_SSN3Q4 <- function() {
   plot_multinucleated_cell(SSN_Q1Q2,
-                           lwd = 1, alpha = 1, col = Okabe_Ito[6])
+                           lwd = 2, alpha = 1, col = Okabe_Ito[6])
   
   plot_multinucleated_cell(SSN_Q3Q4,
-                           lwd = 1, alpha = 1, col = Okabe_Ito[7])
+                           lwd = 2, alpha = 1, col = Okabe_Ito[7])
   
   plot3d(outline,
          add = T, alpha = 0.05, col = "grey50"
@@ -46,7 +46,7 @@ close3d()
 nopen3d() 
 mfrow3d(1, 3)  
 #define the size of the rgl window, the view and zoom
-par3d(windowRect = c(0, 0, 1200, 350))
+par3d(windowRect = c(0, 0, 4800, 1400))
 
 #plot aboral view
 plot_SSNQ1Q2_SSN3Q4()
@@ -84,7 +84,7 @@ close3d()
 # 3d plot SSN Q1Q2Q3Q4 neuron -----------------------------------------------
 plot_SSNQ1Q2Q3Q4 <- function() {
   plot_multinucleated_cell(SSN_Q1Q2Q3Q4,
-                           lwd = 1, alpha = 1, col = Okabe_Ito[5])
+                           lwd = 2, alpha = 1, col = Okabe_Ito[5])
   plot3d(with_soma,
          soma = T, lwd = 0.5, add = T, alpha = 0.025, col = Okabe_Ito[8],
          WithConnectors = F, WithNodes = F)
@@ -98,7 +98,7 @@ close3d()
 nopen3d() 
 mfrow3d(1, 3)  
 #define the size of the rgl window, the view and zoom
-par3d(windowRect = c(0, 0, 1200, 350))
+par3d(windowRect = c(0, 0, 4800, 1400))
 
 #plot aboral view
 plot_SSNQ1Q2Q3Q4()
@@ -364,15 +364,15 @@ pos_ves_no_syn <- mito_vesicle_info |>
 
 plot_mito_SSN <- function() {
   plot3d(SSN_Q1Q2,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[6],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.25, col = Okabe_Ito[6],
          WithConnectors = F, WithNodes = F)
   
   plot3d(SSN_Q3Q4,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[7],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.25, col = Okabe_Ito[7],
          WithConnectors = F, WithNodes = F)
   
   plot3d(SSN_Q1Q2Q3Q4,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.25, col = Okabe_Ito[5],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.25, col = Okabe_Ito[5],
          WithConnectors = F, WithNodes = F)
   
   plot3d(outline,
@@ -405,7 +405,7 @@ close3d()
 nopen3d() 
 mfrow3d(1, 3)  
 #define the size of the rgl window, the view and zoom
-par3d(windowRect = c(0, 0, 1200, 350))
+par3d(windowRect = c(0, 0, 4800, 1400))
 #par3d(windowRect = c(0, 0, 2400, 700))
 
 #plot aboral view
@@ -496,15 +496,15 @@ syn_small_to_small <- stats_synapse %>%
 
 plot_SSN <- function() {
   plot3d(SSN_Q1Q2,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[6],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.5, col = Okabe_Ito[6],
          WithConnectors = F, WithNodes = F)
   
   plot3d(SSN_Q3Q4,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[7],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.5, col = Okabe_Ito[7],
          WithConnectors = F, WithNodes = F)
   
   plot3d(SSN_Q1Q2Q3Q4,
-         soma = FALSE, lwd = 1, add = T, alpha = 0.5, col = Okabe_Ito[5],
+         soma = FALSE, lwd = 2, add = T, alpha = 0.5, col = Okabe_Ito[5],
          WithConnectors = F, WithNodes = F)
   
   plot3d(outline,
@@ -549,7 +549,7 @@ close3d()
 nopen3d() 
 mfrow3d(1, 3)  
 #define the size of the rgl window, the view and zoom
-par3d(windowRect = c(0, 0, 1200, 350))
+par3d(windowRect = c(0, 0, 4800, 1400))
 #par3d(windowRect = c(0, 0, 2400, 700))
 
 
